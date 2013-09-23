@@ -1,0 +1,87 @@
+%% #HEADSTART##############################################################
+%% #
+%% #PROJECT:      UnifiedTraceAndLogManager
+%% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #SHORT:        utalm-bash
+%% #LICENCE:      Apache-2.0
+%% #VERSION:      03_01_001
+%% #
+%% ########################################################################
+%% #
+%% #   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+%% #
+%% #   Licensed under the Apache License, Version 2.0 (the "License");
+%% #   you may not use this file except in compliance with the License.
+%% #   You may obtain a copy of the License at
+%% #
+%% #     http://www.apache.org/licenses/LICENSE-2.0
+%% #
+%% #   Unless required by applicable law or agreed to in writing, software
+%% #   distributed under the License is distributed on an "AS IS" BASIS,
+%% #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% #   See the License for the specific language governing permissions and
+%% #   limitations under the License.
+%% #
+%% #HEADEND################################################################
+%%
+%%$Header$
+%%
+
+%%ACTUAL-START
+\documentclass{article}
+
+\input{../../conf/pdf/screen/man/ctys-packages.tex}
+
+\newcommand{\addtoCtysManToc}[2]{
+  \phantomsection{}
+  \addcontentsline{toc}{#1}{#2}
+}
+
+
+\usepackage[pdftex,
+pdfauthor={Arno-Can Uestuensoez},
+pdftitle={UnifiedTraceAndLogManager-bash},
+colorlinks,
+bookmarks,
+bookmarksopen=true,
+pdfnewwindow=true,
+bookmarksnumbered=true,
+bookmarksopenlevel=1,
+bookmarkstype=toc,
+pdfstartview=Fit
+]{hyperref}
+\usepackage[all]{hypcap}
+
+
+\input{../../conf/common/ctys-manual-settings.tex}
+\setcounter{tocdepth}{5}
+\input{../../conf/common/ctys-manual-macros.tex}
+
+\input{../../conf/pdf/screen/man/ctys-manual-settings.tex}
+\setcounter{tocdepth}{5}
+
+\input{../../conf/pdf/screen/man/ctys-manual-macros.tex}
+
+%%4TEST \pagestyle{fancy}
+%%4TEST 
+\pagestyle{headings}
+%%4TEST \setPageTitle{libutalm-bash(1)}
+%%4TEST 
+\title{libutalm-bash(1)}
+\date{\today}
+%%\title{\textbf{libutalm-bash(1)}\\ \textbf{C}ommutate \textbf{T}o \textbf{Y}our \textbf{S}essions\\
+\title{\textbf{libutalm-bash(1)}}
+
+\begin{document}
+%%4TEST 
+\maketitle
+%%4TEST 
+\extpdfcontent
+%% \setcounter{tocdepth}{5}
+%% \listoftables
+%% \listoffigures
+ 
+\newpage
+
+

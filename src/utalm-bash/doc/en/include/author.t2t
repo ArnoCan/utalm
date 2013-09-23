@@ -1,0 +1,52 @@
+
+
+ 
+= AUTHOR =
+%% #HEADSTART##############################################################
+%% #
+%% #PROJECT:      UnifiedTraceAndLogManager
+%% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #SHORT:        utalm-bash
+%% #LICENCE:      Apache-2.0
+%% #VERSION:      03_01_001
+%% #
+%% ########################################################################
+%% #
+%% #   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+%% #
+%% #   Licensed under the Apache License, Version 2.0 (the "License");
+%% #   you may not use this file except in compliance with the License.
+%% #   You may obtain a copy of the License at
+%% #
+%% #     http://www.apache.org/licenses/LICENSE-2.0
+%% #
+%% #   Unless required by applicable law or agreed to in writing, software
+%% #   distributed under the License is distributed on an "AS IS" BASIS,
+%% #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% #   See the License for the specific language governing permissions and
+%% #   limitations under the License.
+%% #
+%% #HEADEND################################################################
+%%
+%%$Header$
+%%
+
+
+Written and maintained by
+| Arno-Can Uestuensoez: | http://www.fsf.org Member#8673
+%HTML% |  | [[../../../images/8673.png] http://www.fsf.org]
+%TEX% \begin{figure}[H]
+%TEX%   \includegraphics[width=0.12\textwidth]{../../images/8673.png}
+%TEX% \end{figure}
+| Maintenance:      | <acue.opensource@gmail.com>
+| Sourceforge:      | <https://sourceforge.net/projects/utalm/files/utalm-bash/>
+| Github:           | <https://github.com/ArnoCan/utalm>
+| Original:         | <http://www.UnifiedSessionsManager.org>
+%HTML% | Info:         | [[../../../images/facebook.png] https://www.facebook.com/pages/UnifiedSessionsManager/194336347253331] [[../../../images/wordpress.png] http://unifiedsessionsmanager.wordpress.com/] [[../../../images/slideshare.png] http://www.slideshare.net/Arno-Can/presentations] [[../../../images/twitter.png] http://www.twitter.com/UnifiedSessions] [[../../../images/stumbleupon.png] http://www.stumbleupon.com/]
+
+%%error-workaround: unwanted center of previous in pdf-docs
+
+%TEX% \ \\
+
+%HTML% -LT-br /-GT-

@@ -1,0 +1,207 @@
+
+.
+%NONTEX% = EXAMPLES =
+%TEX% \ifman
+%% #HEADSTART##############################################################
+%% #
+%% #PROJECT:      UnifiedTraceAndLogManager
+%% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #SHORT:        utalm-bash
+%% #LICENCE:      Apache-2.0
+%% #VERSION:      03_01_001
+%% #
+%% ########################################################################
+%% #
+%% #   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+%% #
+%% #   Licensed under the Apache License, Version 2.0 (the "License");
+%% #   you may not use this file except in compliance with the License.
+%% #   You may obtain a copy of the License at
+%% #
+%% #     http://www.apache.org/licenses/LICENSE-2.0
+%% #
+%% #   Unless required by applicable law or agreed to in writing, software
+%% #   distributed under the License is distributed on an "AS IS" BASIS,
+%% #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% #   See the License for the specific language governing permissions and
+%% #   limitations under the License.
+%% #
+%% #HEADEND################################################################
+%%
+%%$Header$
+
+%TEX% \section{EXAMPLES}
+%TEX% \else
+%TEX% \section{EXAMPLES}
+%TEX% \fi
+
+
+%NONTEX% == Options integration ==
+%TEX% \ifman
+%TEX% \section{Options integration}
+%TEX% \fi
+The debugging library is controlled internally by a set of control variables.
+These store values, thresholds, and bitarrays.
+Also filename arrays with related line-ranges for section dependent tracing.
+The main function for initially setting of the debugging features is the function 
+```
+fetchDBGArgs $*
+```
+This is called immediatley after loading and analyses the current commandline parameters for
+setting the debugging facilities.
+From the call on debugging could be utilized within application code, thus this library
+should be loaded before others.
+The parameters could be analysed and set later within any option procession loop.
+
+Some examples are provided by the included test cases within the "tests" directory
+tree.
+
+%NONTEX% === Early-Prefetch of Option-Values ===
+%TEX% \section{Early-Prefetch of Option-Values}
+%TEX% \fi
+The early prefetch of option values is exactly the previously described auto-analysis of the 
+command line by the libUnifiedTraceAndLogManager function **fetchDBGArgs**.
+```
+fetchDBGArgs $*
+```
+This provides for logging as soon as possible, once a proces has started.
+
+
+%NONTEX% === 'args' Integration ===
+%TEX% \ifman
+%TEX% \section{'args' Integration}
+%TEX% \fi
+
+The args could be simply integrated into any processing loop based on **"$*"**.
+The fetchDBGArgs does not remove the debugging options from the argv.
+So the following code pattern may be applied:
+```
+
+#!/bin/bash
+
+. $HOME/lib/libutalm.sh
+
+for o in $*;do
+    case $o in
+        '-a') echo "some option";;
+        '-d') echo "debug option";
+              shift;
+              SUBOPTS=$1;
+              echo "debug subtions";
+              ;;
+        '--debug') 
+              echo "debug option";
+              shift;
+              SUBOPTS=$1;
+              echo "debug subtions";
+              ;;
+        '--debug='*) 
+              echo "debug option";
+              shift;
+              SUBOPTS=${1#*=};
+              echo "debug subtions";
+              ;;
+           *) echo "some unknown option or arguments";;
+    esac
+    shift
+done
+```
+
+%NONTEX% === 'getopt' Integration ===
+%TEX% \ifman
+%TEX% \section{'getopt' Integration}
+%TEX% \fi
+The following example depicts a typical use of **getopt** for a more complex
+case. A complete example could be found in the USM module
+"pluyings/CORE/CLI.sh"
+
+```
+
+#!/bin/bash
+
+. $HOME/lib/libutalm.sh
+
+OPTIND=1
+OPTLST="a:A:b:d:D:c:C:EfF:g:hH:j:k:l:L:M:no:O:p:r:s:S:t:T:vVwW:x:XyYz:Z:";
+...
+while getopts $OPTLST CUROPT ${_myArgs} && [ -z "${ABORT}" ]; do
+     case ${CUROPT} in
+         a) #[-a:]
+             if [ -z "${OPTARG}" ]; then
+                   ABORT=1;         
+             fi
+              #for bi-usage-options like "-V", gwhich could be used seperately, or for analysis of
+             #runtime resources at the end of an execution
+             local _actionSet=1;
+             #...
+             #...
+             ;;
+          A) #[-A:]
+             if [ -z "${OPTARG}" ]; then
+                 ABORT=1;
+                 printERR $LINENO $BASH_SOURCE ${ABORT} "Missing sub-arguments for \"-A\""
+             fi
+             case ${OPTARG} in
+                 0|[oO][fF][fF])unset C_ALLOWAMBIGIOUS;;
+                 1|[oO][nN])
+                     C_ALLOWAMBIGIOUS=1;
+                     R_OPTS="${R_OPTS} -A 1 ";
+                     ;;
+                 *)
+                     ABORT=1;
+                     printERR $LINENO $BASH_SOURCE ${ABORT} \
+                         "Erroneous sub-arguments:\"-A\" ${OPTARG}"
+                     ;;
+             esac
+             printDBG $S_CORE ${D_MAINT} $LINENO $BASH_SOURCE \
+                         "Allow ambiguous labels:${C_ALLOWAMBIGIOUS}"
+             ;;
+         #...
+         #...
+   esac
+   #...
+   #...
+```
+
+%NONTEX% == Configuration by CLI Options ==
+%TEX% \ifman
+%TEX% \section{Configuration by CLI Options }
+%TEX% \fi
+The configuration by CLI options is quite simple.
+Just call by options.
+```
+yourExecutable.sh -d LEVEL:FLOW,S:VMW,INFO:3,W:2 -a ...
+```
+For setting additional default values use the following call
+by adding some variables you want to be superposed
+as shell variables by common call conventions.
+```
+MYCONFPATH=/tmp/testdir yourExecutable.sh -d LEVEL:FLOW,S:VMW,INFO:3,W:2 -a ...
+```
+Or alternatively set exported variables.
+```
+export MYCONFPATH=/tmp/testdir
+yourExecutable.sh -d LEVEL:FLOW,S:VMW,INFO:3,W:2 -a ...
+```
+
+
+%NONTEX% == Configuration by conf-File ==
+%TEX% \ifman
+%TEX% \section{Configuration by conf-File}
+%TEX% \fi
+The current version sources the following configuration file when available.
+```
+$HOME/conf/libutalm-bash-examples.conf
+```
+Later versions will harmonise as an additional option all supported languages
+into a common configuration file.
+
+
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+
+
+
+
