@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -58,7 +58,7 @@ WWWBASE		= ${BASE}/$(WWWLNK)
 
 #rt-root
 RTLNK		= rt-tmp
-RTBASE		= ${BASE}/$(RTLNK)
+RTBASE		= ${BASE}/$(RTLNK)/$(VARIANT)
 
 #doc-root
 DOCLNK 		= doc-tmp

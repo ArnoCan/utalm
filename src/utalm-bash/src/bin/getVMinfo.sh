@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -91,9 +91,9 @@ MYCALLPATH=`dirname $MYCALLPATHNAME`
 #
 #If a specific library is forced by the user
 #
-if [ -n "${CTYS_LIBPATH}" ];then
-    MYLIBPATH=$CTYS_LIBPATH
-    MYLIBEXECPATHNAME=${CTYS_LIBPATH}/bin/$MYCALLNAME
+if [ -n "${UTALM_LIBPATH}" ];then
+    MYLIBPATH=$UTALM_LIBPATH
+    MYLIBEXECPATHNAME=${UTALM_LIBPATH}/bin/$MYCALLNAME
 else
     MYLIBEXECPATHNAME=$MYCALLPATHNAME
 fi
@@ -131,7 +131,7 @@ EOF
     fi
 fi
 
-MYBOOTSTRAP=${MYBOOTSTRAP}/bootstrap.03.01.007.sh
+MYBOOTSTRAP=${MYBOOTSTRAP}/bootstrap-03.01.009.sh
 if [ ! -f "${MYBOOTSTRAP}" ];then
     echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
     cat <<EOF  
@@ -193,7 +193,7 @@ MYCALLPATHNAME=`dirname ${_MYCALLPATHNAME}`
 MYLANG=${MYLANG:-en}
 
 #path for various loads: libs, help, macros, plugins
-MYLIBPATH=${CTYS_LIBPATH:-`dirname $MYLIBEXECPATH`}
+MYLIBPATH=${UTALM_LIBPATH:-`dirname $MYLIBEXECPATH`}
 
 #path for various loads: libs, help, macros, plugins
 MYHELPPATH=${MYHELPPATH:-$MYLIBPATH/help/$MYLANG}
@@ -207,7 +207,7 @@ bootstrapCheckInitialPath
 #OK - Now should work.                            #
 ###################################################
 
-MYCONFPATH=${MYCONFPATH:-$MYLIBPATH/conf/ctys}
+MYCONFPATH=${MYCONFPATH:-$MYLIBPATH/conf/utalm}
 if [ ! -d "${MYCONFPATH}" ];then
     echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYCONFPATH=${MYCONFPATH}"
     exit 1
@@ -318,8 +318,8 @@ fi
 . ${MYLIBPATH}/lib/groups.sh
 
 #path to directory containing the default mapping db
-if [ -d "${HOME}/.ctys/db/default" ];then
-    DEFAULT_DBPATHLST=${DEFAULT_DBPATHLST:-$HOME/.ctys/db/default}
+if [ -d "${HOME}/.utalm/db/default" ];then
+    DEFAULT_DBPATHLST=${DEFAULT_DBPATHLST:-$HOME/.utalm/db/default}
 fi
 
 #path to directory containing the default mapping db
@@ -329,25 +329,25 @@ fi
 
 
 #Source pre-set environment from user
-if [ -f "${HOME}/.ctys/ctys.conf.sh" ];then
-    . "${HOME}/.ctys/ctys.conf.sh"
+if [ -f "${HOME}/.utalm/utalm.conf.sh" ];then
+    . "${HOME}/.utalm/utalm.conf.sh"
 fi
 
 #Source pre-set environment from installation 
-if [ -f "${MYCONFPATH}/ctys.conf.sh" ];then
-    . "${MYCONFPATH}/ctys.conf.sh"
+if [ -f "${MYCONFPATH}/utalm.conf.sh" ];then
+    . "${MYCONFPATH}/utalm.conf.sh"
 fi
 
 #system tools
-if [ -f "${HOME}/.ctys/systools.conf-${MYDIST}.sh" ];then
-    . "${HOME}/.ctys/systools.conf-${MYDIST}.sh"
+if [ -f "${HOME}/.utalm/systools.conf-${MYDIST}.sh" ];then
+    . "${HOME}/.utalm/systools.conf-${MYDIST}.sh"
 else
 
     if [ -f "${MYCONFPATH}/systools.conf-${MYDIST}.sh" ];then
 	. "${MYCONFPATH}/systools.conf-${MYDIST}.sh"
     else
-	if [ -f "${MYLIBEXECPATH}/../conf/ctys/systools.conf-${MYDIST}.sh" ];then
-	    . "${MYLIBEXECPATH}/../conf/ctys/systools.conf-${MYDIST}.sh"
+	if [ -f "${MYLIBEXECPATH}/../conf/utalm/systools.conf-${MYDIST}.sh" ];then
+	    . "${MYLIBEXECPATH}/../conf/utalm/systools.conf-${MYDIST}.sh"
 	else
 	    ABORT=1;
 	    printERR $LINENO $BASH_SOURCE ${ABORT} "Missing system tools configuration file:\"systools.conf-${MYDIST}.sh\""

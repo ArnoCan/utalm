@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -29,14 +29,13 @@
 #$Header$
 #
 
-
 #FUNCEG###############################################################
 #
 #PROJECT:
 MYPROJECT="Unified Sessions Manager"
 #
 #NAME:
-#  ctys-setversion.sh
+#  utalm-setversion.sh
 #
 #AUTHOR:
 AUTHOR="Arno-Can Uestuensoez - acue.opensource@gmail.com"
@@ -45,7 +44,7 @@ AUTHOR="Arno-Can Uestuensoez - acue.opensource@gmail.com"
 FULLNAME="Unified Sessions Manager - remote execution"
 #
 #CALLFULLNAME:
-CALLFULLNAME="ctys-setversion.sh"
+CALLFULLNAME="utalm-setversion.sh"
 #
 #LICENCE:
 LICENCE=GPL3
@@ -226,7 +225,6 @@ MYINSTALLPATH= #Value is assigned in base. Symbolic links are replaced by target
 ##############################################
 #load basic library required for bootstrap   #
 ##############################################
-
 . ${MYLIBPATH}/lib/libutalm.sh
 coreRegisterLib
 
@@ -241,7 +239,7 @@ if [ -z "$BASH" ];then
     echo "* \"bash\" shell is required.                                         *"
     echo "*                                                                   *"
     echo "* Call: 1. bash                                                     *"
-    echo "*       2. <path>/ctys-install.sh <args>                               *"
+    echo "*       2. <path>/utalm-install.sh <args>                               *"
     echo "*                                                                   *"
     echo "*********************************************************************"
     exit 1
@@ -265,7 +263,7 @@ PATH=$MYLIBEXECPATH:$PATH
 case ${MYOS} in
     Linux);;
 #     SunOS)
-# 	export PATH=/usr/xpg4/bin:/opt/sfw/bin:/usr/sbin:/usr/bin:/usr/openwin/bin:$PATH
+# 	export PATH=/usr/xpg4/bin:/usr/share/sfw/bin:/usr/sbin:/usr/bin:/usr/openwin/bin:$PATH
 # 	;;
     *)
 	ABORT=1;
@@ -274,43 +272,15 @@ case ${MYOS} in
 	;;
 esac
 
-
-
 #Source pre-set environment from user
-if [ -f "${HOME}/.ctys/ctys.conf.sh" ];then
-  . "${HOME}/.ctys/ctys.conf.sh"
+if [ -f "${HOME}/conf/utalm/utalm-bash.conf" ];then
+  . "${HOME}/conf/utalm-bash.conf"
 fi
 
 #Source pre-set environment from installation 
-if [ -f "${MYCONFPATH}/ctys.conf.sh" ];then
-  . "${MYCONFPATH}/ctys.conf.sh"
+if [ -f "${MYCONFPATH}/utalm/utalm-bash.conf" ];then
+  . "${MYCONFPATH}/utalm/utalm-bash.conf"
 fi
-
-#system tools
-if [ -f "${HOME}/.ctys/systools.conf-${MYDIST}.sh" ];then
-    . "${HOME}/.ctys/systools.conf-${MYDIST}.sh"
-else
-
-    if [ -f "${MYCONFPATH}/systools.conf-${MYDIST}.sh" ];then
-	. "${MYCONFPATH}/systools.conf-${MYDIST}.sh"
-    else
-	if [ -f "${MYLIBEXECPATH}/../conf/ctys/systools.conf-${MYDIST}.sh" ];then
-	    . "${MYLIBEXECPATH}/../conf/ctys/systools.conf-${MYDIST}.sh"
-	else
-	    ABORT=1;
-	    printERR $LINENO $BASH_SOURCE ${ABORT} "Missing system tools configuration file:\"systools.conf-${MYDIST}.sh\""
-	    printERR $LINENO $BASH_SOURCE ${ABORT} "Check your installation."
-	    gotoHell ${ABORT}
-	fi
-    fi
-fi
-
-
-. ${MYLIBPATH}/lib/help/help.sh
-#. ${MYLIBPATH}/lib/misc.sh
-#. ${MYLIBPATH}/lib/network/network.sh
-#. ${MYLIBPATH}/lib/groups.sh
-
 
 INSTTYPE=;
 INSTDIR=;
@@ -402,7 +372,7 @@ if [ -n "$_nTarget" ];then
     fi
 
     #LOD
-    MYDOCSOURCE="${MYINSTALLPATH%/*}/ctys-manual.${INSTVERSION}"
+    MYDOCSOURCE="${MYINSTALLPATH%/*}/doc"
     if [ ! -d "${MYDOCSOURCE}" ];then
 	MYDOCSOURCE=;
 	if [ -f "${MYDOCSOURCE}" ];then
@@ -435,24 +405,24 @@ fi
 #
 #
 #
-CTYSVERSGEN=${MYCONFPATH}/versinfo.gen.sh
+UTALMVERSGEN=${MYCONFPATH}/versinfo.gen.sh
 
 #
 #
 #
-CTYSGETREL=${MYLIBEXECPATH}/bin/getCurCTYSRel.sh
+UTALMGETREL=${MYLIBEXECPATH}/bin/getCurUTALMRel.sh
 if [ -n "${_nVERSION}" ];then
-    if [ -n "${CTYSGETREL}" ];then
-	sed -i 's/CTYS_RELEASE=..*/CTYS_RELEASE='"${_nVERSION}"'/g' ${CTYSGETREL}
+    if [ -n "${UTALMGETREL}" ];then
+	sed -i 's/utalm_RELEASE=..*/utalm_RELEASE='"${_nVERSION}"'/g' ${UTALMGETREL}
     else
 	ABORT=1;
-	printERR $LINENO $BASH_SOURCE ${ABORT} "Missing:\"${CTYSGETREL}\""
+	printERR $LINENO $BASH_SOURCE ${ABORT} "Missing:\"${UTALMGETREL}\""
 	gotoHell ${ABORT}
     fi
 
-    if [ -n "${CTYSVERSGEN}" ];then
-	sed -i 's/CTYSREL=.*$/CTYSREL='"${_nVERSION}"'/g' ${CTYSVERSGEN}
-	sed -i 's/VERSION=.*$/VERSION='"${_nVERSION}"'/g' ${CTYSVERSGEN}
+    if [ -n "${utalmVERSGEN}" ];then
+	sed -i 's/UTALMREL=.*$/UTALMREL='"${_nVERSION}"'/g' ${UTALMVERSGEN}
+	sed -i 's/VERSION=.*$/VERSION='"${_nVERSION}"'/g' ${UTALMVERSGEN}
     fi
 
 fi
@@ -462,21 +432,19 @@ fi
 #
 #
 #
-CTYSGETVAR=${MYLIBEXECPATH}/bin/getCurCTYSVariant.sh
+UTALMGETVAR=${MYLIBEXECPATH}/bin/getCurUTALMVariant.sh
 if [ -n "${_nVARIANT}" ];then
-    if [ -n "${CTYSGETREL}" ];then
-	sed -i 's/CTYS_VARIANT=.*$/CTYS_VARIANT='"${_nVARIANT}"'/g' ${CTYSGETVAR}
+    if [ -n "${UTALMGETREL}" ];then
+	sed -i 's/UTALM_VARIANT=.*$/UTALM_VARIANT='"${_nVARIANT}"'/g' ${UTALMGETVAR}
     else
 	ABORT=1;
-	printERR $LINENO $BASH_SOURCE ${ABORT} "Missing:\"${CTYSGETVAR}\""
+	printERR $LINENO $BASH_SOURCE ${ABORT} "Missing:\"${UTALMGETVAR}\""
 	gotoHell ${ABORT}
     fi
 
-    if [ -n "${CTYSVERSGEN}" ];then
-	sed -i 's/CTYSVARIANT=.*$/CTYSVARIANT='"${_nVARIANT}"'/g' ${CTYSVERSGEN}
+    if [ -n "${UTALMVERSGEN}" ];then
+	sed -i 's/UTALMVARIANT=.*$/UTALMVARIANT='"${_nVARIANT}"'/g' ${UTALMVERSGEN}
     fi
 
 fi
-
-
 

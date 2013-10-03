@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -84,7 +84,7 @@ src: outdirs $(ENVFILES)
 	@echo "###"
 	@echo "#Change to:$@"
 	cd $@&&export PATH=$(PATH):$(BLD_ROOT)/src/bin&& $(MAKE) $(MFLAGS)
-	export PATH=$(PATH):$(BLD_ROOT)/src/bin&&export VERBOSE=$(VERBOSE)&&export INSTROOT=$(TGZ_ROOT)&&./install.sh >&2
+#	export PATH=$(PATH):$(BLD_ROOT)/src/bin&&export VERBOSE=$(VERBOSE)&&export INSTROOT=$(TGZ_ROOT)&&./install.sh >&2
 	@echo "#...finished:$@"
 
 include $(BLD_ROOT)include/Makefile-rules.mk

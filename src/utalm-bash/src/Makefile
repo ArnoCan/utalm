@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -27,6 +27,38 @@
 #
 #$Header$
 #
+ifdef BLD_ROOT
+  include $(BLD_ROOT)include/Makefile-pre.mk
+else
+  $(error "Missing environment variable BLD_ROOT")
+endif
 
-all:
-	@echo "FFS"
+
+SRC_FILES = 
+SRC_DIRS =
+
+SRC_FILES += README.txt 
+
+SRC_DIRS += bin
+SRC_DIRS += conf
+SRC_DIRS += include
+SRC_DIRS += lib
+
+.PHONY: $(SRC_DIRS)
+
+all: outdirs $(SRC_FILES) $(SRC_DIRS)
+
+$(SRC_FILES):
+ifdef VERBOSE
+	@echo "Copy $@"
+endif
+	@$(CPA) $@ $(RTBASE)
+
+$(SRC_DIRS):
+ifdef VERBOSE
+	@echo "Copy $@"
+endif
+	@$(CPA) $@ $(RTBASE)
+
+
+include $(BLD_ROOT)include/Makefile-post.mk

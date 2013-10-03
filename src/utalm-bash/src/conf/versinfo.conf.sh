@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -26,7 +26,7 @@
 #
 #HEADEND################################################################
 #
-#$Header: /home2/reps/cvs/proj/ctys/ctys-rt/src/conf/ctys/versinfo.conf.sh,v 1.3 2011/12/05 15:57:41 acue Exp $
+#$Header: /home2/reps/cvs/proj/utalm/utalm-rt/src/conf/utalm/versinfo.conf.sh,v 1.3 2011/12/05 15:57:41 acue Exp $
 #
 
 ################################################################
@@ -48,12 +48,12 @@ TARGET_WM=""
 
 #LOC -Lines-Of-Code
 #Generated during install:
-# => find ctys.01_02_007a15 -type f -name '*[!~]'  -name '[!0-9][!0-9]*' -exec cat {} \;|wc -l
+# => find utalm.01_02_007a15 -type f -name '*[!~]'  -name '[!0-9][!0-9]*' -exec cat {} \;|wc -l
 #LOC=36986
 
 #LOD -Lines-Of-Documentation
 #Generated during install:
-# => find ctys.01_02_007a15 -type f -name '*[!~]'  -name '[0-9][0-9]*' -exec cat {} \;|wc -l
+# => find utalm.01_02_007a15 -type f -name '*[!~]'  -name '[0-9][0-9]*' -exec cat {} \;|wc -l
 #LOD=8795
 
 . ${MYCONFPATH}/versinfo.gen.sh

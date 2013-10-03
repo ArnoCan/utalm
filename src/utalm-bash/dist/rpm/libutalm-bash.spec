@@ -42,8 +42,7 @@ Packager: %{mypackager}
 BuildRoot: /tmp/rpm/%{mytgzname}
 ExclusiveOS: Linux
 
-#Prefix: /usr/share
-Prefix: /opt/utalm
+Prefix: /usr/share
 
 #Requires:
 
@@ -63,14 +62,14 @@ the following options are available:
      '. <Prefix>/lib/libutalm.sh
  
    By default:
-      <Prefix>:=/opt/utalm
+      <Prefix>:=/usr/share
 
 2. When a local user installation is required just copy the
    tgz-file into your home directory and unpack it.
 
 	cd $HOME
-	cp libutalm-bash-03.01.001-R0.noarch.tgz
-	tar zxf libutalm-bash-03.01.001-R0.noarch.tgz   
+	cp libutalm-bash-03.01.002-R0.noarch.tgz
+	tar zxf libutalm-bash-03.01.002-R0.noarch.tgz   
 
 
 %prep
@@ -79,7 +78,7 @@ the following options are available:
 %build
 
 %install
-INSTBASE=${RPM_BUILD_ROOT}/opt
+INSTBASE=${RPM_BUILD_ROOT}/usr/share
 INSTTARGET=${INSTBASE}/libutalm-bash-${RPM_PACKAGE_VERSION}.%{_target_cpu}
 
 echo ${VARIANT_ROOT}/redhat
@@ -95,14 +94,14 @@ chmod -R 755 ${INSTTARGET}
 %files
 %defattr(-,root,root)
 
-/opt/%{myname}-%{myversion}.%{_target_cpu}
+/usr/share/%{myname}-%{myversion}.%{_target_cpu}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
 %changelog
 * Sat Sep 21 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.01.001
+- Version-03.01.002
 
 * Tue Sep 15 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
 - Version-02.01.001

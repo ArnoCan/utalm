@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -246,11 +246,11 @@ to find the required paths for utilities from project "${MYPROJECT}".
 Else the following environment variable is required to be
 set to the containing directory of project:${MYPROJECT}
 
-   CTYS_LIBPATH=/<base-directory>/${MYPROJECT}/{bin,lib,...}
+   UTALM_LIBPATH=/<base-directory>/${MYPROJECT}/{bin,lib,...}
 
 The executables from 
 
-   \${CTYS_LIBPATH}/bin/...
+   \${UTALM_LIBPATH}/bin/...
 
 Should be set as a symbolic link to a directory within PATH, e.g.
 

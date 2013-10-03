@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -37,7 +37,7 @@ CALLARGS=$*
 export SILENT=1
 . ${MYCALLPATH}/install.conf
 
-for i in tests/case*.sh;do
+for i in tests/utalm-bash/case*.sh;do
 	((SILENT==0))&&echo "->${i}"
 	sh $i $CALLARGS
 	ret=$?

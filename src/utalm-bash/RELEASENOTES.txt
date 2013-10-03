@@ -1,1 +1,2 @@
+20131002 - BETA with several minor enhancements.
 20130923 - NIGHTLY as ALPHA release.

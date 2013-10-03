@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -47,13 +47,16 @@ $(HELP_FILES): %.txt: $(wildcard *.t2t) $(ENV_FILES)
 $(MAN1_FILES): %.1: $(wildcard *.t2t) $(ENV_FILES)
 	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t man -i $(notdir $(@:.1=.t2t))  -o $@ --quiet
 
+$(MAN3_FILES): %.3: $(wildcard *.t2t) $(ENV_FILES)
+	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t man -i $(notdir $(@:.3=.t2t))  -o $@ --quiet
+
 $(MAN7_FILES): %.7: $(wildcard *.t2t) $(ENV_FILES)
 	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t man -i $(notdir $(@:.7=.t2t))  -o $@
 
-$(HTML1_FILES) $(HTML7_FILES): %.html: $(wildcard *.t2t) $(ENV_FILES)
+$(HTML1_FILES) $(HTML3_FILES) $(HTML7_FILES): %.html: $(wildcard *.t2t) $(ENV_FILES)
 	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t html -i $(notdir $(@:.html=.t2t))  -o $@
 
-$(PDF1_FILES) $(PDF7_FILES): %.pdf: $(wildcard *.t2t) $(ENV_FILES)
+$(PDF1_FILES) $(PDF3_FILES) $(PDF7_FILES): %.pdf: $(wildcard *.t2t) $(ENV_FILES)
 	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t tex --headers -i $(notdir $(@:.pdf=.t2t))  -o $(@:.pdf=.tex)
 	$(SED) -i 's_..backslash._\\_g' $(@:.pdf=.tex)
 	$(SED) -i 's/\\{/{/g;s/\\}/}/g' $(@:.pdf=.tex)
@@ -73,10 +76,10 @@ ifeq ($(KEEPMETA),0)
 	$(RMRF) $(@:.pdf=.log) $(@:.pdf=.aux) $(@:.pdf=.out) $(@:.pdf=.toc) $(@:.pdf=.lot) $(@:.pdf=.lof) $(@:.pdf=.tex)
 endif
 
-$(TXT1_FILES) $(TXT7_FILES): %.txt: $(wildcard *.t2t) $(ENV_FILES)
+$(TXT1_FILES) $(TXT3_FILES) $(TXT7_FILES): %.txt: $(wildcard *.t2t) $(ENV_FILES)
 	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t txt --headers -i $(notdir $(@:.txt=.t2t))  -o $@
 	
-$(TEX1_FILES) $(TEX7_FILES): %.tex: $(wildcard *.t2t) $(ENV_FILES)
+$(TEX1_FILES) $(TEX3_FILES) $(TEX7_FILES): %.tex: $(wildcard *.t2t) $(ENV_FILES)
 	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t tex --headers -i $(notdir $(@:.tex=.t2t))  -o $@
 	$(SED) -i '1,/ACTUAL-START/d' $(@:.pdf=.tex)
 	$(SED) -i 's_\$$\\backslash\$$_\\_g' $@
@@ -141,11 +144,11 @@ $(LATEX2HTML_MULTI_FILES): %.html: $(wildcard *.tex) $(ENV_FILES)
 		-info "pre-release" \
 		$(@:.html=.tex) 
 
-$(WIKI1_FILES) $(WIKI7_FILES): %.wiki: $(wildcard *.t2t) $(ENV_FILES)
+$(WIKI1_FILES) $(WIKI3_FILES) $(WIKI7_FILES): %.wiki: $(wildcard *.t2t) $(ENV_FILES)
 	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t wiki --headers -i $(notdir $(@:.wiki=.t2t))  -o $@
 	
 
-$(GWIKI1_FILES) $(GWIKI7_FILES): %.gwiki: $(wildcard *.t2t) $(ENV_FILES)
+$(GWIKI1_FILES) $(GWIKI3_FILES) $(GWIKI7_FILES): %.gwiki: $(wildcard *.t2t) $(ENV_FILES)
 	$(TXT2TAGS) $(TXT2TAGS_OPTS) -t gwiki --headers -i $(notdir $(@:.gwiki=.t2t))  -o $@
 	
 

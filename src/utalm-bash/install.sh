@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -35,42 +35,76 @@ MYCALLNAME=`basename $MYCALLPATHNAME`
 MYCALLNAME=${MYCALLNAME%.sh}
 MYCALLPATH=`dirname $MYCALLPATHNAME`
 
-function display () {
-	if((VERBOSE==1));then
-		echo $*
+if [ ! -e ${0##*/} -a ${PWD##*/} != src ];then
+	echo "ERROR:Must be called in own directory!">&2
+	exit 1
+fi
+
+if [ -e ${MYCALLPATH%/*}/conf/utalm-bash.conf ];then
+	. ${MYCALLPATH%/*}/conf/utalm-bash.conf
+else
+	if [ -e ${BASH_SOURCE%/*}/src/conf/utalm-bash.conf ];then
+		. ${BASH_SOURCE%/*}/src/conf/utalm-bash.conf
 	else
-		if((SILENT==0));then
-			echo $*
+		if [ -e ${BASH_SOURCE%/*}/conf/utalm-bash.conf ];then
+			. ${BASH_SOURCE%/*}/conf/utalm-bash.conf
+		else
+			if [ -e ${HOME}/conf/utalm-bash.conf ];then
+				. ${HOME}/conf/utalm-bash.conf
+			else
+				echo "ERROR:Missing: utalm-bash.conf">&2
+				echo "ERROR:${BASH_SOURCE}">&2
+				echo "ERROR:${PWD}">&2
+				exit 1
+			fi
 		fi
 	fi
-}
+fi
 
 . ${MYCALLPATH}/install.conf
 
-
 CP="cp -r"
-for i in src/bin/bootstrap/*;do
-	display "->${i}"
+for i in ${BASE}bin/bootstrap/*;do
+	displayIt "->${i}"
 	$CP ${i} ${BOOTSTRAPBIN}
-	chmod -R u+x ${BOOTSTRAPBIN}/${i##*/} 
+	chmod -R u+x ${BOOTSTRAPBIN}${i##*/} 
 	$CP ${i} ${BOOTSTRAPLIB}
-	chmod -R u+x ${BOOTSTRAPLIB}/${i##*/} 
+	chmod -R u+x ${BOOTSTRAPLIB}${i##*/} 
 done
 
-for i in src/lib/core/*;do
-	display "->${i}"
+for i in ${BASE}lib/core/*;do
+	displayIt "->${i}"
 	$CP ${i} ${COREBIN}
-	chmod -R u+x ${COREBIN}/${i##*/} 
+	chmod -R u+x ${COREBIN}${i##*/} 
 	$CP ${i} ${CORELIB}
-	chmod -R u+x ${CORELIB}/${i##*/} 
+	chmod -R u+x ${CORELIB}${i##*/} 
 done
 
-for i in src/bin/*;do
-	display "->${i}"
+for i in ${BASE}bin/*;do
+	displayIt "->${i}"
 	cp -r ${i} ${BINDIR}
-	chmod -R u+x ${BINDIR}/${i##*/} 
+	chmod -R u+x ${BINDIR}${i##*/} 
 done
 
-display "->libutalm.sh $LIBDIR"
-$CP src/lib/libutalm.sh $LIBDIR
+for i in ${BASE}conf/*;do
+	displayIt "->${i}"
+	cp -r ${i} ${MYCONFPATH}
+done
 
+
+_BASE=${BASE%/}
+_BASE=${_BASE%/src}
+if [ "$_BASE" == src ];then
+	_BASE=.
+fi
+_BASE=${_BASE}/
+for i in ${_BASE}doc/*;do
+	displayIt "->${i}"
+	cp -r ${i} ${DOCBASE}
+done
+
+
+displayIt "->libutalm.sh $LIBDIR"
+$CP ${BASE}lib/libutalm.sh $LIBDIR
+
+$CP ${BASE}utalm-bash-show-help.sh $HOME

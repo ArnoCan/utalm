@@ -1,0 +1,103 @@
+%% #HEADSTART##############################################################
+%% #
+%% #PROJECT:      UnifiedTraceAndLogManager
+%% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #SHORT:        utalm-bash
+%% #LICENCE:      Apache-2.0
+%% #VERSION:      03_01_002
+%% #
+%% ########################################################################
+%% #
+%% #   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+%% #
+%% #   Licensed under the Apache License, Version 2.0 (the "License");
+%% #   you may not use this file except in compliance with the License.
+%% #   You may obtain a copy of the License at
+%% #
+%% #     http://www.apache.org/licenses/LICENSE-2.0
+%% #
+%% #   Unless required by applicable law or agreed to in writing, software
+%% #   distributed under the License is distributed on an "AS IS" BASIS,
+%% #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% #   See the License for the specific language governing permissions and
+%% #   limitations under the License.
+%% #
+%% #HEADEND################################################################
+%%
+%%$Header: /home2/reps/cvs/proj/utalm/utalm-doc/conf/pdf/print/utalm-manual-macros.tex,v 1.2 2011/12/05 15:57:08 acue Exp $
+%%
+
+%
+%Add additional toc entries for online help
+%
+\newcommand{\addtotoc}[2]{
+   \phantomsection{}
+%%    \addcontentsline{toc}{#1}{#2}
+}
+
+
+
+%
+%Add toc to pdfbookmarks
+%
+\newcommand{\extpdfcontent}[0]{
+  \pdfbookmark[0]{Contents}{toc}
+  \tableofcontents
+}
+
+
+%
+%Set full section reference for latex
+%and pdflatex
+%
+%% \newcommand{\sectionRef}[1]{
+%%   Section~\ref*{#1} \Nameref{#1}
+%% }
+\newcommand{\sectionRef}[1]{
+  \ifman
+    SECTION#1
+  \else
+    Section~\ref*{#1} \Nameref{#1}
+  \fi
+}
+
+%
+%Set hyperref as supported
+%
+\newcommand{\callHyperref}[2]{
+  \ifrefhyper
+    \ifman
+       #2
+    \else
+       \hyperref[#1]{#2}
+    \fi
+  \else
+    #2
+  \fi
+}
+
+
+%
+%Set hyperref as supported
+%
+\newcommand{\callHyperlink}[2]{
+  \ifreflink
+    \ifman
+       #2
+    \else
+       \hyperref[#1]{#2}
+    \fi
+  \else
+    #2
+  \fi
+}
+
+\newif\ifmanual\manualtrue
+\newif\ifman\manfalse
+\newif\iftoclinks\toclinksfalse
+
+\newif\ifrefhyper\refhyperfalse
+\newif\ifreflink\reflinkfalse
+
+

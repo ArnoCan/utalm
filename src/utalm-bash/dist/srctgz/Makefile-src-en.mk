@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -36,7 +36,11 @@ PKG_SRC_IMP_FILES	+= $(BLD_ROOT)TODO.txt
 PKG_SRC_IMP_FILES	+= $(BLD_ROOT)Apache-2.0.txt
 
 PKG_SRC_IMP_FILES	+= $(BLD_ROOT)install.sh
+PKG_SRC_IMP_FILES	+= $(BLD_ROOT)installToSystem.sh
+PKG_SRC_IMP_FILES	+= $(BLD_ROOT)install.conf
+PKG_SRC_IMP_FILES	+= $(BLD_ROOT)collect-filelist.sh
 PKG_SRC_IMP_FILES	+= $(BLD_ROOT)test.sh
+PKG_SRC_IMP_FILES   += $(BLD_ROOT)utalm-bash-show-help.sh
 
 PKG_SRC_IMP_FILES	+= $(BLD_ROOT)Makefile
 PKG_SRC_IMP_FILES	+= $(BLD_ROOT)Makefile-root.mk

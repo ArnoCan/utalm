@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -25,23 +25,45 @@
 #   limitations under the License.
 #
 #HEADEND################################################################
-
-
 #
 #$Header$
 #
 if [ -z "$__UnifiedTraceAndLogManager__" ];then #*** prevent multiple inclusion
 __UnifiedTraceAndLogManager__=1 #*** prevent multiple inclusion
 
+if [ -e ${MYCALLPATH%/*}/conf/utalm-bash.conf ];then
+	. ${MYCALLPATH%/*}/conf/utalm-bash.conf
+else
+	if [ -e ${BASH_SOURCE%/*}/src/conf/utalm-bash.conf ];then
+		. ${BASH_SOURCE%/*}/src/conf/utalm-bash.conf
+	else
+		if [ -e ${BASH_SOURCE%/*}/conf/utalm-bash.conf ];then
+			. ${BASH_SOURCE%/*}/conf/utalm-bash.conf
+		else
+			if [ -e ${HOME}/conf/utalm-bash.conf ];then
+				. ${HOME}/conf/utalm-bash.conf
+			else
+				echo "ERROR:Missing: utalm-bash.conf">&2
+				echo "ERROR:${BASH_SOURCE}">&2
+				echo "ERROR:${PWD}">&2
+				exit 1
+			fi
+		fi
+	fi
+fi
+
+
 if [ -e ${BASH_SOURCE%/*}/bootstrap/bootstrap-03.01.009.sh ];then
 	. ${BASH_SOURCE%/*}/bootstrap/bootstrap-03.01.009.sh
 else
 	. ${BASH_SOURCE%/*}/../bin/bootstrap/bootstrap-03.01.009.sh
 fi
+if [ -z "$__LIBCORE__" ];then 
 . ${BASH_SOURCE%/*}/core/libcore-03.01.009.sh
+fi
 
 _myLIBNAME_UnifiedTraceAndLogManager="${BASH_SOURCE}"
-_myLIBVERS_UnifiedTraceAndLogManager="03.01.001"
+_myLIBVERS_UnifiedTraceAndLogManager="03.01.002"
 
 #shopt -s nullglob
 #shopt -s extglob
@@ -59,7 +81,7 @@ MYLIBPATH=${MYLIBPATH//\/\//\/}
 
 #moment of truth, where it is required to be set
 if [ ! -d "${MYLIBPATH}" -o ! -e "${MYLIBPATH}/libutalm.sh" ];then
-	MYLIBPATH=${MYLIBPATH}/lib
+	MYLIBPATH=${MYLIBPATH%/lib}/lib
 	if [ ! -d "${MYLIBPATH}" -o ! -e "${MYLIBPATH}/libutalm.sh" ];then
 	  echo "${BASH_SOURCE##*/}:$LINENO:ERROR:${MYCALLNAME}-Missing:MYLIBPATH=${MYLIBPATH}"
 	  echo "${BASH_SOURCE##*/}:$LINENO:ERROR:Required to point to the root of the"
@@ -308,6 +330,25 @@ function fetchDBGArgs () {
 		    export C_PFEXE=$LVL;
 		    ;;
 		H|HELP)
+			A=`echo ${ARG}|tr '[:lower:]' '[:upper:]'`
+			case $A in
+				HTML)
+					if [ -n "$BROWSER" ];then
+						$BROWSER $DOCBASE/$MYLANG/html/man3/libutalm-bash.html &
+					fi
+					exit 0
+				    ;;
+				PDF)
+					if [ -n "$PDFVIEWER" ];then
+						$PDFVIEWER ${DOCBASE}${MYLANG}/pdf/man3/libutalm-bash.pdf &
+					fi
+					exit 0
+					;;
+				MAN)
+					man -M $MANPATH 3 libutalm-bash
+					exit 0
+					;;
+			esac
 		    cat <<EOF
 UnifiedTraceAndLogManager-bash: libutalm.sh
 
@@ -371,7 +412,7 @@ EOF
 fetchDBGArgs $*
 
 if [ -n "`echo $*| sed -n 's/-y/1/p'`" ];then
-    export CTYS_XTERM=0;
+    export UTALM_XTERM=0;
 fi
 
 
@@ -485,10 +526,10 @@ function printERR () {
     local L=$1;shift;
     local f=${1%/*/*};f=${1#$f\/};shift;
     if((DBG>0));then 
-	if [ "$CTYS_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:ERROR:$1";
+	if [ "$UTALM_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:ERROR:$1";
 	else local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:\033[31mERROR\033[m:$1";fi
     else
-	if [ "$CTYS_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:ERROR:$1";
+	if [ "$UTALM_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:ERROR:$1";
 	else local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:\033[31mERROR\033[m:$1";fi
     fi
     shift;echo -e "$b:$*" >&2;
@@ -525,10 +566,10 @@ function printWNG () {
     local L=$1;shift;
     local f=${1%/*/*};f=${1#$f\/};shift;
     if((DBG>0));then 
-	if [ "$CTYS_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:WARNING:$1";
+	if [ "$UTALM_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:WARNING:$1";
 	else local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:\033[35mWARNING\033[m:$1";fi
     else
-	if [ "$CTYS_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:WARNING:$1";
+	if [ "$UTALM_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:WARNING:$1";
 	else local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:\033[35mWARNING\033[m:$1";fi
     fi    
     shift;echo -e "$b:$*" >&2;
@@ -570,7 +611,7 @@ function printINFO () {
     ((DBG>0))&&o="${f}:";
 
     (((M&4&&INF>l)||(M&2&&INF<l)||(M&1&&INF&l)))&&{
-      ((CTYS_XTERM==1))&&{
+      ((UTALM_XTERM==1))&&{
          ((F^1))&&{
             echo -e "${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$o$L:INFO:$e:$*">&2;
 	 }||{
@@ -623,10 +664,10 @@ function printFINALCALL () {
     local t=${1};shift;
     local a=${*//  / };
     if((DBG>0));then 
-	if [ "$CTYS_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:PRINT:\n$t\n--->\n${a//  / }\n<---";
+	if [ "$UTALM_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:PRINT:\n$t\n--->\n${a//  / }\n<---";
 	else local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:$f:$L:\033[32mPRINT\033[m:\n\033[1m\033[4m$t\033[m\n\033[1m===>\033[m\n${a//  / }\n\033[1m<===\033[m";fi
     else
-	if [ "$CTYS_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:PRINT:\n$t\n--->\n${a//  / }\n<---";
+	if [ "$UTALM_XTERM" == 1  ];then local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:PRINT:\n$t\n--->\n${a//  / }\n<---";
 	else local b="${MYCALLNAME}:${MYUID}@${MYHOST}:$$:\033[32mPRINT\033[m:\n\033[1m\033[4m$t\033[m\n\033[1m===>\033[m\n${a//  / }\n\033[1m<===\033[m";fi
     fi
     shift; echo -e "$b" >&2;
@@ -650,7 +691,7 @@ function printFINALCALL () {
 #EXAMPLE:
 #
 #GLOBAL:
-#  CTYS_NOCALLWRAPPER
+#  UTALM_NOCALLWRAPPER
 #
 #PARAMETERS:
 #  $1:    LINENO of caller
@@ -673,7 +714,7 @@ function callErrOutWrapper () {
     local _res=0
     printDBG $S_LIB $D_BULK $_originLine "$_originFile" 0 "$FUNCNAME:<${@}>"
 
-    if [ -n "${CTYS_NOCALLWRAPPER}" ];then
+    if [ -n "${UTALM_NOCALLWRAPPER}" ];then
 	${_cli}
 	return $?
     fi
@@ -698,7 +739,7 @@ function callErrOutWrapper () {
     echo ${_buf}
 
     local _rd=;
-    [ "$CTYS_XTERM" == 0 ]\
+    [ "$UTALM_XTERM" == 0 ]\
       &&{ [ "$_res" == 0 ]&&_rd="\033[32m OK \033[m"||_rd="\033[31m NOK \033[m"; }\
       ||{ [ "$_res" == 0 ]&&_rd=" OK "||_rd=" NOK "; }
 
@@ -707,5 +748,85 @@ function callErrOutWrapper () {
     return $_res
 }
 
+
+#FUNCBEG###############################################################
+#NAME:
+#  getPathName
+#
+#TYPE:
+#  bash-function
+#
+#DESCRIPTION:
+#  Due to some wrappers, e.g. "consolehelper" for CentOS/RHEL, the 
+#  function evaluates the PATH variable only when run from a console,
+#  else hard-coded paths are checked. The paths has to be specifically
+#  adapted to the different platforms of course.
+#
+#  This approach includes support for pre-configured authorization by 
+#  usage of PAM modules for specific console-wrappers.1
+#  
+#EXAMPLE:
+#
+#PARAMETERS:
+#  $1: LINENO of caller
+#  $2: BASH_SOURCE of caller
+#  $3: ERROR|WARNING|WARNINGEXT
+#       ERROR
+#        Prints an error message and exits.
+#       WARNING  
+#        Prints a warning and continues.
+#       WARNINGEXT
+#        Prints a warning-extended when activated by "-w" and continues.
+#  $4: exec callee
+#  $5: default path
+#
+#
+#OUTPUT:
+#  RETURN:
+#    0: Success
+#    1: Failure
+#  VALUES:
+#    pathname
+#     With absolute path
+#
+#FUNCEND###############################################################
+function getPathName () {
+    local _pname=;
+    local _ret=1;
+
+    #if not on console trouble is caused by several console-wrappers
+    checkConsole 2>/dev/null >/dev/null
+    if [ $? -eq 0 ];then
+        #try whether access is permitted, else continue with usual business
+	_pname=`gwhich $4 2>/dev/null`
+	_ret=$?
+    fi
+    if [ -z "$_pname" ];then
+        #try the system specific path
+	if [ -n "${5}" ];then
+	    _pname=`gwhich ${5}/${4} 2>/dev/null`
+	    _ret=$?
+	else
+	    case $3 in
+		ERROR)printERR $1 $2 1  "Missing required default path";gotoHell 1;;
+		WARNING)printWNG 1 $1 $2 1  "Missing required default path";;
+		WARNINGEXT|*)printWNG 2 $1 $2 1  "Missing required default path";;
+	    esac
+	fi
+    fi
+    if [ $_ret -ne 0 ];then
+    	case $3 in
+	    ERROR)printERR $1 $2 1  "Can not evaluate exec-access to \"`setSeverityColor ERR ${4}`\"";gotoHell 1;;
+	    WARNING)printWNG 1 $1 $2 1  "Can not evaluate exec-access to \"`setSeverityColor WNG ${4}`\"";;
+	    WARNINGEXT|*)printWNG 2 $1 $2 1  "Can not evaluate exec-access to \"`setSeverityColor WNG ${4}`\"";;
+	esac
+	
+    fi
+    [ -n "${_pname}" -a $_ret -eq 0 ]&&_disp=`setSeverityColor INF ${_pname}`||_disp=`setSeverityColor WNG "ABSENT(${5}/${4})"`;
+    if [ $_ret -eq 0 ];then
+	echo "$_pname"	
+    fi
+    return $_ret
+}
 
 fi #*** prevent multiple inclusion

@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -27,12 +27,6 @@
 #
 #$Header$
 #
-ifndef BLD_ROOT
-	TGZ_BLD_ROOT := $(shell pwd)
-	BLD_ROOT := $(dir $(TGZ_BLD_ROOT))/
-	TGZ_BLD_ROOT := $(TGZ_BLD_ROOT)/
-endif
-
 ifdef BLD_ROOT
   include $(BLD_ROOT)include/Makefile-pre.mk
 else
@@ -45,73 +39,69 @@ SRC_POOL        =
 #
 # filled from includes
 #
-PKG_SRC_IMP_FILES =
-PKG_SRC_IMP_DIRS =
+PKG_ENV_FILES =
+PKG_ENV_DIRS =
 PKG_SRC_FILES =
 PKG_SRC_DIRS =
-PKG_HLP_IMP	= 
-PKG_DOC_IMP	= 
+PKG_SRC_FILES =
+PKG_SRC_DIRS =
+PKG_HLP_DIRS = 
+PKG_HLP_FILESS = 
+PKG_DOC_FILES = 
+PKG_DOC_DIRS = 
 IMGS = 
-
-#
-#common
-
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/images/,$(notdir $(wildcard $(DOCBASE_ML)/images/*)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/css/,$(notdir $(wildcard $(DOCBASE_ML)/css/*)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/js/,$(notdir $(wildcard $(DOCBASE_ML)/js/*.js)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/,$(notdir $(wildcard $(DOCBASE_ML)/*.ico)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/,$(notdir $(wildcard $(DOCBASE_ML)/*.html)))
 
 ###
 include Makefile-src-en.mk
 include Makefile-doctree-en.mk
 include Makefile-doctree-de.mk
-###
 
-PKG_DOC_IMP 	+= $(IMGS)
+IMPORTS_DIRS =
+IMPORTS_FILES =
 
+IMPORTS_DIRS +=
+IMPORTS_DIRS += $(PKG_ENV_DIRS)
+IMPORTS_DIRS += $(PKG_SRC_DIRS)
+IMPORTS_DIRS += $(PKG_DOC_DIRS)
+IMPORTS_DIRS += $(PKG_ENV_DIRS)
+IMPORTS_DIRS += $(PKG_SRC_DIRS)
+IMPORTS_DIRS += $(PKG_HLP_DIRS)
 
-#
-UNIQUE_PKG_SRC_FILES:=$(shell for i in ${PKG_SRC_IMP_FILES};do echo $$i;done|sort -u)
-UNIQUE_PKG_SRC_DIRS:=$(shell for i in ${PKG_SRC_IMP_DIRS};do echo $$i;done|sort -u)
+IMPORTS_FILES +=
+IMPORTS_FILES += $(PKG_ENV_FILES)
+IMPORTS_FILES += $(PKG_SRC_FILES)
+IMPORTS_FILES += $(PKG_ENV_FILES)
+IMPORTS_FILES += $(PKG_SRC_FILES)
+IMPORTS_FILES += $(PKG_DOC_FILES)
+IMPORTS_FILES += $(PKG_HLP_FILES)
 
-UNIQUE_PKG_SRC_IMP_FILES:=$(addprefix $(TGZ_ROOT)/,$(notdir $(UNIQUE_PKG_SRC_FILES)))
-UNIQUE_PKG_SRC_IMP_DIRS:=$(addprefix $(TGZ_ROOT)/,$(notdir $(UNIQUE_PKG_SRC_DIRS)))
+UNIQUE_IMPORTS_DIRS:=$(shell for i in ${IMPORTS_DIRS};do echo $$i;done|sort -u)
+UNIQUE_IMPORTS_FILES:=$(shell for i in ${IMPORTS_FILES};do echo $$i;done|sort -u)
 
-UNIQUE_PKG_DOC_IMP_DIRS=$(dir ${PKG_DOC_IMP})
-UNIQUE_PKG_DOC_IMP_DIRS:=$(shell for i in ${UNIQUE_PKG_DOC_IMP_DIRS};do echo $$i;done|sort -u)
-OUTDIRS += $(UNIQUE_PKG_DOC_IMP_DIRS)
-
-UNIQUE_PKG_HLP_IMP_DIRS=$(dir ${PKG_HLP_IMP})
-UNIQUE_PKG_HLP_IMP_DIRS:=$(shell for i in ${UNIQUE_PKG_HLP_IMP_DIRS};do echo $$i;done|sort -u)
-OUTDIRS += $(UNIQUE_PKG_HLP_IMP_DIRS)
+OUTDIRS += $(subst $(TGZ_ROOT)/doc,$(DOCBASE_ML),$(UNIQUE_IMPORTS_DIRS))
 
 PKG_COMMON_PREREQ =  $(VARIANT_ROOT) $(TGZ_ROOT) $(OUTDIRS) 
-PKG_COMMON_PREREQ += $(UNIQUE_PKG_DOC_IMP_DIRS) $(UNIQUE_PKG_HLP_IMP_DIRS)
+PKG_COMMON_PREREQ += $(UNIQUE_IMPORTS_DIRS) $(UNIQUE_IMPORTS_FILES)
 
-.PHONY: PREPMETA RTBASE DOCBASE WWWBASE DOC_BLD
+.PHONY: SRC_BLD DOC_BLD PREPTGZ
 
-all: PREPMETA $(TGZ_PNAME)
-PREPMETA: outdirs  SRC_BLD DOC_BLD
+all: outdirs SRC_BLD DOC_BLD PREPTGZ $(TGZ_PNAME)
 
-$(TGZ_PNAME): $(TGZ_PNAME_BLD)
-	@echo "Copy TGZ to $@"
-	@$(CPA) $(TGZ_PNAME_BLD) $@
-
-#
-$(TGZ_PNAME_BLD): $(PKG_DOC_IMP) $(PKG_HLP_IMP) $(UNIQUE_PKG_SRC_IMP_FILES) $(UNIQUE_PKG_SRC_IMP_DIRS)
+$(TGZ_PNAME):$(TGZ_PNAME_BLD)   
+ifdef VERBOSE
+	$(ECHO) "Copy TGZ-archive:$(TGZ_PNAME_BLD)"
+endif
+	cp $(TGZ_PNAME_BLD) $(TGZ_PNAME)
+ 
+$(TGZ_PNAME_BLD):   
 	$(ECHO) "Create TGZ-archive:$@"
 ifdef VERBOSE
 	$(ECHO) "PKG=$(TGZ_PNAME)"
 	$(ECHO) "TGZ_ROOT=$(TGZ_ROOT)"
 	$(ECHO) 
-	$(ECHO) "Input:PKG_DOC_IMP="$(PKG_DOC_IMP)
+	$(ECHO) "Input:UNIQUE_IMPORTS_DIRS="$(UNIQUE_IMPORTS_DIRS) 
 	$(ECHO) 
-	$(ECHO) "Input:PKG_HLP_IMP="$(PKG_HLP_IMP)
-	$(ECHO) 
-	$(ECHO) "Input:UNIQUE_PKG_SRC_IMP_FILES="$(UNIQUE_PKG_SRC_IMP_FILES) 
-	$(ECHO) 
-	$(ECHO) "Input:UNIQUE_PKG_SRC_IMP_DIRS="$(UNIQUE_PKG_SRC_IMP_DIRS) 
+	$(ECHO) "Input:UNIQUE_IMPORTS_FILES="$(UNIQUE_IMPORTS_FILES) 
 	$(ECHO) 
 	$(ECHO) "Blacklist:PKG_BLACK="$(PKG_BLACK)
 	$(ECHO) 
@@ -120,50 +110,34 @@ endif
              \( -type d  -exec $(CHMOD) 755 {} \; \) \
 	     -o \( -type f -name '*.sh'    -exec $(CHMOD) 755 {} \; \) \
 	     -o \( -type f -exec $(CHMOD) 644 {} \; \)
-	echo "cd $(dir $(TGZ_ROOT))&&$(TGZ) $@ $(notdir $(TGZ_ROOT))"
-	cd $(dir $(TGZ_ROOT))&&$(TGZ) $@ $(notdir $(TGZ_ROOT))
+ifdef VERBOSE
+	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" -d 99999 
+	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(TGZ_ROOT)/VERSION -d 99999
+else
 	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" 
 	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(TGZ_ROOT)/VERSION
-
-
-UNIQUE_PKG_DOC_IMP:=$(shell for i in ${PKG_DOC_IMP};do echo $$i;done|sort -u)
-$(UNIQUE_PKG_DOC_IMP): DOC_BLD $(PKG_COMMON_PREREQ) $(dir $(PKG_DOC_IMP)) $(DOCBASE)
-ifdef VERBOSE
-	$(ECHO) "IMPORT-DOC:$(notdir $@)"
 endif
-	$(MKDIR) $(dir $@)
-	$(CHMOD) 755 $(dir $@)
+	cd $(TGZ_ROOT)&&$(BLD_ROOT)collect-filelist.sh
+	cd $(dir $(TGZ_ROOT))&&$(TGZ) $(TGZ_PNAME_BLD) $(notdir $(TGZ_ROOT))
+
+
+PREPTGZ:
+ifdef VERBOSE
+	$(ECHO)
+	$(ECHO) "IMPORT-DIRS:$(UNIQUE_IMPORTS_DIRS)"
+	$(ECHO)
+	$(ECHO) "IMPORT-FILES:$(UNIQUE_IMPORTS_FILES)"
+	$(ECHO)
+endif
+	$(MKDIR) $(UNIQUE_IMPORTS_DIRS)
+	$(CHMOD) 755 $(UNIQUE_IMPORTS_DIRS)
 	#
-	#TODO: FixIt - shifted due to priority for now
-	$(if $(findstring /en/,$@),\
-		$(CPA) "$(subst $(TGZ_ROOT)/doc/en,$(DOCBASE_ML)/en,$@)" "$(dir $@ )" \
-		,\
-		$(CPA) "$(subst $(TGZ_ROOT)/doc,$(DOCBASE_ML),$@)" "$(dir $@ )" \
-	)
-
-$(PKG_HLP_IMP): DOC_BLD $(PKG_COMMON_PREREQ) $(dir $(PKG_HLP_IMP)) $(DOCBASE)
-ifdef VERBOSE
-	$(ECHO) "IMPORT-HLP:$(notdir $@)"
-endif
-	$(CPA) $(subst $(TGZ_ROOT),$(DOCBASE_ML),$@) $(dir $(subst $(DOCBASE_ML)/doc,$(TGZ_ROOT),$@))
-
-
-$(UNIQUE_PKG_SRC_IMP_FILES): $(UNIQUE_PKG_SRC_FILES) 
-ifdef VERBOSE
-	$(ECHO) "IMPORT-SRCFILES:$(notdir $@)"
-endif
-	@$(CPA) $(BLD_ROOT)$(notdir $@)  $(TGZ_ROOT)
-
-$(UNIQUE_PKG_SRC_IMP_DIRS): $(UNIQUE_PKG_SRC_DIRS) 
-ifdef VERBOSE
-	$(ECHO) "IMPORT-SRCDIRS:$(notdir $@)"
-endif
-	@$(CPA) $(BLD_ROOT)$(notdir $@)  $(TGZ_ROOT)
-
-$(SRC_POOL): $(ENVFILES)
-	@echo "###Change to:$@"
-	cd $@&& $(MAKE) $(MFLAGS)
-	@echo "###..return from $@"
+#	for i in $(subst $(TGZ_ROOT)/doc,$(DOCBASE_ML),$(UNIQUE_IMPORTS_DIRS));do $(CPA) $$i $(TGZ_ROOT);done
+	$(CPA) $(DOCBASE_ML) $(TGZ_ROOT)
+	for i in $(subst $(TGZ_ROOT),$(RTBASE),$(UNIQUE_IMPORTS_DIRS));do $(CPA) $$i $(TGZ_ROOT);done
+	#
+#	for i in $(subst $(TGZ_ROOT)/doc,$(DOCBASE_ML),$(UNIQUE_IMPORTS_FILES));do $(CPA) $$i $(TGZ_ROOT);done
+	for i in $(subst $(TGZ_ROOT),$(RTBASE),$(UNIQUE_IMPORTS_FILES));do $(CPA) $$i $(TGZ_ROOT);done
 
 
 SRC_BLD:

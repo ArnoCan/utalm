@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -130,89 +130,6 @@ function coreListLib () {
 }
 
 
-#FUNCBEG###############################################################
-#NAME:
-#  getPathName
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Due to some wrappers, e.g. "consolehelper" for CentOS/RHEL, the 
-#  function evaluates the PATH variable only when run from a console,
-#  else hard-coded paths are checked. The paths has to be specifically
-#  adapted to the different platforms of course.
-#
-#  This approach includes support for pre-configured authorization by 
-#  usage of PAM modules for specific console-wrappers.1
-#  
-#EXAMPLE:
-#
-#PARAMETERS:
-#  $1: LINENO of caller
-#  $2: BASH_SOURCE of caller
-#  $3: ERROR|WARNING|WARNINGEXT
-#       ERROR
-#        Prints an error message and exits.
-#       WARNING  
-#        Prints a warning and continues.
-#       WARNINGEXT
-#        Prints a warning-extended when activated by "-w" and continues.
-#  $4: exec callee
-#  $5: default path
-#
-#
-#OUTPUT:
-#  RETURN:
-#    0: Success
-#    1: Failure
-#  VALUES:
-#    pathname
-#     With absolute path
-#
-#FUNCEND###############################################################
-function getPathName () {
-    printDBG $S_LIB ${D_BULK} $LINENO $BASH_SOURCE "$FUNCNAME:<$@>"
-    local _pname=;
-    local _ret=1;
-
-    #if not on console trouble is caused by several console-wrappers
-    checkConsole 2>/dev/null >/dev/null
-    if [ $? -eq 0 ];then
-	printDBG $S_LIB ${D_BULK} $LINENO $BASH_SOURCE "running from CONSOLE"
-        #try whether access is permitted, else continue with usual business
-	_pname=`gwhich $4 2>/dev/null`
-	_ret=$?
-    fi
-    if [ -z "$_pname" ];then
-        #try the system specific path
-	if [ -n "${5}" ];then
-	    printDBG $S_LIB ${D_BULK} $LINENO $BASH_SOURCE "try \"${5}/${4}\""
-	    _pname=`gwhich ${5}/${4} 2>/dev/null`
-	    _ret=$?
-	else
-	    case $3 in
-		ERROR)printERR $1 $2 1  "Missing required default path";gotoHell 1;;
-		WARNING)printWNG 1 $1 $2 1  "Missing required default path";;
-		WARNINGEXT|*)printWNG 2 $1 $2 1  "Missing required default path";;
-	    esac
-	fi
-    fi
-    if [ $_ret -ne 0 ];then
-    	case $3 in
-	    ERROR)printERR $1 $2 1  "Can not evaluate exec-access to \"`setSeverityColor ERR ${4}`\"";gotoHell 1;;
-	    WARNING)printWNG 1 $1 $2 1  "Can not evaluate exec-access to \"`setSeverityColor WNG ${4}`\"";;
-	    WARNINGEXT|*)printWNG 2 $1 $2 1  "Can not evaluate exec-access to \"`setSeverityColor WNG ${4}`\"";;
-	esac
-	
-    fi
-    [ -n "${_pname}" -a $_ret -eq 0 ]&&_disp=`setSeverityColor INF ${_pname}`||_disp=`setSeverityColor WNG "ABSENT(${5}/${4})"`;
-    printDBG $S_LIB ${D_SYS} $1 "$2" "$FUNCNAME:`setSeverityColor TRY \"eval(${4})\"` => [ ${_disp} ]"
-    if [ $_ret -eq 0 ];then
-	echo "$_pname"	
-    fi
-    return $_ret
-}
 
 
 #FUNCBEG###############################################################
@@ -248,9 +165,8 @@ function getPathName () {
 #
 #FUNCEND###############################################################
 function setFontAttrib () {
-    printDBG $S_LIB ${D_BULK} $LINENO $BASH_SOURCE "$FUNCNAME:<$@>"
     local col=$1;shift
-    [ "$CTYS_XTERM" != 0 ]&&echo -n -e "$*"||\
+    [ "$UTALM_XTERM" != 0 ]&&echo -n -e "$*"||\
     case $col in
 	BOLD)echo -n -e "\033[1m${*}\033[m";;
 	UNDL)echo -n -e "\033[4m${*}\033[m";;
@@ -318,9 +234,8 @@ function setFontAttrib () {
 #
 #FUNCEND###############################################################
 function setSeverityColor () {
-    printDBG $S_LIB ${D_BULK} $LINENO $BASH_SOURCE "$FUNCNAME:<$@>"
     local col=$1;shift
-    [ "$CTYS_XTERM" != 0 ]&&echo -n -e "$*"||\
+    [ "$UTALM_XTERM" != 0 ]&&echo -n -e "$*"||\
     case $col in
 	ERR)echo -n -e "\033[31m${*}\033[m";;
 	WNG)echo -n -e "\033[35m${*}\033[m";;
@@ -368,5 +283,17 @@ HOUR=${TIME%%:*};
 #DATETIME=`date +"%Y%m%d%H%M%S"`
 DATETIME="${DATE//.}${TIME//:}"
 DAYOFWEEK=`date +"%u"`
+
+
+function displayIt () {
+	if [ "$VERBOSE" == 1 ];then
+		echo $*
+	else
+		if [ "$SILENT" == 0 ];then
+			echo $*
+		fi
+	fi
+}
+
 
 fi #*** prevent multiple inclusion

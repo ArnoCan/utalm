@@ -9,7 +9,7 @@
 %% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 %% #SHORT:        utalm-bash
 %% #LICENCE:      Apache-2.0
-%% #VERSION:      03_01_001
+%% #VERSION:      03_01_002
 %% #
 %% ########################################################################
 %% #
@@ -43,7 +43,7 @@
 %TEX% : **-d <debug-args>**
 %NONTEX% ===-d <debug-args> ===
 %TEX% \ifman
-%TEX% \addtoCtysManToc{subsubsection}{-d <debug-levels>}
+%TEX% \addtoUTALMManToc{subsubsection}{-d <debug-levels>}
 %TEX% \else
 %TEX% \addtotoc{subsubsection}{-d <args>}
 %TEX% \label{it:optd}

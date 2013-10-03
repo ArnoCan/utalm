@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -30,20 +30,8 @@
 
 #
 #
-IMGS        += $(addprefix $(TGZ_ROOT)/doc/en/images/,$(notdir $(wildcard $(DOCBASE_ML)/en/images/*.png)))
-
 #
-PKG_HLP_IMP	+= $(addprefix $(TGZ_ROOT)/help/en/,$(notdir $(wildcard $(DOCBASE_ML)/help/en/*)))
+PKG_DOC_DIRS	+= $(DOCBASE_ML)
 
-#
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/en/css/,$(notdir $(wildcard $(DOCBASE_ML)/en/css/*.css)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/en/js/,$(notdir $(wildcard $(DOCBASE_ML)/en/js/*.js)))
-
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/en/html/man1/,$(notdir $(wildcard $(DOCBASE_ML)/en/html/man1/libutalm-bash.html)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/en/man/man1/,$(notdir $(wildcard $(DOCBASE_ML)/en/man/man1/libutalm-bash.1)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/en/pdf/man1/,$(notdir $(wildcard $(DOCBASE_ML)/en/pdf/man1/libutalm-bash.pdf)))
-
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/en/html/man7/,$(notdir $(wildcard $(DOCBASE_ML)/en/html/man7/libutalm-bash-examples.html)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/en/man/man7/,$(notdir $(wildcard $(DOCBASE_ML)/en/man/man7/libutalm-bash-examples.7)))
-PKG_DOC_IMP	+= $(addprefix $(TGZ_ROOT)/doc/en/pdf/man7/,$(notdir $(wildcard $(DOCBASE_ML)/en/pdf/man7/libutalm-bash-examples.pdf)))
+#G_HLP_IMP	+= $(addprefix $(TGZ_ROOT)/help/en/,$(notdir $(wildcard $(DOCBASE_ML)/help/en/*)))
 

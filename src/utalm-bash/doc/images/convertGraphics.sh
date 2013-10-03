@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -91,7 +91,7 @@ IMGSOURCES=(
     NONE sflogo_006.png
     NONE sflogo_007.png
 
-    NONE ctys-usm.png
+    NONE utalm-usm.png
 
 
     NONE twitter-2.png
@@ -140,8 +140,8 @@ IMGSOURCES=(
     NONE php-devenv-01a.png
     NONE php-devenv-02.png
 
-    NONE xdg-menue-ctys-01.png
-    NONE xdg-menue-ctys-02.png
+    NONE xdg-menue-utalm-01.png
+    NONE xdg-menue-utalm-02.png
     NONE wxp-01.png
     NONE wxp-02.png
     NONE wxp-vbox-01.png
@@ -200,6 +200,7 @@ for((i=0;i<imgarrsiz;i+=2)){
 #echo "	cp ${PNAME} ${OUTf}"
 		cp ${PNAME} ${OUTf}
     fi
+
     if [ -n "$VERBOSE" ];then
     	echo -e "${TRACE}\n"
     fi

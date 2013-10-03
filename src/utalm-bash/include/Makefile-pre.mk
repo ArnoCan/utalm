@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -30,7 +30,6 @@
 ifndef BLD_ROOT_PRE_INCLUDED
 BLD_ROOT_PRE_INCLUDED:=1
 
-
 include $(BLD_ROOT)Makefile-version.mk
 include $(BLD_ROOT)Makefile-root.mk
 
@@ -52,6 +51,8 @@ OUTDOC		= $(DOCBASE)/doc
 OUTDIRS		+= $(OUTDOC)
 OUTDOC1		= $(OUTDOC)/man1
 OUTDIRS		+= $(OUTDOC1)
+OUTDOC3		= $(OUTDOC)/man3
+OUTDIRS		+= $(OUTDOC3)
 OUTDOC7		= $(OUTDOC)/man7
 OUTDIRS		+= $(OUTDOC7)
 
@@ -59,6 +60,8 @@ OUTHTML		= $(DOCBASE)/html
 OUTDIRS		+= $(OUTHTML)
 OUTHTML1	= $(OUTHTML)/man1
 OUTDIRS		+= $(OUTHTML1)
+OUTHTML3	= $(OUTHTML)/man3
+OUTDIRS		+= $(OUTHTML3)
 OUTHTML7	= $(OUTHTML)/man7
 OUTDIRS		+= $(OUTHTML7)
 
@@ -66,6 +69,8 @@ OUTTEX		= $(DOCBASE)/tex
 OUTDIRS		+= $(OUTTEX)
 OUTTEX1		= $(OUTTEX)/man1
 OUTDIRS		+= $(OUTTEX1)
+OUTTEX3		= $(OUTTEX)/man3
+OUTDIRS		+= $(OUTTEX3)
 OUTTEX7		= $(OUTTEX)/man7
 OUTDIRS		+= $(OUTTEX7)
 
@@ -73,6 +78,8 @@ OUTPDF		= $(DOCBASE)/pdf
 OUTDIRS		+= $(OUTPDF)
 OUTPDF1		= $(OUTPDF)/man1
 OUTDIRS		+= $(OUTPDF1)
+OUTPDF3		= $(OUTPDF)/man3
+OUTDIRS		+= $(OUTPDF3)
 OUTPDF7		= $(OUTPDF)/man7
 OUTDIRS		+= $(OUTPDF7)
 
@@ -80,6 +87,8 @@ OUTMAN		= $(DOCBASE)/man
 OUTDIRS		+= $(OUTMAN)
 OUTMAN1		= $(OUTMAN)/man1
 OUTDIRS		+= $(OUTMAN1)
+OUTMAN3		= $(OUTMAN)/man3
+OUTDIRS		+= $(OUTMAN3)
 OUTMAN7		= $(OUTMAN)/man7
 OUTDIRS		+= $(OUTMAN7)
 
@@ -87,6 +96,8 @@ OUTTXT		= $(DOCBASE)/txt
 OUTDIRS		+= $(OUTTXT)
 OUTTXT1		= $(OUTTXT)/man1
 OUTDIRS		+= $(OUTTXT1)
+OUTTXT3		= $(OUTTXT)/man3
+OUTDIRS		+= $(OUTTXT3)
 OUTTXT7		= $(OUTTXT)/man7
 OUTDIRS		+= $(OUTTXT7)
 
@@ -94,6 +105,8 @@ OUTEPUB		= $(DOCBASE)/epub
 OUTDIRS		+= $(OUTEPUB)
 OUTEPUB1	= $(OUTEPUB)/man1
 OUTDIRS		+= $(OUTEPUB1)
+OUTEPUB3	= $(OUTEPUB)/man3
+OUTDIRS		+= $(OUTEPUB3)
 OUTEPUB7	= $(OUTEPUB)/man7
 OUTDIRS		+= $(OUTEPUB7)
 
@@ -101,6 +114,8 @@ OUTWIKI		= $(DOCBASE)/wiki
 OUTDIRS		+= $(OUTWIKI)
 OUTWIKI1	= $(OUTWIKI)/man1
 OUTDIRS		+= $(OUTWIKI1)
+OUTWIKI3	= $(OUTWIKI)/man3
+OUTDIRS		+= $(OUTWIKI3)
 OUTWIKI7	= $(OUTWIKI)/man7
 OUTDIRS		+= $(OUTWIKI7)
 
@@ -108,6 +123,8 @@ OUTGWIKI	= $(DOCBASE)/gwiki
 OUTDIRS		+= $(OUTGWIKI)
 OUTGWIKI1	= $(OUTGWIKI)/man1
 OUTDIRS		+= $(OUTGWIKI1)
+OUTGWIKI3	= $(OUTGWIKI)/man3
+OUTDIRS		+= $(OUTGWIKI3)
 OUTGWIKI7	= $(OUTGWIKI)/man7
 OUTDIRS		+= $(OUTGWIKI7)
 

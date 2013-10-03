@@ -6,15 +6,7 @@ This projects is aimed to unify the required trace and logging output and integr
 The target is to provide general development, test, and production support of software environments based on multiple programming languages for distributed multicore environments.
 
 
-## Library Components ##
-
-### UTALM Components ###
-The UTALM supports a number of common programming languages, this comprises interpreted and compiled languages.
-Examples are C/C++, Erlang, Hadoop, Java, JavaScript, MongoDB, MySQL, Perl, PHP, PowerShell, Ruby, Scala,
-SQL, and SQLite. Additional handling and visualization plugins are available for Eclipse, and VisualStudio.
-
-
-### utalm-bash ###
+## utalm-bash ##
 This package **UnifiedTraceAndLogManager-bash** contains the support for bash scripting, refer to versions and variants for additional options.
 
 
@@ -32,9 +24,29 @@ The emphasis is here on distributed environments.
 This is the **bash** edition.
 
 **Installation**:
+***Package - tgz***
+* Download tgz
+* Unpack tgz.
+* Call install.sh in main directory.
+  Installs in home-directory. The files.conf 
+  and directories.conf contain a list of changes.
+
+***Package - rpm***
+* Download rpm
+* Install rpm, default is "/usr/share/libutalm-bash-<version>.<arch>"
+* Either use form install directory, or call "install.sh" in install
+  root for installation to your HOME.
+
+***Sources***
 * Download zip-file, or clone from github.
 * Call **make**, or **make help**.
 * Install **tgz** file or **rpm** file.
-* Read man pages in $HOME/doc/{pdf,html,man}/{man1,man7}
+* Read man pages in $HOME/doc/{pdf,html,man}/{man3,man7}
 
+**Build**
+* Install sources.
+* Change into install root and call make
+  Get help with "make help"
 
+***Intro***
+For first help call from install root: "utalm-bash-show-help.sh".

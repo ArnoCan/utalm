@@ -9,7 +9,7 @@
 %% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 %% #SHORT:        utalm-bash
 %% #LICENCE:      Apache-2.0
-%% #VERSION:      03_01_001
+%% #VERSION:      03_01_002
 %% #
 %% ########################################################################
 %% #
@@ -193,7 +193,7 @@ yourExecutable.sh -d LEVEL:FLOW,S:VMW,INFO:3,W:2 -a ...
 %TEX% \fi
 The current version sources the following configuration file when available.
 ```
-$HOME/conf/libutalm-bash.conf
+$HOME/conf/utalm-bash.conf
 ```
 Later versions will harmonise as an additional option all supported languages
 into a common configuration file.

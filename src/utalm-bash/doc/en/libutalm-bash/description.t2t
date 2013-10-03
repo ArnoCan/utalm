@@ -9,7 +9,7 @@
 %% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 %% #SHORT:        utalm-bash
 %% #LICENCE:      Apache-2.0
-%% #VERSION:      03_01_001
+%% #VERSION:      03_01_002
 %% #
 %% ########################################################################
 %% #
@@ -94,16 +94,16 @@ This document is related to the **bash** edition.
 
 This project is a spin-off from the OpenSource project **UnifiedSessionsManager** available since 02/2008.
 For the original implementation refer to the contained library **lib/base.h** and to the generic options
-of **ctys.sh**.
+of **utalm.sh**.
 
 %TEX% //UnifiedSessionsManager.org//
 
-%HTML% //UnifiedSessionsManager.org [ http://www.UnifiedSessionsManager.org ] - Sourceforge.net [ http://sourceforge.net/projects/ctys/files/ctys/ ]// 
+%HTML% //UnifiedSessionsManager.org [ http://www.UnifiedSessionsManager.org ] - Sourceforge.net [ http://sourceforge.net/projects/utalm/files/utalm/ ]// 
 %HTML% -LT-br /-GT-
 
 %MAN% **UnifiedSessionsManager.org** [ http://www.UnifiedSessionsManager.org ]
 
-%MAN% **Sourceforge.net** [ http://sourceforge.net/projects/ctys/files/ctys/ ]
+%MAN% **Sourceforge.net** [ http://sourceforge.net/projects/utalm/files/utalm/ ]
 
 %NONTEX% == Versions and Variants ==
 %TEX% \ifman
@@ -131,7 +131,7 @@ The project is hosted at:
 %NONTEX% == Basics ==
 %TEX% \ifman
 %TEX% \subsection{Basics}
-%TEX% The most important aspects for the application of ctys are:
+%TEX% The most important aspects for the application of utalm are:
 %TEX% \fi
 %%%HTML% -LT-H2-GT-Basics-LT-/H2-GT-
 

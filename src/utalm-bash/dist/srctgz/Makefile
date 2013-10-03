@@ -4,7 +4,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -64,11 +64,17 @@ all:   outdirs $(SRCTGZ_PNAME)
 
 
 $(SRCTGZ_ROOT)/VERSION : 
+ifdef VERBOSE
+	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" -d 99999 
+	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(SRCTGZ_ROOT)/VERSION -d 99999
+endif
 	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" 
 	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(SRCTGZ_ROOT)/VERSION
 
 srctgz $(SRCTGZ_PNAME): $(SRCTGZ_PNAME_BLD)
+ifdef VERBOSE
 	@echo "Copy TGZ to $(SRCTGZ_PNAME)"
+endif
 	@$(CPA) $(SRCTGZ_PNAME_BLD) $(SRCTGZ_PNAME)
 
 $(SRCTGZ_PNAME_BLD) packonly: $(SRCTGZ_ROOT)/VERSION 
@@ -81,8 +87,6 @@ ifdef VERBOSE
 	$(ECHO) $(UNIQUE_PKG_SRC_IMP_DIRS)
 	$(ECHO) 
 endif
-	@echo "Copy sources to $(SRCTGZ_ROOT)"
-	echo "@$(CPA) $(UNIQUE_PKG_SRC_IMP_DIRS) $(SRCTGZ_ROOT)"
 	@$(CPA) $(UNIQUE_PKG_SRC_IMP_DIRS)  $(SRCTGZ_ROOT)
 	@$(CPA) $(UNIQUE_PKG_SRC_IMP_FILES) $(SRCTGZ_ROOT)
 	$(FIND) $(SRCTGZ_ROOT) \
@@ -92,7 +96,9 @@ endif
 	cd $(dir $(SRCTGZ_ROOT))&&$(TGZ) $(SRCTGZ_PNAME_BLD) $(notdir $(SRCTGZ_ROOT))
 
 delsrctgz : 
+ifdef VERBOSE
 	@echo "RM:$(SRCTGZ_PNAME)"
+endif
 	@$(RM) $(SRCTGZ_PNAME)
 
 dirsrctgz : 

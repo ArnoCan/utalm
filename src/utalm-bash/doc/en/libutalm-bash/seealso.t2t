@@ -9,7 +9,7 @@
 %% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 %% #SHORT:        utalm-bash
 %% #LICENCE:      Apache-2.0
-%% #VERSION:      03_01_001
+%% #VERSION:      03_01_002
 %% #
 %% ########################################################################
 %% #
@@ -32,8 +32,13 @@
 %%$Header$
 %%
 
-: **use-cases**
-//libutalm-bash(7)//
+: **www**
+
+//[ UnifiedTraceAndLogManager.org - Sourceforge.net http://sourceforge.net/projects/utalm/files/ ]//
+
+: **use-cases and examples**
+
+//show-help.sh//, //included test-cases: tests/utalm-bash//,  //included test-examples: examples//
 
 : **Origin project**
 
@@ -41,12 +46,10 @@
 //[ UnifiedSessionsManager.org http://www.UnifiedSessionsManager.org ]//
 %TEX% \ \\
 
-//[ UnifiedSessionsManager.org - Sourceforge.net http://sourceforge.net/projects/ctys/files/ctys/ ]//
-
 
 : **helper executables in bin-directory**
 
-//getCPUinfo.sh//, //getCurArch.sh//, //getCurCTYSRel.sh//, //getCurCTYSVariant.sh//,
+//getCPUinfo.sh//, //getCurArch.sh//, //getCurUTALMRel.sh//, //getCurUTALMVariant.sh//,
 //getCurDistribution.sh//, //getCurGID.sh//, //getCurOSRel.sh//, //getCurOS.sh//,
 //getCurRelease.sh//, //getVMinfo.sh//, //setversion.sh//
 

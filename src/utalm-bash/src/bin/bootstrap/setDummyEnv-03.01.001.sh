@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -32,7 +32,7 @@ P=${1}
 
 
 PATH=$PATH:/usr/bin
-PATH=$P/bin::$P/conf/ctys/scripts:$PATH
+PATH=$P/bin::$P/conf/utalm/scripts:$PATH
 export PATH
 
 umask 077
@@ -40,5 +40,5 @@ umask 077
 
 MANPATH=$P/doc/de/man:${MANPATH};export MANPATH
 
-CTYS_LIBPATH=$P;export CTYS_LIBPATH;
-CTYS_INI=1;export CTYS_INI
+UTALM_LIBPATH=$P;export UTALM_LIBPATH;
+UTALM_INI=1;export UTALM_INI

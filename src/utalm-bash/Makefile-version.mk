@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_001
+#VERSION:      03_01_002
 #
 ########################################################################
 #
@@ -31,7 +31,7 @@
 #production output
 VENDOR      = Ingenieurbuero Arno-Can Uestuensoez - www.i4p.com
 PACKAGER    = Arno-Can Uestuensoez - acue.opensource@gmail.com
-VERSION		= 03.01.001
+VERSION		= 03.01.002
 LICENSE	    = Apache-2.0
 RELEASE	    = R0
 ARCH		= noarch
@@ -40,7 +40,7 @@ PACKAGE_LONG = libutalm-bash
 PACKAGE		= libutalm-bash
 WWW_PROJ	= https://github.com/ArnoCan/UnifiedTraceAndLogManager
 WWW_REPOS	= https://github.com/ArnoCan/UnifiedTraceAndLogManager
-WWW_REF		= http://sourceforge.net/projects/ctys
+WWW_REF		= http://sourceforge.net/projects/utalm
 WWW_USM		= http://UnifiedSessionsManager.org
 
 ifndef OUTLANG
