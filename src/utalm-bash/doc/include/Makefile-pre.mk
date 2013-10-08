@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -29,6 +29,7 @@
 #
 ifndef DOC_BLD_ROOT_PRE_INCLUDED
 DOC_BLD_ROOT_PRE_INCLUDED:=1
+
 
 ifdef BLD_ROOT
   include $(BLD_ROOT)include/Makefile-pre.mk
@@ -62,7 +63,7 @@ LATEX		= latex
 TEX2PDF		= pdflatex
 TXT2TAGS 	= txt2tags
 
-ifndef VERBOSE
+ifndef DBG
   TEX2PDF_ERRNULL = |sed -n 's/Output written/'$(TEX2PDF)':&/p;'
   ERRNULL	  = 2>/dev/null
 endif

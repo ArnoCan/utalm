@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -29,29 +29,32 @@
 #
 
 #
-PKG_ENV_FILES	+= $(BLD_ROOT)README.md
-PKG_ENV_FILES	+= $(BLD_ROOT)RELEASENOTES.txt
-PKG_ENV_FILES	+= $(BLD_ROOT)INSTALL.txt
-PKG_ENV_FILES	+= $(BLD_ROOT)TODO.txt
-PKG_ENV_FILES	+= $(BLD_ROOT)Apache-2.0.txt
-PKG_ENV_FILES	+= $(BLD_ROOT)install.sh
-PKG_ENV_FILES	+= $(BLD_ROOT)installToSystem.sh
-PKG_ENV_FILES	+= $(BLD_ROOT)install.conf
-PKG_ENV_FILES	+= $(BLD_ROOT)collect-filelist.sh
-PKG_ENV_FILES	+= $(BLD_ROOT)test.sh
-PKG_ENV_FILES	+= $(BLD_ROOT)sourceEnvironment.sh
+IMPORT_FILES	+= $(BLD_ROOT)README.md
+IMPORT_FILES	+= $(BLD_ROOT)RELEASENOTES.txt
+IMPORT_FILES	+= $(BLD_ROOT)INSTALL.txt
+IMPORT_FILES	+= $(BLD_ROOT)TODO.txt
+IMPORT_FILES	+= $(BLD_ROOT)Apache-2.0.txt
+IMPORT_FILES	+= $(BLD_ROOT)install.sh
+IMPORT_FILES	+= $(BLD_ROOT)installToSystem.sh
+IMPORT_FILES	+= $(BLD_ROOT)install.conf
+IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
+IMPORT_FILES	+= $(BLD_ROOT)sourceEnvironment.sh
 
-PKG_ENV_FILES	+= $(BLD_ROOT)utalm-bash-show-help.sh
+IMPORT_FILES	+= $(BLD_ROOT)utalm-bash-show-help.sh
 
-PKG_ENV_DIRS	+= $(BLD_ROOT)bin
-PKG_ENV_DIRS	+= $(BLD_ROOT)conf
-PKG_ENV_DIRS	+= $(BLD_ROOT)examples
-PKG_ENV_DIRS	+= $(BLD_ROOT)tests
 
+IMPORT_DIRS		+= $(BLD_ROOT)bin
+IMPORT_DIRS		+= $(BLD_ROOT)conf
+
+IMPORT_DIRS		+= $(DOCBASE_ML)
 
 #
-PKG_SRC_DIRS	+= $(RTBASE)/bin
-PKG_SRC_DIRS	+= $(RTBASE)/conf
-PKG_SRC_DIRS	+= $(RTBASE)/lib
+IMPORT_DIRS		+= $(RTBASE)bin
+IMPORT_DIRS		+= $(RTBASE)conf
+IMPORT_DIRS		+= $(RTBASE)lib
+
+IMPORT_DIRS		+= $(RTBASE)examples
+
+
 
 

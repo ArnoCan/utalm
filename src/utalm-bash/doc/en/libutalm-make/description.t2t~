@@ -1,0 +1,217 @@
+
+.
+%NONTEX% = NAME =
+%NONTEX% **MYTITLE**
+%% #HEADSTART##############################################################
+%% #
+%% #PROJECT:      UnifiedTraceAndLogManager
+%% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #SHORT:        utalm-bash
+%% #LICENCE:      Apache-2.0
+%% #VERSION:      03_02_001
+%% #
+%% ########################################################################
+%% #
+%% #   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+%% #
+%% #   Licensed under the Apache License, Version 2.0 (the "License");
+%% #   you may not use this file except in compliance with the License.
+%% #   You may obtain a copy of the License at
+%% #
+%% #     http://www.apache.org/licenses/LICENSE-2.0
+%% #
+%% #   Unless required by applicable law or agreed to in writing, software
+%% #   distributed under the License is distributed on an "AS IS" BASIS,
+%% #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% #   See the License for the specific language governing permissions and
+%% #   limitations under the License.
+%% #
+%% #HEADEND################################################################
+%%
+%%$Header$
+%%
+%TEX% \ifman
+%TEX% \section{NAME}
+%TEX% **MYTITLE**
+%TEX% \else
+%TEX% \newpage
+%TEX% \section{MYCALL}
+%TEX% \label{s:MYCALL}
+%TEX% \fi
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+
+%NONTEX% = SYNTAX =
+%HTML%  -LT-br /-GT- 
+%TEX% \ifman
+%TEX% \section{SYNTAX}
+%TEX% \else
+%TEX% \large\textbf{MYCALL}
+%TEX% \fi
+%VERBATIMBEG
+%!include(wiki): ''syntax.t2t''
+%!include(tex): ''syntax.t2t''
+%!include(txt): ''syntax.t2t''
+%!include(man): ''syntax.t2t''
+%!include(html): ""syntax.t2t""
+%VERBATIMEND
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+
+%NONTEX% = DESCRIPTION =
+%TEX% \ifman
+%TEX% \section{DESCRIPTION}
+%TEX% \fi
+Modern software systems and application are commonly written in multiple languages, include scripting engines, and are frequently build on
+multiple specialized frameworks and middleware for a considerable diversity of runtime environments.
+The latest influencing update in development paradigm is the application of multicore processors.
+This projects is aimed to unify the required trace and logging output and integrate into debugging environments.
+The target is to provide general developement, test, and production support of software environments based
+on multiple programming languages for distributed multicore environments.
+
+
+This package **UnifiedTraceAndLogManager-bash** contains the support for bash scripting and **make integration** for cli based unit tests, and building of specialized documentation.
+
+The features are packaged in small units to specific Makefiles bundled as an include-library.
+This includes generic tree handling and adapted documentation of the managed subtrees.
+For documentation and pattern refer for now to the tests-subdirectoy contained in the development packages **tgz-devel** and **rpm-devel**.
+This document is related to the **bash** edition.
+
+
+
+%NONTEX% == History and Origin ==
+%TEX% \ifman
+%TEX% \section{History and Origin}
+%TEX% \fi
+
+This project is a spin-off from the OpenSource project **UnifiedSessionsManager** available since 02/2008.
+The original implementation is part of the non-disclosed production environment.
+
+%TEX% //UnifiedSessionsManager.org//
+
+%HTML% //UnifiedSessionsManager.org [ http://www.UnifiedSessionsManager.org ] - Sourceforge.net [ http://sourceforge.net/projects/utalm/files/utalm/ ]// 
+%HTML% -LT-br /-GT-
+
+%MAN% **UnifiedSessionsManager.org** [ http://www.UnifiedSessionsManager.org ]
+
+%MAN% **Sourceforge.net** [ http://sourceforge.net/projects/utalm/files/utalm/ ]
+
+%NONTEX% == Versions and Variants ==
+%TEX% \ifman
+%TEX% \section{Versions and Variants}
+%TEX% \fi
+The main feature of the **UnifiedTraceAndLogManager** is the support of a common interface
+for the debugging and logging of operational data in an
+environment of multiple programmning languages.
+The emphasis of the component **libutalm-make** is to provide a lean environment for build, test,
+and production of small CLI utilites. This includes also a draft regression testing, 
+appropriate to the spent effort for the adhoc-development of small sized utilities.
+
+The project is hosted at:
+
+%TEX% //UnifiedTraceAndLogManager at Sourceforge.net//
+%HTML% //UnifiedTraceAndLogManager at **Sourceforge.net** [ http://sourceforge.net/projects/utalm/ ] -  **github** [ https://github.com/ArnoCan/utalm ]//
+%MAN% **UnifiedTraceAndLogManager at github** [ https://github.com/ArnoCan/UnifiedTraceAndLogManager ]
+%TEX% //UnifiedTraceAndLogManager at github//
+%MAN% **UnifiedTraceAndLogManager at github** [ https://github.com/ArnoCan/UnifiedTraceAndLogManager ]
+%HTML% -LT-br /-GT-
+
+
+%NONTEX% == Basics ==
+%TEX% \ifman
+%TEX% \subsection{Basics}
+%TEX% The most important aspects for the application of utalm are:
+%TEX% \fi
+%%%HTML% -LT-H2-GT-Basics-LT-/H2-GT-
+
+%NONTEX% === Installation and Setup ===
+%TEX% \ifman
+%TEX% \subsection{Installation and Setup}
+%TEX% \else
+%TEX% \subsection{Installation and Setup}
+%TEX% \fi
+%%%HTML% -LT-H3-GT-Installation and Setup-LT-/H3-GT-
+The installation formats supported are tgz, rpm, and (deb).
+Because the library is a developer tool, some preassumptions for the knowledge of users are made.
+The simplest installation is by tgz - tar-gzip - format, where the included **install.sh**
+script installs the libraray and required **core** and **bootstrap** components in the users 
+home directory.
+
+The created directories are depicted in the following figure, these are
+used commonly for all spin-offs from the USM and other projects by the
+author in the same manner.
+
+```
+   $HOME
+     |
+     +-bin
+        +-bootstrap
+        +-core
+     +-conf
+     +-doc
+        +de
+        +en
+     +-help
+        +en
+     +-lib
+        +-bootstrap
+        +-core
+        +-Makefile.lib
+
+```
+The **bootstrap** and **core** subdirectories of **bin** and **lib** contain the lowest level of required 
+runtime calls, which are required to set internal variables. An example is the operations system, which is 
+used for several mediation decisions within the code like using appropriate paths and system call variants.
+
+Another deeper directory tree is the doc directory tree, which contains the documents in the formats 
+**MAN**, **PDF**, and **HTML**.
+```
+   $HOME
+     |
+     +-doc
+        +en
+          +images
+          +-html
+            +-man1
+            +-man7
+          +-pdf
+            +-man1
+            +-man7
+          +-man
+            +-man1
+            +-man7
+
+```
+The **MANPATH** variable should be set as 
+```
+export MANPATH=${MANPATH}:$HOME/doc/en/man
+```
+or
+```
+export MANPATH=${MANPATH}:$HOME/doc/de/man
+```
+
+%HTML% -LT-br /-GT-
+
+
+%NONTEX% === Configuration ===
+%TEX% \ifman
+%TEX% \subsection{Configuration}
+%TEX% \else
+%TEX% \subsection{Configuration}
+%TEX% \fi
+%%%HTML% -LT-H3-GT-Configuration-LT-/H3-GT-
+The preset default values of internal shell variables could be changed by environment variables, refer to the code. The standard pattern for this **bash** version is
+```
+
+	MYVARNAME=${MYVARNAME:-<default-value>}
+
+```
+could be changed by configuration files
+and environment variables.
+The configuration files are installed by default within **$HOME/conf** directory tree.
+%HTML% -LT-br /-GT-
+

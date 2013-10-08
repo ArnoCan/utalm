@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      01_02_001
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -39,16 +39,21 @@ Distribution: %{myname}
 Vendor: %{myvendor}
 Packager: %{mypackager}
 
-BuildRoot: /tmp/rpm/%{mytgzname}
+#BuildRoot: /tmp/rpm/%{mytgzname}
+BuildRoot: %{_tmppath}/%{mytgzname}
+
+BuildArch: noarch
+BuildRequires: bash
+#BuildRequires: python
 ExclusiveOS: Linux
 
 Prefix: /usr/share
 
-#Requires:
-
+Requires: bash
+Provides: utalm-bash
 
 %description
-The 'bash' variant of UnifiedTraceAndLogManager provides th components for 
+The 'bash' variant of UnifiedTraceAndLogManager provides the components for 
 debugging and production time  logging of the UnifiedTraceAndLogManager
 project.  
 
@@ -68,8 +73,8 @@ the following options are available:
    tgz-file into your home directory and unpack it.
 
 	cd $HOME
-	cp libutalm-bash-03.01.002-R0.noarch.tgz
-	tar zxf libutalm-bash-03.01.002-R0.noarch.tgz   
+	cp libutalm-bash-03.02.001-R0.noarch.tgz
+	tar zxf libutalm-bash-03.02.001-R0.noarch.tgz   
 
 
 %prep
@@ -100,8 +105,11 @@ chmod -R 755 ${INSTTARGET}
 rm -rf ${RPM_BUILD_ROOT}
 
 %changelog
+* Thu Oct 08 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
+- Version-03.02.001
+
 * Sat Sep 21 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.01.002
+- Version-03.02.001
 
 * Tue Sep 15 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
 - Version-02.01.001

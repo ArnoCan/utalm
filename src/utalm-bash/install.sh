@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -26,7 +26,7 @@
 #
 #HEADEND################################################################
 
-export VERBOSE=${VERBOSE:-0}
+export DBG=${DBG:-0}
 export SILENT=${SILENT:-1}
 #
 #Execution anchor
@@ -38,6 +38,22 @@ MYCALLPATH=`dirname $MYCALLPATHNAME`
 if [ ! -e ${0##*/} -a ${PWD##*/} != src ];then
 	echo "ERROR:Must be called in own directory!">&2
 	exit 1
+fi
+
+#
+# installation target
+#
+if [ -n "${INSTROOT}" ];then
+	if [ -e "${INSTROOT}" ];then
+		BASE=${INSTROOT}
+	else
+		echo "ERROR:Missing INSTROOT=${INSTROOT}">&2
+		exit 1
+	fi
+fi
+if [ -z "${INSTROOT}" ];then
+	INSTROOT=${HOME}
+	BASE=${HOME}
 fi
 
 if [ -e ${MYCALLPATH%/*}/conf/utalm-bash.conf ];then
@@ -107,4 +123,8 @@ done
 displayIt "->libutalm.sh $LIBDIR"
 $CP ${BASE}lib/libutalm.sh $LIBDIR
 
+displayIt "->utalm-bash-show-help.sh $HOME"
 $CP ${BASE}utalm-bash-show-help.sh $HOME
+
+displayIt "->sourceEnvironment.sh $HOME"
+$CP ${BASE}sourceEnvironment.sh $HOME

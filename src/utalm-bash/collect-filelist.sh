@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -26,7 +26,7 @@
 #
 #HEADEND################################################################
 
-export VERBOSE=${VERBOSE:-0}
+export DBG=${DBG:-0}
 export SILENT=${SILENT:-1}
 #
 #Execution anchor

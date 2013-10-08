@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -31,7 +31,7 @@
 #production output
 VENDOR      = Ingenieurbuero Arno-Can Uestuensoez - www.i4p.com
 PACKAGER    = Arno-Can Uestuensoez - acue.opensource@gmail.com
-VERSION		= 03.01.002
+VERSION		= 03.02.001
 LICENSE	    = Apache-2.0
 RELEASE	    = R0
 ARCH		= noarch
@@ -50,3 +50,4 @@ endif
 ifndef VARIANT
   VARIANT=NIGHTLY
 endif
+

@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -27,21 +27,19 @@
 #
 #$Header$
 #
-ifndef OUTLANG
-	OUTLANG=$(CALLDIRNAME)
-endif
-ifndef OUTLANG
-  	$(error "Missing environment variable OUTLANG")
-endif
+OUTLANG:=en
+DOC_BLD_ROOT:=$(BLD_ROOT)doc/
+
 ifdef DOC_BLD_ROOT
-	include $(DOC_BLD_ROOT)$(OUTLANG)/include/Makefile-pre.mk
+  include $(DOC_BLD_ROOT)include/Makefile-pre.mk
 else
-  $(error "Missing environment variable DOC_BLD_ROOT")
+  $(error "Missing environment variable BLD_ROOT")
 endif
+
 SRC_POOL        =  
 SRC_POOL        +=  images
 SRC_POOL        +=  libutalm-bash 
-#SRC_POOL        +=  libutalm-bash-examples 
+SRC_POOL        +=  libutalm-make 
 
 
 .PHONY: $(SRC_POOL) css js
@@ -53,7 +51,7 @@ $(SRC_POOL): $(ENVFILES)
 	@echo "...return from $@"
 
 css js:
-ifdef VERBOSE
+ifdef DBG
 	@echo "##Copy:$@"
 endif
 	$(CPA) $@   $(DOCBASE)

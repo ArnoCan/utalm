@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -81,7 +81,7 @@ all: outdirs $(OUT_POOL) $(BLD_POOL)
 outdirs:$(OUTDIRS)
 
 $(BLD_POOL): $(OUTIMGDOC)
-ifdef VERBOSE
+ifdef DBG
 	$(ECHO) "Copy:"
 	$(ECHO) "  from:$(OUTIMGTMP)/$(@F)"
 	$(ECHO) "  to:  $(OUTIMGDOC)"
@@ -90,11 +90,11 @@ endif
 	chmod 755 $(OUTIMGDOC)/$(@F)
 
 $(OUT_POOL): $(IN_POOL)
-ifdef VERBOSE
+ifdef DBG
 	$(ECHO) "Convert:"
 	$(ECHO) "  from:$(notdir $@)"
 endif
-	BLD_ROOT=$(BLD_ROOT) OUTIMG=$(OUTIMGTMP) VERBOSE=$(VERBOSE) bash convertGraphics.sh $(notdir $@)
+	BLD_ROOT=$(BLD_ROOT) OUTIMG=$(OUTIMGTMP) DBG=$(DBG) bash convertGraphics.sh $(notdir $@)
 
 $(IN_POOL): $(ENVFILES)
 

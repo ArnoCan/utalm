@@ -37,6 +37,12 @@ This is the **bash** edition.
 * Either use form install directory, or call "install.sh" in install
   root for installation to your HOME.
 
+***Package - rpm-devel***
+* Download rpm-devel
+* Install rpm-devel, default is "/usr/share/libutalm-bash-devel-<version>.<arch>"
+* Either use form install directory, or call "install-devel.sh" in install
+  root for installation to your HOME.
+
 ***Sources***
 * Download zip-file, or clone from github.
 * Call **make**, or **make help**.

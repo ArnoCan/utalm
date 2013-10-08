@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -83,92 +83,35 @@ APIDX=0;
 #       System definitions - do not change these!              #
 ################################################################
 #Execution anchor
+#
+#Execution anchor
 MYCALLPATHNAME=$0
-MYCALLNAME=${MYCALLPATHNAME##*/}
+MYCALLNAME=`basename $MYCALLPATHNAME`
 MYCALLNAME=${MYCALLNAME%.sh}
-MYCALLPATH=${MYCALLPATHNAME%/*}
+MYCALLPATH=`dirname $MYCALLPATHNAME`
+
+if [ -e ${BLD_ROOT}src/conf/utalm-bash.conf ];then
+. ${BLD_ROOT}src/conf/utalm-bash.conf
+else
+	if [ -e ${BLD_ROOT}conf/utalm-bash.conf ];then
+	. ${BLD_ROOT}conf/utalm-bash.conf
+	else
+		if [ -e ${BLD_ROOT}conf/utalm-bash.conf ];then
+		. ${BLD_ROOT}conf/utalm-bash.conf
+		else
+		. ${HOME}/conf/utalm-bash.conf
+		fi
+	fi
+fi
+
+. ${BOOTSTRAPLIB}/bootstrap-03.01.009.sh
+. ${CORELIB}/libcore-03.01.009.sh
+. ${LIBDIR}/libutalm.sh
 
 MYLIBEXECPATHNAME=$MYCALLPATHNAME
 
-#
-#identify the actual location of the callee
-#
-if [ -n "${MYLIBEXECPATHNAME##/*}" ];then
-	MYLIBEXECPATHNAME=${PWD}/${MYLIBEXECPATHNAME}
-fi
-MYLIBEXECPATH=${MYLIBEXECPATHNAME%/*}
-
-###################################################
-#load basic library required for bootstrap        #
-###################################################
 MYBOOTSTRAP=${MYLIBEXECPATH}/bootstrap
-if [ ! -d "${MYBOOTSTRAP}" ];then
-    MYBOOTSTRAP=${MYCALLPATH}/bootstrap
-    if [ ! -d "${MYBOOTSTRAP}" ];then
-	echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
-	cat <<EOF  
 
-
-DESCRIPTION:
-  This directory contains the common mandatory bootstrap functions.
-  Your installation my be erroneous.  
-
-SOLUTION-PROPOSAL:
-  First of all check your installation, because an error at this level
-  might - for no reason - bypass the final tests.
-
-  If this does not help please send a bug-report.
-
-EOF
-	exit 1
-    fi
-fi
-
-MYBOOTSTRAP=${MYBOOTSTRAP}/bootstrap-03.01.009.sh
-if [ ! -f "${MYBOOTSTRAP}" ];then
-  echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
-cat <<EOF  
-
-DESCIPTION:
-  This file contains the common mandatory bootstrap functions required
-  for start-up of any shell-script within this package.
-
-  It seems though your installation is erroneous or you detected a bug.  
-
-SOLUTION-PROPOSAL:
-  First of all check your installation, because an error at this level
-  might - for no reason - bypass the final tests.
-
-  When your installation seems to be OK, you may try to set a TEMPORARY
-  symbolic link to one of the files named as "bootstrap.<highest-version>".
-  
-    ln -s ${MYBOOTSTRAP} bootstrap.<highest-version>
-
-  in order to continue for now. 
-
-  Be aware, that any installation containing the required file will replace
-  the symbolic link, because as convention the common boostrap files are
-  never symbolic links, thus only recognized as a temporary workaround to 
-  be corrected soon.
-
-  If this does not work you could try one of the other versions.
-
-  Please send a bug-report.
-
-EOF
-  exit 1
-fi
-
-###################################################
-#Start bootstrap now                              #
-###################################################
-. ${MYBOOTSTRAP}
-###################################################
-#OK - utilities to find components of this version#
-#available now.                                   #
-###################################################
-
-#
 #set real path to install, resolv symbolic links
 _MYLIBEXECPATHNAME=`bootstrapGetRealPathname ${MYLIBEXECPATHNAME}`
 MYLIBEXECPATH=${_MYLIBEXECPATHNAME%/*}

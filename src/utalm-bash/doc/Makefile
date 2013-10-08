@@ -3,13 +3,13 @@
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
-#SHORT:        utalm-bash
+#SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_01_001
 #
 ########################################################################
 #
-#   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+#   Copyright [2011,2012,2013] Arno-Can Uestuensoez
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -28,9 +28,7 @@
 #$Header$
 #
 
-DOC_BLD_ROOT := $(shell pwd)
-BLD_ROOT := $(dir $(DOC_BLD_ROOT))
-DOC_BLD_ROOT := $(DOC_BLD_ROOT)/
+DOC_BLD_ROOT := $(shell pwd)/
 
 ifdef DOC_BLD_ROOT
   include $(DOC_BLD_ROOT)include/Makefile-pre.mk
@@ -38,15 +36,16 @@ else
   $(error "Missing environment variable BLD_ROOT")
 endif
 
-SRC_POOL        =  images js css $(OUTLANGLST) 
+SRC_POOL        =  images css js $(OUTLANGLST) 
 
 .PHONY: $(SRC_POOL)  
 
-all:  outdirs $(SRC_POOL) 
-
+all:  outdirs $(SRC_POOL)
+	
 $(OUTLANGLST): $(ENVFILES)
 	@echo "###################################"
 	@echo "##Change to LANG:$@"
+	echo "cd $@&&BLD_ROOT=$(BLD_ROOT) DOC_BLD_ROOT=$(DOC_BLD_ROOT) OUTLANG=$@ $(MAKE) $(MFLAGS)"
 	cd $@&&BLD_ROOT=$(BLD_ROOT) DOC_BLD_ROOT=$(DOC_BLD_ROOT) OUTLANG=$@ $(MAKE) $(MFLAGS)
 	@echo "##...return from $@"
 
@@ -60,6 +59,7 @@ ifdef VERBOSE
 	@echo "##Copy:$@"
 endif
 	$(CPA) $@   $(DOCBASE_ML)
+
 
 #
 include $(BLD_ROOT)include/Makefile-rules.mk

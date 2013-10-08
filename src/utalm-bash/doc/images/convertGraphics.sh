@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -201,7 +201,7 @@ for((i=0;i<imgarrsiz;i+=2)){
 		cp ${PNAME} ${OUTf}
     fi
 
-    if [ -n "$VERBOSE" ];then
+    if [ -n "$DBG" ];then
     	echo -e "${TRACE}\n"
     fi
 }

@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -27,34 +27,17 @@
 #
 #$Header$
 #
+all: pkg pkg-devel pkg-src
+pkg: tgz rpm
+pkg-devel: tgz-devel rpm-devel
+pkg-src: srctgz srcrpm git
+rpm-src:srcrpm
+tgz-src:srctgz
 
-DOC_BLD_ROOT := $(shell pwd)
-BLD_ROOT := $(dir $(DOC_BLD_ROOT))
-DOC_BLD_ROOT := $(DOC_BLD_ROOT)/
+SUBROOTTOP=dist
 
-ifdef BLD_ROOT
-  include $(BLD_ROOT)include/Makefile-pre.mk
-else
+ifndef BLD_ROOT
   $(error "Missing environment variable BLD_ROOT")
 endif
+include $(BLD_ROOT)include/Makefile-nodewalk.mk
 
-ifndef OUTLANGLST
-  $(error "Missing environment variable OUTLANGLST")
-endif
-
-
-
-SRC_POOL        =  tgz rpm srctgz srcrpm
-
-.PHONY: $(SRC_POOL)  
-
-all:  $(SRC_POOL) 
-
-$(SRC_POOL): outdirs
-	@echo "###################################"
-	@echo "##Change to:$@ for each:$(OUTLANGLST)"
-	for i in $(OUTLANGLST);do BLD_ROOT=$(BLD_ROOT) OUTLANG=$${i} $(MAKE) -C $@ $(MFLAGS);done
-	@echo "##...return from $@"
-
-
-include $(BLD_ROOT)include/Makefile-post.mk

@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -41,7 +41,6 @@ SRC_FILES += README.txt
 
 SRC_DIRS += bin
 SRC_DIRS += conf
-SRC_DIRS += include
 SRC_DIRS += lib
 
 .PHONY: $(SRC_DIRS)
@@ -49,13 +48,13 @@ SRC_DIRS += lib
 all: outdirs $(SRC_FILES) $(SRC_DIRS)
 
 $(SRC_FILES):
-ifdef VERBOSE
+ifdef DBG
 	@echo "Copy $@"
 endif
 	@$(CPA) $@ $(RTBASE)
 
 $(SRC_DIRS):
-ifdef VERBOSE
+ifdef DBG
 	@echo "Copy $@"
 endif
 	@$(CPA) $@ $(RTBASE)

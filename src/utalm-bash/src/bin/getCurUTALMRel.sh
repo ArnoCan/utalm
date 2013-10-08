@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -47,6 +47,6 @@
 #
 #FUNCEND###############################################################
 
-UTALM_RELEASE=03_01_002
+UTALM_RELEASE=03_02_001
 
 echo -n "${UTALM_RELEASE}"

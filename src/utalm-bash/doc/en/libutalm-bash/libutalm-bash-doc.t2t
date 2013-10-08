@@ -9,7 +9,7 @@ September, 2013
 %% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 %% #SHORT:        utalm-bash
 %% #LICENCE:      Apache-2.0
-%% #VERSION:      03_01_002
+%% #VERSION:      03_02_001
 %% #
 %% ########################################################################
 %% #
@@ -41,7 +41,7 @@ September, 2013
 
 %Type:no-type
 %!postproc:       (MYCALL)            'libutalm-bash'
-%!postproc:  	  (MYTITLE)           'libutalm-bash - Commutate To Your Session'
+%!postproc:  	  (MYTITLE)           'libutalm-bash - Unified Trace And Log Manager'
 
 %Type:TEX
 %%!postproc(tex): (\\section\*{NAME})  '\section{MYCALL}'

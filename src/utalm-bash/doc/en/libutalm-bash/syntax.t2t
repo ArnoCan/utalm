@@ -24,7 +24,7 @@
                 |D_FRAME|FRAME
                 |D_SYS|SYS
                 |D_STAT|STAT
-                |D_TST|TST
+                |D_TESTDEBUG|TST
                 |D_BULK)|BULK
               )
 

@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -42,7 +42,7 @@ ifndef DOC_BLD_ROOT
 endif
 
 #SRC_POOL = $(ROOT_SRC_POOL)  src doc tgz rpm
-SRC_POOL = $(ROOT_SRC_POOL)  src doc dist
+SRC_POOL = $(ROOT_SRC_POOL)  src examples tests doc dist
 LNK_POOL =  
 OUTDIRS  += $(TGZ_ROOT)
 
@@ -50,20 +50,6 @@ OUTDIRS  += $(TGZ_ROOT)
 
 all: outdirs  $(SRC_POOL)
 rt: src
-rpm: $(ENVFILES) outdirs
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	cd dist&&$(MAKE) $(MFLAGS) rpm
-	@echo "#...finished:$@"
-
-targz:tgz
-tgz: outdirs  $(ENVFILES)
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	cd dist&&$(MAKE) $(MFLAGS) tgz
-	@echo "#...finished:$@"
 
 dist:
 	@echo
@@ -72,20 +58,34 @@ dist:
 	cd $@&&$(MAKE) $(MFLAGS)
 	@echo "#...finished:$@"
 
-doc: outdirs $(ENVFILES)
+pkg:tgz rpm
+pkg-devel:tgz-devel rpm-devel
+pkg-src:srctgz srcrpm
+rpm-src:srcrpm
+tgz-src :srctgz
+targz:tgz
+git tgz srctgz tgz-devel srcrpm rpm-devel rpm: $(ENVFILES) outdirs
+	@echo
+	@echo "###"
+	@echo "#Change to:$@"
+	cd dist&&$(MAKE) $(MFLAGS) $@
+	@echo "#...finished:$@"
+
+src examples tests doc: $(ENVFILES) outdirs
 	@echo
 	@echo "###"
 	@echo "#Change to:$@"
 	cd $@&&$(MAKE) $(MFLAGS)
 	@echo "#...finished:$@"
 
-src: outdirs $(ENVFILES)
+
+test: outdirs $(ENVFILES)
 	@echo
 	@echo "###"
 	@echo "#Change to:$@"
-	cd $@&&export PATH=$(PATH):$(BLD_ROOT)/src/bin&& $(MAKE) $(MFLAGS)
-#	export PATH=$(PATH):$(BLD_ROOT)/src/bin&&export VERBOSE=$(VERBOSE)&&export INSTROOT=$(TGZ_ROOT)&&./install.sh >&2
+	cd tests&&$(MAKE) $(MFLAGS) test
 	@echo "#...finished:$@"
+
 
 include $(BLD_ROOT)include/Makefile-rules.mk
 include $(BLD_ROOT)include/Makefile-post.mk

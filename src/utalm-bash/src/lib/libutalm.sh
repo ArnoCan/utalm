@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -31,27 +31,30 @@
 if [ -z "$__UnifiedTraceAndLogManager__" ];then #*** prevent multiple inclusion
 __UnifiedTraceAndLogManager__=1 #*** prevent multiple inclusion
 
-if [ -e ${MYCALLPATH%/*}/conf/utalm-bash.conf ];then
-	. ${MYCALLPATH%/*}/conf/utalm-bash.conf
+if [ -e ${BASH_SOURCE%/*/*}/conf/utalm-bash.conf ];then
+	. ${BASH_SOURCE%/*/*}/conf/utalm-bash.conf
 else
-	if [ -e ${BASH_SOURCE%/*}/src/conf/utalm-bash.conf ];then
-		. ${BASH_SOURCE%/*}/src/conf/utalm-bash.conf
+	if [ -e ${MYCALLPATH%/*/*}/conf/utalm-bash.conf ];then
+		. ${MYCALLPATH%/*/*}/conf/utalm-bash.conf
 	else
-		if [ -e ${BASH_SOURCE%/*}/conf/utalm-bash.conf ];then
-			. ${BASH_SOURCE%/*}/conf/utalm-bash.conf
+		if [ -e ${BASH_SOURCE%/*/*/*}/conf/utalm-bash.conf ];then
+			. ${BASH_SOURCE%/*/*/*}/conf/utalm-bash.conf
 		else
-			if [ -e ${HOME}/conf/utalm-bash.conf ];then
-				. ${HOME}/conf/utalm-bash.conf
+			if [ -e ${BASH_SOURCE%/*/*/*/*}/conf/utalm-bash.conf ];then
+				. ${BASH_SOURCE%/*/*/*/*}/conf/utalm-bash.conf
 			else
-				echo "ERROR:Missing: utalm-bash.conf">&2
-				echo "ERROR:${BASH_SOURCE}">&2
-				echo "ERROR:${PWD}">&2
-				exit 1
+				if [ -e ${HOME}/conf/utalm-bash.conf ];then
+					. ${HOME}/conf/utalm-bash.conf
+				else
+					echo "ERROR:Missing: utalm-bash.conf">&2
+					echo "ERROR:FROM:${BASH_SOURCE}">&2
+					echo "ERROR:CALL:${PWD}">&2
+					exit 1
+				fi
 			fi
 		fi
 	fi
 fi
-
 
 if [ -e ${BASH_SOURCE%/*}/bootstrap/bootstrap-03.01.009.sh ];then
 	. ${BASH_SOURCE%/*}/bootstrap/bootstrap-03.01.009.sh
@@ -63,7 +66,7 @@ if [ -z "$__LIBCORE__" ];then
 fi
 
 _myLIBNAME_UnifiedTraceAndLogManager="${BASH_SOURCE}"
-_myLIBVERS_UnifiedTraceAndLogManager="03.01.002"
+_myLIBVERS_UnifiedTraceAndLogManager="03.02.001"
 
 #shopt -s nullglob
 #shopt -s extglob
@@ -74,7 +77,7 @@ _myLIBVERS_UnifiedTraceAndLogManager="03.01.002"
 
 #if not yet initialized, but pre-defined, than set it
 if [ -z "${MYLIBPATH}" ];then
-    MYLIBPATH=${HOME}/lib
+    MYLIBPATH=${BASH_SOURCE%/*}/
 fi
 MYLIBPATH=${MYLIBPATH//\/\//\/}
 MYLIBPATH=${MYLIBPATH//\/\//\/}
@@ -128,40 +131,47 @@ fi
 #
 #levels
 #
-export      D_UI=$((2#1))
-export    D_FLOW=$((2#10))
-export     D_UID=$((2#100))
-export    D_DATA=$((2#1000))
-export   D_MAINT=$((2#10000))
-export   D_FRAME=$((2#100000))
-export     D_SYS=$((2#1000000))
-export    D_STAT=$((2#10000000000000))
-export     D_TST=$((2#100000000000000))
-export    D_BULK=$((2#1000000000000000))
+export D_RESULTCODE=1
+export D_RESULTDATA=2
+export D_TESTRESULT=4
+export D_TESTDATA=8
+export D_TESTDEBUG=16
+export D_UI=32
+export D_FLOW=64
+export D_UID=128
+export D_DATA=256
+export D_MAINT=512
+export D_FRAME=1024
+export D_SYS=2048
+export D_STAT=4096
+export D_MAKE=8192
+
+export D_BULK=4294967296
 
 #
 #subsystems
 #
-export    S_CONF=$((2#1))
-export     S_BIN=$((2#10))
-export     S_LIB=$((2#100))
-export    S_CORE=$((2#1000))
-export     S_GEN=$((2#10000))
-export     S_CLI=$((2#100000))
-export     S_X11=$((2#1000000))
-export     S_VNC=$((2#10000000))
-export    S_QEMU=$((2#100000000))
-export     S_VMW=$((2#1000000000))
-export     S_XEN=$((2#10000000000))
-export      S_PM=$((2#100000000000))
-export     S_KVM=$((2#1000000000000))
-export     S_RDP=$((2#10000000000000))
-export    S_VBOX=$((2#100000000000000))
+export S_CONF=1
+export S_BIN=2
+export S_LIB=4
+export S_CORE=8
+export S_GEN=16
+export S_CLI=32
+export S_X11=64
+export S_VNC=128
+export S_QEMU=256
+export S_VMW=512
+export S_XEN=1024
+export S_PM=2048
+export S_KVM=4096
+export S_RDP=8192
+export S_VBOX=16384
+export S_UTALM=32768
 
 #
 #ALL4all
 #
-export     D_ALL=$((16#ffff))
+export D_ALL=4294967296
 
 #mode
 M=4;
@@ -236,21 +246,21 @@ function fetchDBGArgs () {
 		SUBSYSTEM|S)
 		    LVL=${ARG};
 		    case ${LVL} in
-			S_CONF|CONF)LVL=$((2#1));;
-			S_BIN|BIN)LVL=$((2#10));;
-			S_LIB|LIB)LVL=$((2#100));;
-			S_CORE|CORE)LVL=$((2#1000));;
-			S_GEN|GEN)LVL=$((2#10000));;
-			S_CLI|CLI)LVL=$((2#100000));;
-			S_X11|X11)LVL=$((2#1000000));;
-			S_VNC|VNC)LVL=$((2#10000000));;
-			S_QEMU|QEMU)LVL=$((2#100000000));;
-			S_VMW|VMW)LVL=$((2#1000000000));;
-			S_XEN|XEN)LVL=$((2#10000000000));;
-			S_PM|PM)LVL=$((2#100000000000));;
-			S_KVM|KVM)LVL=$((2#1000000000000));;
-			S_RDP|RDP)LVL=$((2#10000000000000));;
-			S_VBOX|VBOX)LVL=$((2#100000000000000));;
+			S_CONF|CONF)LVL=1;;
+			S_BIN|BIN)LVL=2;;
+			S_LIB|LIB)LVL=4;;
+			S_CORE|CORE)LVL=8;;
+			S_GEN|GEN)LVL=16;;
+			S_CLI|CLI)LVL=32;;
+			S_X11|X11)LVL=64;;
+			S_VNC|VNC)LVL=128;;
+			S_QEMU|QEMU)LVL=256;;
+			S_VMW|VMW)LVL=512;;
+			S_XEN|XEN)LVL=1024;;
+			S_PM|PM)LVL=2048;;
+			S_KVM|KVM)LVL=4096;;
+			S_RDP|RDP)LVL=8192;;
+			S_VBOX|VBOX)LVL=16382;;
 			*)
 			    if [ -n "${LVL//[0-9]/}" ];then
 				echo "requires numeric value:$KEY">&2
@@ -280,16 +290,16 @@ function fetchDBGArgs () {
 		LEVEL|L)
 		    export LVL=${ARG};
 		    case ${LVL} in
-		        D_UI|UI)LVL==$((2#1));;
-			D_FLOW|FLOW)LVL=$((2#10));;
-			D_UID|UID)LVL=$((2#100));;
-			D_DATA|DATA)LVL=$((2#1000));;
-			D_MAINT|MAINT)LVL=$((2#10000));;
-			D_FRAME|FRAME)LVL=$((2#100000));;
-			D_SYS|SYS)LVL=$((2#1000000));;
-			D_STAT|STAT)LVL=$((2#10000000000000));;
-			D_TST|TST)LVL=$((2#100000000000000));;
-			D_BULK|BULK)LVL=$((2#1000000000000000));;
+		        D_UI|UI)LVL==1;;
+			D_FLOW|FLOW)LVL=2;;
+			D_UID|UID)LVL=4;;
+			D_DATA|DATA)LVL=8;;
+			D_MAINT|MAINT)LVL=16;;
+			D_FRAME|FRAME)LVL=32;;
+			D_SYS|SYS)LVL=64;;
+			D_STAT|STAT)LVL=128;;
+			D_TESTDEBUG|TST)LVL=256;;
+			D_BULK|BULK)LVL=512;;
 			*)
 			    if [ -n "${LVL//[0-9]/}" ];then
 				echo "requires numeric value:$KEY">&2
@@ -310,16 +320,16 @@ function fetchDBGArgs () {
 		PRINTFINAL|PFIN|PF)
 		    LVL=${ARG:-0};
 		    case ${LVL} in
-		    D_UI|UI)LVL==$((2#1));;
-			D_FLOW|FLOW)LVL=$((2#10));;
-			D_UID|UID)LVL=$((2#100));;
-			D_DATA|DATA)LVL=$((2#1000));;
-			D_MAINT|MAINT)LVL=$((2#10000));;
-			D_FRAME|FRAME)LVL=$((2#100000));;
-			D_SYS|SYS)LVL=$((2#1000000));;
-			D_STAT|STAT)LVL=$((2#10000000000000));;
-			D_TST|TST)LVL=$((2#100000000000000));;
-			D_BULK|BULK)LVL=$((2#1000000000000000));;
+		    D_UI|UI)LVL==1;;
+			D_FLOW|FLOW)LVL=2;;
+			D_UID|UID)LVL=4;;
+			D_DATA|DATA)LVL=8;;
+			D_MAINT|MAINT)LVL=16;;
+			D_FRAME|FRAME)LVL=32;;
+			D_SYS|SYS)LVL=64;;
+			D_STAT|STAT)LVL=128;;
+			D_TESTDEBUG|TST)LVL=256;;
+			D_BULK|BULK)LVL=512;;
 			*)
 			    if [ -n "${LVL//[0-9]/}" ];then
 				echo "requires numeric value:$KEY">&2
@@ -389,7 +399,7 @@ OPTIONS:
       D_FRAME|FRAME
       D_SYS|SYS
       D_STAT|STAT
-      D_TST|TST
+      D_TESTDEBUG|TST
       D_BULK|BULK
       [0-9]*
    [0-9]*
@@ -827,6 +837,77 @@ function getPathName () {
 	echo "$_pname"	
     fi
     return $_ret
+}
+
+
+#FUNCBEG###############################################################
+#NAME:
+#  gotoHell
+#
+#TYPE:
+#  bash-function
+#
+#DESCRIPTION:
+#  Exits with "grep" string for unit evaluation.
+#    "utalm_exit:#value"
+#  
+#EXAMPLE:
+#    "utalm_exit:0"
+#    "utalm_exit:2"
+#
+#PARAMETERS:
+#  $1: LINENO of caller
+#  $2: BASH_SOURCE of caller
+#  $3: exit code
+#
+#
+#OUTPUT:
+#  exits with given code
+#
+#FUNCEND###############################################################
+function gotoHell () {
+	printINFO 0 $1 $2 1  "Requested exit:$3"
+	echo "utalm_exit:$3">&2
+	exit $3	
+}
+
+
+#FUNCBEG###############################################################
+#NAME:
+#  countErrors
+#
+#TYPE:
+#  bash-function
+#
+#DESCRIPTION:
+#  Counts error exits generated by gotoHell.
+#    "utalm_exit:#value"
+#  
+#EXAMPLE:
+#    "utalm_exit:0"
+#    "utalm_exit:2"
+#
+#PARAMETERS:
+#  $1: LINENO of caller
+#  $2: BASH_SOURCE of caller
+#  $3: exit code
+#
+#
+#OUTPUT:
+#  exits with given code
+#
+#FUNCEND###############################################################
+function countErrors () {
+	awk -F':' '
+		BEGIN{
+			ecnt=0;
+		}
+		$0~/utalm_exit/{
+			if($2!=0){ecnt+=1;}print "ecnt=" ecnt " " $0
+		}
+		END{
+			print "utalm_sum_of_errors:" ecnt
+		}'>&2
 }
 
 fi #*** prevent multiple inclusion

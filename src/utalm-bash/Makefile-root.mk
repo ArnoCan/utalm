@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -37,7 +37,7 @@ ifndef BLD_OUT_BASE
   $(error "Missing environment variable BLD_OUT_BASE append a '/'")
 endif
 
-BASE 	= $(BLD_OUT_BASE)/bld/$(PACKAGE)-$(VERSION)
+BASE 	= $(BLD_OUT_BASE)/bld/$(PACKAGE)-$(VERSION)/
 TMP		= ${BASE}/tmp
 ifndef OUTDIR
 	OUTDIR	= $(BASE)-out
@@ -54,27 +54,36 @@ endif
 
 #www-root
 WWWLNK		= www-tmp
-WWWBASE		= ${BASE}/$(WWWLNK)
+WWWBASE		= ${BASE}/$(WWWLNK)/
 
 #rt-root
 RTLNK		= rt-tmp
-RTBASE		= ${BASE}/$(RTLNK)/$(VARIANT)
+RTBASE		= ${BASE}/$(RTLNK)/$(VARIANT)/
 
-#doc-root
+#root for dependent parts
+#RTADDONSLNK	= addons-tmp
+#RTADDONSBASE  = ${BASE}/$(RTADDONSLNK)/$(VARIANT)/
+
+#unknown temporary storage for further analysis
+#UNKNOWNLNK	= addons-tmp
+#UNKNOWNBASE  = ${BASE}/$(UNKNOWNLNK)/$(VARIANT)/
+
+#doc-root - could be used autonomous too
 DOCLNK 		= doc-tmp
-DOCBASE_ML	= ${BASE}/$(DOCLNK)/$(VARIANT)/doc
-DOCBASE		= ${DOCBASE_ML}/$(OUTLANG)
-DOCBASE_COMMON	= ${BASE}/$(DOCLNK)
+DOCVARIANT	= ${BASE}/$(DOCLNK)/$(VARIANT)/
+DOCBASE_ML	= ${BASE}/$(DOCLNK)/$(VARIANT)/doc/
+DOCBASE		= ${DOCBASE_ML}/$(OUTLANG)/
+DOCBASE_COMMON	= ${BASE}/$(DOCLNK)/
 
 #
 #assemble generic output directories 
 #
 OUTDIRS		+= $(BASE) $(TMP)
-OUTDIRS		+= $(WWWBASE) $(RTBASE) $(DOCBASE) $(DOCBASE_COMMON)
+OUTDIRS		+= $(RTBASE) $(RTADDONSBASE) $(WWWBASE) $(DOCBASE) $(DOCBASE_COMMON)
 
 ROOT_SRC_POOL   =  doc src 
 ROOT_LNK_POOL   =  
 
 DIST_ROOT	= $(BLD_OUT_BASE)/bld
-VARIANT_ROOT	= $(BASE)/dist-bld/$(VARIANT)
+VARIANT_ROOT	= $(BASE)dist-bld/$(VARIANT)
 OUTDIRS		+= $(DIST_ROOT) $(VARIANT_ROOT)

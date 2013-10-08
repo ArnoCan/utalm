@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -33,6 +33,7 @@ BLD_ROOT_PRE_INCLUDED:=1
 include $(BLD_ROOT)Makefile-version.mk
 include $(BLD_ROOT)Makefile-root.mk
 
+
 ifndef OUTLANG
   $(error "Missing environment variable OUTLANG")
 endif
@@ -47,7 +48,7 @@ ENV_FILES	+= $(BLD_ROOT)include/Makefile-rules.mk
 #
 #bld root-subdirs
 #
-OUTDOC		= $(DOCBASE)/doc
+OUTDOC		= $(DOCBASE)doc
 OUTDIRS		+= $(OUTDOC)
 OUTDOC1		= $(OUTDOC)/man1
 OUTDIRS		+= $(OUTDOC1)
@@ -56,7 +57,7 @@ OUTDIRS		+= $(OUTDOC3)
 OUTDOC7		= $(OUTDOC)/man7
 OUTDIRS		+= $(OUTDOC7)
 
-OUTHTML		= $(DOCBASE)/html
+OUTHTML		= $(DOCBASE)html
 OUTDIRS		+= $(OUTHTML)
 OUTHTML1	= $(OUTHTML)/man1
 OUTDIRS		+= $(OUTHTML1)
@@ -65,7 +66,7 @@ OUTDIRS		+= $(OUTHTML3)
 OUTHTML7	= $(OUTHTML)/man7
 OUTDIRS		+= $(OUTHTML7)
 
-OUTTEX		= $(DOCBASE)/tex
+OUTTEX		= $(DOCBASE)tex
 OUTDIRS		+= $(OUTTEX)
 OUTTEX1		= $(OUTTEX)/man1
 OUTDIRS		+= $(OUTTEX1)
@@ -74,7 +75,7 @@ OUTDIRS		+= $(OUTTEX3)
 OUTTEX7		= $(OUTTEX)/man7
 OUTDIRS		+= $(OUTTEX7)
 
-OUTPDF		= $(DOCBASE)/pdf
+OUTPDF		= $(DOCBASE)pdf
 OUTDIRS		+= $(OUTPDF)
 OUTPDF1		= $(OUTPDF)/man1
 OUTDIRS		+= $(OUTPDF1)
@@ -83,7 +84,7 @@ OUTDIRS		+= $(OUTPDF3)
 OUTPDF7		= $(OUTPDF)/man7
 OUTDIRS		+= $(OUTPDF7)
 
-OUTMAN		= $(DOCBASE)/man
+OUTMAN		= $(DOCBASE)man
 OUTDIRS		+= $(OUTMAN)
 OUTMAN1		= $(OUTMAN)/man1
 OUTDIRS		+= $(OUTMAN1)
@@ -92,7 +93,7 @@ OUTDIRS		+= $(OUTMAN3)
 OUTMAN7		= $(OUTMAN)/man7
 OUTDIRS		+= $(OUTMAN7)
 
-OUTTXT		= $(DOCBASE)/txt
+OUTTXT		= $(DOCBASE)txt
 OUTDIRS		+= $(OUTTXT)
 OUTTXT1		= $(OUTTXT)/man1
 OUTDIRS		+= $(OUTTXT1)
@@ -101,7 +102,7 @@ OUTDIRS		+= $(OUTTXT3)
 OUTTXT7		= $(OUTTXT)/man7
 OUTDIRS		+= $(OUTTXT7)
 
-OUTEPUB		= $(DOCBASE)/epub
+OUTEPUB		= $(DOCBASE)epub
 OUTDIRS		+= $(OUTEPUB)
 OUTEPUB1	= $(OUTEPUB)/man1
 OUTDIRS		+= $(OUTEPUB1)
@@ -110,7 +111,7 @@ OUTDIRS		+= $(OUTEPUB3)
 OUTEPUB7	= $(OUTEPUB)/man7
 OUTDIRS		+= $(OUTEPUB7)
 
-OUTWIKI		= $(DOCBASE)/wiki
+OUTWIKI		= $(DOCBASE)wiki
 OUTDIRS		+= $(OUTWIKI)
 OUTWIKI1	= $(OUTWIKI)/man1
 OUTDIRS		+= $(OUTWIKI1)
@@ -119,7 +120,7 @@ OUTDIRS		+= $(OUTWIKI3)
 OUTWIKI7	= $(OUTWIKI)/man7
 OUTDIRS		+= $(OUTWIKI7)
 
-OUTGWIKI	= $(DOCBASE)/gwiki
+OUTGWIKI	= $(DOCBASE)gwiki
 OUTDIRS		+= $(OUTGWIKI)
 OUTGWIKI1	= $(OUTGWIKI)/man1
 OUTDIRS		+= $(OUTGWIKI1)
@@ -128,23 +129,23 @@ OUTDIRS		+= $(OUTGWIKI3)
 OUTGWIKI7	= $(OUTGWIKI)/man7
 OUTDIRS		+= $(OUTGWIKI7)
 
-OUTIMGTMP	= $(TMP)/doc/images/
+OUTIMGTMP	= $(TMP)doc/images/
 OUTIMGLANGTMP	= $(OUTIMGTMP)/$(OUTLANG)/images/
 OUTDIRS		+= $(OUTIMGTMP)
-OUTIMGDOC	= $(DOCBASE_ML)/images
+OUTIMGDOC	= $(DOCBASE_ML)images
 OUTDIRS		+= $(OUTIMGDOC)
-OUTIMGDOCLANG = $(DOCBASE)/images
+OUTIMGDOCLANG = $(DOCBASE)images
 OUTDIRS		+= $(OUTIMGDOCLANG)
-TMPTEX		= $(TMP)/tex/$(OUTLANG)
+TMPTEX		= $(TMP)tex/$(OUTLANG)
 OUTDIRS		+= $(TMPTEX)
 
-OUTHELP		= $(DOCBASE)/help/$(OUTLANG)
+OUTHELP		= $(DOCBASE)help/$(OUTLANG)
 OUTDIRS		+= $(OUTHELP)
 
-OUTINTERNAL	= $(DOCBASE)/internal/$(OUTLANG)
+OUTINTERNAL	= $(DOCBASE)internal/$(OUTLANG)
 OUTDIRS		+= $(OUTINTERNAL)
 
-OUTINTRO	= $(DOCBASE)/intro/$(OUTLANG)
+OUTINTRO	= $(DOCBASE)intro/$(OUTLANG)
 OUTDIRS		+= $(OUTINTRO)
 
 
@@ -152,7 +153,6 @@ OUTDIRS		+= $(OUTINTRO)
 TGZ_ROOT	= $(VARIANT_ROOT)/$(PACKAGE)-$(VERSION).$(ARCH)
 OUTDIRS  	+= $(TGZ_ROOT)
 ifeq ($(VARIANT),RELEASE)
-#TGZ_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).$(ARCH).tgz
 TGZ_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).$(ARCH).tgz
 else
 TGZ_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE)_$(VARIANT).$(ARCH).tgz
@@ -160,11 +160,21 @@ endif
 TGZ_PNAME	= $(DIST_ROOT)/$(TGZ_NAME)
 TGZ_PNAME_BLD = $(VARIANT_ROOT)/$(TGZ_NAME)
 
+#tgz-devel - generic
+TGZ_DEVEL_ROOT	= $(VARIANT_ROOT)/$(PACKAGE)-devel-$(VERSION).$(ARCH)
+OUTDIRS  	+= $(TGZ_DEVEL_ROOT)
+ifeq ($(VARIANT),RELEASE)
+TGZ_DEVEL_NAME	= $(PACKAGE)-devel-$(VERSION)-$(RELEASE).$(ARCH).tgz
+else
+TGZ_DEVEL_NAME	= $(PACKAGE)-devel-$(VERSION)-$(RELEASE)_$(VARIANT).$(ARCH).tgz
+endif
+TGZ_DEVEL_PNAME	= $(DIST_ROOT)/$(TGZ_DEVEL_NAME)
+TGZ_DEVEL_PNAME_BLD = $(VARIANT_ROOT)/$(TGZ_DEVEL_NAME)
+
 #srctgz - generic
 SRCTGZ_ROOT= $(VARIANT_ROOT)/$(PACKAGE)-$(VERSION).src
 OUTDIRS  	+= $(SRCTGZ_ROOT)
 ifeq ($(VARIANT),RELEASE)
-#TGZ_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).$(ARCH).tgz
 SRCTGZ_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).src.tgz
 else
 SRCTGZ_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE)_$(VARIANT).src.tgz
@@ -189,6 +199,23 @@ RPM_PNAME_BLD	= $(RPMBLD)/redhat/RPMS/noarch/$(RPM_NAME)
 RPM_TGZ         = 
 
 
+#rpm - devel
+RPMDEVEL	= $(VARIANT_ROOT)/rpm-devel
+RPMDEVELBLD	= $(RPMDEVEL)/bld
+RPMDEVEL_ROOT = $(RPMDEVEL)/$(PACKAGE)-devel-$(VERSION)
+OUTDIRS  	+= $(RPMDEVEL_ROOT)
+ifeq ($(VARIANT),RELEASE)
+RPMDEVEL_NAME	= $(PACKAGE)-devel-$(VERSION)-$(RELEASE).$(ARCH).rpm
+else
+RPMDEVEL_NAME	= $(PACKAGE)-devel-$(VERSION)-$(RELEASE)_$(VARIANT).$(ARCH).rpm
+endif
+RPMDEVEL_PNAME	= $(DIST_ROOT)/$(RPMDEVEL_NAME)
+RPMDEVEL_SPECNAME	= $(PACKAGE)-devel.spec
+RPMDEVEL_SPECPATH	= $(RPMDEVELBLD)/redhat/SPECS/$(RPMDEVEL_SPECNAME) 
+RPMDEVEL_PNAME_BLD	= $(RPMDEVELBLD)/redhat/RPMS/noarch/$(RPMDEVEL_NAME)
+RPMDEVEL_TGZ         = 
+
+
 #srcrpm - generic
 SRCRPM		= $(VARIANT_ROOT)/srcrpm
 SRCRPMBLD	= $(SRCRPM)/bld
@@ -205,6 +232,17 @@ SRCRPM_SPECPATH	= $(SRCRPMBLD)/redhat/SPECS/$(SRCRPM_SPECNAME)
 SRCRPM_PNAME_BLD = $(SRCRPMBLD)/redhat/SRPMS/$(SRCRPM_NAME)
 SRCRPM_TGZ      = 
 
+#gittree generic
+GITTREE		 = $(VARIANT_ROOT)/git
+GITTREE_ROOT = $(GITTREE)/$(PACKAGE)-$(VERSION).git
+GITTREEBLD	= $(GITTREE)/bld
+OUTDIRS  	+= $(GITTREE_ROOT)
+ifeq ($(VARIANT),RELEASE)
+GITTREE_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).git
+else
+GITTREE_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE)_$(VARIANT).git
+endif
+GITTREE_PNAME	= $(DIST_ROOT)/$(SRCRPM_NAME)
 
 
 #debian
@@ -212,14 +250,6 @@ DEB		= $(VARIANT_ROOT)/rpm
 DEBBLD 		= $(DEB)/bld
 DEB_ROOT	= $(DEB)/$(PACKAGE)-$(VERSION)
 OUTDIRS  	+= $(DEB_ROOT)
-# ifeq ($(VARIANT),RELEASE)
-# DEB_NAME	= $(VARIANT_ROOT)/$(PACKAGE)-$(VERSION).$(ARCH).debian.5.noarch
-# else
-# DEB_NAME	= $(VARIANT_ROOT)/$(PACKAGE)-$(VERSION)-$(RELEASE).$(ARCH).debian.5.noarch
-# endif
-# DEB_PNAME	= $(DIST_ROOT)/$(DEB_NAME)
-# DEB_PNAME_BLD	= $(DEBBLD)/$(DEB_NAME)
-
 
 OUTFILES        = 
 OUTFILES        += $(TGZ_PNAME)
@@ -229,15 +259,9 @@ OUTFILES        += $(SRCRPM_PNAME)
 OUTFILES        += $(DEB_PNAME)
 
 #
-#planned versions
-#
-# OPENBSD		= 
-# FREEBSD		=
-# SOLARIS		=
-
-#
 #common calls
 #
+PATH		:= $(RTBASE)/bin:$(PATH) 
 CALLDIR		= $(shell pwd)
 CALLDIRNAME	= $(notdir $(CALLDIR))
 CD		    = cd
@@ -255,13 +279,11 @@ RM		    = rm
 RMRF		= $(RM) -rf
 RPMBUILD	= rpmbuild
 SED		    = sed
-TGZ		    = tar -zcf
+TARGZIP	    = tar -zcf
 CHMOD		= chmod
 
 TXT2TAGS    = txt2tags
 SPHINX      = sphinx
 EPYDOC      = epydoc
-
-MK_BLD_LINKS = $(BLD_ROOT)tools/linklst.sh
 
 endif

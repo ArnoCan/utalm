@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -29,40 +29,38 @@
 #
 
 #
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)README.md
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)RELEASENOTES.txt
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)INSTALL.txt
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)TODO.txt
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)Apache-2.0.txt
+IMPORT_FILES	+= $(BLD_ROOT)README.md
+IMPORT_FILES	+= $(BLD_ROOT)RELEASENOTES.txt
+IMPORT_FILES	+= $(BLD_ROOT)INSTALL.txt
+IMPORT_FILES	+= $(BLD_ROOT)TODO.txt
+IMPORT_FILES	+= $(BLD_ROOT)Apache-2.0.txt
 
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)install.sh
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)installToSystem.sh
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)install.conf
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)collect-filelist.sh
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)test.sh
-PKG_SRC_IMP_FILES   += $(BLD_ROOT)utalm-bash-show-help.sh
+IMPORT_FILES	+= $(BLD_ROOT)install.sh
+IMPORT_FILES	+= $(BLD_ROOT)installToSystem.sh
+IMPORT_FILES	+= $(BLD_ROOT)install.conf
+IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
+IMPORT_FILES    += $(BLD_ROOT)utalm-bash-show-help.sh
 
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)Makefile
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)Makefile-root.mk
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)Makefile-version.mk
-PKG_SRC_IMP_FILES	+= $(BLD_ROOT)sourceEnvironment.sh
+IMPORT_FILES	+= $(BLD_ROOT)Makefile
+IMPORT_FILES	+= $(BLD_ROOT)Makefile-root.mk
+IMPORT_FILES	+= $(BLD_ROOT)Makefile-version.mk
+IMPORT_FILES	+= $(BLD_ROOT)sourceEnvironment.sh
 
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)bin
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)conf
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)dist
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)doc
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)faq
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)help
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)howto
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)images
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)include
+IMPORT_DIRS		+= $(BLD_ROOT)bin
+IMPORT_DIRS		+= $(BLD_ROOT)conf
+IMPORT_DIRS		+= $(BLD_ROOT)dist
+IMPORT_DIRS		+= $(BLD_ROOT)doc
+IMPORT_DIRS		+= $(BLD_ROOT)faq
+IMPORT_DIRS		+= $(BLD_ROOT)help
+IMPORT_DIRS		+= $(BLD_ROOT)howto
+IMPORT_DIRS		+= $(BLD_ROOT)images
+IMPORT_DIRS		+= $(BLD_ROOT)include
 
 #
 #sources
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)examples
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)src
+IMPORT_DIRS		+= $(BLD_ROOT)examples
+IMPORT_DIRS		+= $(BLD_ROOT)src
 
 #
 #unittests
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)testlib
-PKG_SRC_IMP_DIRS	+= $(BLD_ROOT)tests
+IMPORT_DIRS		+= $(BLD_ROOT)tests

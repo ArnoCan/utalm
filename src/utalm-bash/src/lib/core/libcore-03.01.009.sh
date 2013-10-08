@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -286,7 +286,7 @@ DAYOFWEEK=`date +"%u"`
 
 
 function displayIt () {
-	if [ "$VERBOSE" == 1 ];then
+	if [ "$DBG" == 1 ];then
 		echo $*
 	else
 		if [ "$SILENT" == 0 ];then

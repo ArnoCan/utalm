@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -27,6 +27,7 @@
 #
 #$Header$
 #
+pkg-src srcrpm:all
 ifndef BLD_ROOT
   BLD_ROOT := $(dir $(shell pwd))/
 endif
@@ -83,7 +84,7 @@ RPMDIRS =  $(foreach X, BUILD SOURCES SRPMS SPECS RPMS, $(SRCRPMBLD)/redhat/$(X)
 RPMDIRS += $(foreach X, noarch i386 x86_64, $(SRCRPMBLD)/redhat/RPMS/$(X))
 OUTDIRS += $(RPMDIRS)
 
-ifndef VERBOSE
+ifndef DBG
 SRCRPM_OPTS += --quiet
 endif
 
@@ -101,12 +102,12 @@ $(SRCRPM_PNAME):  $(SRCTGZ_PNAME) $(SRCRPM_PNAME_BLD)
 
 $(SRCRPM_PNAME_BLD): $(SRCRPM_SPECPATH) $(SRCRPM_SRCTGZ_PNAME)
 	@$(ECHO) "#"
-ifdef VERBOSE
+ifdef DBG
 	@$(ECHO) "##########################################################################################"
 	@$(ECHO) "#"
 endif
 	@$(ECHO) "Create RPM-all-archive:$@"
-ifdef VERBOSE
+ifdef DBG
 	@$(ECHO) 
 	@$(ECHO) "SRCRPM_SPECNAME="$(SRCRPM_SPECNAME)
 	@$(ECHO) 

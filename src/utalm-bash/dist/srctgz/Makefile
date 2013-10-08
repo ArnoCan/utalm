@@ -1,14 +1,15 @@
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
+#AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
-#   Copyright [2011,2012,2013] Arno-Can Uestuensoez
+#   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -26,12 +27,7 @@
 #
 #$Header$
 #
-ifndef BLD_ROOT
-	TGZ_BLD_ROOT := $(shell pwd)
-	BLD_ROOT := $(dir $(TGZ_BLD_ROOT))/
-	TGZ_BLD_ROOT := $(TGZ_BLD_ROOT)/
-endif
-
+pkg-src srctgz:all
 ifdef BLD_ROOT
   include $(BLD_ROOT)include/Makefile-pre.mk
 else
@@ -39,73 +35,106 @@ else
 endif
 
 SRC_POOL        = 
-PKG_BASE_COMP	= 
 #
 
 #
 # filled from includes
 #
-PKG_SRC_IMP_FILES	= 
-PKG_SRC_IMP_DIRS	= 
-include $(BLD_ROOT)dist/srctgz/Makefile-src-en.mk
-#
-UNIQUE_PKG_SRC_IMP_FILES:=$(shell for i in ${PKG_SRC_IMP_FILES};do echo $$i;done|sort -u)
-UNIQUE_PKG_SRC_IMP_DIRS:=$(shell for i in ${PKG_SRC_IMP_DIRS};do echo $$i;done|sort -u)
-OUTDIRS += $(UNIQUE_PKG_SRC_IMP_DIRS)
+IMGS = 
+IMPORT_DIRS =
+IMPORT_FILES =
+###
+include Makefile-src-en.mk
+###
+UNIQUE_IMPORT_DIRS:=$(shell for i in ${IMPORT_DIRS};do echo $$i;done|sort -u)
+UNIQUE_IMPORT_FILES:=$(shell for i in ${IMPORT_FILES};do echo $$i;done|sort -u)
 
-OUTFILES += $(SRCTGZ_PNAME)
+.PHONY: SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPTGZ
 
-PKG_COMMON_PREREQ =  $(VARIANT_ROOT) $(SRCTGZ_ROOT) $(OUTDIRS) 
-PKG_COMMON_PREREQ += $(UNIQUE_PKG_SRC_IMP_DIRS_DIRS) 
+all: outdirs SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPSRCTGZ $(SRCTGZ_PNAME)
 
-.PHONY: srctgz delsrctgz dirsrctgz packonly
-
-all:   outdirs $(SRCTGZ_PNAME) 
-
-
-$(SRCTGZ_ROOT)/VERSION : 
-ifdef VERBOSE
-	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" -d 99999 
-	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(SRCTGZ_ROOT)/VERSION -d 99999
+$(SRCTGZ_PNAME):$(SRCTGZ_PNAME_BLD)   
+ifdef DBG
+	@$(ECHO) "Copy SRCTGZ-archive:$(SRCTGZ_PNAME_BLD)"
 endif
-	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" 
-	$(BLD_ROOT)/src/bin/setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(SRCTGZ_ROOT)/VERSION
-
-srctgz $(SRCTGZ_PNAME): $(SRCTGZ_PNAME_BLD)
-ifdef VERBOSE
-	@echo "Copy TGZ to $(SRCTGZ_PNAME)"
+	cp $(SRCTGZ_PNAME_BLD) $(SRCTGZ_PNAME)
+ 
+$(SRCTGZ_PNAME_BLD):   
+	@$(ECHO) "Create SRCTGZ-archive:$@"
+ifdef DBG
+	@$(ECHO) "PKG=$(SRCTGZ_PNAME)"
+	@$(ECHO) "SRCTGZ_ROOT=$(SRCTGZ_ROOT)"
+	@$(ECHO) 
+	@$(ECHO) "Input:UNIQUE_IMPORT_DIRS="$(UNIQUE_IMPORT_DIRS) 
+	@$(ECHO) 
+	@$(ECHO) "Input:UNIQUE_IMPORT_FILES="$(UNIQUE_IMPORT_FILES) 
+	@$(ECHO) 
+	@$(ECHO) "Blacklist:PKG_BLACK="$(PKG_BLACK)
+	@$(ECHO) 
 endif
-	@$(CPA) $(SRCTGZ_PNAME_BLD) $(SRCTGZ_PNAME)
-
-$(SRCTGZ_PNAME_BLD) packonly: $(SRCTGZ_ROOT)/VERSION 
-	$(ECHO) "Create TGZ-archive:$@"
-ifdef VERBOSE
-	$(ECHO) "PKG=$(SRCTGZ_PNAME)"
-	$(ECHO) "TGZ_ROOT=$(SRCTGZ_ROOT)"
-	$(ECHO) 
-	$(ECHO) "Input:UNIQUE_PKG_SRC_IMP_DIRS"
-	$(ECHO) $(UNIQUE_PKG_SRC_IMP_DIRS)
-	$(ECHO) 
-endif
-	@$(CPA) $(UNIQUE_PKG_SRC_IMP_DIRS)  $(SRCTGZ_ROOT)
-	@$(CPA) $(UNIQUE_PKG_SRC_IMP_FILES) $(SRCTGZ_ROOT)
 	$(FIND) $(SRCTGZ_ROOT) \
              \( -type d  -exec $(CHMOD) 755 {} \; \) \
 	     -o \( -type f -name '*.sh'    -exec $(CHMOD) 755 {} \; \) \
 	     -o \( -type f -exec $(CHMOD) 644 {} \; \)
-	cd $(dir $(SRCTGZ_ROOT))&&$(TGZ) $(SRCTGZ_PNAME_BLD) $(notdir $(SRCTGZ_ROOT))
-
-delsrctgz : 
-ifdef VERBOSE
-	@echo "RM:$(SRCTGZ_PNAME)"
+ifdef DBG
+	setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" -d 99999 
+	setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(SRCTGZ_ROOT)/VERSION -d 99999
+	@$(ECHO) "cd $(SRCTGZ_ROOT)&&$(BLD_ROOT)collect-filelist.sh"
+	@$(ECHO) "cd $(dir $(SRCTGZ_ROOT))&&$(TARGZIP) $(SRCTGZ_PNAME_BLD) $(notdir $(SRCTGZ_ROOT))"
+else
+	setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" 
+	setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(SRCTGZ_ROOT)/VERSION
 endif
-	@$(RM) $(SRCTGZ_PNAME)
+	cd $(SRCTGZ_ROOT)&&$(BLD_ROOT)collect-filelist.sh
+	cd $(dir $(SRCTGZ_ROOT))&&$(TARGZIP) $(SRCTGZ_PNAME_BLD) $(notdir $(SRCTGZ_ROOT))
 
-dirsrctgz : 
-	@ls -l $(SRCTGZ_PNAME)
 
-$(UNIQUE_UNIQUE_PKG_SRC_IMP_DIRS):
-	$(MKDIR) $@
-	$(CHMOD) 755 $@
+prep:PREPSRCTGZ
+PREPSRCTGZ:
+ifdef DBG
+	@$(ECHO)
+	@$(ECHO) "IMPORT-DIRS:$(UNIQUE_IMPORT_DIRS)"
+	@$(ECHO)
+	@$(ECHO) "IMPORT-FILES:$(UNIQUE_IMPORT_FILES)"
+	@$(ECHO)
+	@$(ECHO) $(MKDIR) $(UNIQUE_IMPORT_DIRS)
+endif
+	$(MKDIR) $(UNIQUE_IMPORT_DIRS)
+ifdef DBG
+	@$(ECHO) $(CHMOD) 755 $(UNIQUE_IMPORT_DIRS)
+endif
+	$(CHMOD) 755 $(UNIQUE_IMPORT_DIRS)
+ifdef DBG
+	@$(ECHO) $(CPA) $(IMPORT_DIRS) $(SRCTGZ_ROOT)
+endif
+	$(CPA) $(IMPORT_DIRS) $(SRCTGZ_ROOT)
+ifdef DBG
+	@$(ECHO) $(CPA) $(IMPORT_FILES) $(SRCTGZ_ROOT)
+endif
+	$(CPA) $(IMPORT_FILES) $(SRCTGZ_ROOT)
+
+src:SRC_BLD
+SRC_BLD:
+	$(ECHO) "##Change to:src"
+	$(MAKE) -C $(BLD_ROOT)src $(MFLAGS)
+	$(ECHO) "##..return from $@"
+
+doc:DOC_BLD
+DOC_BLD:
+	@echo "###Change to:$@"
+	$(MAKE) -C $(BLD_ROOT)doc $(MFLAGS)
+	@echo "###..return from $@"
+
+tests:TESTS_BLD
+TESTS_BLD:
+	@echo "###Change to:$@"
+	$(MAKE) -C $(BLD_ROOT)tests $(MFLAGS)
+	@echo "###..return from $@"
+
+examples:EXAMPLES_BLD
+EXAMPLES_BLD:
+	@echo "###Change to:$@"
+	$(MAKE) -C $(BLD_ROOT)examples $(MFLAGS)
+	@echo "###..return from $@"
 
 include $(BLD_ROOT)include/Makefile-post.mk

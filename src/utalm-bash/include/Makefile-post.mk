@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_01_002
+#VERSION:      03_02_001
 #
 ########################################################################
 #
@@ -45,11 +45,18 @@ help:
 	@echo "  make help        - display this help"
 	@echo
 	@echo "  make rt          - build runtime"
+	@echo "  make src         - build sources"
+	@echo "  make examples    - build documents"
+	@echo "  make tests       - build regression and unit tests"
+	@echo "  make test        - calls regression and unit tests"
 	@echo "  make doc         - build documents"
 	@echo
-	@echo "  make tgz         - generic package for userland"
-	@echo "  make rpm         - RHEL and derived"
-	@echo "  make deb         - Debian and derived"
+	@echo "  make install     - Not yet supported - use script 'install.sh'"
+	@echo "  make uninstall   - Not yet supported"
+	@echo
+	@echo "  make pkg         - generic packages for userland: tgz, rpm"
+	@echo "  make pkg-devel   - developer package for userland: tgz-devel, rpm-devel"
+	@echo "  make pkg-src     - generic source package: srctgz, srcrpm"
 	@echo
 	@echo "  make clean       - clean up"
 	@echo "  make distclean   - clean up, except packages"
@@ -57,8 +64,8 @@ help:
 	@echo
 	@echo "  make outdirs     - create production tree"
 	@echo
-	@echo "  make createlinks - creates elevator links"
-	@echo "  make cleanlinks  - cleans elevator links"
+	@echo "  make createlinks - creates elevator links - obsolet"
+	@echo "  make cleanlinks  - cleans elevator links - obsolet"
 	@echo
 	@echo
 	@echo "  BASE             = $(BASE)"
@@ -71,7 +78,7 @@ help:
 	@echo "  RTLNK            = $(RTLNK)"
 	@echo "  RTBASE           = $(RTBASE)"
 	@echo
-	@echo "  VERBOSE=1"
+	@echo "  DBG=1"
 	@echo "  ERRSTOP=1"
 	@echo "  KEEPMETA=1"
 	@echo
@@ -104,18 +111,15 @@ createlinks:: cleanlinks $(OUTDIR)
 
 clean:
 	@echo "Cleanup..."
-#	@echo "**->In "$(shell echo $${PWD##*/})
 	@echo "**->In "$(shell echo $${PWD})
-ifdef OUTFILES
+ifdef DEBUG
 	@echo
 	@echo "$(RMRF) $(OUTFILES)"
-	$(RMRF) $(OUTFILES)
-endif
-ifdef SRC_POOL
 	@echo 
 	@echo "SRC_POOL=$(SRC_POOL)"
-	for ixy in $(SRC_POOL);do echo "ixy=$${ixy}";[ -z "$${ixy}" ]&&continue;[ ! -e "$${ixy}" ]&&continue;cd $${ixy};$(MAKE) $(MFLAGS) clean;cd ->/dev/null;done
 endif
+	$(RMRF) $(OUTFILES)
+	for ixy in $(SRC_POOL);do echo "ixy=$${ixy}";[ -z "$${ixy}" ]&&continue;[ ! -e "$${ixy}" ]&&continue;cd $${ixy};$(MAKE) $(MFLAGS) clean;cd ->/dev/null;done
 	@echo
 	@echo "...finished:"$(shell echo $${PWD##*/})
 	@echo
@@ -129,18 +133,17 @@ distclean:
 
 mrproper: distclean
 	@echo "Clean complete build output."
+ifdef OUTFILES
 	@echo "$(RM) -f $(OUTFILES)"
 	$(RM) -f $(OUTFILES)
+endif
 
-#UNIQUE_OUTDIRS=$(dir ${OUTDIRS})
 UNIQUE_OUTDIRS:=$(shell for i in ${OUTDIRS};do echo $$i;done|sort -u)
 outdirs: $(UNIQUE_OUTDIRS)
-#	echo "OUT=$(OUTDIR)"
-#	echo "OUTDIRS=$(OUTDIRS)"
 
 
 $(UNIQUE_OUTDIRS):
-ifdef VERBOSE
+ifdef DBG
 	@echo "MKDIR:$@"
 endif
 	$(MKDIR) $@
@@ -154,9 +157,6 @@ $(OUTDIR):
 	@echo "->$(BASE) => $(OUTDIR)"
 	-$(LNS) $(BASE) $(OUTDIR)
 
-
-# clean:
-# 	@echo "Cleanup..."
 
 .SILENT:
 .PHONY: all help clean distclean
@@ -179,4 +179,4 @@ endif
 endif
 endif
 
-endif
+endif #BLD_ROOT_POST_INCLUDED
