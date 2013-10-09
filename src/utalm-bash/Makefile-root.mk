@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -38,7 +38,7 @@ ifndef BLD_OUT_BASE
 endif
 
 BASE 	= $(BLD_OUT_BASE)/bld/$(PACKAGE)-$(VERSION)/
-TMP		= ${BASE}/tmp
+TMP		= ${BASE}tmp
 ifndef OUTDIR
 	OUTDIR	= $(BASE)-out
 endif
@@ -54,11 +54,11 @@ endif
 
 #www-root
 WWWLNK		= www-tmp
-WWWBASE		= ${BASE}/$(WWWLNK)/
+WWWBASE		= ${BASE}$(WWWLNK)/
 
 #rt-root
 RTLNK		= rt-tmp
-RTBASE		= ${BASE}/$(RTLNK)/$(VARIANT)/
+RTBASE		= ${BASE}$(RTLNK)/$(VARIANT)/
 
 #root for dependent parts
 #RTADDONSLNK	= addons-tmp
@@ -70,11 +70,17 @@ RTBASE		= ${BASE}/$(RTLNK)/$(VARIANT)/
 
 #doc-root - could be used autonomous too
 DOCLNK 		= doc-tmp
-DOCVARIANT	= ${BASE}/$(DOCLNK)/$(VARIANT)/
-DOCBASE_ML	= ${BASE}/$(DOCLNK)/$(VARIANT)/doc/
-DOCBASE		= ${DOCBASE_ML}/$(OUTLANG)/
-DOCBASE_COMMON	= ${BASE}/$(DOCLNK)/
+DOCVARIANT	= ${BASE}$(DOCLNK)/$(VARIANT)/
+DOCBASE_ML	= ${BASE}$(DOCLNK)/$(VARIANT)/doc/
+DOCBASE		= ${DOCBASE_ML}$(OUTLANG)/
+DOCBASE_COMMON	= ${BASE}$(DOCLNK)/
 
+#
+# Eclipse
+#
+ECLIPSE_DOC_ID  = org.i4p.utalm.bash
+DOCBASE_ECLIPSE = ${BASE}$(DOCLNK)/$(VARIANT)/eclipse
+OUTDIRS += $(DOCBASE_ECLIPSE)
 #
 #assemble generic output directories 
 #

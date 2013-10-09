@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -25,7 +25,35 @@
 #   limitations under the License.
 #
 #HEADEND################################################################
-
+#
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Test scan of command line call options by fetchDBArgs
+##
+## TestCase-000 with basic call test for commanline evaluation
+## and controlled exit with defined display value on exit for
+## post processing. The evaluation is performed by early-fetch
+## in the library, thus needs no additional action. This assures
+## tracing to begin when options are processes.
+##
+##	# Loads common bootstrap-functions
+##	. ${BOOTSTRAPLIB}/bootstrap-03.01.009.sh
+##	
+##	# Next level of core function, still a little and very basic.
+##	. ${CORELIB}/libcore-03.01.009.sh
+##	
+##	# The main library. 
+##	. ${LIBDIR}/libutalm.sh
+##	
+##	gotoHell $LINENO $BASH_SOURCE 0
+##
+#***MODUL_DOXYGEN_END***
+## \cond
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -73,6 +101,7 @@ gotoHell $LINENO $BASH_SOURCE 0
 
 
 #callErrOutWrapper
+## \endcond
 
 
 

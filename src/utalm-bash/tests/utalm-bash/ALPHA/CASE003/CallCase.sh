@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -25,7 +25,23 @@
 #   limitations under the License.
 #
 #HEADEND################################################################
-
+#
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Test printWNG
+##
+## TestCase-003 adds basic trace calls using predefined "const-like"
+## values.
+##
+##	printWNG 1 $LINENO $BASH_SOURCE 2 TEST000
+##
+#***MODUL_DOXYGEN_END***
+## \cond
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -87,3 +103,4 @@ if [ $? -ne 0 ];then
 fi
 gotoHell $LINENO $BASH_SOURCE 0
 
+## \endcond

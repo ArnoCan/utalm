@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -27,6 +27,20 @@
 #
 #$Header$
 #
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Implements the Nodeaction "test", refer to "Makefile-nodewalk.mk"
+##
+## Implements the action test for performing unit and regression tests
+## on slim utilitilies.
+##
+#***MODUL_DOXYGEN_END***
+## \cond
 ifndef _MAKE_TEST_INCLUDED_
 _MAKE_TEST_INCLUDED_:=1
 
@@ -59,7 +73,7 @@ ifdef DBG
 		$(ECHO) "$(INDENT1)No test cases in current directory:$$PWD"; \
 	fi
 endif
-	#Do the redirect for post-filtering on stdout and stderr seperate.
+	#Do the redirect on stdout and stderr seperate - for selective post-filtering .
 	if [ -e "$(CALLTEST)" ];then \
 		{ INDENT0="   $(INDENT0)" INDENT1="   $(INDENT1)"   CURSUBPATH=$(CURSUBPATH)/$(subst test_,,$@) $(TESTCALLER) $(CALLTEST)  | awk -v indent="${INDENT1}" '{print indent $$0}' ; } 3>&2 2>&1 1>&3 |awk -v indent="${INDENT1}" '{print indent $$0}'  >&2 ;\
 	fi
@@ -67,3 +81,4 @@ endif
 #.PHONY: test calltest 
 
 endif #_MAKE_TEST_INCLUDED_ 
+## \endcond

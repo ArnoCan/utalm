@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -27,18 +27,31 @@
 #
 #$Header$
 #
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Helper Utility for check of if-endif-pairs in Makefile-trees
+##
+## Helper-Utility to check the resulting ifdef-endif-levels of "Makefile"s.
+## As a real-dev-hacker-tool, it's a Spartanian, contolled by following
+## Environment variables.
+##
+##	STARTLEVEL=${STARTLEVEL:-1}
+##	  -> STARTLEVEL=1-99999
+##	CONTENT=${CONTENT:-0}
+##	FILEONLY=${FILEONLY}
+##	STARTNODE=${STARTNODE:-.}
+##	DISPERRSUM=${DISPERRSUM:-0}
+##
+##
+#***MODUL_DOXYGEN_END***
+## \cond
 
-#
-# Helper-Utility to check the resulting ifdef-endif-levels of "Makefile"s.
-# As a real-dev-hacker-tool, it's a Spartanian.
-#
-#
 
-#
-#
-# STARTLEVEL=1-99999
-# CONTENT=1
-#
 
 STARTLEVEL=${STARTLEVEL:-1}
 CONTENT=${CONTENT:-0}
@@ -139,3 +152,4 @@ echo "-> FILEONLY=${FILEONLY}"
 echo "-> STARTNODE=${STARTNODE}"
 echo "-> DISPERRSUM=${DISPERRSUM}"
 
+## \endcond

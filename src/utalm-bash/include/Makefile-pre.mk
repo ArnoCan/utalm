@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -274,7 +274,7 @@ FIND		= find
 LNS		    = ln -s
 MKDIRFLGS	= -p
 MKDIR		= mkdir  $(MKDIRFLGS) 
-MV		    = MV 
+MV		    = mv
 RM		    = rm
 RMRF		= $(RM) -rf
 RPMBUILD	= rpmbuild
@@ -285,5 +285,6 @@ CHMOD		= chmod
 TXT2TAGS    = txt2tags
 SPHINX      = sphinx
 EPYDOC      = epydoc
+DOXYGEN		= doxygen
 
 endif

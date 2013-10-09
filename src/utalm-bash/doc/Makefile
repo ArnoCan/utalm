@@ -55,7 +55,7 @@ images:
 	@echo "##...return from $@"
 
 css js:
-ifdef VERBOSE
+ifdef DBG
 	@echo "##Copy:$@"
 endif
 	$(CPA) $@   $(DOCBASE_ML)

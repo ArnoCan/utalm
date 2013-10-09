@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -28,6 +28,20 @@
 #
 #$Header$
 #
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## libutalm.sh.
+##
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Main library of libutalm-bash component
+##
+#***MODUL_DOXYGEN_END***
+## \cond
+
 if [ -z "$__UnifiedTraceAndLogManager__" ];then #*** prevent multiple inclusion
 __UnifiedTraceAndLogManager__=1 #*** prevent multiple inclusion
 
@@ -66,7 +80,7 @@ if [ -z "$__LIBCORE__" ];then
 fi
 
 _myLIBNAME_UnifiedTraceAndLogManager="${BASH_SOURCE}"
-_myLIBVERS_UnifiedTraceAndLogManager="03.02.001"
+_myLIBVERS_UnifiedTraceAndLogManager="03.02.002"
 
 #shopt -s nullglob
 #shopt -s extglob
@@ -197,7 +211,7 @@ I=1;
 #<level>: prints
 C_PFEXE=;
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  fetchDBGArgs
 #
@@ -215,7 +229,7 @@ C_PFEXE=;
 #
 #  VALUES:
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function fetchDBGArgs () {
     if [ -n "`echo ${*}| sed -n 's/([^)]*)//g;s/-d /1/p'`" ];then
 	C_DARGS=`echo " ${*} "| sed -n 's/^.*-d  *\([^ \t)]*\)[ \t)].*$/\1/p'`
@@ -426,7 +440,7 @@ if [ -n "`echo $*| sed -n 's/-y/1/p'`" ];then
 fi
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  doDebug
 #
@@ -450,7 +464,7 @@ fi
 #    1: No debug.
 #  VALUES:
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function doDebug  () {
     ((DBG>0))||return 1;
     local s=$1;shift;
@@ -466,7 +480,7 @@ function doDebug  () {
 
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  printDBG
 #
@@ -486,7 +500,7 @@ function doDebug  () {
 #OUTPUT:
 #  RETURN:
 #  VALUES:
-#FUNCEND###############################################################
+#***FUNCEND***
 function printDBG {
     local r=$?;
     ((DBG>0))||return $r;
@@ -514,7 +528,7 @@ function printDBG {
 }
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  printERR
 #
@@ -530,7 +544,7 @@ function printDBG {
 #OUTPUT:
 #  RETURN:
 #  VALUES:
-#FUNCEND###############################################################
+#***FUNCEND***
 function printERR () {
     local r=$?;
     local L=$1;shift;
@@ -548,7 +562,7 @@ function printERR () {
 
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  printWNG
 #
@@ -568,7 +582,7 @@ function printERR () {
 #
 #  VALUES:
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function printWNG () {
     local r=$?;
     local l=$1;shift;
@@ -589,7 +603,7 @@ function printWNG () {
 
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  printINFO
 #
@@ -609,7 +623,7 @@ function printWNG () {
 #
 #  VALUES:
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function printINFO () {
     local r=$?;
     local l=$1;shift;
@@ -644,7 +658,7 @@ function printINFO () {
 
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  printFINALCALL
 #
@@ -664,7 +678,7 @@ function printINFO () {
 #
 #  VALUES:
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function printFINALCALL () {
     local r=$?;
     local l=$1;shift;
@@ -685,7 +699,7 @@ function printFINALCALL () {
 }
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  callErrOutWrapper
 #
@@ -714,7 +728,7 @@ function printFINALCALL () {
 #
 #  VALUES:
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function callErrOutWrapper () {
     printDBG $S_LIB ${D_BULK} $LINENO $BASH_SOURCE "$FUNCNAME:<${@}>"
 
@@ -759,7 +773,7 @@ function callErrOutWrapper () {
 }
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  getPathName
 #
@@ -799,7 +813,7 @@ function callErrOutWrapper () {
 #    pathname
 #     With absolute path
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function getPathName () {
     local _pname=;
     local _ret=1;
@@ -840,7 +854,7 @@ function getPathName () {
 }
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  gotoHell
 #
@@ -850,6 +864,12 @@ function getPathName () {
 #DESCRIPTION:
 #  Exits with "grep" string for unit evaluation.
 #    "utalm_exit:#value"
+#
+#  The name gotoHell is honouring my very first colleagues -
+#  really nice and in particular actually skilled.
+#  Really missing that after meeting so much ant's beeing 
+#  the real-wanna-be-super-guru.
+#
 #  
 #EXAMPLE:
 #    "utalm_exit:0"
@@ -864,7 +884,7 @@ function getPathName () {
 #OUTPUT:
 #  exits with given code
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function gotoHell () {
 	printINFO 0 $1 $2 1  "Requested exit:$3"
 	echo "utalm_exit:$3">&2
@@ -872,7 +892,7 @@ function gotoHell () {
 }
 
 
-#FUNCBEG###############################################################
+#***FUNCBEG***
 #NAME:
 #  countErrors
 #
@@ -896,7 +916,7 @@ function gotoHell () {
 #OUTPUT:
 #  exits with given code
 #
-#FUNCEND###############################################################
+#***FUNCEND***
 function countErrors () {
 	awk -F':' '
 		BEGIN{
@@ -911,3 +931,4 @@ function countErrors () {
 }
 
 fi #*** prevent multiple inclusion
+## \endcond

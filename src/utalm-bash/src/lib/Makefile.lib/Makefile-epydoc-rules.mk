@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -27,8 +27,8 @@
 #
 #$Header$
 #
-ifndef BLD_ROOT_PYTHON_DOC_RULES_INCLUDED
-BLD_ROOT_PYTHON_DOC_RULES_INCLUDED:=1
+ifndef _EPYDOC_RULES_INCLUDED_
+_EPYDOC_RULES_INCLUDED_:=1
 
 #
 # For additional information refer to "man 7 man-pages"
@@ -66,9 +66,9 @@ endif
 
 EPYDOC = epydoc
 EPYDOC_OPTS =
-ifdef VERBOSE
+ifdef DBG
 EPYDOC_OPTS += -v
-EPYDOC_OPTS += --verbose
+EPYDOC_OPTS += --DBG
 EPYDOC_OPTS += --debug
 EPYDOC_OPTS += --include-log
 endif
@@ -110,7 +110,7 @@ $(error "Missing definition of EPYDOC_HTML_INPUT")
 endif
 html:$(EPYDOC_HTML_FILES)
 $(EPYDOC_HTML_FILES): $(EPYDOC_HTML_INPUT) $(ENV_FILES)
-ifdef VERBOSE
+ifdef DBG
 	@$(ECHO) "export PYTHONPATH=$(PYTHONPATH); $(EPYDOC) --html $(EPYDOC_OPTS) --name=$(shell A=$(dir $@)&&A=$${A%/}&&echo $${A##*/}) --output=$(dir $@)  $(EPYDOC_HTML_INPUT)"
 endif
 	export PYTHONPATH=$(PYTHONPATH); $(EPYDOC) --html $(EPYDOC_OPTS) --name=$(shell A=$(dir $@)&&A=$${A%/}&&echo $${A##*/}) --output=$(dir $@) $(EPYDOC_HTML_INPUT)
@@ -125,7 +125,7 @@ $(error "Missing definition of EPYDOC_PDF_INPUT")
 endif
 pdf:$(EPYDOC_PDF_FILES)
 $(EPYDOC_PDF_FILES): $(EPYDOC_PDF_INPUT) $(ENV_FILES)
-ifdef VERBOSE
+ifdef DBG
 	@$(ECHO) "export PYTHONPATH=$(PYTHONPATH); $(EPYDOC) --pdf $(EPYDOC_OPTS) --output=$(dir $@) $(EPYDOC_PDF_INPUT)"
 endif
 	export PYTHONPATH=$(PYTHONPATH); $(EPYDOC) --pdf $(EPYDOC_OPTS) --output=$(dir $@)/$(NAME) $(EPYDOC_PDF_INPUT)
@@ -137,16 +137,16 @@ endif
 
 #
 $(EPYDOC_LATEX_FILES): $(EPYDOC_LATEX_INPUT) $(ENV_FILES)
-ifdef VERBOSE
+ifdef DBG
 	@$(ECHO) "export PYTHONPATH=$(PYTHONPATH); $(EPYDOC) --latex $(EPYDOC_OPTS) ---name=$(shell A=$(dir $@)&&A=$${A%/}&&echo $${A##*/}) -output=$(dir $@) $(EPYDOC_LATEX_INPUT)" 
 endif
 	export PYTHONPATH=$(PYTHONPATH); $(EPYDOC) --latex $(EPYDOC_OPTS) --name=$(shell A=$(dir $@)&&A=$${A%/}&&echo $${A##*/}) --output=$(dir $@) $(EPYDOC_LATEX_INPUT)
 
 #
 $(EPYDOC_DVI_FILES): $(EPYDOC_DVI_INPUT) $(ENV_FILES)
-ifdef VERBOSE
+ifdef DBG
 	@$(ECHO) $(EPYDOC) --latex $(EPYDOC_OPTS) --output=$(dir $@) $(EPYDOC_LATEX_INPUT)
 endif
 	cd $(dir $@)&&$(EPYDOC) --latex $(EPYDOC_OPTS) --output=$(dir $@) $(EPYDOC_LATEX_INPUT)
 
-endif # BLD_ROOT_PYTHON_DOC_RULES_INCLUDED
+endif # _EPYDOC_RULES_INCLUDED_

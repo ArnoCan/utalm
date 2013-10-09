@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -25,7 +25,23 @@
 #   limitations under the License.
 #
 #HEADEND################################################################
-
+#
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Test printFINALCALL
+##
+## TestCase-006 demonstrates the controlled call of sub-process with collection
+## and transparent bypass of output and exit value.
+##
+##	printFINALCALL $D_FLOW $LINENO $BASH_SOURCE TEST004 "$MYCALLPATH/exec4FINALCALL.sh -x -z 2"
+##
+#***MODUL_DOXYGEN_END***
+## \cond
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -86,3 +102,4 @@ if [ $? -ne 0 ];then
 fi
 gotoHell $LINENO $BASH_SOURCE 0
 
+## \endcond

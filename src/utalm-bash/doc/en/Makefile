@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -40,10 +40,12 @@ SRC_POOL        =
 SRC_POOL        +=  images
 SRC_POOL        +=  libutalm-bash 
 SRC_POOL        +=  libutalm-make 
+SRC_POOL        +=  libutalm-examples 
+SRC_POOL        +=  libutalm-test-and-examples 
 
 
 .PHONY: $(SRC_POOL) css js
-all: css js $(SRC_POOL)
+all: outdirs css js $(SRC_POOL)
 
 $(SRC_POOL): $(ENVFILES)
 	@echo "###Change to:$@"

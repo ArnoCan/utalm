@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -35,8 +35,8 @@ $(error "Missing BLD_ROOT")
 endif
 
 #proxy only
-NODEWALKINCLUDE=$(shell X=$(BLD_ROOT)lib/Makefile.lib/Makefile-nodewalk.mk;if [ -e "$$X" ];then echo $$X; \
-    else  X=$(BLD_ROOT)src/lib/Makefile.lib/Makefile-nodewalk.mk;if [ -e "$$X" ];then echo $$X;  \
+NODEWALKINCLUDE=$(shell X=$(BLD_ROOT)src/lib/Makefile.lib/Makefile-nodewalk.mk;if [ -e "$$X" ];then echo $$X; \
+    else  X=$(BLD_ROOT)lib/Makefile.lib/Makefile-nodewalk.mk;if [ -e "$$X" ];then echo $$X;  \
        else  X=$(HOME)/lib/Makefile.lib/Makefile-nodewalk.mk;if [ -e "$$X" ];then echo $$X;      \
        fi; \
     fi; \

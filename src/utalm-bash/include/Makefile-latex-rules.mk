@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -32,8 +32,8 @@
 ifndef _LATEX_INCLUDED_
 _LATEX_INCLUDED_:=1
 
-LATEXINCLUDE=$(shell X=$(BLD_ROOT)src/lib/Makefile.lib/Makefile-latex-rules.mk;if [ -e $$X ];then echo $$X; \
-    else  X=$(BLD_ROOT)lib/Makefile.lib/Makefile-latex-rules.mk;if [ -e $$X ];then echo $$X;  \
+LATEXINCLUDE=$(shell X=$(BLD_ROOT)lib/Makefile.lib/Makefile-latex-rules.mk;if [ -e $$X ];then echo $$X; \
+    else  X=$(BLD_ROOT)src/lib/Makefile.lib/Makefile-latex-rules.mk;if [ -e $$X ];then echo $$X;  \
        else  X=$(HOME)/lib/Makefile.lib/Makefile-latex-rules.mk;if [ -e $$X ];then echo $$X;      \
        fi; \
     fi; \

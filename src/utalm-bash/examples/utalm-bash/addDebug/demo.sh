@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -28,8 +28,41 @@
 #
 #$Header$
 #
-
-
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_user
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Demonstration of various debug calls.
+##
+## Example with a first application of UTALM library calls for bash.
+##
+##	fetchDBGArgs # collects options, is implicit called in library
+##	
+##	printDBG       5   5 $LINENO $BASH_SOURCE         "printDBG..."
+##	printWNG          10 $LINENO $BASH_SOURCE 1       "printWNG..."
+##	printINFO         20 $LINENO $BASH_SOURCE 1       "printINFO..."
+##	printERR             $LINENO $BASH_SOURCE 1       "printERR..."
+##	printFINALCALL    30 $LINENO $BASH_SOURCE TEST004 "echo ABC"
+##	callErrOutWrapper    $LINENO $BASH_SOURCE         "echo BCD"
+##
+## The following calls show various contents:
+##
+##	- demo.sh -d l:1
+##	- demo.sh -d l:10
+##	- demo.sh -d i:1
+##	- demo.sh -d i:50
+##	- demo.sh -d w:1
+##	- demo.sh -d w:50
+##	- demo.sh -d l:50
+##	- demo.sh -d l:50,i:50
+##	- demo.sh -d l:100,i:100,w:100
+##
+#***MODUL_DOXYGEN_END***
+## \cond
+#
 shopt -s nullglob
 
 #
@@ -93,4 +126,4 @@ printFINALCALL 30 $LINENO $BASH_SOURCE TEST004 "echo ABC"
 echo
 callErrOutWrapper $LINENO $BASH_SOURCE "echo BCD"
 
-#function doDebug  () {
+## \endcond

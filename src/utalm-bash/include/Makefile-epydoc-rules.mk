@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -29,21 +29,21 @@
 #
 
 #proxy only
-ifndef _EPYDOC_INCLUDED_
-_EPYDOC_INCLUDED_:=1
+ifndef _DOXYGEN_INCLUDED_
+_DOXYGEN_INCLUDED_:=1
 
-EPYDOCINCLUDE=$(shell X=$(BLD_ROOT)Makefile.lib/Makefile-epydoc.mk;if [ -e $$$X ];then echo $$X; \
-    else  X=$(BLD_ROOT)src/Makefile.lib/Makefile-epydoc.mk;if [ -e $$$X ];then echo $$X;  \
-       else  X=$(HOME)/Makefile.lib/Makefile-epydoc.mk;if [ -e $$$X ];then echo $$X;      \
+DOXYGENINCLUDE=$(shell X=$(BLD_ROOT)lib/Makefile.lib/Makefile-doxygen.mk;if [ -e $$X ];then echo $$X; \
+    else  X=$(BLD_ROOT)src/lib/Makefile.lib/Makefile-doxygen.mk;if [ -e $$X ];then echo $$X;  \
+       else  X=$(HOME)/lib/Makefile.lib/Makefile-doxygen.mk;if [ -e $$X ];then echo $$X;      \
        fi; \
     fi; \
 fi;)
-ifndef EPYDOCINCLUDE
-$(error "Missing EPYDOCINCLUDE")
+ifndef DOXYGENINCLUDE
+$(error "Missing DOXYGENINCLUDE")
 endif
-include $(EPYDOCINCLUDE)
+include $(DOXYGENINCLUDE)
 ifndef BLD_ROOT_PYTHON_DOC_RULES_INCLUDED
-$(error "Missing: Makefile-epydoc.mk -> " $(BLD_ROOT_PYTHON_DOC_RULES_INCLUDED))
+$(error "Missing: Makefile-doxygen.mk -> " $(BLD_ROOT_PYTHON_DOC_RULES_INCLUDED))
 endif
 
-endif #_EPYDOC_INCLUDED_
+endif #_DOXYGEN_INCLUDED_

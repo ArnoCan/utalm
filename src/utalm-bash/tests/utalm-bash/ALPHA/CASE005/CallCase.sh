@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -25,7 +25,22 @@
 #   limitations under the License.
 #
 #HEADEND################################################################
-
+#
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Test doDBG
+##
+## TestCase-005 adds basic check for trace enabled.
+##
+##	doDebug&&((DBG>0))&&echo "DBG=ON"||((DBG>0))&&echo "DBG=OFF"
+##
+#***MODUL_DOXYGEN_END***
+## \cond
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -83,3 +98,4 @@ doDebug&&((DBG>0))&&echo "DBG=ON"||((DBG>0))&&echo "DBG=OFF"
 a=b
 
 gotoHell $LINENO $BASH_SOURCE 0
+## \endcond

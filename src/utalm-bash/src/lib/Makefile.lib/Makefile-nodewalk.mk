@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -27,14 +27,41 @@
 #
 #$Header$
 #
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Makefile for parsing and performing actions on directory-trees
+##
+## A Makefile for parsing and performing actions on directory-trees.
+## This includes default action for collection of contents defined
+## by included lists. These are collected to a meta-pool for actual 
+## pre-assembling and production of the target configuration.
+## cross-dependencies are worked out in a 2-level-approach.
+##
+## Nodewalk is therefore an abstract make module, which navigates downward
+## trees in an inverted treestructure, passing each branch and touching each
+## leaf once. The path resolution is from left first, downward from leftmost
+## first. Thus the order of entering terminating leafs and executing the 
+## foreseen action is for the lowest level on the leftmost subtree first.
+## Following the next lowest level, and so on. Each subtree is finalised by
+## performing actions on their intersetion point.
+##
+## The current interface for inclusion is:
+##
+##	- $(BLD_ROOT)include/Makefile-pre.mk    - mandatory
+##	- Makefile-src-en.mk                    - optional
+##	- Makefile-nodeaction-en.mk             - optional
+##	- $(BLD_ROOT)include/Makefile-post.mk   - mandatory
+## 
+## This could be customized as required.
+#***MODUL_DOXYGEN_END***
+## \cond
 #
-# Nodewalk is an abstract make module, which navigates downward thres a
-# inverted treestructure, passing each branch and touching each leaf once. 
-# The path resolution is from left first, downward from leftmost first.
-# Thus the order of reachin terminating leafs and executing the foreseen 
-# action is the lowest level of the leftmost subtree first, following the
-# next lowest level, and so on. Each subtree is finalised by performing 
-# actions on their intersetion point.  
+#
 #
 #
 #
@@ -141,3 +168,5 @@ endif
 include $(BLD_ROOT)include/Makefile-post.mk
 
 endif #_MAKE_NODEWALK_INCLUDED_
+
+## \endcond

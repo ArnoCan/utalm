@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_001
+#VERSION:      03_02_002
 #
 ########################################################################
 #
@@ -27,6 +27,36 @@
 #HEADEND################################################################
 #
 #$Header$
+#
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_user
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Demonstration of debug help formats
+##
+## Example demonstrating the various help formats of UTALM for bash.
+##
+## Demostrates the early-fetch of cli options by utalm-bash, here for
+## the display of online help. The help is presented in one of the following
+## formats, type in:
+##
+##	- demo.sh -d help
+##	- demo.sh -d help:HTML
+##	- demo.sh -d help:PDF
+##	- demo.sh -d help:MAN
+## 
+## You can set the following environment variables, refer to utalm-bash.conf:
+##
+##	- LANG
+##	- BROWSER
+##	- PDFVIEWER
+##	- MANPATH
+## 
+#***MODUL_DOXYGEN_END***
+## \cond
 #
 
 
@@ -81,3 +111,4 @@ You can set the following environment variables, refer to utalm-bash.conf:
 
 EOF
 
+## \endcond
