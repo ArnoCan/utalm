@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -28,60 +28,21 @@
 #
 #$Header$
 #
-
-
-################################################################
-#                   Begin of FrameWork                         #
-################################################################
-
-#FUNCBEG###############################################################
-#
-#PROJECT:
-MYPROJECT="Unified Sessions Manager"
-#
-#NAME:
-#  getVMinfo.sh
-#
-#AUTHOR:
-AUTHOR="Arno-Can Uestuensoez - acue.opensource@gmail.com"
-#
-#FULLNAME:
-FULLNAME="Unified Sessions Manager"
-#
-#CALLFULLNAME:
-CALLFULLNAME="Generic detection of GuestOS-Execution"
-#
-#LICENCE:
-LICENCE=GPL3
-#
-#TYPE:
-#  bash-script
-#
-#VERSION:
-VERSION=01_11_003
-#DESCRIPTION:
-#  Generic detection of GuestOS-Execution
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#  VALUES:
-#
-#FUNCEND###############################################################
-
-################################################################
-#                     Global shell options.                    #
-################################################################
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Generic detection of GuestOS-Execution
+##
+## \cond
+#***MODUL_DOXYGEN_END***
+# 
 shopt -s nullglob
 
-
-
-################################################################
-#       System definitions - do not change these!              #
-################################################################
+#System definitions - do not change these!
 #Execution anchor
 MYCALLPATHNAME=$0
 MYCALLNAME=`basename $MYCALLPATHNAME`
@@ -106,9 +67,7 @@ if [ -n "${MYLIBEXECPATHNAME##/*}" ];then
 fi
 MYLIBEXECPATH=`dirname $MYLIBEXECPATHNAME`
 
-###################################################
-#load basic library required for bootstrap        #
-###################################################
+#load basic library required for bootstrap
 MYBOOTSTRAP=${MYLIBEXECPATH}/bootstrap
 if [ ! -d "${MYBOOTSTRAP}" ];then
     MYBOOTSTRAP=${MYCALLPATH}/bootstrap
@@ -131,7 +90,7 @@ EOF
     fi
 fi
 
-MYBOOTSTRAP=${MYBOOTSTRAP}/bootstrap-03.01.009.sh
+MYBOOTSTRAP=${MYBOOTSTRAP}/bootstrap-03_01_009.sh
 if [ ! -f "${MYBOOTSTRAP}" ];then
     echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
     cat <<EOF  
@@ -166,15 +125,10 @@ EOF
     exit 1
 fi
 
-###################################################
-#Start bootstrap now                              #
-###################################################
+#Start bootstrap now
 . ${MYBOOTSTRAP}
-###################################################
-#OK - utilities to find components of this version#
-#available now.                                   #
-###################################################
-
+#OK - utilities to find components of this version
+#available now.
 #
 #set real path to install, resolv symbolic links
 _MYLIBEXECPATHNAME=`bootstrapGetRealPathname ${MYLIBEXECPATHNAME}`
@@ -184,10 +138,7 @@ _MYCALLPATHNAME=`bootstrapGetRealPathname ${MYCALLPATHNAME}`
 MYCALLPATHNAME=`dirname ${_MYCALLPATHNAME}`
 
 #
-###################################################
-#Now find libraries might perform reliable.       #
-###################################################
-
+#Now find libraries might perform reliable.
 
 #current language, not really NLS
 MYLANG=${MYLANG:-en}
@@ -198,14 +149,9 @@ MYLIBPATH=${UTALM_LIBPATH:-`dirname $MYLIBEXECPATH`}
 #path for various loads: libs, help, macros, plugins
 MYHELPPATH=${MYHELPPATH:-$MYLIBPATH/help/$MYLANG}
 
-
-###################################################
-#Check master hook                                #
-###################################################
+#Check master hook
 bootstrapCheckInitialPath
-###################################################
-#OK - Now should work.                            #
-###################################################
+#OK - Now should work.
 
 MYCONFPATH=${MYCONFPATH:-$MYLIBPATH/conf/utalm}
 if [ ! -d "${MYCONFPATH}" ];then
@@ -231,24 +177,13 @@ fi
 
 MYINSTALLPATH= #Value is assigned in base. Symbolic links are replaced by target
 
-
-##############################################
-#load basic library required for bootstrap   #
-##############################################
+#load basic library required for bootstrap
 . ${MYLIBPATH}/lib/base.sh
 . ${MYLIBPATH}/lib/libManager.sh
-#
-#Germish: "Was the egg or the chicken first?"
-#
-#..and prevent real load order for later display.
-#
 bootstrapRegisterLib
 baseRegisterLib
 libManagerRegisterLib
-##############################################
-#Now the environment is armed, so let's go.  #
-##############################################
-
+#Now the environment is armed, so let's go.
 if [ ! -d "${MYINSTALLPATH}" ];then
     ABORT=1;
     printERR $LINENO $BASH_SOURCE ${ABORT} "Missing:MYINSTALLPATH=${MYINSTALLPATH}"
@@ -263,10 +198,7 @@ if [ $? -ne 0 ];then
     gotoHell ${ABORT}
 fi
 
-
-################################################################
-# Main supported runtime environments                          #
-################################################################
+# Main supported runtime environments
 #release
 TARGET_OS="Linux: CentOS/RHEL(5+), SuSE-Professional 9.3"
 
@@ -286,11 +218,7 @@ TARGET_WM_SOON="xfce"
 #to be tested - coming soon
 TARGET_WM_FORESEEN="KDE(might work now)"
 
-################################################################
-#                     End of FrameWork                         #
-################################################################
-
-
+#End of FrameWork
 #
 #Verify OS support
 #
@@ -309,7 +237,6 @@ esac
 if [ "${*}" != "${*//-X/}" ];then
     C_TERSE=1
 fi
-
 
 . ${MYLIBPATH}/lib/misc.sh
 . ${MYLIBPATH}/lib/help/help.sh
@@ -357,10 +284,7 @@ else
     fi
 fi
 
-
-################################################################
-#    Default definitions - User-Customizable  from shell       #
-################################################################
+#Default definitions - User-Customizable  from shell
 _ARGS=;
 _ARGSCALL=$*;
 _RUSER0=;
@@ -404,3 +328,5 @@ fi
 
 getVMinfo
 [ "$C_TERSE" != 1 ]&&echo
+
+## \endcond

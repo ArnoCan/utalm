@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -265,7 +265,8 @@ PATH		:= $(RTBASE)/bin:$(PATH)
 CALLDIR		= $(shell pwd)
 CALLDIRNAME	= $(notdir $(CALLDIR))
 CD		    = cd
-CPA		    = cp -a -f
+#CPA		    = cp -a -f
+CPA		    = cp -a -f -u
 CPTREE	    = cp -a --parents
 CPR  		= cp -r
 CP	    	= cp 
@@ -273,6 +274,9 @@ ECHO		= echo
 FIND		= find
 LNS		    = ln -s
 MKDIRFLGS	= -p
+ifdef DBG
+MKDIRFLGS	+= -v
+endif
 MKDIR		= mkdir  $(MKDIRFLGS) 
 MV		    = mv
 RM		    = rm

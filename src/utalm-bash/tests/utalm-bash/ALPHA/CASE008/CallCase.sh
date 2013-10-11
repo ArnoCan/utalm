@@ -1,4 +1,5 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -6,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -27,6 +28,7 @@
 #HEADEND################################################################
 #
 #***MODUL_DOXYGEN_START***
+## \endcond
 ##
 ## @package libutalm_bash_devel
 ## @author Arno-Can Uestuensoez
@@ -37,8 +39,8 @@
 ##
 ## TestCase-008 with basic tests.
 ##
-#***MODUL_DOXYGEN_END***
 ## \cond
+#***MODUL_DOXYGEN_END***
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -60,8 +62,8 @@ else
 	fi
 fi
 
-. ${BOOTSTRAPLIB}/bootstrap-03.01.009.sh
-. ${CORELIB}/libcore-03.01.009.sh
+. ${BOOTSTRAPLIB}/bootstrap-03_01_009.sh
+. ${CORELIB}/libcore-03_01_009.sh
 . ${LIBDIR}/libutalm.sh
 
 

@@ -1,3 +1,4 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -5,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -26,6 +27,19 @@
 #HEADEND################################################################
 #
 #$Header$
+#
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Provides rules for txt2tags
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 #
 ifndef BLD_TXT2TAGS_RULES_INCLUDED
 BLD_TXT2TAGS_RULES_INCLUDED:=1
@@ -121,3 +135,4 @@ $(GWIKI1_FILES) $(GWIKI3_FILES) $(GWIKI7_FILES): %.gwiki: $(wildcard *.t2t) $(EN
 	
 
 endif #BLD_TXT2TAGS_RULES_INCLUDED
+## \endcond

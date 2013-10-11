@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -59,12 +59,16 @@ all: outdirs SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPTGZ $(TGZ_PNAME)
 
 .PHONY: src doc prep
 
+tgzcopy:$(TGZ_PNAME)
+.PHONY:tgzcopy 
 $(TGZ_PNAME):$(TGZ_PNAME_BLD)   
 ifdef DBG
 	$(ECHO) "Copy TGZ-archive:$(TGZ_PNAME_BLD)"
 endif
 	cp $(TGZ_PNAME_BLD) $(TGZ_PNAME)
  
+tgzpack:$(TGZ_PNAME_BLD)
+ .PHONY:tgzpack
 $(TGZ_PNAME_BLD):   
 	$(ECHO) "Create TGZ-archive:$@"
 ifdef DBG
@@ -101,11 +105,22 @@ ifdef DBG
 	$(ECHO)
 	$(ECHO) "IMPORT-FILES:$(UNIQUE_IMPORT_FILES)"
 	$(ECHO)
+	$(ECHO) INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
+endif
+	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
+ifdef DBG
+	@$(ECHO) $(MKDIR) $(UNIQUE_IMPORT_DIRS)
 endif
 	$(MKDIR) $(UNIQUE_IMPORT_DIRS)
 	$(CHMOD) 755 $(UNIQUE_IMPORT_DIRS)
-	$(CPA) $(IMPORT_DIRS) $(TGZ_ROOT)
-	$(CPA) $(IMPORT_FILES) $(TGZ_ROOT)
+ifdef DBG
+	@$(ECHO) $(IMPORT_DIRS) $(TGZ_ROOT)
+endif
+	-$(CPA) $(IMPORT_DIRS) $(TGZ_ROOT)
+ifdef DBG
+	@$(ECHO) $(CPA) $(IMPORT_FILES) $(TGZ_ROOT)
+endif
+	-$(CPA) $(IMPORT_FILES) $(TGZ_ROOT)
 
 src:SRC_BLD
 SRC_BLD:

@@ -1,4 +1,4 @@
-#!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -29,19 +29,22 @@
 #$Header$
 #
 #***MODUL_DOXYGEN_START***
+## \endcond
 ##
 ## @package libutalm_bash_devel
-## libutalm.sh.
-##
 ## @author Arno-Can Uestuensoez
 ## @date 2013.10.10
-## @version 03_02_001
+## @version 03_02_003
 ## @file
 ## @brief Main library of libutalm-bash component
 ##
-#***MODUL_DOXYGEN_END***
+## For detailed information on <b>libutalm.sh</b> refer to 
+## <b><a href="../../man3/libutalm-bash.html">libutalm-bash(3)</a></b>
+## and 
+## <b><a href="../../man3/libutalm-make.html">libutalm-make(3)</a></b>
 ## \cond
-
+#***MODUL_DOXYGEN_END***
+#
 if [ -z "$__UnifiedTraceAndLogManager__" ];then #*** prevent multiple inclusion
 __UnifiedTraceAndLogManager__=1 #*** prevent multiple inclusion
 
@@ -70,17 +73,17 @@ else
 	fi
 fi
 
-if [ -e ${BASH_SOURCE%/*}/bootstrap/bootstrap-03.01.009.sh ];then
-	. ${BASH_SOURCE%/*}/bootstrap/bootstrap-03.01.009.sh
+if [ -e ${BASH_SOURCE%/*}/bootstrap/bootstrap-03_01_009.sh ];then
+	. ${BASH_SOURCE%/*}/bootstrap/bootstrap-03_01_009.sh
 else
-	. ${BASH_SOURCE%/*}/../bin/bootstrap/bootstrap-03.01.009.sh
+	. ${BASH_SOURCE%/*}/../bin/bootstrap/bootstrap-03_01_009.sh
 fi
 if [ -z "$__LIBCORE__" ];then 
-. ${BASH_SOURCE%/*}/core/libcore-03.01.009.sh
+. ${BASH_SOURCE%/*}/core/libcore-03_01_009.sh
 fi
 
-_myLIBNAME_UnifiedTraceAndLogManager="${BASH_SOURCE}"
-_myLIBVERS_UnifiedTraceAndLogManager="03.02.002"
+MYLIBNAME="${BASH_SOURCE##*/}"
+MYLIBVERS="03.02.003"
 
 #shopt -s nullglob
 #shopt -s extglob
@@ -89,6 +92,13 @@ _myLIBVERS_UnifiedTraceAndLogManager="03.02.002"
 #Set some common basic definitions.
 #
 
+#**doxygen-workaround***
+## \endcond
+#P ## @var MYLIBPATH
+#P # Root for libraries, default is relative to current.
+#P #
+#P MYLIBPATH="${BASH_SOURCE%/*}/"
+## \cond
 #if not yet initialized, but pre-defined, than set it
 if [ -z "${MYLIBPATH}" ];then
     MYLIBPATH=${BASH_SOURCE%/*}/
@@ -108,12 +118,20 @@ if [ ! -d "${MYLIBPATH}" -o ! -e "${MYLIBPATH}/libutalm.sh" ];then
 fi
 
 #make it absolute
-if [ -n "${MYLIBPATH##/*}" ];then
+if [ -n "##/*}" ];then
     cd "${MYLIBPATH}"
     MYLIBPATH=${PWD}
     cd -
 fi
+MYLIBPATHNAME="${MYLIBPATH}/${MYLIBNAME}"
 
+#**doxygen-workaround***
+## \endcond
+#P ## @var MYLANG
+#P # Language - default 'en'
+#P #
+#P MYLANG="${MYLANG:-$LANG}"
+## \cond
 MYLANG=${MYLANG:-$LANG}
 case ${MYLANG} in
 #    de*|De*|DE*) MYLANG=de;;
@@ -122,6 +140,13 @@ case ${MYLANG} in
 esac
 
 
+#**doxygen-workaround***
+## \endcond
+#P ## @var MYDOCBASE
+#P # Base for document tree
+#P #
+#P MYDOCBASE="${MYDOCBASE:-$HOME/doc}"
+## \cond
 MYDOCBASE=${MYDOCBASE:-$HOME/doc}
 if [ ! -d "${MYDOCBASE}" ];then
     echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYDOCBASE=${MYDOCBASE}"
@@ -129,6 +154,13 @@ if [ ! -d "${MYDOCBASE}" ];then
 fi
 
 
+#**doxygen-workaround***
+## \endcond
+#P ## @var MYCONFPATH
+#P # Base for configuration files
+#P #
+#P MYCONFPATH="${MYCONFPATH:-$HOME/conf}"
+## \cond
 MYCONFPATH=${MYCONFPATH:-$HOME/conf}
 if [ ! -d "${MYCONFPATH}" ];then
   echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYCONFPATH=${MYCONFPATH}"
@@ -212,23 +244,18 @@ I=1;
 C_PFEXE=;
 
 #***FUNCBEG***
-#NAME:
-#  fetchDBGArgs
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#
-#  VALUES:
-#
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Fetch argv
+#P #
+#P # Is implicitly called, fetches suboptions for '-d ...'
+#P #
+#P # For valid options refer to <a href="../../man3/libutalm-bash.html" target="_blank">libutalm-bash(3)</a>
+#P #
+#P def fetchDBGArgs():
+#P 	pass
+## \cond
 #***FUNCEND***
 function fetchDBGArgs () {
     if [ -n "`echo ${*}| sed -n 's/([^)]*)//g;s/-d /1/p'`" ];then
@@ -356,19 +383,55 @@ function fetchDBGArgs () {
 		H|HELP)
 			A=`echo ${ARG}|tr '[:lower:]' '[:upper:]'`
 			case $A in
+				PATHS)
+					echo "INFO:">&2
+					echo "INFO:Current library: ${MYLIBPATHNAME}">&2
+					echo "INFO:">&2
+					echo "INFO:Following could be pre-set by bash-environment:">&2
+					echo "INFO:">&2
+					echo "INFO:   Using libraries: MYLIBPATH    = ${MYLIBPATH}">&2
+					echo "INFO:   Using documents: MYDOCBASE    = ${MYDOCBASE}">&2
+					echo "INFO:   Using config:    MYCONFPATH   = ${MYCONFPATH}">&2
+					echo "INFO:   Using language:  MYLANG       = ${MYLANG}">&2
+					echo "INFO:">&2
+					echo "INFO:   Using language:  MANPATH      = ${MANPATH}">&2
+					echo "INFO:">&2
+					echo "INFO:   Using for html:  BROWSER      = ${BROWSER}">&2
+					echo "INFO:   Using for html:  DEFAULT_HELP = ${DEFAULT_HELP}">&2
+					echo "INFO:">&2
+					echo "INFO:   Using for pdf:   PDFVIEWER    = ${PDFVIEWER}">&2
+					echo "INFO:">&2
+					exit 0
+				    ;;
 				HTML)
 					if [ -n "$BROWSER" ];then
-						$BROWSER $DOCBASE/$MYLANG/html/man3/libutalm-bash.html &
+						local _MYDOC=${DEFAULT_HELP}
+						echo "CALL:$BROWSER ${_MYDOC}">&2
+						if [ ! -e "${_MYDOC}" ];then
+							echo "ERROR:Missing:${_MYDOC}">&2 
+							echo "INFO:Check/set MYDOCBASE=${MYDOCBASE}">&2 
+							exit 1
+						fi
+						$BROWSER ${_MYDOC} &
 					fi
 					exit 0
 				    ;;
 				PDF)
 					if [ -n "$PDFVIEWER" ];then
-						$PDFVIEWER ${DOCBASE}${MYLANG}/pdf/man3/libutalm-bash.pdf &
+						local _MYDOC=${MYDOCBASE}/${MYLANG}/pdf/man3/libutalm-bash.pdf
+						echo "CALL:$PDFVIEWER ${_MYDOC}">&2
+						if [ ! -e "${_MYDOC}" ];then
+							echo "ERROR:Missing:${_MYDOC}">&2 
+							echo "INFO:Check/set MYDOCBASE">&2 
+							exit 1
+						fi
+						$PDFVIEWER ${_MYDOC} &
 					fi
 					exit 0
 					;;
 				MAN)
+					echo "INFO:Using documents from:MANPATH=${MANPATH}">&2
+					echo "CALL:man -M $MANPATH 3 libutalm-bash">&2
 					man -M $MANPATH 3 libutalm-bash
 					exit 0
 					;;
@@ -419,7 +482,17 @@ OPTIONS:
    [0-9]*
    ALL
    H|HELP
-   
+
+Special cases:
+
+  - for extended HELP:   $0 -d help:html   
+  - for toubleshooting:  $0 -d help:paths
+  - extended troubleshooting
+    - install devel package
+    - call "make test" in install-root, this
+      is also done by install package for 
+      verification, aou can add "DBG=1" for
+      (lots of) verbose output
 EOF
 		    exit 0;
 		    ;;
@@ -439,31 +512,19 @@ if [ -n "`echo $*| sed -n 's/-y/1/p'`" ];then
     export UTALM_XTERM=0;
 fi
 
-
-#***FUNCBEG***
-#NAME:
-#  doDebug
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Returns wheter debug level matches. If some specific
-#  actions to be done. E.g. evaluating time-intensive
-#  debug actions for tests.
-#
-#   -> doDebug <subsys> <dbg-level> <line> <file>
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#    0: Debug it.
-#    1: No debug.
-#  VALUES:
-#
+## \endcond
+#P ##
+#P # Fetch argv
+#P #
+#P #  Returns wheter debug level matches. If some specific
+#P #  actions to be done. E.g. evaluating time-intensive
+#P #  debug actions for tests.
+#P #
+#P #	doDebug <subsys> <dbg-level> <line> <file>
+#P #
+#P def doDebug():
+#P 	pass
+## \cond
 #***FUNCEND***
 function doDebug  () {
     ((DBG>0))||return 1;
@@ -479,29 +540,29 @@ function doDebug  () {
 }
 
 
-
 #***FUNCBEG***
-#NAME:
-#  printDBG
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Prints only when called with more than one option and matches defined 
-#  number.
-#
-#   -> printDBG <subsys> <dbg-level> <line> <file> <message>
-#
-#  implementation priority: PERFORMANCE
-#
-#EXAMPLE:
-#PARAMETERS:
-#OUTPUT:
-#  RETURN:
-#  VALUES:
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Print trace/log-string
+#P # 
+#P # Prints a trace/log-string when called with more than one option 
+#P # and matches defined number.
+#P # 
+#P #	printDBG <subsys> <dbg-level> <line> <file> <message>
+#P # 
+#P # Implementation priority: PERFORMANCE
+#P # 
+#P # @param $1 subsys
+#P # @param $2 dbg-level
+#P # @param $3 line
+#P # @param $4 file
+#P # @param $5 message
+#P def printDBG($1,$2,$3,$4,$5):
+#P 	pass
+## \cond
 #***FUNCEND***
-function printDBG {
+function printDBG () {
     local r=$?;
     ((DBG>0))||return $r;
     local s=$1;shift;
@@ -529,21 +590,24 @@ function printDBG {
 
 
 #***FUNCBEG***
-#NAME:
-#  printERR
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Prints errors
-#   -> printERR <line> <fname> <code> <message>
-#
-#EXAMPLE:
-#PARAMETERS:
-#OUTPUT:
-#  RETURN:
-#  VALUES:
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Print trace/log-string for errors
+#P # 
+#P # Prints a trace/log-string when called with more than one option. 
+#P # 
+#P #	printERR <line> <fname> <code> <message>
+#P # 
+#P # Implementation priority: PERFORMANCE
+#P # 
+#P # @param $1 line
+#P # @param $2 file
+#P # @param $3 code
+#P # @param $4 message
+#P def printERR($1,$2,$3,$4):
+#P 	pass
+## \cond
 #***FUNCEND***
 function printERR () {
     local r=$?;
@@ -560,28 +624,27 @@ function printERR () {
     return $r;
 }
 
-
-
 #***FUNCBEG***
-#NAME:
-#  printWNG
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Prints warnings
-#   -> printWNG <warning-level> <line> <fname> <code> <message>
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#
-#  VALUES:
-#
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Print trace/log-string for warnings
+#P # 
+#P # Prints a trace/log-string when called with more than one option 
+#P # and matches current level. 
+#P # 
+#P #	printWNG <warning-level> <line> <fname> <code> <message>
+#P # 
+#P # Implementation priority: PERFORMANCE
+#P # 
+#P # @param $1 warning-level
+#P # @param $2 line
+#P # @param $3 fname
+#P # @param $4 code
+#P # @param $5 message
+#P def printWNG($1,$2,$3,$4,$5):
+#P 	pass
+## \cond
 #***FUNCEND***
 function printWNG () {
     local r=$?;
@@ -600,29 +663,27 @@ function printWNG () {
     return $r;
 }
 
-
-
-
 #***FUNCBEG***
-#NAME:
-#  printINFO
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Prints warnings
-#   -> printINFO <info-level> <line> <fname> <code> <message>
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#
-#  VALUES:
-#
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Print trace/log-string for info
+#P # 
+#P # Prints a trace/log-string when called with more than one option 
+#P # and matches current level. 
+#P # 
+#P #	printINFO <info-level> <line> <fname> <code> <message>
+#P # 
+#P # Implementation priority: PERFORMANCE
+#P # 
+#P # @param $1 info-level
+#P # @param $2 line
+#P # @param $3 fname
+#P # @param $4 code
+#P # @param $5 message
+#P def printINFO($1,$2,$3,$4,$5):
+#P 	pass
+## \cond
 #***FUNCEND***
 function printINFO () {
     local r=$?;
@@ -656,28 +717,27 @@ function printINFO () {
     return $r;
 }
 
-
-
 #***FUNCBEG***
-#NAME:
-#  printFINALCALL
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Prints final call strings
-#   -> printFINALCALL <level> <line> <fname> <title> <exec-or-call-string>
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#
-#  VALUES:
-#
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Prints final call strings
+#P # 
+#P # Prints a trace/log-string of a string prepared to be executed when called with more
+#P # than one option and matches current level. 
+#P # 
+#P #	printFINALCALL <level> <line> <fname> <title> <exec-or-call-string>
+#P # 
+#P # Implementation priority: PERFORMANCE
+#P # 
+#P # @param $1 level
+#P # @param $2 line
+#P # @param $3 fname
+#P # @param $4 title
+#P # @param $5 exec-or-call-string
+#P def printFINALCALL($1,$2,$3,$4,$5):
+#P 	pass
+## \cond
 #***FUNCEND***
 function printFINALCALL () {
     local r=$?;
@@ -698,36 +758,25 @@ function printFINALCALL () {
     return $r;
 }
 
-
 #***FUNCBEG***
-#NAME:
-#  callErrOutWrapper
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Fetched the User-ID and Group-UID of primary group,
-#  as string in the format:
-#
-#    <uid>;<guid>
-#
-#EXAMPLE:
-#
-#GLOBAL:
-#  UTALM_NOCALLWRAPPER
-#
-#PARAMETERS:
-#  $1:    LINENO of caller
-#  $2:    BASH_SOURCE of caller
-#  $3-*:  The call to be wrapped
-#
-#
-#OUTPUT:
-#  RETURN:
-#
-#  VALUES:
-#
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Prints final call strings
+#P # 
+#P # Prints a trace/log-string of a string prepared to be executed when called with more
+#P # than one option and matches current level. 
+#P # 
+#P #	callErrOutWrapper <line> <fname> <exec-or-call-string>
+#P # 
+#P # Implementation priority: PERFORMANCE
+#P # 
+#P # @param $1 line LINENO of caller
+#P # @param $2 file BASH_SOURCE of caller
+#P # @param $3 exec-or-call-string The call to be wrapped
+#P def callErrOutWrapper($1,$2,$3):
+#P 	pass
+## \cond
 #***FUNCEND***
 function callErrOutWrapper () {
     printDBG $S_LIB ${D_BULK} $LINENO $BASH_SOURCE "$FUNCNAME:<${@}>"
@@ -772,49 +821,49 @@ function callErrOutWrapper () {
     return $_res
 }
 
-
 #***FUNCBEG***
-#NAME:
-#  getPathName
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Due to some wrappers, e.g. "consolehelper" for CentOS/RHEL, the 
-#  function evaluates the PATH variable only when run from a console,
-#  else hard-coded paths are checked. The paths has to be specifically
-#  adapted to the different platforms of course.
-#
-#  This approach includes support for pre-configured authorization by 
-#  usage of PAM modules for specific console-wrappers.1
-#  
-#EXAMPLE:
-#
-#PARAMETERS:
-#  $1: LINENO of caller
-#  $2: BASH_SOURCE of caller
-#  $3: ERROR|WARNING|WARNINGEXT
-#       ERROR
-#        Prints an error message and exits.
-#       WARNING  
-#        Prints a warning and continues.
-#       WARNINGEXT
-#        Prints a warning-extended when activated by "-w" and continues.
-#  $4: exec callee
-#  $5: default path
-#
-#
-#OUTPUT:
-#  RETURN:
-#    0: Success
-#    1: Failure
-#  VALUES:
-#    pathname
-#     With absolute path
-#
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Evaluates pathname with awareness of console-call
+#P # 
+#P # Due to some wrappers, e.g. "consolehelper" for CentOS/RHEL, the 
+#P # function evaluates the PATH variable only when run from a console,
+#P # else hard-coded paths are checked. The paths has to be specifically
+#P # adapted to the different platforms of course.
+#P #
+#P # This approach includes support for pre-configured authorization by 
+#P # usage of PAM modules for specific console-wrappers.1
+#P # 
+#P # Implementation priority: PERFORMANCE
+#P # 
+#P # @param $1: LINENO of caller
+#P # @param $2: BASH_SOURCE of caller
+#P # @param $3: ERROR|WARNING|WARNINGEXT
+#P # <ul>
+#P #   <li>ERROR<br>
+#P #        Prints an error message and exits.
+#P #   </li>
+#P #   <li>WARNING<br>  
+#P #        Prints a warning and continues.
+#P #   </li>
+#P #   <li>WARNINGEXT<br>
+#P #        Prints a warning-extended when activated by "-w" and continues.
+#P #   </li>
+#P # </ul>
+#P # @param $4: exec callee
+#P # @param $5: default path
+#P # @return 
+#P # <ul>
+#P #   <li>SUCCESS:= 0 + echo absolute-pathname</li>
+#P #   <li>FAILURE:= 1</li>
+#P # </ul>
+#P # 
+#P def getPathName($1,$2,$3,$4,$5):
+#P 	pass
+## \cond
 #***FUNCEND***
-function getPathName () {
+ getPathName () {
     local _pname=;
     local _ret=1;
 
@@ -853,37 +902,28 @@ function getPathName () {
     return $_ret
 }
 
-
 #***FUNCBEG***
-#NAME:
-#  gotoHell
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Exits with "grep" string for unit evaluation.
-#    "utalm_exit:#value"
-#
-#  The name gotoHell is honouring my very first colleagues -
-#  really nice and in particular actually skilled.
-#  Really missing that after meeting so much ant's beeing 
-#  the real-wanna-be-super-guru.
-#
-#  
-#EXAMPLE:
-#    "utalm_exit:0"
-#    "utalm_exit:2"
-#
-#PARAMETERS:
-#  $1: LINENO of caller
-#  $2: BASH_SOURCE of caller
-#  $3: exit code
-#
-#
-#OUTPUT:
-#  exits with given code
-#
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Exits with stardard string output
+#P # 
+#P #  Exits with "grep" string for unit evaluation.
+#P #    "utalm_exit:#value"
+#P #
+#P # Examples:
+#P #    "utalm_exit:0"
+#P #    "utalm_exit:2"
+#P #
+#P #  The name gotoHell is honouring my very first colleagues -
+#P #  actually skilled - not wanna-be-super-gurus.
+#P # @param $1: LINENO of caller
+#P # @param $2: BASH_SOURCE of caller
+#P # @param $3: EXIT values.
+#P # @exit with given code
+#P def gotoHell($1,$2,$3):
+#P 	pass
+## \cond
 #***FUNCEND***
 function gotoHell () {
 	printINFO 0 $1 $2 1  "Requested exit:$3"
@@ -891,31 +931,19 @@ function gotoHell () {
 	exit $3	
 }
 
-
 #***FUNCBEG***
-#NAME:
-#  countErrors
-#
-#TYPE:
-#  bash-function
-#
-#DESCRIPTION:
-#  Counts error exits generated by gotoHell.
-#    "utalm_exit:#value"
-#  
-#EXAMPLE:
-#    "utalm_exit:0"
-#    "utalm_exit:2"
-#
-#PARAMETERS:
-#  $1: LINENO of caller
-#  $2: BASH_SOURCE of caller
-#  $3: exit code
-#
-#
-#OUTPUT:
-#  exits with given code
-#
+#**doxygen-workaround***
+## \endcond
+#P ##
+#P # Counts errors for SUnit and regression tests. 
+#P # 
+#P # Counts error exits generated by gotoHell.
+#P #   "utalm_sum_of_errors:#sum-value"
+#P #
+#P # @return with sum
+#P def countErrors():
+#P 	pass
+## \cond
 #***FUNCEND***
 function countErrors () {
 	awk -F':' '

@@ -1,4 +1,5 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -6,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -25,6 +26,19 @@
 #   limitations under the License.
 #
 #HEADEND################################################################
+#
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_003
+## @file
+## @brief Installer
+## 
+## \cond
+#***MODUL_DOXYGEN_END***
 
 export DBG=${DBG:-0}
 export SILENT=${SILENT:-1}
@@ -39,6 +53,17 @@ if [ ! -e ${0##*/} -a ${PWD##*/} != src ];then
 	echo "ERROR:Must be called in own directory!">&2
 	exit 1
 fi
+
+function displayIt () {
+	if [ "$DBG" == 1 ];then
+		echo ${LINENO}:$*
+	else
+		if [ "$SILENT" == 0 ];then
+			echo ${LINENO}:$*
+		fi
+	fi
+}
+
 
 #
 # installation target
@@ -80,6 +105,7 @@ fi
 . ${MYCALLPATH}/install.conf
 
 CP="cp -r"
+displayIt $BASH_SOURCE
 for i in ${BASE}bin/bootstrap/*;do
 	displayIt "->${i}"
 	$CP ${i} ${BOOTSTRAPBIN}
@@ -87,6 +113,7 @@ for i in ${BASE}bin/bootstrap/*;do
 	$CP ${i} ${BOOTSTRAPLIB}
 	chmod -R u+x ${BOOTSTRAPLIB}${i##*/} 
 done
+displayIt $BASH_SOURCE
 
 for i in ${BASE}lib/core/*;do
 	displayIt "->${i}"
@@ -95,36 +122,44 @@ for i in ${BASE}lib/core/*;do
 	$CP ${i} ${CORELIB}
 	chmod -R u+x ${CORELIB}${i##*/} 
 done
+displayIt $BASH_SOURCE
 
 for i in ${BASE}bin/*;do
 	displayIt "->${i}"
 	cp -r ${i} ${BINDIR}
 	chmod -R u+x ${BINDIR}${i##*/} 
 done
+displayIt $BASH_SOURCE
 
 for i in ${BASE}conf/*;do
 	displayIt "->${i}"
 	cp -r ${i} ${MYCONFPATH}
 done
-
+displayIt $BASH_SOURCE
 
 _BASE=${BASE%/}
 _BASE=${_BASE%/src}
 if [ "$_BASE" == src ];then
 	_BASE=.
 fi
+displayIt $BASH_SOURCE
+
 _BASE=${_BASE}/
 for i in ${_BASE}doc/*;do
 	displayIt "->${i}"
-	cp -r ${i} ${DOCBASE}
+	cp -r ${i} ${MYDOCBASE}
 done
-
+displayIt $BASH_SOURCE
 
 displayIt "->libutalm.sh $LIBDIR"
 $CP ${BASE}lib/libutalm.sh $LIBDIR
 
+displayIt "->sourceEnvironment.sh $HOME"
+$CP ${BASE}sourceEnvironment.sh $HOME
 displayIt "->utalm-bash-show-help.sh $HOME"
 $CP ${BASE}utalm-bash-show-help.sh $HOME
 
-displayIt "->sourceEnvironment.sh $HOME"
-$CP ${BASE}sourceEnvironment.sh $HOME
+${HOME}utalm-bash-show-help.sh
+
+
+## \endcond

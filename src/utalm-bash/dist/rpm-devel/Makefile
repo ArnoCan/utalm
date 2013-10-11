@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -60,6 +60,17 @@ ifeq ($(VARIANT),ALL)
 OUTFILES += $(RPMDEVEL_PNAME)
 RPM_OPTS += --define "myrelease    ${RELEASE}_${VARIANT}"
 endif
+
+ifeq ($(VARIANT),ALPHA)
+OUTFILES += $(RPMDEVEL_PNAME)
+RPM_OPTS += --define "myrelease    ${RELEASE}_${VARIANT}"
+endif
+
+ifeq ($(VARIANT),BETA)
+OUTFILES += $(RPMDEVEL_PNAME)
+RPM_OPTS += --define "myrelease    ${RELEASE}_${VARIANT}"
+endif
+
 ifeq ($(VARIANT),INTERNAL)
 OUTFILES += $(RPMDEVEL_PNAME)
 RPM_OPTS += --define "myrelease    ${RELEASE}_${VARIANT}"

@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -81,6 +81,10 @@ IMGSOURCES=(
    NONE feather-88x26.png
    NONE feather-small.png
 
+   NONE sourceforge-21x21.png
+   NONE python-logo-21x21.png
+   NONE github-21x21.png
+
     NONE bslogo.png
     NONE flag_usa_s.png
     NONE flag_d_s.png
@@ -99,6 +103,11 @@ IMGSOURCES=(
     NONE t_logo-a.png
     NONE t_logo-b.png
     NONE t_logo-c.png
+
+    NONE usm-21x21.png
+    NONE usm-80x80.png
+    NONE usm-50x50.png
+    NONE usm-green-50x50.png
 
     NONE OSI-Approved-License-100x137.png
     NONE OSI-Approved-License-88x121.png

@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -57,12 +57,16 @@ all: outdirs SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPTGZ $(TGZ_DEVEL_PNAME)
 
 .PHONY: src doc prep
 
+tgzcopy:$(TGZ_DEVEL_PNAME)
+.PHONY:tgzcopy 
 $(TGZ_DEVEL_PNAME):$(TGZ_DEVEL_PNAME_BLD)   
 ifdef DBG
 	$(ECHO) "Copy TGZ-archive:$(TGZ_DEVEL_PNAME_BLD)"
 endif
 	cp $(TGZ_DEVEL_PNAME_BLD) $(TGZ_DEVEL_PNAME)
  
+ tgzpack:$(TGZ_DEVEL_PNAME_BLD)
+ .PHONY:tgzpack
 $(TGZ_DEVEL_PNAME_BLD):   
 	$(ECHO) "Create TGZ-archive:$@"
 ifdef DBG
@@ -101,6 +105,7 @@ ifdef DBG
 	$(ECHO)
 endif
 	$(MKDIR) $(UNIQUE_IMPORT_DIRS)
+	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs	
 	$(CHMOD) 755 $(UNIQUE_IMPORT_DIRS)
 	$(CPA) $(IMPORT_DIRS) $(TGZ_DEVEL_ROOT)
 	$(CPA) $(IMPORT_FILES) $(TGZ_DEVEL_ROOT)

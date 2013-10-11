@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -27,6 +27,7 @@
 #
 #$Header$
 #
+## \cond
 ifndef _NODEWALK_INCLUDED_
 _NODEWALK_INCLUDED_:=1
 
@@ -50,3 +51,4 @@ $(error "Missing: Makefile-nodewalk.mk -> " $(_MAKE_NODEWALK_INCLUDED_))
 endif
 
 endif #_NODEWALK_INCLUDED_
+## \endcond

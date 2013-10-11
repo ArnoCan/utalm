@@ -1,3 +1,4 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -5,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -27,9 +28,20 @@
 #
 #$Header$
 #
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Lists subtree resources.
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 
 #
-SUBROOT := .
 CURSUBPATH := .
 
 #
@@ -44,3 +56,4 @@ SRC_DIRS	+=
 #
 SUB_POOLS   += utalm-bash
 
+## \endcond

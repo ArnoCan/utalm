@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -27,6 +27,18 @@
 #
 #$Header$
 #
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief List relevant CPU architecture
+##
+## \cond
+#***MODUL_DOXYGEN_END***
+
 #FUNCBEG###############################################################
 #NAME:
 #  getCurArch.sh
@@ -52,3 +64,5 @@
 #avoid errors on OpenSolaris
 xarch=$(uname -m|tr '\n' ' ')
 echo -n -e ${xarch// /}
+
+## \endcond

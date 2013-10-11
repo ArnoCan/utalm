@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -28,63 +28,22 @@
 #
 #$Header$
 #
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief List relevant CPU parameters
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 
-################################################################
-#                   Begin of FrameWork                         #
-################################################################
-
-
-#FUNCBEG###############################################################
 #
-#PROJECT:
-MYPROJECT="Unified Sessions Manager"
-#
-#NAME:
-#  getCPUinfo.sh
-#
-#AUTHOR:
-AUTHOR="Arno-Can Uestuensoez - acue.opensource@gmail.com"
-#
-#FULLNAME:
-FULLNAME="Unified Sessions Manager"
-#
-#CALLFULLNAME:
-CALLFULLNAME="Generic display of available CPUs"
-#
-#LICENCE:
-LICENCE=GPL3
-#
-#TYPE:
-#  bash-script
-#
-#VERSION:
-VERSION=01_11_003
-#DESCRIPTION:
-#  Generic display of available CPUs
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#  refer to online help "-h" and/or "-H"
-#
-#
-#OUTPUT:
-#  RETURN:
-#  VALUES:
-#
-#FUNCEND###############################################################
-
-################################################################
-#                     Global shell options.                    #
-################################################################
 shopt -s nullglob
 
-
-
-################################################################
-#       System definitions - do not change these!              #
-################################################################
+#System definitions - do not change these!
 #Execution anchor
 MYCALLPATHNAME=$0
 MYCALLNAME=`basename $MYCALLPATHNAME`
@@ -134,7 +93,7 @@ EOF
     fi
 fi
 
-MYBOOTSTRAP=${MYBOOTSTRAP}/bootstrap-03.01.009.sh
+MYBOOTSTRAP=${MYBOOTSTRAP}/bootstrap-03_01_009.sh
 if [ ! -f "${MYBOOTSTRAP}" ];then
     echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
     cat <<EOF  
@@ -169,14 +128,8 @@ EOF
     exit 1
 fi
 
-###################################################
-#Start bootstrap now                              #
-###################################################
+#Start bootstrap now
 . ${MYBOOTSTRAP}
-###################################################
-#OK - utilities to find components of this version#
-#available now.                                   #
-###################################################
 
 #
 #set real path to install, resolv symbolic links
@@ -186,12 +139,7 @@ MYLIBEXECPATH=`dirname ${_MYLIBEXECPATHNAME}`
 _MYCALLPATHNAME=`bootstrapGetRealPathname ${MYCALLPATHNAME}`
 MYCALLPATHNAME=`dirname ${_MYCALLPATHNAME}`
 
-#
-###################################################
-#Now find libraries might perform reliable.       #
-###################################################
-
-
+#Now find libraries might perform reliable.
 #current language, not really NLS
 MYLANG=${MYLANG:-en}
 
@@ -202,13 +150,8 @@ MYLIBPATH=${UTALM_LIBPATH:-`dirname $MYLIBEXECPATH`}
 MYHELPPATH=${MYHELPPATH:-$MYLIBPATH/help/$MYLANG}
 
 
-###################################################
-#Check master hook                                #
-###################################################
+#Check master hook
 bootstrapCheckInitialPath
-###################################################
-#OK - Now should work.                            #
-###################################################
 
 MYCONFPATH=${MYCONFPATH:-$MYLIBPATH/conf/utalm}
 if [ ! -d "${MYCONFPATH}" ];then
@@ -235,23 +178,13 @@ fi
 MYINSTALLPATH= #Value is assigned in base. Symbolic links are replaced by target
 
 
-##############################################
-#load basic library required for bootstrap   #
-##############################################
+#load basic library required for bootstrap
 . ${MYLIBPATH}/lib/base.sh
 . ${MYLIBPATH}/lib/libManager.sh
-#
-#Germish: "Was the egg or the chicken first?"
-#
-#..and prevent real load order for later display.
-#
 bootstrapRegisterLib
 baseRegisterLib
 libManagerRegisterLib
-##############################################
-#Now the environment is armed, so let's go.  #
-##############################################
-
+#Now the environment is armed, so let's go.
 if [ ! -d "${MYINSTALLPATH}" ];then
     ABORT=1;
     printERR $LINENO $BASH_SOURCE ${ABORT} "Missing:MYINSTALLPATH=${MYINSTALLPATH}"
@@ -266,10 +199,7 @@ if [ $? -ne 0 ];then
     gotoHell ${ABORT}
 fi
 
-
-################################################################
-# Main supported runtime environments                          #
-################################################################
+# Main supported runtime environments
 #release
 TARGET_OS="Linux: CentOS/RHEL(5+), SuSE-Professional 9.3"
 
@@ -292,8 +222,6 @@ TARGET_WM_FORESEEN="KDE(might work now)"
 ################################################################
 #                     End of FrameWork                         #
 ################################################################
-
-
 #
 #Verify OS support
 #
@@ -308,11 +236,9 @@ case ${MYOS} in
 	;;
 esac
 
-
 if [ "${*}" != "${*//-X/}" ];then
     C_TERSE=1
 fi
-
 
 . ${MYLIBPATH}/lib/misc.sh
 . ${MYLIBPATH}/lib/help/help.sh
@@ -329,7 +255,6 @@ fi
 if [ -d "${MYCONFPATH}/db/default" ];then
     DEFAULT_DBPATHLST=${DEFAULT_DBPATHLST:-$HOME/conf/db/default}
 fi
-
 
 #Source pre-set environment from user
 if [ -f "${HOME}/.utalm/utalm.conf.sh" ];then
@@ -360,10 +285,7 @@ else
     fi
 fi
 
-
-################################################################
-#    Default definitions - User-Customizable  from shell       #
-################################################################
+#Default definitions - User-Customizable  from shell
 _ARGS=;
 _ARGSCALL=$*;
 _RUSER0=;
@@ -409,3 +331,5 @@ fi
 
 getCPUinfo
 [ "$C_TERSE" != 1 ]&&echo
+
+## \endcond

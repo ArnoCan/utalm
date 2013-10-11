@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -69,8 +69,8 @@ the following options are available:
    tgz-file into your home directory and unpack it.
 
 	cd $HOME
-	cp libutalm-bash-03.02.002-R0.src.tgz
-	tar zxf libutalm-bash-03.02.002-R0.src.tgz   
+	cp libutalm-bash-03.02.003-R0.src.tgz
+	tar zxf libutalm-bash-03.02.003-R0.src.tgz   
 
 
 %prep
@@ -103,10 +103,10 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %changelog
 * Thu Oct 08 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.02.002
+- Version-03.02.003
 
 * Sat Sep 21 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.02.002
+- Version-03.02.003
 
 * Tue Sep 15 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
 - Version-02.01.001

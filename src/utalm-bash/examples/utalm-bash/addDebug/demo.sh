@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -60,8 +60,8 @@
 ##	- demo.sh -d l:50,i:50
 ##	- demo.sh -d l:100,i:100,w:100
 ##
-#***MODUL_DOXYGEN_END***
 ## \cond
+#***MODUL_DOXYGEN_END***
 #
 shopt -s nullglob
 
@@ -75,7 +75,7 @@ MYCALLPATH=`dirname $MYCALLPATHNAME`
 MYLIBPATH=${MYLIBPATH:-$HOME/lib}
 MYBINPATH=${MYBINPATH:-$HOME/bin}
 
-MYBOOTSTRAP=${MYBINPATH}/bootstrap/bootstrap-03.01.009.sh
+MYBOOTSTRAP=${MYBINPATH}/bootstrap/bootstrap-03_01_009.sh
 if [ ! -f "${MYBOOTSTRAP}" ];then
     echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
     exit 1

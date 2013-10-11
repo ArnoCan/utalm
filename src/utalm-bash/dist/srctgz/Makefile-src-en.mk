@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -44,6 +44,7 @@ IMPORT_FILES    += $(BLD_ROOT)utalm-bash-show-help.sh
 IMPORT_FILES	+= $(BLD_ROOT)Makefile
 IMPORT_FILES	+= $(BLD_ROOT)Makefile-root.mk
 IMPORT_FILES	+= $(BLD_ROOT)Makefile-version.mk
+IMPORT_FILES	+= $(BLD_ROOT)Makefile-src-en.mk
 IMPORT_FILES	+= $(BLD_ROOT)sourceEnvironment.sh
 
 IMPORT_DIRS		+= $(BLD_ROOT)bin

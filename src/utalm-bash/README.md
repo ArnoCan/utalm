@@ -18,6 +18,8 @@ In addition some enhanced features like tracing within specific files and line-r
 The log records and control of output could be controlled widely by call parameters.
 The debugging also integrates seamless into the syslog.
 
+Adds Makefile-libraries for founding a common build platform of all supported UTALM components.
+
 The main feature is the support of a common interface for the debugging and logging of operational data in a environment of multiple programmning languages.
 The emphasis is here on distributed environments.
 

@@ -1,3 +1,4 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -5,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -26,6 +27,19 @@
 #HEADEND################################################################
 #
 #$Header$
+#
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Provides rules for epydoc
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 #
 ifndef _EPYDOC_RULES_INCLUDED_
 _EPYDOC_RULES_INCLUDED_:=1
@@ -150,3 +164,4 @@ endif
 	cd $(dir $@)&&$(EPYDOC) --latex $(EPYDOC_OPTS) --output=$(dir $@) $(EPYDOC_LATEX_INPUT)
 
 endif # _EPYDOC_RULES_INCLUDED_
+## \endcond

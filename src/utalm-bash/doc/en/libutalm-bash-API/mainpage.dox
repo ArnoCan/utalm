@@ -1,0 +1,70 @@
+/**
+* \mainpage User-Interfaces and Developer APIs 
+*
+* The 	UnifiedTraceAndLogManager - UTALM - provides a single lean interface for all
+* applied technologies and programming languages in DevOps and R&D runtime environments.
+* The features comprise development, test, and runtime environments. 
+* 
+* The smallest scale of library support starts by the bash component, targeting ad-hoc
+* utilities starting with just a dozen lines of code, ranging to several thousands lines
+* in advanced environments.
+* The origin project - <a href="http://www.UnifiedSessionsManager.org">UnifiedSessionsManager</a> - 
+* grew finally to about 100.000LOC of code - probably the questionable limit for bash projects.
+* But still the UTALM suuits the requirements.
+* 
+* The bash component with contained make file support is the founding component for 
+* the remaining.
+*
+* <H1>Features of the bash Component</H1>
+* <ul>
+* 	<li>
+* 	The main library: <a href="../../man3/libutalm-bash.html">libutalm-bash.sh(3)</a>
+* 	</li>
+* 	<li>
+* 	Make library for generic tree recursion and documentation.
+*    <a href="../../man3/libutalm-make.html">libutalm-make(3)</a>
+* 	</li>
+* 	<li>
+*   Miscellaneous commandline utilities.
+* 	</li>
+* </ul>
+* 
+* <H1>Additional Documents</H1>
+* <ul>
+* 	<li>
+* 	<a href="../../man3/libutalm-bash.html">libutalm-bash.sh(3)</a>
+* 	</li>
+* 	<li>
+* 	<a href="../../man3/libutalm-make.html">libutalm-make(3)</a>
+* 	</li>
+* 	<li>
+* 	<a href="../../man7/libutalm-test-and-examples/index.html">libutalm-test-and-examples(7)</a>
+* 	</li>
+* 	<li>
+* 	<a href="../../man7/libutalm-examples/index.html">libutalm-examples(7)</a>
+* 	</li>
+* </ul>
+* 
+* <H1>License</H1>
+* The license is <a href="http://opensource.org/licenses/Apache-2.0" target="_blank"><img src="../../../../images/feather-88x26.png" />Apache-2.0</a>,
+* approved by the <a href="http://opensource.org/licenses" target="_blank">OSI<img src="../../../../images/OSI-Approved-License-88x121.png"></img></a>.
+* 
+*<pre>
+*	
+*	Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*	
+* 	Licensed under the Apache License, Version 2.0 (the "License");
+*	you may not use this file except in compliance with the License.
+*	You may obtain a copy of the License at
+*	
+*	http://www.apache.org/licenses/LICENSE-2.0
+*	
+*	Unless required by applicable law or agreed to in writing, software
+*	distributed under the License is distributed on an "AS IS" BASIS,
+*	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*	See the License for the specific language governing permissions and
+*	limitations under the License.
+*	
+* </pre>
+*
+*/

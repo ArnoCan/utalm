@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -29,22 +29,24 @@
 #
 
 #
-IMPORT_FILES	+= $(BLD_ROOT)README.md
-IMPORT_FILES	+= $(BLD_ROOT)RELEASENOTES.txt
-IMPORT_FILES	+= $(BLD_ROOT)INSTALL.txt
+IMPORT_FILES	+= $(RTBASE)README.md
+IMPORT_FILES	+= $(RTBASE)RELEASENOTES.txt
+IMPORT_FILES	+= $(RTBASE)INSTALL.txt
+IMPORT_FILES	+= $(RTBASE)Apache-2.0.txt
+IMPORT_FILES	+= $(RTBASE)install.sh
+IMPORT_FILES	+= $(RTBASE)install.conf
+IMPORT_FILES	+= $(RTBASE)sourceEnvironment.sh
+
+IMPORT_FILES	+= $(RTBASE)utalm-bash-show-help.sh
+
 IMPORT_FILES	+= $(BLD_ROOT)TODO.txt
-IMPORT_FILES	+= $(BLD_ROOT)Apache-2.0.txt
-IMPORT_FILES	+= $(BLD_ROOT)install.sh
-IMPORT_FILES	+= $(BLD_ROOT)installToSystem.sh
-IMPORT_FILES	+= $(BLD_ROOT)install.conf
 IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
-IMPORT_FILES	+= $(BLD_ROOT)sourceEnvironment.sh
+IMPORT_FILES	+= $(BLD_ROOT)Makefile-root.mk
+IMPORT_FILES	+= $(BLD_ROOT)Makefile-version.mk
 
-IMPORT_FILES	+= $(BLD_ROOT)utalm-bash-show-help.sh
 
-
-IMPORT_DIRS		+= $(BLD_ROOT)bin
-IMPORT_DIRS		+= $(BLD_ROOT)conf
+IMPORT_DIRS		+= $(RTBASE)bin
+IMPORT_DIRS		+= $(RTBASE)conf
 
 IMPORT_DIRS		+= $(DOCBASE_ML)
 

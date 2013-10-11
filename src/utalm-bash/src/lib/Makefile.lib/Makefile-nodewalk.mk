@@ -1,3 +1,4 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -5,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -28,6 +29,7 @@
 #$Header$
 #
 #***MODUL_DOXYGEN_START***
+## \endcond
 ##
 ## @package libutalm_bash_devel
 ## @author Arno-Can Uestuensoez
@@ -58,12 +60,8 @@
 ##	- $(BLD_ROOT)include/Makefile-post.mk   - mandatory
 ## 
 ## This could be customized as required.
-#***MODUL_DOXYGEN_END***
 ## \cond
-#
-#
-#
-#
+#***MODUL_DOXYGEN_END***
 #
 
 ifndef _MAKE_NODEWALK_INCLUDED_
@@ -82,12 +80,16 @@ else
 $(error "Missing environment variable BLD_ROOT")
 endif #BLD_ROOT
 
-ifndef SUBROOTTOP
-$(error "Missing environment variable SUBROOTTOP - basename of a valid sub tree of BLD_ROOT")
-endif
+#ifndef SUBROOTTOP
+#$(warning "Missing environment variable SUBROOTTOP - basename of a valid sub tree of BLD_ROOT")
+#endif
 
 #
+ifeq ($(shell pwd)/,$(BLD_ROOT))
+CURSUBPATH := 
+else
 CURSUBPATH := $(subst $(BLD_ROOT),,$(shell pwd))
+endif
 .PHONY:CURSUBPATH
 
 TARGETBASE=
@@ -117,8 +119,13 @@ SUB_POOLS =
 # PREPARE
 UNIQUE_DIRS:=$(shell for i in ${SRC_DIRS};do echo $$i;done|sort -u)
 UNIQUE_FILES:=$(shell for i in ${SRC_FILES};do echo $$i;done|sort -u)
-TARGET_DIRS += $(addprefix $(TARGETBASE)/,$(addprefix $(CURSUBPATH)/,$(UNIQUE_DIRS)))
-TARGET_FILES += $(addprefix $(TARGETBASE)/,$(addprefix $(CURSUBPATH)/,$(UNIQUE_FILES)))
+ifeq ($(CURSUBPATH),)
+TARGET_DIRS += $(addprefix $(TARGETBASE),$(UNIQUE_DIRS))
+TARGET_FILES += $(addprefix $(TARGETBASE),$(UNIQUE_FILES))
+else
+TARGET_DIRS += $(addprefix $(TARGETBASE),$(addprefix $(CURSUBPATH)/,$(UNIQUE_DIRS)))
+TARGET_FILES += $(addprefix $(TARGETBASE),$(addprefix $(CURSUBPATH)/,$(UNIQUE_FILES)))
+endif
 OUTDIRS += $(dir $(TARGET_FILES))
 #
 ###
@@ -135,6 +142,8 @@ ifndef NODEACTIONONLY
 # Default is export selected items to intermediate tree
 #
 _forward_test_all all: outdirs $(SUB_POOLS) $(TARGET_DIRS) $(TARGET_FILES)
+dirs:$(TARGET_DIRS)
+.PHONY:dirs
 $(TARGET_DIRS): $(UNIQUE_DIRS)
 ifdef DBG
 	$(ECHO) "$(INDENT1)IMPORT-DIRS:$@"	
@@ -143,6 +152,8 @@ endif
 	$(MKDIR) $(TARGETBASE)/$(CURSUBPATH)
 	$(CPA) $? $(TARGETBASE)/$(CURSUBPATH)
 
+files:$(TARGET_FILES)
+.PHONY:files
 $(TARGET_FILES):$(UNIQUE_FILES)
 ifdef DBG
 	$(ECHO) "$(INDENT1)IMPORT-FILES:$@"
@@ -154,6 +165,8 @@ else
 _forward_test_all: all
 endif #NODEACTIONONLY
 
+subpools:$(SUB_POOLS)
+.PHONY:subpools
 $(SUB_POOLS):
 ifdef DEBUG 
 	@$(ECHO) "$(INDENT0)###################################"

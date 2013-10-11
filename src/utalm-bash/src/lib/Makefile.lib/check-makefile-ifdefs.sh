@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -47,9 +47,8 @@
 ##	STARTNODE=${STARTNODE:-.}
 ##	DISPERRSUM=${DISPERRSUM:-0}
 ##
-##
-#***MODUL_DOXYGEN_END***
 ## \cond
+#***MODUL_DOXYGEN_END***
 
 
 

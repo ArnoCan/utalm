@@ -1,3 +1,4 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -5,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -28,6 +29,7 @@
 #$Header$
 #
 #***MODUL_DOXYGEN_START***
+## \endcond
 ##
 ## @package libutalm_bash_devel
 ## @author Arno-Can Uestuensoez
@@ -39,8 +41,8 @@
 ## Implements the action test for performing unit and regression tests
 ## on slim utilitilies.
 ##
-#***MODUL_DOXYGEN_END***
 ## \cond
+#***MODUL_DOXYGEN_END***
 ifndef _MAKE_TEST_INCLUDED_
 _MAKE_TEST_INCLUDED_:=1
 
@@ -63,7 +65,6 @@ test: calltest
 
 export BLD_ROOT
 export OUTLANG
-export SUBROOT
 
 calltest: $(TEST_DIRS)
 ifdef DBG

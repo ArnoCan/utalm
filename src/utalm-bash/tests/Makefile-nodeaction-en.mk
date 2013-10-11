@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -26,6 +26,21 @@
 #HEADEND################################################################
 #
 #$Header$
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Loads current node specifc action.
+##
+## Loads the Nodeaction "test", refer to "Makefile-nodewalk.mk".
+## Implements the action test for performing unit and regression tests
+## on slim utilitilies.
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 #
 #
 # Nodewalk is an abstract make module, which navigates downward thres a

@@ -1,4 +1,5 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -6,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -28,52 +29,18 @@
 #
 #$Header$
 #
-
-#FUNCEG###############################################################
-#
-#PROJECT:
-MYPROJECT="Unified Sessions Manager"
-#
-#NAME:
-#  utalm-setversion.sh
-#
-#AUTHOR:
-AUTHOR="Arno-Can Uestuensoez - acue.opensource@gmail.com"
-#
-#FULLNAME:
-FULLNAME="Unified Sessions Manager - remote execution"
-#
-#CALLFULLNAME:
-CALLFULLNAME="utalm-setversion.sh"
-#
-#LICENCE:
-LICENCE=GPL3
-#
-#TYPE:
-#  sh-script
-#
-#VERSION:
-VERSION=01_11_011
-#DESCRIPTION:
-#  Remote execution script.
-#
-#  For further information refer to help and manual.
-#
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#
-#  refer to online help "-h" and/or "-H"
-#
-#
-#OUTPUT:
-#  RETURN:
-#  VALUES:
-#
-#FUNCEND###############################################################
-
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Setx version.
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 
 #list of access points for established tunnel entries
 declare -a AP;
@@ -104,8 +71,8 @@ else
 	fi
 fi
 
-. ${BOOTSTRAPLIB}/bootstrap-03.01.009.sh
-. ${CORELIB}/libcore-03.01.009.sh
+. ${BOOTSTRAPLIB}/bootstrap-03_01_009.sh
+. ${CORELIB}/libcore-03_01_009.sh
 . ${LIBDIR}/libutalm.sh
 
 MYLIBEXECPATHNAME=$MYCALLPATHNAME
@@ -390,4 +357,5 @@ if [ -n "${_nVARIANT}" ];then
     fi
 
 fi
+## \endcond
 

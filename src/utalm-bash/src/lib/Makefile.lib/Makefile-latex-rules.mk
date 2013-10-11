@@ -1,3 +1,4 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -5,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -26,6 +27,19 @@
 #HEADEND################################################################
 #
 #$Header$
+#
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Provides rules for LaTex
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 #
 ifndef _LATEX_RULES_INCLUDED
 _LATEX_RULES_INCLUDED:=1
@@ -64,3 +78,4 @@ $(LATEX2HTML_MULTI_FILES): %.html: $(wildcard *.tex) $(ENV_FILES)
 
 
 endif #_LATEX_RULES_INCLUDED
+## \endcond

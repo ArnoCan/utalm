@@ -9,7 +9,7 @@
               [,(INFO|I):<info-level-values>]
               [,(FILELIST|F):<file-list>[,(EXCLUDE|INCLUDE)]]
               [,(PRINTFINAL|PFIN)[:<print-systemcall-bit-array>]]
-              [,(HELP|H)[:(MAN|HTML|PDF)]]
+              [,(HELP|H)[:(MAN|HTML|PDF)|(PATHSMANPATH)]]
 
    <debug-bit-array>=
               (

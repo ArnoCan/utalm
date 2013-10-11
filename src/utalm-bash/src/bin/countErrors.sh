@@ -1,4 +1,5 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -6,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -25,7 +26,20 @@
 #   limitations under the License.
 #
 #HEADEND################################################################
-
+#
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Error count for unit and regression test 
+##
+## Test library for tiny DevOps tools.
+## \cond
+#***MODUL_DOXYGEN_END***
 
 #
 #Execution anchor
@@ -48,8 +62,8 @@ else
 	fi
 fi
 
-. ${BOOTSTRAPLIB}/bootstrap-03.01.009.sh
-. ${CORELIB}/libcore-03.01.009.sh
+. ${BOOTSTRAPLIB}/bootstrap-03_01_009.sh
+. ${CORELIB}/libcore-03_01_009.sh
 . ${LIBDIR}/libutalm.sh
 
 
@@ -62,4 +76,5 @@ fi
 errcnt=0
 countErrors
 
+## \endcond
 

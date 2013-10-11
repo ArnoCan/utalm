@@ -1,4 +1,5 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -6,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -28,10 +29,52 @@
 #
 #$Header$
 #
-
-
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_003
+## @file
+## @brief Entry level help caller
+##
+## Demonstrates the early-fetch of cli options by utalm, call 
+## 
+## <pre> 
+## 
+##     utalm-bash-show-help.sh -d help
+##     utalm-bash-show-help.sh -d help:HTML
+##     utalm-bash-show-help.sh -d help:PDF
+##     utalm-bash-show-help.sh -d help:MAN
+## 
+## </pre> 
+## You can display the environment by the call 
+## 
+## <pre> 
+## 
+##     utalm-bash-show-help.sh -d help:PATHS
+## 
+## </pre> 
+##
+## You can set the following environment variables, refer to utalm-bash.conf:
+## 
+## <ul> 
+## 	  <li>MYDOCBASE</li>
+## 	  <li>MYBINPATH</li>
+## 	  <li>MYLIBPATH</li>
+## 	  <li>BROWSER</li>
+## 	  <li>PDFVIEWER</li>
+## 	  <li>MANPATH</li>
+## 	  <li>LANG</li>
+## </ul> 
+## 
+## For detailed information on <b>UTALM-bash - libutalm</b> refer to 
+## <b><a href="../../man3/libutalm-bash.html">libutalm-bash(3)</a></b>
+## \cond
+#***MODUL_DOXYGEN_END***
+#
 shopt -s nullglob
-
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -42,9 +85,17 @@ MYCALLPATH=`dirname $MYCALLPATHNAME`
 MYLIBPATH=${MYLIBPATH:-$HOME/lib}
 MYBINPATH=${MYBINPATH:-$HOME/bin}
 
-MYBOOTSTRAP=${MYBINPATH}/bootstrap/bootstrap-03.01.009.sh
+MYVERSION=03_01_009
+MYBOOTSTRAP=${MYBINPATH}/bootstrap/bootstrap-${MYVERSION}.sh
 if [ ! -f "${MYBOOTSTRAP}" ];then
+    echo "${MYCALLNAME}:$LINENO:"
     echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
+    echo "${MYCALLNAME}:$LINENO:ERROR:check for \"bootstrap/bootstrap-${MYVERSION}.sh\" in:"
+    echo "${MYCALLNAME}:$LINENO:ERROR:   MYBINPATH=${MYBINPATH}"
+    echo "${MYCALLNAME}:$LINENO:"
+    echo "${MYCALLNAME}:$LINENO:INFO:You can set MYBINPATH for the call"
+    echo "${MYCALLNAME}:$LINENO:INFO:   MYBINPATH=<root-of-bootstrap> ${MYCALLNAME}.sh"
+    echo "${MYCALLNAME}:$LINENO:"
     exit 1
 fi
 . ${MYBOOTSTRAP}
@@ -55,6 +106,16 @@ MYCONFPATH=${MYCONFPATH:-$HOME/conf}
 MYMACROPATH=${MYMACROPATH:-$HOME/conf/macros}
 MYPKGPATH=${MYPKGPATH:-$MYLIBPATH/plugins}
 
+if [ ! -f "${MYLIBPATH}/libutalm.sh" ];then
+    echo "${MYCALLNAME}:$LINENO:"
+    echo "${MYCALLNAME}:$LINENO:ERROR:Missing library:\"libutalm.sh\""
+    echo "${MYCALLNAME}:$LINENO:ERROR:   ${MYLIBPATH}/libutalm.sh"
+    echo "${MYCALLNAME}:$LINENO:"
+    echo "${MYCALLNAME}:$LINENO:INFO:You can set MYLIBPATH for the call"
+    echo "${MYCALLNAME}:$LINENO:INFO:   MYLIBPATH=<you-lib> ${MYCALLNAME}.sh"
+    echo "${MYCALLNAME}:$LINENO:"
+    exit 1
+fi
 . ${MYLIBPATH}/libutalm.sh
 bootstrapCheckInitialPath
 
@@ -64,12 +125,12 @@ bootstrapCheckInitialPath
 
 
 cat << EOF
-Demostrates the early-fetch of cli options by utalm, type 
+Demonstrates the early-fetch of cli options by utalm, call 
 
-    demo.sh -d help
-    demo.sh -d help:HTML
-    demo.sh -d help:PDF
-    demo.sh -d help:MAN
+    ${MYCALLNAME}.sh -d help
+    ${MYCALLNAME}.sh -d help:HTML
+    ${MYCALLNAME}.sh -d help:PDF
+    ${MYCALLNAME}.sh -d help:MAN
 
 You can set the following environment variables, refer to utalm-bash.conf:
 
@@ -80,4 +141,4 @@ You can set the following environment variables, refer to utalm-bash.conf:
 	MANPATH
 
 EOF
-
+## \endcond

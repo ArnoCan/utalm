@@ -9,7 +9,7 @@
 %% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 %% #SHORT:        utalm-bash
 %% #LICENCE:      Apache-2.0
-%% #VERSION:      03_02_002
+%% #VERSION:      03_02_003
 %% #
 %% ########################################################################
 %% #
@@ -32,9 +32,14 @@
 %%$Header$
 %%
 
-: **Main-Component**
+%HTML% Documentation of User-Interfaces and Developer APIs: //-LT-a href="../man7/libutalm-bash-API/index.html" -GT- libutalm-bash-API(7) -LT-/a-GT-//
 
-//[ libutalm-bash.sh ]//
+
+: **Sub-Component**
+
+%NOHTML% //[ libutalm-make(3) ]//
+%HTML% //-LT-a href="libutalm-make.html" -GT- libutalm-make(3) -LT-/a-GT-//, 
+
 
 : **www**
 
@@ -42,7 +47,17 @@
 
 : **use-cases and examples**
 
-//show-help.sh//, //included test-cases: tests/utalm-bash//,  //included test-examples: examples//
+%HTML% -LT-ul-GT-
+%HTML% -LT-li-GT-
+//utalm-bash-show-help.sh//, 
+%HTML% -LT-/li-GT-
+%HTML% -LT-li-GT-
+%HTML% //included examples: -LT-a href="../man7/libutalm-examples/index.html" -GT- libutalm-examples(7) -LT-/a-GT-//
+%HTML% -LT-/li-GT-
+%HTML% -LT-li-GT-
+%HTML% //included test-cases: -LT-a href="../man7/libutalm-test-and-examples/index.html" -GT- libutalm-test-and-examples(7) -LT-/a-GT-//
+%HTML% -LT-/li-GT-
+%HTML% -LT-/ul-GT-
 
 : **Origin project**
 

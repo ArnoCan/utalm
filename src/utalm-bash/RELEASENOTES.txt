@@ -1,3 +1,5 @@
+20131010 - BETA - Deeper tested, added doygen common interface for all UTALM components.
+           Added some treewalker enhancements.
 20131007 - BETA with enhancements.
            - Makefile-Library with:
            	 - Nodewalk for generic tree-processing

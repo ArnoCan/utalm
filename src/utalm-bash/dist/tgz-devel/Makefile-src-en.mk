@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -29,17 +29,18 @@
 #
 
 #
-IMPORT_FILES	+= $(BLD_ROOT)README.md
-IMPORT_FILES	+= $(BLD_ROOT)RELEASENOTES.txt
-IMPORT_FILES	+= $(BLD_ROOT)INSTALL.txt
-IMPORT_FILES	+= $(BLD_ROOT)TODO.txt
-IMPORT_FILES	+= $(BLD_ROOT)Apache-2.0.txt
-IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
-IMPORT_FILES	+= $(BLD_ROOT)install-devel.sh
-IMPORT_FILES	+= $(BLD_ROOT)install.conf
+IMPORT_FILES	+= $(RTBASE)README.md
+IMPORT_FILES	+= $(RTBASE)RELEASENOTES.txt
+IMPORT_FILES	+= $(RTBASE)INSTALL.txt
+IMPORT_FILES	+= $(RTBASE)Apache-2.0.txt
+IMPORT_FILES	+= $(RTBASE)install-devel.sh
 
+IMPORT_FILES	+= $(BLD_ROOT)TODO.txt
+IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
+IMPORT_FILES	+= $(BLD_ROOT)install.conf
 IMPORT_FILES	+= $(BLD_ROOT)Makefile-root.mk
 IMPORT_FILES	+= $(BLD_ROOT)Makefile-version.mk
+
 IMPORT_DIRS		+= $(BLD_ROOT)include
 
 IMPORT_DIRS		+= $(BLD_ROOT)bin

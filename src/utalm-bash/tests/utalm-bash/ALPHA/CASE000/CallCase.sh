@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -42,10 +42,10 @@
 ## tracing to begin when options are processes.
 ##
 ##	# Loads common bootstrap-functions
-##	. ${BOOTSTRAPLIB}/bootstrap-03.01.009.sh
+##	. ${BOOTSTRAPLIB}/bootstrap-03_01_009.sh
 ##	
 ##	# Next level of core function, still a little and very basic.
-##	. ${CORELIB}/libcore-03.01.009.sh
+##	. ${CORELIB}/libcore-03_01_009.sh
 ##	
 ##	# The main library. 
 ##	. ${LIBDIR}/libutalm.sh
@@ -74,8 +74,8 @@ else
 		fi
 	fi
 fi
-. ${BOOTSTRAPLIB}/bootstrap-03.01.009.sh
-. ${CORELIB}/libcore-03.01.009.sh
+. ${BOOTSTRAPLIB}/bootstrap-03_01_009.sh
+. ${CORELIB}/libcore-03_01_009.sh
 . ${LIBDIR}/libutalm.sh
 
 

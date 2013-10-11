@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -32,12 +32,6 @@ ifdef BLD_ROOT
   include $(BLD_ROOT)include/Makefile-pre.mk
 else
   $(error "Missing environment variable BLD_ROOT")
-endif
-
-ifndef SUBROOT
-	#in top only
-#	SUBROOT := $(RTADDONSS)
-	SUBROOT := $(shell pwd)
 endif
 
 #in top only

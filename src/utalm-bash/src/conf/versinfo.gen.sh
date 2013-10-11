@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -25,8 +25,8 @@
 #
 #HEADEND################################################################
 ###
-VERSION=03_02_002
-RELEASE=03_02_002
+VERSION=03_02_003
+RELEASE=03_02_003
 VARIANT=VARIANT
 DATE=2011.12.07
 TIME=06:13:14

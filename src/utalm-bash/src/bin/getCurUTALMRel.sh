@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -27,26 +27,19 @@
 #
 #$Header$
 #
-#FUNCBEG###############################################################
-#NAME:
-#  getCurUTALMRel.sh
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Prints the current release of UTALM.
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 #
-#TYPE:
-#  generic-script
-#
-#DESCRIPTION:
-#  Prints the current release of UTALM.
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#  VALUES:
-#
-#FUNCEND###############################################################
-
-UTALM_RELEASE=03_02_002
+UTALM_RELEASE=03_02_003
 
 echo -n "${UTALM_RELEASE}"
+## \endcond

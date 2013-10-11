@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -27,9 +27,7 @@
 #
 #$Header$
 #
-SUBROOTTOP:=utalm-bash
-
-#Set when in RT system: SUBROOTTOP:=tests
+SUBROOTTOP:=tests
 ifdef BLD_ROOT
   include $(BLD_ROOT)include/Makefile-nodewalk.mk
 else

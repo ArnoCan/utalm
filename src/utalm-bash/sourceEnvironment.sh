@@ -1,4 +1,5 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -6,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -25,9 +26,23 @@
 #   limitations under the License.
 #
 #HEADEND################################################################
+#
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @package libutalm_bash_devel
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_003
+## @file
+## @brief Basic environment settings.
+## 
+## \cond
+#***MODUL_DOXYGEN_END***
 
 BLD_ROOT=$PWD/
 export BLD_ROOT;
 
 DOC_BLD_ROOT=$BLD_ROOT/doc/
 export DOC_BLD_ROOT;
+## \endcond

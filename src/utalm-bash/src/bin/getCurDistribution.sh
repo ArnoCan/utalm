@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -27,26 +27,17 @@
 #
 #$Header$
 #
-
-#FUNCBEG###############################################################
-#NAME:
-#  getCurDistribution.sh
-#
-#TYPE:
-#  generic-script
-#
-#DESCRIPTION:
-#  Used during bootstrap of each call to get current distribution.
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#  VALUES:
-#
-#FUNCEND###############################################################
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Used during bootstrap of each call to get current distribution.
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 
 CALLDIR=`dirname $0`
 
@@ -163,3 +154,5 @@ esac
 
 
 echo -n ${CURDIST}
+
+## \endcond

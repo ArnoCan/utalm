@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENCE:      Apache-2.0
-#VERSION:      03_02_002
+#VERSION:      03_02_003
 #
 ########################################################################
 #
@@ -27,28 +27,22 @@
 #
 #$Header$
 #
-#FUNCBEG###############################################################
-#NAME:
-#  getCurOS.sh
+#***MODUL_DOXYGEN_START***
+##
+## @package libutalm_bash
+## @author Arno-Can Uestuensoez
+## @date 2013.10.10
+## @version 03_02_001
+## @file
+## @brief Used during bootstrap to get current OS
+##
+## Used during bootstrap of each call to get current OS.
+## Might change and become some cumbersome for versions grouping
+## etc. over lifecycle, so wrap it.
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 #
-#TYPE:
-#  generic-script
-#
-#DESCRIPTION:
-#  Used during bootstrap of each call to get current OS.
-#  Might change and become some cumbersome for versions grouping
-#  etc. over lifecycle, so wrap it.
-#
-#EXAMPLE:
-#
-#PARAMETERS:
-#
-#OUTPUT:
-#  RETURN:
-#  VALUES:
-#
-#FUNCEND###############################################################
-
 _gOS=$(uname -s)
 case "$_gOS" in
     CYGWIN_NT*)
@@ -59,4 +53,4 @@ case "$_gOS" in
 	;;
 esac
 
-
+## \endcond
