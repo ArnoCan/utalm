@@ -159,7 +159,7 @@ $CP ${BASE}sourceEnvironment.sh $HOME
 displayIt "->utalm-bash-show-help.sh $HOME"
 $CP ${BASE}utalm-bash-show-help.sh $HOME
 
-${HOME}utalm-bash-show-help.sh
+${HOME}/utalm-bash-show-help.sh
 
 
 ## \endcond

@@ -127,10 +127,10 @@ bootstrapCheckInitialPath
 cat << EOF
 Demonstrates the early-fetch of cli options by utalm, call 
 
-    ${MYCALLNAME}.sh -d help
-    ${MYCALLNAME}.sh -d help:HTML
-    ${MYCALLNAME}.sh -d help:PDF
-    ${MYCALLNAME}.sh -d help:MAN
+    ${0} -d help
+    ${0} -d help:HTML
+    ${0} -d help:PDF
+    ${0} -d help:MAN
 
 You can set the following environment variables, refer to utalm-bash.conf:
 
