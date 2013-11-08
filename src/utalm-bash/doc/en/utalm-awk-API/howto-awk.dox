@@ -1,0 +1,51 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_001
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page howtoutalmawk Howto - utalm-awk
+* \par
+*
+* <h1>libutalm.awk integration</h1>
+*The current version is tested with GNUawk - gawk. This comprises mainly the feature 
+* for include of awk script libraries, and the access to the environment variables 
+* inherited from the caller process.
+*
+* The **libutalm.awk** is a library of awk functions, these could be imported 
+* into awk by one of the following methods:
+* <ul>
+* <li>GNU-awk</li>
+* In gawk the include statement could be applied.
+*
+*	...
+*	@include "libutalm.awk"
+*	...
+*
+* </li>
+* <li>traditonal awk</li>
+* The tradiional awk does not support the include statement, thus here the "-f"
+* option has to be used. The side-effekt is the ignorance of the commandline 
+* program, thus this has to be included by the "-f" option too.
+*
+*	awk -f libutalm.awk -f awk-main.awk
+*	...
+*
+* Some implementation, such as gawk, support in addition the '-i' and '--exec' 
+* option, refer for additional information to the manual.
+* </li>
+* </ul>
+*
+* <h1>Call Debug Traces</h1>
+* For an example refer to \ref awkMatchFilter.
+*   The awkMatchFilter provides an example for the typical 
+*   cases for awk scripts used in conjunction with shell scripts.
+*/
+

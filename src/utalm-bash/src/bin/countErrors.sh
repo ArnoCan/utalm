@@ -5,9 +5,9 @@
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
-#SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#SHORT:        utalm-make
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -25,22 +25,37 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #***MODUL_DOXYGEN_START***
 ## \endcond
 ##
-## @package libutalm_bash_devel
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
 ## @file
 ## @brief Error count for unit and regression test 
 ##
-## Test library for tiny DevOps tools.
+## The collection and processing of exit codes for error evaluation 
+## is based on the **gotoHell** function in 
+## <a href="../../html/man3/utalm-bash-API/index.sh#index_g">utalm-bash-API(3)</a>.
+## Test library 
+## for DevOps tools. The parameters are transparently passed to the
+## library function.
+##
+## Some call examples are:
+##
+##	CALLTESTOPTS="-d f:F_EXITCODE_AS_str" make test 2>&1|\
+##		countErrors.sh expect=28 flat=1 filter=1 sums=1
+##	
+##	CALLTESTOPTS="-d f:F_EXITCODE_AS_str" make test 2>&1|\
+##		countErrors.sh expect=28 flat=1 filter=1 sums=0
+##	
+##
+## @ingroup libutalm_make
 ## \cond
 #***MODUL_DOXYGEN_END***
-
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -48,33 +63,19 @@ MYCALLNAME=`basename $MYCALLPATHNAME`
 MYCALLNAME=${MYCALLNAME%.sh}
 MYCALLPATH=`dirname $MYCALLPATHNAME`
 
-if [ -e ${BLD_ROOT}src/conf/utalm-bash.conf ];then
-. ${BLD_ROOT}src/conf/utalm-bash.conf
-else
-	if [ -e ${BLD_ROOT}conf/utalm-bash.conf ];then
-	. ${BLD_ROOT}conf/utalm-bash.conf
-	else
-		if [ -e ${BLD_ROOT}conf/utalm-bash.conf ];then
-		. ${BLD_ROOT}conf/utalm-bash.conf
-		else
-		. ${HOME}/conf/utalm-bash.conf
-		fi
-	fi
-fi
-
-. ${BOOTSTRAPLIB}/bootstrap-03_01_009.sh
-. ${CORELIB}/libcore-03_01_009.sh
-. ${LIBDIR}/libutalm.sh
-
-
-((DBG>0))&&echo 'fetchDBGArgs $*'
-fetchDBGArgs $*
+MYBOOTSTRAPFILE=$(getPathToBootstrapDir.sh)/bootstrap-03_03_001.sh
+. ${MYBOOTSTRAPFILE}
 if [ $? -ne 0 ];then
-	gotoHell $LINENO $BASH_SOURCE 1
+	echo "ERROR:Missing bootstrap file:configuration: ${MYBOOTSTRAPFILE}">&2
+	exit 1
 fi
-
+setUTALMbash 1 $*
+#
+###
+#
+. $(getPathToLib.sh libutalmfileobjects.sh)
+. $(getPathToLib.sh libutalmrefpersistency.sh)
 errcnt=0
-countErrors
-
+countErrors $*
 ## \endcond
 

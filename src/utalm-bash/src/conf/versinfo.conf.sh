@@ -1,12 +1,13 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -24,36 +25,59 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
-#$Header: /home2/reps/cvs/proj/utalm/utalm-rt/src/conf/utalm/versinfo.conf.sh,v 1.3 2011/12/05 15:57:41 acue Exp $
+#$Header$
+#
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @file
+## @brief Version specific statistics
+##
+## \cond
+#***MODUL_DOXYGEN_END***
 #
 
 ################################################################
 # Main supported runtime environments                          #
 ################################################################
 
-#######
-#OS
+## \endcond
+## TARGET_OS
+#
 TARGET_OS="Linux, Cygwin, OpenBSD, Posix(bash)"
 
-#######
-#VM
+## VirtualMachine
+#
+# Targeted VirtualMachine
 TARGET_VM=""
 
-#######
-#WM
+## WindowManager
+#
+# Targeted WindowManager
 TARGET_WM=""
 
+## LineOfCode
+#
+# Lines-Of-Code, this info is generated during install:
+# <pre>
+#	find utalm.01_02_007a15 -type f -name '*[!~]'  -name '[!0-9][!0-9]*' -exec cat {} \;|wc -l
+# </pre>
+LOC=36986
 
-#LOC -Lines-Of-Code
-#Generated during install:
-# => find utalm.01_02_007a15 -type f -name '*[!~]'  -name '[!0-9][!0-9]*' -exec cat {} \;|wc -l
-#LOC=36986
+## LinesOfDocumentation
+#
+# LOD -Lines-Of-Documentation, this info is generated during install:
+# <pre>
+#	find utalm.01_02_007a15 -type f -name '*[!~]'  -name '[0-9][0-9]*' -exec cat {} \;|wc -l
+# </pre>
+LOD=8795
 
-#LOD -Lines-Of-Documentation
-#Generated during install:
-# => find utalm.01_02_007a15 -type f -name '*[!~]'  -name '[0-9][0-9]*' -exec cat {} \;|wc -l
-#LOD=8795
-
+## \cond
 . ${MYCONFPATH}/versinfo.gen.sh
+## \endcond

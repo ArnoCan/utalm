@@ -5,8 +5,8 @@
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -24,6 +24,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -31,10 +35,6 @@
 #***MODUL_DOXYGEN_START***
 ## \endcond
 ##
-## @package libutalm_bash_devel
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
 ## @file
 ## @brief Lists subtree resources.
 ##
@@ -42,8 +42,6 @@
 #***MODUL_DOXYGEN_END***
 
 #
-CURSUBPATH := .
-
 #
 SRC_FILES	+= README.txt
 SRC_FILES	+= Makefile
@@ -51,9 +49,11 @@ SRC_FILES	+= Makefile-src-en.mk
 SRC_FILES	+= Makefile-nodeaction-en.mk
 
 #
-SRC_DIRS	+= 
+SRC_DIRS	+= bin
 
 #
 SUB_POOLS   += utalm-bash
+#In process-available soon: SUB_POOLS   += utalm-awk
+SUB_POOLS   += utalm-make
 
 ## \endcond

@@ -4,9 +4,9 @@
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
-#SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#SHORT:        utalm-make
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -24,6 +24,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -31,10 +35,6 @@
 #***MODUL_DOXYGEN_START***
 ## \endcond
 ##
-## @package libutalm_bash_devel
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
 ## @file
 ## @brief Makefile for parsing and performing actions on directory-trees
 ##
@@ -60,12 +60,61 @@
 ##	- $(BLD_ROOT)include/Makefile-post.mk   - mandatory
 ## 
 ## This could be customized as required.
+## @ingroup libutalm_make
 ## \cond
 #***MODUL_DOXYGEN_END***
 #
-
 ifndef _MAKE_NODEWALK_INCLUDED_
 _MAKE_NODEWALK_INCLUDED_:=1
+
+ifndef MAKE_VERSION
+$(error "requires GNUmake")
+endif
+
+## \endcond
+# \brief Provides sub-help
+#
+# @ingroup libutalm_make
+#
+MYHELPTARGETS = help help_test help_utalm
+## \cond
+
+ifdef UTALM
+$(warning "UTALM:" $(UTALM))
+TARGETS=utalm
+
+utalm:
+	echo "UTALM-target"
+ifdef D
+ifeq ($(D),help)
+	utalmhelp.sh html&
+endif
+ifeq ($(D),help:pdf)
+	echo epdfview $${HOME}/doc/en/pdf/man3/utalm-make.pdf
+	epdfview $${HOME}/doc/en/pdf/man3/utalm-make.pdf&
+endif
+endif
+	
+
+endif
+	
+
+X0=$(firstword $(MAKECMDGOALS))
+X=$(shell X="$(X0)"&&echo $${X%%:*} )
+#
+ifneq ($(MYGOAL), help)
+ifeq ($(firstword $(X)), help)
+MYGOAL=$(shell X="$(MAKECMDGOALS)"&&echo -n $${X// /_})
+$(warning "help for:" $(MYGOAL))
+
+ifneq ($(filter $(MYGOAL),$(MYHELPTARGETS)),)
+$(warning "help for:" $(MYGOAL))
+.PHONY:$(MYGOAL)
+_help:$(MYGOAL)
+endif
+endif
+endif
+#$(error "")
 
 ifndef INDENT0
 INDENT0=+--+>
@@ -77,24 +126,26 @@ endif
 ifdef BLD_ROOT
 include $(BLD_ROOT)include/Makefile-pre.mk
 else
-$(error "Missing environment variable BLD_ROOT")
+$(error "Missing environment variable BLD_ROOT - see utalm-bash-API(3)")
 endif #BLD_ROOT
 
-#ifndef SUBROOTTOP
-#$(warning "Missing environment variable SUBROOTTOP - basename of a valid sub tree of BLD_ROOT")
-#endif
-
 #
+ifndef CURSUBPATH
 ifeq ($(shell pwd)/,$(BLD_ROOT))
 CURSUBPATH := 
 else
 CURSUBPATH := $(subst $(BLD_ROOT),,$(shell pwd))
 endif
+endif
 .PHONY:CURSUBPATH
 
 TARGETBASE=
+ifdef SUBROOTTOP
 ifeq ($(SUBROOTTOP),doc)
 TARGETBASE=$(DOCVARIANT)
+else
+TARGETBASE=$(RTBASE)$(SUBROOTTOP)/
+endif 
 else
 TARGETBASE=$(RTBASE)
 endif 
@@ -172,14 +223,16 @@ ifdef DEBUG
 	@$(ECHO) "$(INDENT0)###################################"
 	@$(ECHO) "$(INDENT1)#Change to:$(CURSUBPATH)/$@"
 	@$(ECHO) "$(INDENT1)#INDENT0="   $(INDENT0)" INDENT1="   $(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP=$(SUBROOTTOP) CURSUBPATH=$(CURSUBPATH)/$@ $(MAKE) -C $@ $(MFLAGS) $(MAKECMDGOALS)"
-else
+endif
+ifndef UNITTEST
 	@$(ECHO) "$(INDENT0)#Change to:$(CURSUBPATH)/$@"
-endif	
+endif
 	INDENT0="   $(INDENT0)" INDENT1="   $(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP=$(SUBROOTTOP) CURSUBPATH=$(CURSUBPATH)/$@ $(MAKE) -C $@ $(MFLAGS) $(MAKECMDGOALS)
-	@$(ECHO) "$(INDENT1)#...return from $(CURSUBPATH)/$@($$?)"
+ifndef UNITTEST
+	@$(ECHO) "$(INDENT1)#...return from:$(CURSUBPATH)/$@($$?)"
+endif
 
 include $(BLD_ROOT)include/Makefile-post.mk
 
 endif #_MAKE_NODEWALK_INCLUDED_
-
 ## \endcond

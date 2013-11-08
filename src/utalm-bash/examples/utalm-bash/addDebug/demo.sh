@@ -1,12 +1,13 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -24,77 +25,42 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
 #
 #***MODUL_DOXYGEN_START***
-##
-## @package libutalm_bash_user
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
+## \endcond
+## @ingroup addDebug
 ## @file
 ## @brief Demonstration of various debug calls.
 ##
-## Example with a first application of UTALM library calls for bash.
-##
-##	fetchDBGArgs # collects options, is implicit called in library
-##	
-##	printDBG       5   5 $LINENO $BASH_SOURCE         "printDBG..."
-##	printWNG          10 $LINENO $BASH_SOURCE 1       "printWNG..."
-##	printINFO         20 $LINENO $BASH_SOURCE 1       "printINFO..."
-##	printERR             $LINENO $BASH_SOURCE 1       "printERR..."
-##	printFINALCALL    30 $LINENO $BASH_SOURCE TEST004 "echo ABC"
-##	callErrOutWrapper    $LINENO $BASH_SOURCE         "echo BCD"
-##
-## The following calls show various contents:
-##
-##	- demo.sh -d l:1
-##	- demo.sh -d l:10
-##	- demo.sh -d i:1
-##	- demo.sh -d i:50
-##	- demo.sh -d w:1
-##	- demo.sh -d w:50
-##	- demo.sh -d l:50
-##	- demo.sh -d l:50,i:50
-##	- demo.sh -d l:100,i:100,w:100
-##
+## For additional description refer to \ref addDebug. 
 ## \cond
 #***MODUL_DOXYGEN_END***
 #
 shopt -s nullglob
-
 #
 #Execution anchor
 MYCALLPATHNAME=$0
-MYCALLNAME=`basename $MYCALLPATHNAME`; MYCALLNAME=${MYCALLNAME%.sh}
+MYCALLNAME=`basename $MYCALLPATHNAME`
+MYCALLNAME=${MYCALLNAME%.sh}
 MYCALLPATH=`dirname $MYCALLPATHNAME`
 
-#
-MYLIBPATH=${MYLIBPATH:-$HOME/lib}
-MYBINPATH=${MYBINPATH:-$HOME/bin}
-
-MYBOOTSTRAP=${MYBINPATH}/bootstrap/bootstrap-03_01_009.sh
-if [ ! -f "${MYBOOTSTRAP}" ];then
-    echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
-    exit 1
+MYBOOTSTRAPFILE=$(getPathToBootstrapDir.sh)/bootstrap-03_03_001.sh
+. ${MYBOOTSTRAPFILE}
+if [ $? -ne 0 ];then
+	echo "ERROR:Missing bootstrap file:configuration: ${MYBOOTSTRAPFILE}">&2
+	exit 1
 fi
-. ${MYBOOTSTRAP}
-
-MYLANG=${MYLANG:-en}
-MYHELPPATH=${MYHELPPATH:-$MYLIBPATH/help/$MYLANG}
-MYCONFPATH=${MYCONFPATH:-$HOME/conf}
-MYMACROPATH=${MYMACROPATH:-$HOME/conf/macros}
-MYPKGPATH=${MYPKGPATH:-$MYLIBPATH/plugins}
-
-. ${MYLIBPATH}/libutalm.sh
-bootstrapCheckInitialPath
-
+setUTALMbash 1 $*
 #
 ###
 #
-
 
 cat << EOF
 Demostrates the early-fetch of cli options by utalm, type 
@@ -102,13 +68,13 @@ Demostrates the early-fetch of cli options by utalm, type
     demo.sh -d l:1
     demo.sh -d l:10
     demo.sh -d i:1
-    demo.sh -d i:50
+    demo.sh -d info:50
     demo.sh -d w:1
-    demo.sh -d w:50
+    demo.sh -d wng:50
 
     demo.sh -d l:50
-    demo.sh -d l:50,i:50
-    demo.sh -d l:100,i:100,w:100
+    demo.sh -d lvl:50,i:50
+    demo.sh -d level:100,i:100,warning:100
 
 EOF
 
@@ -116,14 +82,50 @@ EOF
 # fetchDBGArgs - collexts options, is implicit called in library
 #
 
-printDBG      5 5  $LINENO $BASH_SOURCE  "printDBG..."
+echo "* printDBG-Call: set level >5">&2
+printDBG      $S_ALL 5  $LINENO $BASH_SOURCE  "printDBG..."
+
+echo "* printDBG-Call: set level >5 and subsystem == $S_SYS/\$S_SYS">&2
+printDBG      $S_ALL 5  $LINENO $BASH_SOURCE  "printDBG..."
+
 echo
-printWNG      10 $LINENO $BASH_SOURCE 1  "printWNG..."
-printINFO     20 $LINENO $BASH_SOURCE 1  "printINFO..."
+
+echo "* printWNG-Call: set level >3">&2
+printWNG      3 $LINENO $BASH_SOURCE 1  "printWNG..."
+
+echo "* printINFO-Call: set level >2">&2
+printINFO     2 $LINENO $BASH_SOURCE 1  "printINFO..."
+
+echo "* printERR-Call:">&2
 printERR        $LINENO $BASH_SOURCE 1   "printERR..."
+
 echo
-printFINALCALL 30 $LINENO $BASH_SOURCE TEST004 "echo ABC"
+
+echo "* printFINALCALL-Call: set level >1">&2
+printFINALCALL 1 $LINENO $BASH_SOURCE TEST004 "echo ABC"
+
 echo
-callErrOutWrapper $LINENO $BASH_SOURCE "echo BCD"
+
+echo "* callErrOutWrapper-Call:'echo BCD-Here it is!'">&2
+callErrOutWrapper $LINENO $BASH_SOURCE "echo 'BCD-Here it is!'"
+echo "The trick is to keep the value: exit == $?"
+
+echo
+
+echo "* callErrOutWrapper-Call:'exit 1'">&2
+callErrOutWrapper $LINENO $BASH_SOURCE "exit 1"
+echo "The trick is to keep the value: exit == $?"
+
+echo
+
+echo "* callErrOutWrapper-Call:'eval exit 22'">&2
+callErrOutWrapper $LINENO $BASH_SOURCE "eval exit 22"
+echo "The trick is to keep the value: exit == $?"
+
+echo
+
+echo "* callErrOutWrapper-Call:'eval exit 2'">&2
+callErrOutWrapper $LINENO $BASH_SOURCE "eval exit 2"
+echo "The trick is to keep the value: exit == $?"
 
 ## \endcond

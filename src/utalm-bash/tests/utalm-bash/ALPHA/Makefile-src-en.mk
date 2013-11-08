@@ -1,11 +1,12 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,6 +24,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -37,22 +42,12 @@ SRC_FILES	+= Makefile
 SRC_FILES	+= Makefile-src-en.mk
 SRC_FILES	+= Makefile-nodeaction-en.mk
 
-SRC_FILES	+= exec4ErrOutWrapper.sh
-SRC_FILES	+= exec4FINALCALL.sh
 
 #
 SRC_DIRS	+=   
 
 #
-SUB_POOLS	+= CASE000  
-SUB_POOLS	+= CASE001
-SUB_POOLS	+= CASE002
-SUB_POOLS	+= CASE003
-SUB_POOLS	+= CASE004
-SUB_POOLS	+= CASE005
-SUB_POOLS	+= CASE006
-SUB_POOLS	+= CASE007
-SUB_POOLS	+= CASE008
-SUB_POOLS	+= CASE009
-SUB_POOLS	+= CASE010
-
+SUB_POOLS	+= 0_basic_debug_support  
+SUB_POOLS	+= 1_basic_test_support 
+SUB_POOLS	+= 2_debug_streams 
+## \endcond

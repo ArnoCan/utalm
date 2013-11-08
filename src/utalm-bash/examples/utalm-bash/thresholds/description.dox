@@ -1,0 +1,48 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_001
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+
+/**
+ * \ingroup utalmBashExamples
+ * \defgroup thresholds thresholds
+ * \addtogroup thresholds
+ *  @{
+ * \brief Example for basic utalm API 
+ *
+ * The addDebug provides examples for the application of libutalm.bash 
+ * 
+ * Example with first application of UTALM library calls for bash.
+ *
+ *	fetchDBGArgs # collects options, is implicit called in library
+ *	
+ *	printDBG  $S_ALL   1 $LINENO $BASH_SOURCE         "printDBG..."
+ *	printWNG          10 $LINENO $BASH_SOURCE 1       "printWNG..."
+ *	printINFO         20 $LINENO $BASH_SOURCE 1       "printINFO..."
+ *	printERR             $LINENO $BASH_SOURCE 1       "printERR..."
+ *	printFINALCALL    30 $LINENO $BASH_SOURCE TEST004 "echo ABC"
+ *	callErrOutWrapper    $LINENO $BASH_SOURCE         "echo BCD"
+ *
+ * The following calls show various contents:
+ *
+ *	- demo.sh -d l:1
+ *	- demo.sh -d l:10
+ *	- demo.sh -d i:1
+ *	- demo.sh -d i:50
+ *	- demo.sh -d w:1
+ *	- demo.sh -d w:50
+ *	- demo.sh -d l:50
+ *	- demo.sh -d l:50,i:50
+ *	- demo.sh -d l:100,i:100,w:100
+ *
+ * @}
+ */
+ 

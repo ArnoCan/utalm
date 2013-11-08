@@ -1,11 +1,12 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,16 +24,39 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
 #
-SRC_FILES	+= 
+#***MODUL_DOXYGEN_START***
+## \endcond
+## @ingroup utalmBashExamples
+## @file
+## @brief Top Makefile in BLD_ROOT
+##
+## The Makefile located within BLD_ROOT directory. 
+##
+## \cond
+#***MODUL_DOXYGEN_END***
+#
+SRC_FILES	+=  
+SRC_FILES	+= description.dox 
 
 #
 SRC_DIRS	+= help-demo
 SRC_DIRS	+= addDebug
+SRC_DIRS	+= controlDebug
+SRC_DIRS	+= fileStream
+SRC_DIRS	+= findParameterError
+SRC_DIRS	+= headerFormatDemo
+SRC_DIRS	+= refPersistency
+SRC_DIRS	+= thresholds 
+SRC_DIRS	+= 
 
 #
 SUB_POOLS   += 
-
+## \endcond

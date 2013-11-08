@@ -6,8 +6,8 @@
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -25,31 +25,27 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+#***MODUL_DOXYGEN_START***
+## \endcond
+## @file
+## @brief Set version.
+##
+##   * @ref setversion.sh
+##   * @ref setversion-min.sh
+##
+## \cond
+#***MODUL_DOXYGEN_END***
+#
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
-## \endcond
-##
-## @package libutalm_bash
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
-## @file
-## @brief Setx version.
-##
-## \cond
-#***MODUL_DOXYGEN_END***
-
-#list of access points for established tunnel entries
-declare -a AP;
-APIDX=0;
-
-################################################################
-#       System definitions - do not change these!              #
-################################################################
-#Execution anchor
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -57,90 +53,20 @@ MYCALLNAME=`basename $MYCALLPATHNAME`
 MYCALLNAME=${MYCALLNAME%.sh}
 MYCALLPATH=`dirname $MYCALLPATHNAME`
 
-if [ -e ${BLD_ROOT}src/conf/utalm-bash.conf ];then
-. ${BLD_ROOT}src/conf/utalm-bash.conf
-else
-	if [ -e ${BLD_ROOT}conf/utalm-bash.conf ];then
-	. ${BLD_ROOT}conf/utalm-bash.conf
-	else
-		if [ -e ${BLD_ROOT}conf/utalm-bash.conf ];then
-		. ${BLD_ROOT}conf/utalm-bash.conf
-		else
-		. ${HOME}/conf/utalm-bash.conf
-		fi
-	fi
+MYBOOTSTRAPFILE=$(getPathToBootstrapDir.sh)/bootstrap-03_03_001.sh
+. ${MYBOOTSTRAPFILE}
+if [ $? -ne 0 ];then
+	echo "ERROR:Missing bootstrap file:configuration: ${MYBOOTSTRAPFILE}">&2
+	exit 1
 fi
-
-. ${BOOTSTRAPLIB}/bootstrap-03_01_009.sh
-. ${CORELIB}/libcore-03_01_009.sh
-. ${LIBDIR}/libutalm.sh
-
-MYLIBEXECPATHNAME=$MYCALLPATHNAME
-
-MYBOOTSTRAP=${MYLIBEXECPATH}/bootstrap
-
-#set real path to install, resolv symbolic links
-_MYLIBEXECPATHNAME=`bootstrapGetRealPathname ${MYLIBEXECPATHNAME}`
-MYLIBEXECPATH=${_MYLIBEXECPATHNAME%/*}
-
-_MYCALLPATHNAME=`bootstrapGetRealPathname ${MYCALLPATHNAME}`
-MYCALLPATHNAME=${_MYCALLPATHNAME%/*}
-
+setUTALMbash 1 $*
 #
-###################################################
-#Now find libraries might perform reliable.       #
-###################################################
+###
+#
 
-#current language, not really NLS
-MYLANG=${MYLANG:-en}
-
-#path for various loads: libs, help, macros, plugins
-MYLIBPATH=${MYLIBEXECPATH%/*}
-
-#path for various loads: libs, help, macros, plugins
-MYHELPPATH=${MYHELPPATH:-$MYLIBPATH/help/$MYLANG}
-
-###################################################
-#Check master hook                                #
-###################################################
-bootstrapCheckInitialPath
-###################################################
-#OK - Now should work.                            #
-###################################################
-
-MYCONFPATH=${MYCONFPATH:-$MYLIBPATH/conf}
-if [ ! -d "${MYCONFPATH}" ];then
-  echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYCONFPATH=${MYCONFPATH}"
-  exit 1
-fi
-
-if [ -f "${MYCONFPATH}/versinfo.conf.sh" ];then
-    . ${MYCONFPATH}/versinfo.conf.sh
-fi
-
-MYMACROPATH=${MYMACROPATH:-$MYCONFPATH/macros}
-if [ ! -d "${MYMACROPATH}" ];then
-  echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYMACROPATH=${MYMACROPATH}"
-  exit 1
-fi
-
-MYPKGPATH=${MYPKGPATH:-$MYLIBPATH/lib/plugins}
-if [ ! -d "${MYPKGPATH}" ];then
-  echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYPKGPATH=${MYPKGPATH}"
-  exit 1
-fi
-
-MYINSTALLPATH= #Value is assigned in base. Symbolic links are replaced by target
-
-##############################################
-#load basic library required for bootstrap   #
-##############################################
-. ${MYLIBPATH}/lib/libutalm.sh
-coreRegisterLib
-
-##############################################
-#Now the environment is armed, so let's go.  #
-##############################################
+#list of access points for established tunnel entries
+declare -a AP;
+APIDX=0;
 
 if [ -z "$BASH" ];then
     echo "*********************************************************************"
@@ -161,15 +87,6 @@ if [ "$HOME" == "/" ];then
     exit 1
 fi
 
-if [ "$MYLIBEXECPATH" == "." ];then
-    MYLIBEXECPATH=${PWD%/*}
-else
-    MYLIBEXECPATH=${MYLIBEXECPATH%/*}
-fi
-export MYLIBEXECPATH
-MYLIBPATH=$MYLIBEXECPATH
-PATH=$MYLIBEXECPATH:$PATH
-
 case ${MYOS} in
     Linux);;
 #     SunOS)
@@ -178,19 +95,9 @@ case ${MYOS} in
     *)
 	ABORT=1;
 	printERR $LINENO $BASH_SOURCE ${ABORT} "Current OS is not supported:\"${MYOS}\""
-	gotoHell ${ABORT}
+	gotoHell $LINENO $BASH_SOURCE ${ABORT}
 	;;
 esac
-
-#Source pre-set environment from user
-if [ -f "${HOME}/conf/utalm/utalm-bash.conf" ];then
-  . "${HOME}/conf/utalm-bash.conf"
-fi
-
-#Source pre-set environment from installation 
-if [ -f "${MYCONFPATH}/utalm/utalm-bash.conf" ];then
-  . "${MYCONFPATH}/utalm/utalm-bash.conf"
-fi
 
 INSTTYPE=;
 INSTDIR=;

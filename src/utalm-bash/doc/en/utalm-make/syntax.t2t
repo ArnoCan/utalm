@@ -1,0 +1,20 @@
+.
+   include lib/Makefile.lib/<module-name>
+
+   <module-name>:=(
+        Makefile-doxygen-rules.mk
+        Makefile-epydoc-rules.mk
+        Makefile-latex-rules.mk
+        Makefile-nodewalk.mk
+        Makefile-test.mk
+        Makefile-txt2tags-rules.mk
+   )
+
+
+   Nodeaction-test.sh
+   check-makefile-ifdefs.sh
+
+   templates for: tgz, src-tgz, rpm, src-rpm, deb
+
+   templates for: Makefiles, regression tests,, unit tests
+

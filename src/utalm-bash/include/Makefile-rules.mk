@@ -1,11 +1,12 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,6 +24,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -30,7 +35,8 @@
 ifndef BLD_ROOT_RULES_INCLUDED
 BLD_ROOT_PRE_RULES_INCLUDED:=1
 
-include $(BLD_ROOT)include/Makefile-txt2tags-rules.mk
-include $(BLD_ROOT)include/Makefile-latex-rules.mk
+include $(BLD_ROOT)lib/Makefile.lib/Makefile-txt2tags-rules.mk
+include $(BLD_ROOT)lib/Makefile.lib/Makefile-latex-rules.mk
 
 endif
+## \endcond

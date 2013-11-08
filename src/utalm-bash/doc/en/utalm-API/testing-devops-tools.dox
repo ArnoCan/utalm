@@ -1,0 +1,50 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_001
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page testdevopstools How to test small sized adhoc-tools
+* \brief How to test sysadmin tools
+*  \par
+*
+ * The daily business of system administrators requires frequently the development
+ * of small utilities for minor operation tasks. Even though each of 
+ * this is actually small sized, the sum of the environment collection may not be. 
+ * Therefore some efficient and less effort based tool set is required in oder
+ * to assure quality and stability. This could be perfectly managed with a slim
+ * Makefile based environment, which also includes appropriate rule-sets for
+ * some popular documentation automation tools.
+ *
+ * The specific support of the trace and logging facility of UTALM provides here for 
+ * a simple interface to store and manage the tools data for later test automation.
+ * This enables the simplified application by writing the runtime data of the utility 
+ * with a simple statement similar to the syntax of the applied language like
+ *
+ *	assertRefDataWithExit(lineno, filename, ID, data)
+ *
+ * All to be done for the storage of reference data collected on the fly is to set
+ * the lag
+ *
+ *	TESTMODE=CREATEREF
+ *
+ * which changes to write-storage-mode for later comparison. This creates a mirror of
+ * the subtree and writes the reference data literally into a file.
+ 
+  by setting a flag
+ *
+ *	COMPAREREF
+ *
+ * No additional code or action is required. The main benefit here is the 
+ * availability for may languages and environments with almost the same syntax.
+ * Thus once the whole tool set is learned for one language, the latter are almost
+ * known. 
+ *
+ */

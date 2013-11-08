@@ -4,9 +4,9 @@
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
-#SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#SHORT:        utalm-make
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -24,6 +24,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -31,18 +35,19 @@
 #***MODUL_DOXYGEN_START***
 ## \endcond
 ##
-## @package libutalm_bash_devel
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
 ## @file
 ## @brief Provides rules for txt2tags
 ##
+## @ingroup libutalm_make
 ## \cond
 #***MODUL_DOXYGEN_END***
 #
 ifndef BLD_TXT2TAGS_RULES_INCLUDED
 BLD_TXT2TAGS_RULES_INCLUDED:=1
+
+ifndef MAKE_VERSION
+$(error "requires GNUmake")
+endif
 
 TXT2TAGS_OPTS =
 ifndef DBG

@@ -4,9 +4,9 @@
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
-#SHORT:        utalm-python
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#SHORT:        utalm-make
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -24,6 +24,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -31,40 +35,40 @@
 #***MODUL_DOXYGEN_START***
 ## \endcond
 ##
-## @package libutalm_bash_devel
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
 ## @file
 ## @brief Provides rules for epydoc
 ##
+## For additional information refer to "man 7 man-pages"
+## The following extract is applied:
+##
+##	...The manual Sections are traditionally defined as follows:
+##	1 Commands (Programs)
+##	  Those commands that can be executed by the user from within a shell.
+##	2 System calls
+##	  Those functions which must be performed by the kernel.
+##	3 Library calls
+##	  Most of the libc functions.
+##	4 Special files (devices)
+##	  Files found in /dev.
+##	5 File formats and conventions
+##	  The format for /etc/passwd and other human-readable files.
+##	6 Games
+##	7 Overview, conventions, and miscellaneous
+##	  Overviews of various topics, conventions and protocols, character set standards, and miscellaneous other things.
+##	8 System management commands
+##	  Commands like mount(8), many of which only root can execute.
+##
+## @ingroup libutalm_make
 ## \cond
 #***MODUL_DOXYGEN_END***
 #
-ifndef _EPYDOC_RULES_INCLUDED_
-_EPYDOC_RULES_INCLUDED_:=1
+ifndef _EPYDOC_RULES_INCLUDED
+_EPYDOC_RULES_INCLUDED:=1
 
-#
-# For additional information refer to "man 7 man-pages"
-# The following extract is applied:
-#
-# ...The manual Sections are traditionally defined as follows:
-# 1 Commands (Programs)
-# 	Those commands that can be executed by the user from within a shell.
-# 2 System calls
-# 	Those functions which must be performed by the kernel.
-# 3 Library calls
-# 	Most of the libc functions.
-# 4 Special files (devices)
-# 	Files found in /dev.
-# 5 File formats and conventions
-# 	The format for /etc/passwd and other human-readable files.
-# 6 Games
-# 7 Overview, conventions, and miscellaneous
-#	 Overviews of various topics, conventions and protocols, character set standards, and miscellaneous other things.
-# 8 System management commands
-# 	Commands like mount(8), many of which only root can execute.
-#
+ifndef MAKE_VERSION
+$(error "requires GNUmake")
+endif
+
 ifdef PYTHONPATH
 ifdef RTBASE
 	#sets a release collection for auto scan
@@ -129,7 +133,6 @@ ifdef DBG
 endif
 	export PYTHONPATH=$(PYTHONPATH); $(EPYDOC) --html $(EPYDOC_OPTS) --name=$(shell A=$(dir $@)&&A=$${A%/}&&echo $${A##*/}) --output=$(dir $@) $(EPYDOC_HTML_INPUT)
 .PHONY:html
-
 
 ifndef EPYDOC_PDF_FILES
 $(error "Missing definition of EPYDOC_PDF_FILES")

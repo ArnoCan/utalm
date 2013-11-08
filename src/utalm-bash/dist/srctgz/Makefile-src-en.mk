@@ -4,8 +4,8 @@
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,6 +23,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -36,10 +40,7 @@ IMPORT_FILES	+= $(BLD_ROOT)TODO.txt
 IMPORT_FILES	+= $(BLD_ROOT)Apache-2.0.txt
 
 IMPORT_FILES	+= $(BLD_ROOT)install.sh
-IMPORT_FILES	+= $(BLD_ROOT)installToSystem.sh
-IMPORT_FILES	+= $(BLD_ROOT)install.conf
 IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
-IMPORT_FILES    += $(BLD_ROOT)utalm-bash-show-help.sh
 
 IMPORT_FILES	+= $(BLD_ROOT)Makefile
 IMPORT_FILES	+= $(BLD_ROOT)Makefile-root.mk

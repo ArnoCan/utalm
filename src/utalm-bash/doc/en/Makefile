@@ -4,8 +4,8 @@
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,6 +23,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -33,17 +37,33 @@ DOC_BLD_ROOT:=$(BLD_ROOT)doc/
 ifdef DOC_BLD_ROOT
   include $(DOC_BLD_ROOT)include/Makefile-pre.mk
 else
-  $(error "Missing environment variable BLD_ROOT")
+  $(error "Missing environment variable BLD_ROOT - see utalm-bash-API(3)")
 endif
 
 SRC_POOL        =  
 SRC_POOL        +=  images
-SRC_POOL        +=  libutalm-bash 
-SRC_POOL        +=  libutalm-bash-API 
-SRC_POOL        +=  libutalm-make 
-SRC_POOL        +=  libutalm-examples 
-SRC_POOL        +=  libutalm-test-and-examples 
+SRC_POOL        +=  utalm-awk 
+SRC_POOL        +=  utalm-bash 
+SRC_POOL        +=  utalm-make 
 
+#SRC_POOL        +=  utalm-bash-eclipse 
+SRC_POOL        +=  utalm-awk-tests 
+SRC_POOL        +=  utalm-bash-tests 
+SRC_POOL        +=  utalm-make-tests 
+
+SRC_POOL        +=  utalm-API 
+SRC_POOL        +=  utalm-awk-API 
+SRC_POOL        +=  utalm-bash-API 
+SRC_POOL        +=  utalm-make-API 
+
+#SRC_POOL        +=  utalm-perl-API 
+#SRC_POOL        +=  utalm-python-API 
+#SRC_POOL        +=  utalm-pydev-API 
+#SRC_POOL        +=  utalm-cpp-API 
+#SRC_POOL        +=  utalm-java-API 
+#SRC_POOL        +=  utalm-javascript-API 
+#SRC_POOL        +=  utalm-mysql-API 
+#SRC_POOL        +=  utalm-sqlite-API 
 
 .PHONY: $(SRC_POOL) css js
 all: outdirs css js $(SRC_POOL)

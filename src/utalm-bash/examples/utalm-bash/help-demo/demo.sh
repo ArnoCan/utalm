@@ -1,12 +1,13 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -24,70 +25,40 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
 #
 #***MODUL_DOXYGEN_START***
-##
-## @package libutalm_bash_user
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
+## \endcond
+## @ingroup helpDemo
 ## @file
 ## @brief Demonstration of debug help formats
 ##
 ## Example demonstrating the various help formats of UTALM for bash.
-##
-## Demostrates the early-fetch of cli options by utalm-bash, here for
-## the display of online help. The help is presented in one of the following
-## formats, type in:
-##
-##	- demo.sh -d help
-##	- demo.sh -d help:HTML
-##	- demo.sh -d help:PDF
-##	- demo.sh -d help:MAN
-## 
-## You can set the following environment variables, refer to utalm-bash.conf:
-##
-##	- LANG
-##	- BROWSER
-##	- PDFVIEWER
-##	- MANPATH
-## 
+## For additional description refer to \ref helpDemo. 
 ## \cond
 #***MODUL_DOXYGEN_END***
 #
-
-
 shopt -s nullglob
-
 #
 #Execution anchor
 MYCALLPATHNAME=$0
-MYCALLNAME=`basename $MYCALLPATHNAME`; MYCALLNAME=${MYCALLNAME%.sh}
+MYCALLNAME=`basename $MYCALLPATHNAME`
+MYCALLNAME=${MYCALLNAME%.sh}
 MYCALLPATH=`dirname $MYCALLPATHNAME`
 
-#
-MYLIBPATH=${MYLIBPATH:-$HOME/lib}
-MYBINPATH=${MYBINPATH:-$HOME/bin}
-
-MYBOOTSTRAP=${MYBINPATH}/bootstrap/bootstrap-03_01_009.sh
-if [ ! -f "${MYBOOTSTRAP}" ];then
-    echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
-    exit 1
+MYBOOTSTRAPFILE=$(getPathToBootstrapDir.sh)/bootstrap-03_03_001.sh
+. ${MYBOOTSTRAPFILE}
+if [ $? -ne 0 ];then
+	echo "ERROR:Missing bootstrap file:configuration: ${MYBOOTSTRAPFILE}">&2
+	exit 1
 fi
-. ${MYBOOTSTRAP}
-
-MYLANG=${MYLANG:-en}
-MYHELPPATH=${MYHELPPATH:-$MYLIBPATH/help/$MYLANG}
-MYCONFPATH=${MYCONFPATH:-$HOME/conf}
-MYMACROPATH=${MYMACROPATH:-$HOME/conf/macros}
-MYPKGPATH=${MYPKGPATH:-$MYLIBPATH/plugins}
-
-. ${MYLIBPATH}/libutalm.sh
-bootstrapCheckInitialPath
-
+setUTALMbash 1 $*
 #
 ###
 #
@@ -100,6 +71,21 @@ Demostrates the early-fetch of cli options by utalm, type
     demo.sh -d help:HTML
     demo.sh -d help:PDF
     demo.sh -d help:MAN
+
+For special parameters with assigned pre-defined constants context specific
+help is available.
+
+* Provides a list of header format constants.
+
+    demo.sh -d f:help
+
+* Provides a subsystem constants.
+
+    demo.sh -d s:help
+
+* Provides a list of log-level constants.
+
+    demo.sh -d l:help
 
 You can set the following environment variables, refer to utalm-bash.conf:
 

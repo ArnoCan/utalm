@@ -1,0 +1,465 @@
+#C /* <!--#***HEADSTART***--> */
+#C /* \cond */
+#
+#PROJECT:      UnifiedTraceAndLogManager
+#AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+#MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+#SHORT:        utalm-bash
+#LICENSE:      Apache-2.0 - code
+#LICENSE:      CCL-BY-SA - specification, interfaces, and inline documentation
+#VERSION:      03_03_001
+#
+#***
+#
+#   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#
+#***
+#
+#<!-- $Header$ -->
+#
+#C /* \endcond */
+#C /**
+#C   * @ingroup libutalm_awk
+#C   * @file
+#C   * @brief 'awk' support module for utalm-bash component
+#C   *
+#C   * The following call parameters are expected as input variables.
+#C   *
+#C   *	awk \
+#C   *		-v DBG="#debug-level" \
+#C   *		[-v MTYPE="#match-type"] \
+#C   *		[-v SUB="#subsystem"] \
+#C   *		[-v INFO=#info-level] \
+#C   *		[-v WNG=#warning-level] \
+#C   *		[-v PF=#print-final-call-level]...
+#C   *
+#C   * The awk component supports a subset of parameters of the UTALM standard. This is because
+#C   * awk scrpts are commonly used as small embedded sub-scripting for shell scripts, thus most 
+#C   * of the advanced trace and log features is in 99% of applications simply not required.
+#C   * 
+#C   *  * Source and documentation: @ref libutalm.awk
+#C   *  * Stripped runtime version: @ref libutalm-min.awk
+#C   *
+#C   * For detailed information on <b>libutalm.awk</b> refer to:
+#C   * <ul>
+#C   *   <li> 
+#C   *     <b><a href="../../man3/utalm-awk.html">utalm-awk(3)</a></b>
+#C   *   </li> 
+#C   *   <li> 
+#C   *     <b><a href="../../man3/utalm-bash-API/index.html">utalm-bash-API(3)</a></b>
+#C   *   </li> 
+#C   * </ul>
+#C   *
+#C   */
+#C
+#C   /* refer to source-package for unstripped sources */
+#C
+#C   /* <!--#***HEADEND***--> */
+#C   /* \cond #KEEP# PERSISTENT */
+
+
+#C /* \endcond */
+
+
+#C /**
+#C  * Gets PID, requires GNUawk.
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function getPID(){
+	return PROCINFO["pid"];
+}
+
+
+#C /**
+#C  * Gets hostname.
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function getHostname(){
+	call="uname -n";
+	call|getline res;
+	return res;
+}
+
+	
+
+#C /**
+#C  * Gets call name.
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function getCallName(){
+	call="echo $*";
+	call|getline res;
+	res=ENVIRON["MYCALLNAME"]
+	return res;
+}
+
+
+
+#C /**
+#C  * Gets UID.
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function getUID(){
+	getuidcall|getline res;
+	return res;
+	#return PROCINFO["uid"];
+}
+
+
+
+#C /**
+#C  * Gets GID.
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function getGID(){
+	getgidcall|getline res;
+	return res;
+	#return PROCINFO["gid"];
+}
+
+
+
+#C /**
+#C  * Internal trace/log-string function
+#C  *
+#C  * @param le caller level
+#C  * @param li caller line number
+#C  * @param li caller file name
+#C  * @param c caller code
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function prepHead(le,li,f,c){
+	a=f;
+	gsub("[^/]*/[^/]*$","",a);
+	gsub(a,"",f);
+	if(RNUM==1){
+		return cname":"uid"@"hname":"pid":"f":"li":"le":"c":"NR;
+	}else{
+		return cname":"uid"@"hname":"pid":"f":"li":"le":"c;
+	}
+}
+
+
+#C /**
+#C  * Internal trace/log-string function
+#C  *
+#C  * @param m message to be displayed
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function printOUT(m){
+	print m | "cat 1>&2"
+}
+
+
+#C /**
+#C  * Fetch argv
+#C  * 
+#C  * Is implicitly called, fetches suboptions for '-d ...' 
+#C  * For valid options refer to <a href="../../man3/utalm-bash.html" target="_blank">utalm-bash(3)</a> 
+#C  *
+#C  * The following call parameters are expected as input variables.
+#C  *
+#C  *	... awk -v DBG="#debug-level" [-v INFO=#info-level] [-v WNG=#warning-level] [-v PF=#print-final-call-level]...
+#C  *
+#C  * <ul>
+#C  *  <li><b>DBG</b><br />
+#C  *  The current level of DEBUG.
+#C  *  </li>
+#C  *  <li><b>I</b><br />
+#C  *  The current level of INFO.
+#C  *  </li>
+#C  *  <li><b>W</b><br />
+#C  *  The current level of WARNING.
+#C  *  </li>
+#C  *  <li><b>P</b><br />
+#C  *  The current level of printFINALCALL.
+#C  *  </li>
+#C  * </ul>
+#C  *
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function fetchDBGArgs(){
+	pid=getPID();
+	uid=getUID();
+	gid=getGID();
+	hname=getHostname();
+	cname=getCallName();
+	
+	if(MTYPE=="")MTYPE=ENVIRON["MTYPE"];
+	if(SUB=="")SUB=ENVIRON["SUB"];
+	if(DBG=="")DBG=ENVIRON["DBG"];
+	if(WNG=="")WNG=ENVIRON["WNG"];
+	if(INF=="")INF=ENVIRON["INF"];
+	if(PF=="")PF=ENVIRON["PF"];
+	if(RNUM=="")RNUM=ENVIRON["RNUM"];
+
+	if(MTYPE=="")MTYPE=4;
+	if(SUB=="")SUB=0xffffffff;
+	if(DBG=="")DBG=0;
+	if(WNG=="")WNG=1;
+	if(INF=="")INF=1;
+	if(PF=="")PF=0;
+	if(RNUM=="")RNUM=0;
+	if(MYTPE=="MIN")MTYPE=4;
+	if(MYTPE=="MAX")MTYPE=2;
+	if(MYTPE=="PATTERN")MTYPE=1;
+	if(MYTPE=="P")MTYPE=1;
+	
+}
+
+
+
+#C /**
+#C  * Check debug state
+#C  * 
+#C  * Returns whether debug level matches. If some specific 
+#C  * actions to be done. E.g. evaluating time-intensive
+#C  * debug actions for tests.
+#C  *
+#C  *	doDebug <subsys> <dbg-level> <line> <file> 
+#C  *
+#C  * 
+#C  * Logs only when called with more than one option and matches current log-set.
+#C  * Therefore the provided parameters are evaluated by comparison with
+#C  * match criteria as follows:
+#C  *
+#C  *        |Order |Criteria             |Terminates|
+#C  *        |------|---------------------|----------|
+#C  *        |1     |subsys               |No        | 
+#C  *        |2     |level                |No        |
+#C  *
+#C  * 
+#C  * @param subsys subsystem
+#C  * @param level debug level
+#C  * @param line caller line number
+#C  * @param filename
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function doDebug(s,le,li,f){
+	if(MTYPE&&4){
+		#smaller
+		if(s&&SUB>0){
+			return(le<DBG);
+		}
+	}else{
+		if(MTYPE&&2){
+			#greater
+			return(le>=DBG);
+		}else{
+			if(MTYPE&&1){
+				#bits
+				return(le&&DBG);
+			}
+		}
+	}
+}
+
+
+#C /**
+#C  * Print trace/log-string
+#C  * 
+#C  * Prints a trace/log-string when matches defined number.
+#C  * 
+#C  * @param s subsystem
+#C  * @param le debug level
+#C  * @param li caller line number
+#C  * @param f caller filename
+#C  * @param msg message to be displayed
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function printDBG(s,le,li,f,msg){
+	if(doDebug(s,le,li,f)){
+		h=prepHead(le,li,f,0);
+		printOUT(h":DEBUG:"msg);
+	}
+}
+
+
+#C /**
+#C  * Print trace/log-string for errors
+#C  *
+#C  * The output format is:
+#C  * 
+#C  *	<MYCALLNAME>:<MYUID>@<MYHOST>:<pid>:<filename>:#linenumber:INFO:<code>:<message>
+#C  * 
+#C  * @param e caller error number
+#C  * @param li caller line number
+#C  * @param f filename of caller
+#C  * @param c caller code
+#C  * @param msg message to be displayed
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function printERR(e,li,f,c,msg){
+	h=prepHead(0,li,f,c);
+	printOUT(h":ERR:"e":"msg);
+}
+
+
+#C /**
+#C  * Print trace/log-string for warnings
+#C  * 
+#C  * Prints a trace/log-string when matches current level.
+#C  * The output format is:
+#C  * 
+#C  *	<MYCALLNAME>:<MYUID>@<MYHOST>:<pid>:<filename>:#linenumber:INFO:<code>:<message>
+#C  * 
+#C  * Implementation priority: PERFORMANCE
+#C  * 
+#C  * @param w warning-level
+#C  * @param li caller line number
+#C  * @param f filename of caller
+#C  * @param c code
+#C  * @param msg message to be displayed
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function printWNG(w,li,c,f,msg){
+	if(w<WNG){
+		h=prepHead(w,li,f,c);
+		printOUT(h":WNG:"msg);
+	}
+}
+
+
+#C /**
+#C  * Print trace/log-string for info
+#C  * 
+#C  * Prints a trace/log-string when matches current level.
+#C  * The output format is:
+#C  * 
+#C  *	<MYCALLNAME>:<MYUID>@<MYHOST>:<pid>:<filename>:#linenumber:INFO:<code>:<message>
+#C  * 
+#C  * Implementation priority: PERFORMANCE
+#C  * 
+#C  * @param i info-level
+#C  * @param li caller line number
+#C  * @param f filename of caller
+#C  * @param c caller code
+#C  * @param msg message to be displayed
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function printINFO(i,li,c,f,msg){
+	if(i<INF){
+		h=prepHead(i,li,f,c);
+		printOUT(h":INFO:"msg);
+	}
+}
+
+
+#C /**
+#C  * Prints final call strings
+#C  * 
+#C  * Prints a trace/log-string of a string prepared to be executed when called with more
+#C  * than one option and matches current level.
+#C  * 
+#C  *	printFINALCALL <level> <line> <fname> <title> <exec-or-call-string>
+#C  * 
+#C  * Implementation priority: PERFORMANCE
+#C  * 
+#C  * @param le debug level
+#C  * @param li caller line number
+#C  * @param f filename
+#C  * @param t title
+#C  * @param x exec-or-call-string
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function printFINALCALL(le,li,f,t,x){
+	if(le<=PF){
+		h=prepHead(le,li,f,0);
+		printOUT(h":PF:"t":\n("x")");
+	}
+}
+
+
+#C /**
+#C  * Prints final call strings
+#C  * 
+#C  * Prints a trace/log-string of a string prepared to be executed when called with more
+#C  * than one option and matches current level.
+#C  * 
+#C  *	callErrOutWrapper <line> <fname> <exec-or-call-string>
+#C  * 
+#C  * Implementation priority: PERFORMANCE
+#C  * 
+#C  * @param li caller line number
+#C  * @param x exec-or-call-string The call to be wrapped
+#C  *
+#C  * @ingroup libutalm_awk
+#C */
+function callErrOutWrapper(li, x){
+	if(le<=DBG){print "UTALM("thisAWKFile"):"FILENAME":"msg>"/dev/stderr"}
+}
+
+
+
+#C /**
+#C   * Exits with stardard string output
+#C   *  
+#C   * Exits with "grep" string for unit evaluation.
+#C   *	"utalm_exit:#value"
+#C   *
+#C   * Examples:
+#C   *	"utalm_exit:0"
+#C   *	"utalm_exit:2"
+#C   *
+#C   * The name gotoHell is honouring my very first colleagues -
+#C   * actually skilled - not wanna-be-super-gurus.
+#C   * 
+#C   * @param l caller line number
+#C   * @param f caller file
+#C   * @param e exit value
+#C   *
+#C   * @exit with given code
+#C   * @ingroup libutalm_awk
+#C   */
+function gotoHell(l,f,e){
+	printINFO(0,l,e,f,"Requested exit:"e)
+	printOUT("utalm_exit:"e)
+	exit(e);
+}
+
+BEGIN{
+	pid=0;
+	uid=0;
+	gid=0;
+	hname="";
+
+	getgidcall=ENVIRON["GETGIDCALL"]
+	if(getgidcall~/^$/){
+		getgidcall="id -n -g";
+	}
+	getuidcall=ENVIRON["GETUIDCALL"]
+	if(getuidcall~/^$/){
+		getuidcall="id -n -u";
+	}
+				
+	fetchDBGArgs();
+}
+#C /* \cond */
+
+#C   /* \endcond #KEEP# PERSISTENT */

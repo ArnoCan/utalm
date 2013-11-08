@@ -1,0 +1,246 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_001
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \mainpage User-Interfaces and Developer APIs 
+*
+* The 	UnifiedTraceAndLogManager - UTALM - provides a single interface for multiple
+* programming languages and runtime environments. The typical application is for
+* development and test of \ref buildingblocksutamlbash "DevOps and R&D environments". 
+* The application support by the bash and awk component starts for small  
+* ad-hoc utilities with just a dozen lines of code, ranging to major projects
+* in advanced environments.
+*
+* The make component provides the base features for build environments, document generation,
+* and command line based regregression testing.
+* The runtime components comprise:
+* <ul>
+* 	<li>
+*   Makefiles for generic tree-processing with Makefile and/or Shell-Callbacks.
+* 	</li>
+* 	<li>
+*   Make rules for several documentation tools:
+*	<ul>
+*   <li>
+*   Makefile-doxygen-rules.mk
+*   </li>
+*   <li>
+*   Makefile-epydoc-rules.mk
+*   </li>
+*   <li>
+*   Makefile-latex-rules.mk
+*   </li>
+*   <li>
+*   Makefile-nodewalk.mk
+*   </li>
+*   <li>
+*   Makefile-test.mk
+*   </li>
+*   <li>
+*   Makefile-txt2tags-rules.mk
+*   </li>
+*	</ul>
+* 	</li>
+* 	<li>
+*	Makefile validation utilities.
+* 	</li>
+* 	<li>
+*	Packaging templates for: tgz, src-tgz, rpm, src-rpm, deb
+* 	</li>
+* 	<li>
+*   Templates for: Makefiles, regression tests, unit tests
+* 	</li>
+* </ul>
+*
+* The contained development, test, and build support components are:
+* <ul>
+* 	<li>
+* 	Make utility and library collection for build environments, inline API document generation,  
+*   and unit test support for make based build processes - 
+*    <a href="../../man3/utalm-make.html">utalm-make(3)</a>. 
+* 	</li>
+*   <li>Functions supporting regression and unit tests, automation for creation of persistent reference 
+*   data and performing frequent smoke tests by validating continued consistency 
+*   \ref libutalmrefpersistency.sh and \ref countErrors.sh</li> 
+* </ul>
+*
+* For initial version and history refer to \subpage historyanddorigin.
+*
+* <H1>Additional Documents</H1>
+* <ul>
+* 	<li>
+* 	<a href="../../man3/utalm-bash.html">utalm-bash.sh(3)</a>
+* 	</li>
+*   <li> 
+*   <a href="../../man3/utalm-awk.html">utalm-awk(3)</a>
+*   </li> 
+* 	<li>
+* 	<a href="../../man3/utalm-make.html">utalm-make(3)</a>
+* 	</li>
+* 	<li>
+* 	<a href="../../man3/utalm-bash-eclipse.html">utalm-bash-eclipse(3)</a>
+* 	</li>
+* </ul>
+*
+* <H1>Reference Pages</H1>
+* Standard packages required for the runtime environment:
+* <ul>
+* 	<li>GNU awk 
+*   @@<a href="http://www.gnu.org/software/gawk/" target="_blank">gnu.org</a>
+*   </li>
+* 	<li>GNU Make 
+*   @@<a href="http://www.gnu.org/software/make/" target="_blank">gnu.org</a>
+*   </li>
+* 	<li>GNU bash 
+*   @@<a href="http://www.gnu.org/software/bash/" target="_blank">gnu.org</a>
+*   </li>
+* </ul>
+*
+* Applied projects for the build and packaging environment:
+* <ul>
+* 	<li>doxygen 
+*   @@<a href="http://www.stack.nl/~dimitri/doxygen/" target="_blank">M.C.G.V. Stack</a>
+*   /@@<a href="http://www.tue.nl/" target="_blank">TUE</a>
+*   by <a href="http://www.stack.nl/~dimitri/" target="_blank">Dimitri van Heesch</a>
+*   </li>
+* 	<li>Epydoc 
+*   @@<a href="http://epydoc.sourceforge.net/" target="_blank">Sourcefforge.net</a>
+*   by <a href="http://ed.loper.org/" target="_blank">Edward Loper</a>
+*   </li>
+* 	<li>ShellEd 
+*   @@<a href="http://sourceforge.net/projects/shelled/?source=recommended" target="_blank">Sourcefforge.net</a>
+*   by <a href="http://sourceforge.net/users/akurtakov" target="_blank">Alexander Kurtakov</a>,
+*   <a href="http://sourceforge.net/users/dougsatch" target="_blank">Satch</a>,
+*   and <a href="http://sourceforge.net/users/mbooth101" target="_blank">Mat Booth</a>
+*   </li>
+* 	<li>Sphinx 
+*   @@<a href="http://sphinx-doc.org/" target="_blank">sphinx-doc.org</a>
+*   /@@<a href="https://pypi.python.org/pypi/Sphinx" target="_blank">PyPi</a>
+*   /@@<a href="https://bitbucket.org/birkenfeld/sphinx/" target="_blank">Atlassian/bitbucket</a>
+*   by Georg Brandl
+*   </li>
+* 	<li>txt2tags 
+*   @@<a href="http://txt2tags.org/" target="_blank">txt2tags</a>
+*   by by Aurelio Jargas et al
+*   <a href="http://txt2tags.org/team/index.html" target="_blank">tst2tags-team</a>,
+*   </li>
+* </ul>
+* 
+* <H1>License</H1>
+* Details of \ref licenses ...
+*
+* <ul>
+* <li>Code<br />
+* The license for the runtime system excluding specifications and documentation is 
+* <a href="http://opensource.org/licenses/Apache-2.0" target="_blank">Apache-2.0</a>,
+* approved by the <a href="http://opensource.org/licenses" target="_blank">OSI</a>.
+* </li>
+* <li>Specification and Documentation<br />
+* The specification and documentation - this includes inline-documentation.
+* <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+* </li>
+* </ul>
+*
+*/
+
+/**
+ * \defgroup bootstrap bootstrap
+ * \addtogroup bootstrap 
+ *  @{
+ * \brief low-level environment for the initial step of loading modules
+ * 
+ * The boostrap module contains the initial low-level environment for
+ * the first step of loading required modules.
+ * This is mainly the evaluation, conversion, and handling of the
+ * location of fitting versions of modules by absolute pathnames.   
+ * Therefore the path of the bootstrap module itself has to be either a 
+ * hard-coded static standard pathname, or provided  by a predefined 
+ * environment variable.
+ * @}
+ */
+
+
+/**
+*  \defgroup core core
+ * \addtogroup core 
+ *  @{
+ * \brief core functions for loading the final runtime environment
+ * 
+ * The core module contains the required low-level environment for
+ * the process of loading final runtime environments.
+ * @}
+ */
+ 
+
+/**
+* \defgroup libutalm_make utalm-make
+* \addtogroup libutalm_make
+*  @{
+* \brief support for production and command line controlled tests
+* 
+* The environment suppoort for the Makefile based production and the command 
+* line based unit and regression tests. 
+*
+* For additional information on <b>libutalm.sh</b> refer to:
+* <ul>
+*   <li> 
+*     <b><a href="../../man3/utalm-bash.html">utalm-bash(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-make.html">utalm-make(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-awk.html">utalm-awk(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/utalm-bash-examples/index.html">utalm-bash-examples(7)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/libutalm-test-and-examples/index.html">libutalm-test-and-examples(7)</a></b>
+*   </li> 
+* </ul>
+*
+* @}
+*/
+
+ 
+/**
+* \defgroup libutalm_tdd libutalm-TDD
+* \addtogroup libutalm_tdd
+*  @{
+* \brief support for Test Driven Development
+* 
+* The environment suppoort for the Makefile based production and the command 
+* line based unit and regression tests. 
+*
+* For additional information on <b>libutalm.sh</b> refer to:
+* <ul>
+*   <li> 
+*     <b><a href="../../man3/utalm-bash.html">utalm-bash(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-make.html">utalm-make(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-awk.html">utalm-awk(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/utalm-bash-examples/index.html">utalm-bash-examples(7)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/libutalm-test-and-examples/index.html">libutalm-test-and-examples(7)</a></b>
+*   </li> 
+* </ul>
+*
+* @}
+*/
+ 

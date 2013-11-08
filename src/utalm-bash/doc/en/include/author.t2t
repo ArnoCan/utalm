@@ -8,8 +8,8 @@
 %% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 %% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 %% #SHORT:        utalm-bash
-%% #LICENCE:      Apache-2.0
-%% #VERSION:      03_02_003
+%% #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+%% #VERSION:      03_03_001
 %% #
 %% ########################################################################
 %% #
@@ -33,12 +33,7 @@
 %%
 
 
-Written and maintained by
-| Arno-Can Uestuensoez: | http://www.fsf.org Member#8673
-%HTML% |  | [[../../../images/8673.png] http://www.fsf.org]
-%TEX% \begin{figure}[H]
-%TEX%   \includegraphics[width=0.12\textwidth]{../../images/8673.png}
-%TEX% \end{figure}
+Written and maintained by Arno-Can Uestuensoez
 | Maintenance:      | <acue.opensource@gmail.com>
 | Sourceforge:      | <https://sourceforge.net/projects/utalm/files/utalm-bash/>
 | Github:           | <https://github.com/ArnoCan/utalm>

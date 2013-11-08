@@ -1,3 +1,14 @@
+20131108 - NIGHTLY - AWK support, library-stripper, document enhancements, etc..
+           Introduced relocation features:
+           -> Added LD_LIBRARY_PATH and PATH based start resolution of 
+              bootstrap environment.
+           -> Tools for locating inital bootstrap components
+              - getPathBootstrap.sh
+              - getPathLibutalmAwk.sh
+              - getPathLibutalmBash.sh
+              - getPathLibutalmMake.sh
+           -> Unit and Regression tests:
+              - for bash almost complete, state BETA
 20131010 - fix minor lastminite patch.
 20131010 - BETA - Deeper tested, added doygen common interface for all UTALM components.
            Added some treewalker enhancements.

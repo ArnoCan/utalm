@@ -1,0 +1,15 @@
+.
+
+   [-d <debug-args>]
+
+   <debug-args>=
+              [(LEVEL|L)]<debug-bit-array>[,(PATTERN|P)|MIN|MAX]
+              [,(SUBSYSTEM|S):<subsystem-bit-array>]
+              [,(WARNING|W):<warning-level-values>]
+              [,(INFO|I):<info-level-values>]
+              [,(FILELIST|F):<file-list>[,(EXCLUDE|INCLUDE)]]
+              [,(PRINTFINAL|PFIN)[:<print-systemcall-bit-array>]]
+              [,(HELP|H)[:(MAN|HTML|PDF)|(PATHSMANPATH)]]
+
+   for details refer to utalm-bash-API(3)
+

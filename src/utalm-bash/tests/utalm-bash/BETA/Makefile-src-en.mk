@@ -1,11 +1,12 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -22,6 +23,10 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+#
+########################################################################
+#
+# refer to source-package for unstripped sources
 #
 #HEADEND################################################################
 #
@@ -41,3 +46,13 @@ SRC_DIRS	+=
 
 #
 SUB_POOLS	+=   
+SUB_POOLS	+= addDebug
+SUB_POOLS	+= doDebug
+SUB_POOLS	+= controlDebug
+SUB_POOLS	+= fileStream
+#SUB_POOLS	+= findParameterError
+#SUB_POOLS	+= headerFormatDemo
+SUB_POOLS	+= strip-bash
+#SUB_POOLS	+= thresholds
+
+## \endcond

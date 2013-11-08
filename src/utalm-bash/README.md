@@ -23,9 +23,40 @@ Adds Makefile-libraries for founding a common build platform of all supported UT
 The main feature is the support of a common interface for the debugging and logging of operational data in a environment of multiple programmning languages.
 The emphasis is here on distributed environments.
 
-This is the **bash** edition.
+This is the **bash** edition, the included subcomponents are:
+
+* utalm-bash
+* utalm-awk
+* utalm-make
+
+
 
 **Installation**:
+***Package - rpm - recommended***
+* Download rpm
+* Install rpm, default is "/usr/share/utalm-bash-<version>.<arch>"
+* Change to "/usr/share/utalm-bash-<version>.<arch>"
+* Source ". sourceEnvironment.sh"
+* Call "./install.sh"
+* Change to your HOME directory
+* Source now your local ". sourceEnvironment.sh"
+* Call: "utalmhelp.sh" and/or "utalmhelp.sh api"
+
+
+***Package - rpm-devel - recommended***
+* Download rpm-devel
+* Install rpm-devel, default is "/usr/share/utalm-bash-devel-<version>.<arch>"
+* Change to "/usr/share/utalm-bash-<version>.<arch>"
+* Source ". sourceEnvironment.sh"
+* Call "./install-devel.sh"
+* Change to your HOME directory
+* Source now your local ". sourceEnvironment.sh"
+* Call: "utalmhelp.sh" and/or "utalmhelp.sh api"
+* Change to your HOME/tests directory
+* Call: "**make unit**" has to result in "**utalm_sum_of_errors:0**"
+  For additional info on test refer to **utalm-API**, and
+  **Make help**, **utalm-make-API**, and **countErrors.sh --help**.
+
 ***Package - tgz***
 * Download tgz
 * Unpack tgz.
@@ -33,17 +64,12 @@ This is the **bash** edition.
   Installs in home-directory. The files.conf 
   and directories.conf contain a list of changes.
 
-***Package - rpm***
-* Download rpm
-* Install rpm, default is "/usr/share/libutalm-bash-<version>.<arch>"
-* Either use form install directory, or call "install.sh" in install
-  root for installation to your HOME.
-
-***Package - rpm-devel***
-* Download rpm-devel
-* Install rpm-devel, default is "/usr/share/libutalm-bash-devel-<version>.<arch>"
-* Either use form install directory, or call "install-devel.sh" in install
-  root for installation to your HOME.
+***Package - tgz-devel***
+* Download tgz
+* Unpack tgz.
+* Call install.sh in main directory.
+  Installs in home-directory. The files.conf 
+  and directories.conf contain a list of changes.
 
 ***Sources***
 * Download zip-file, or clone from github.
@@ -57,4 +83,4 @@ This is the **bash** edition.
   Get help with "make help"
 
 ***Intro***
-For first help call from install root: "utalm-bash-show-help.sh".
+For first help call from install root: "utalmhelp.sh".

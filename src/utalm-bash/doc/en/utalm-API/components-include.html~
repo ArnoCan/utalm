@@ -1,0 +1,189 @@
+<!--
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_001
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+-->
+<div class="contents">
+<div class="textblock"><p>The provided components for Programming Languages and IDEs</p>
+<dl class="section user"><dt></dt><dd></dd></dl>
+
+<H2>Programming Languages</H2>
+
+<table class="doxtable">
+<tr><th>Language </th><th>Package </th><th>Eclipse </th><th>State </th><th>Delivery </th><th>Installed </th><th>API</th></tr>
+  <tr>
+    <td>awk</td>
+    <td>utalm-bash</td>
+    <td></td>
+    <td>alpha</td>
+    <td>production</td>
+    <td>X</td>
+    <td><a href="../utalm-awk-API/index.html"><b>awk</b></a></td>
+  </tr>
+  <tr>
+    <td>bash</td>
+    <td>utalm-bash</td>
+    <td>(X)</td>
+    <td>beta</td>
+    <td>production</td>
+    <td>X</td>
+    <td><a href="../utalm-bash-API/index.html"><b>bash</b></a></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>C</td>
+    <td>utalm-c</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_C"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>C++</td>
+    <td>utalm-cpp</td>
+    <td></td>
+    <td>alpha</td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_Cpp"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>Erlang</td>
+    <td>utalm-erlang</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_Erlang"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>Hadoop</td>
+    <td>utalm-hadoop</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_Hadoop"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>Java</td>
+    <td>utalm-java</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_Java"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>JavaScript</td>
+    <td>utalm-javascript</td>
+    <td></td>
+    <td>alpha</td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_JavaScript"/></a></td>
+  </tr>
+  <tr>
+    <td>make</td>
+    <td>utalm-bash</td>
+    <td>(*)</td>
+    <td>beta</td>
+    <td>production</td>
+    <td>X</td>
+    <td><a href="../utalm-make-API/index.html"><b>make</b></a></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>mongoDB</td>
+    <td>utalm-mongodb</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_MySQL"/></a></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>MySQL</td>
+    <td>utalm-mysql</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_MySQL"/></a></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>Perl</td>
+    <td>utalm-perl</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_Perl"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>PHP</td>
+    <td>utalm-php</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_PHP"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>PowerShell</td>
+    <td>utalm-powershell</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_PowerShell"/></td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>utalm-python</td>
+    <td>X</td>
+    <td>alpha</td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_Python"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>Ruby</td>
+    <td>utalm-ruby</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_Ruby"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>Scala</td>
+    <td>utalm-scala</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_Scala"/></td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td>SQLite</td>
+    <td>ualm-sqlite</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><a name="anchor_SQLite"/></td>
+  </tr>
+</table> 
+
+<dl class="section user"><dt></dt><dd></dd></dl>
+</div>
+</div>
+

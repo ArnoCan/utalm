@@ -1,0 +1,61 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_001
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page licenses Provided Licenses
+* \brief The provided licenses are Apache-2.0 and CCL-BY-SA-3.0
+* \par
+*
+* \licenses 
+*
+* <img style="border-width:0" src="../../../../images/OSI-Approved-License-100x137.png" />
+* <H2>Code</H2>
+* The license for the runtime system excluding specifications and documentation is 
+* <a href="http://opensource.org/licenses/Apache-2.0" target="_blank">Apache-2.0</a>,
+* approved by the <a href="http://opensource.org/licenses" target="_blank">OSI</a>.
+*  
+*	
+*	Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*	
+* 	Licensed under the Apache License, Version 2.0 (the "License");
+*	you may not use this file except in compliance with the License.
+*	You may obtain a copy of the License at
+*	
+*	http://www.apache.org/licenses/LICENSE-2.0
+*	
+*	Unless required by applicable law or agreed to in writing, software
+*	distributed under the License is distributed on an "AS IS" BASIS,
+*	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*	See the License for the specific language governing permissions and
+*	limitations under the License.
+*	
+*
+* <span>
+* <img style="border-width:0" src="../../../../images/feather-88x26.png" />
+* </span>
+*
+* <H2>Specification and Documentation</H2>
+* The specification and documentation - this includes inline-documentation.
+* <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+*
+*	Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*	
+*	Licensed under Creative Commons License - CC-BY-SA
+*	http://creativecommons.org/licenses/by-sa/3.0/
+*
+* <br />
+* <img alt="Creative Commons License" style="border-width:0" src="../../../../images/CC-BY-SA-88x31.png" />
+* <br />
+*
+* \par
+*
+*/

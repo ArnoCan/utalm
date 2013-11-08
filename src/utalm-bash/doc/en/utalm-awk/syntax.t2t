@@ -1,0 +1,34 @@
+.
+
+   awk 
+     [-v SUB="#subsystem"]
+     [-v DBG="#debug-level"]
+     [-v INFO=#info-level]
+     [-v WNG=#warning-level] 
+     [-v PF=#print-final-call-level]
+     [-v MTYPE="#match-type"]
+     [-v RECNUM="#record-number"]
+
+   #subsystem := #all
+   #debug-level := #level
+   #info-level := #level
+   #warninglevel := #level
+   #print-final-call-level := #level
+   #match-type := (MIN|MAX|(PATTERN|P))
+   #record-number := (0|1)|(ON|OFF)
+
+   #level = {0-MAXINT}
+   #all = ALL
+
+
+   DEFAULT:
+
+    -v MTYPE=MIN
+    -v SUB=ALL
+    -v DBG=0
+    -v INFO=1
+    -v WNG=1
+    -v PF=0
+    -v RECNUM=OFF
+
+

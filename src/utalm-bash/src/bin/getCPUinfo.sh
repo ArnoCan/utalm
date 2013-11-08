@@ -1,12 +1,13 @@
 #!/bin/bash
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -24,16 +25,16 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
 #
 #***MODUL_DOXYGEN_START***
-##
-## @package libutalm_bash
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_001
+## \endcond
 ## @file
 ## @brief List relevant CPU parameters
 ##
@@ -42,188 +43,22 @@
 
 #
 shopt -s nullglob
-
-#System definitions - do not change these!
+#
 #Execution anchor
 MYCALLPATHNAME=$0
 MYCALLNAME=`basename $MYCALLPATHNAME`
 MYCALLNAME=${MYCALLNAME%.sh}
 MYCALLPATH=`dirname $MYCALLPATHNAME`
 
-#
-#If a specific library is forced by the user
-#
-if [ -n "${UTALM_LIBPATH}" ];then
-    MYLIBPATH=$UTALM_LIBPATH
-    MYLIBEXECPATHNAME=${UTALM_LIBPATH}/bin/$MYCALLNAME
-else
-    MYLIBEXECPATHNAME=$MYCALLPATHNAME
-fi
-
-#
-#identify the actual location of the callee
-#
-if [ -n "${MYLIBEXECPATHNAME##/*}" ];then
-	MYLIBEXECPATHNAME=${PWD}/${MYLIBEXECPATHNAME}
-fi
-MYLIBEXECPATH=`dirname $MYLIBEXECPATHNAME`
-
-###################################################
-#load basic library required for bootstrap        #
-###################################################
-MYBOOTSTRAP=${MYLIBEXECPATH}/bootstrap
-if [ ! -d "${MYBOOTSTRAP}" ];then
-    MYBOOTSTRAP=${MYCALLPATH}/bootstrap
-    if [ ! -d "${MYBOOTSTRAP}" ];then
-	echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
-	cat <<EOF  
-
-DESCRIPTION:
-This directory contains the common mandatory bootstrap functions.
-Your installation my be erroneous.  
-
-SOLUTION-PROPOSAL:
-First of all check your installation, because an error at this level
-might - for no reason - bypass the final tests.
-
-If this does not help please send a bug-report.
-
-EOF
-	exit 1
-    fi
-fi
-
-MYBOOTSTRAP=${MYBOOTSTRAP}/bootstrap-03_01_009.sh
-if [ ! -f "${MYBOOTSTRAP}" ];then
-    echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYBOOTSTRAP=${MYBOOTSTRAP}"
-    cat <<EOF  
-
-DESCRIPTION:
-This file contains the common mandatory bootstrap functions required
-for start-up of any shell-script within this package.
-
-It seems though your installation is erroneous or you detected a bug.  
-
-SOLUTION-PROPOSAL:
-First of all check your installation, because an error at this level
-might - for no reason - bypass the final tests.
-
-When your installation seems to be OK, you may try to set a TEMPORARY
-symbolic link to one of the files named as "bootstrap.<highest-version>".
-
-ln -s ${MYBOOTSTRAP} bootstrap.<highest-version>
-
-in order to continue for now. 
-
-Be aware, that any installation containing the required file will replace
-the symbolic link, because as convention the common boostrap files are
-never symbolic links, thus only recognized as a temporary workaround to 
-be corrected soon.
-
-If this does not work you could try one of the other versions.
-
-Please send a bug-report.
-
-EOF
-    exit 1
-fi
-
-#Start bootstrap now
-. ${MYBOOTSTRAP}
-
-#
-#set real path to install, resolv symbolic links
-_MYLIBEXECPATHNAME=`bootstrapGetRealPathname ${MYLIBEXECPATHNAME}`
-MYLIBEXECPATH=`dirname ${_MYLIBEXECPATHNAME}`
-
-_MYCALLPATHNAME=`bootstrapGetRealPathname ${MYCALLPATHNAME}`
-MYCALLPATHNAME=`dirname ${_MYCALLPATHNAME}`
-
-#Now find libraries might perform reliable.
-#current language, not really NLS
-MYLANG=${MYLANG:-en}
-
-#path for various loads: libs, help, macros, plugins
-MYLIBPATH=${UTALM_LIBPATH:-`dirname $MYLIBEXECPATH`}
-
-#path for various loads: libs, help, macros, plugins
-MYHELPPATH=${MYHELPPATH:-$MYLIBPATH/help/$MYLANG}
-
-
-#Check master hook
-bootstrapCheckInitialPath
-
-MYCONFPATH=${MYCONFPATH:-$MYLIBPATH/conf/utalm}
-if [ ! -d "${MYCONFPATH}" ];then
-    echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYCONFPATH=${MYCONFPATH}"
-    exit 1
-fi
-
-if [ -f "${MYCONFPATH}/versinfo.conf.sh" ];then
-    . ${MYCONFPATH}/versinfo.conf.sh
-fi
-
-MYMACROPATH=${MYMACROPATH:-$MYCONFPATH/macros}
-if [ ! -d "${MYMACROPATH}" ];then
-    echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYMACROPATH=${MYMACROPATH}"
-    exit 1
-fi
-
-MYPKGPATH=${MYPKGPATH:-$MYLIBPATH/plugins}
-if [ ! -d "${MYPKGPATH}" ];then
-    echo "${MYCALLNAME}:$LINENO:ERROR:Missing:MYPKGPATH=${MYPKGPATH}"
-    exit 1
-fi
-
-MYINSTALLPATH= #Value is assigned in base. Symbolic links are replaced by target
-
-
-#load basic library required for bootstrap
-. ${MYLIBPATH}/lib/base.sh
-. ${MYLIBPATH}/lib/libManager.sh
-bootstrapRegisterLib
-baseRegisterLib
-libManagerRegisterLib
-#Now the environment is armed, so let's go.
-if [ ! -d "${MYINSTALLPATH}" ];then
-    ABORT=1;
-    printERR $LINENO $BASH_SOURCE ${ABORT} "Missing:MYINSTALLPATH=${MYINSTALLPATH}"
-    gotoHell ${ABORT}
-fi
-
-MYOPTSFILES=${MYOPTSFILES:-$MYLIBPATH/help/$MYLANG/*_base_options} 
-checkFileListElements "${MYOPTSFILES}"
+MYBOOTSTRAPFILE=$(getPathToBootstrapDir.sh)/bootstrap-03_03_001.sh
+. ${MYBOOTSTRAPFILE}
 if [ $? -ne 0 ];then
-    ABORT=1;
-    printERR $LINENO $BASH_SOURCE ${ABORT} "Missing:MYOPTSFILES=${MYOPTSFILES}"
-    gotoHell ${ABORT}
+	echo "ERROR:Missing bootstrap file:configuration: ${MYBOOTSTRAPFILE}">&2
+	exit 1
 fi
-
-# Main supported runtime environments
-#release
-TARGET_OS="Linux: CentOS/RHEL(5+), SuSE-Professional 9.3"
-
-#to be tested - coming soon
-TARGET_OS_SOON="OpenBSD+Linux(might work for any dist.):Ubuntu+OpenSuSE"
-
-#to be tested - might be almsot OK - but for now FFS
-#...probably some difficulties with desktop-switching only?!
-TARGET_OS_FFS="FreeBSD+Solaris/SPARC/x86"
-
-#release
-TARGET_WM="Gnome + fvwm"
-
-#to be tested - coming soon
-TARGET_WM_SOON="xfce"
-
-#to be tested - coming soon
-TARGET_WM_FORESEEN="KDE(might work now)"
-
-################################################################
-#                     End of FrameWork                         #
-################################################################
+setUTALMbash 1 $*
 #
-#Verify OS support
+###
 #
 case ${MYOS} in
     Linux);;
@@ -241,30 +76,9 @@ if [ "${*}" != "${*//-X/}" ];then
 fi
 
 . ${MYLIBPATH}/lib/misc.sh
-. ${MYLIBPATH}/lib/help/help.sh
 . ${MYLIBPATH}/lib/network/network.sh
 . ${MYLIBPATH}/lib/hw/hook.sh
 . ${MYLIBPATH}/lib/groups.sh
-
-#path to directory containing the default mapping db
-if [ -d "${HOME}/.utalm/db/default" ];then
-    DEFAULT_DBPATHLST=${DEFAULT_DBPATHLST:-$HOME/.utalm/db/default}
-fi
-
-#path to directory containing the default mapping db
-if [ -d "${MYCONFPATH}/db/default" ];then
-    DEFAULT_DBPATHLST=${DEFAULT_DBPATHLST:-$HOME/conf/db/default}
-fi
-
-#Source pre-set environment from user
-if [ -f "${HOME}/.utalm/utalm.conf.sh" ];then
-    . "${HOME}/.utalm/utalm.conf.sh"
-fi
-
-#Source pre-set environment from installation 
-if [ -f "${MYCONFPATH}/utalm.conf.sh" ];then
-    . "${MYCONFPATH}/utalm.conf.sh"
-fi
 
 #system tools
 if [ -f "${HOME}/.utalm/systools.conf-${MYDIST}.sh" ];then

@@ -1,11 +1,12 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,6 +24,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -33,12 +38,9 @@ BLD_ROOT_PRE_INCLUDED:=1
 include $(BLD_ROOT)Makefile-version.mk
 include $(BLD_ROOT)Makefile-root.mk
 
-
 ifndef OUTLANG
   $(error "Missing environment variable OUTLANG")
 endif
-
-
 #
 ENV_FILES	=  Makefile
 ENV_FILES	+= $(BLD_ROOT)include/Makefile-pre.mk
@@ -261,7 +263,9 @@ OUTFILES        += $(DEB_PNAME)
 #
 #common calls
 #
-PATH		:= $(RTBASE)/bin:$(PATH) 
+PATH		:= $(RTBASE)/bin:$(PATH)
+PATH		:= $(PATH):$(BLD_ROOT)src/bin
+
 CALLDIR		= $(shell pwd)
 CALLDIRNAME	= $(notdir $(CALLDIR))
 CD		    = cd
@@ -292,3 +296,4 @@ EPYDOC      = epydoc
 DOXYGEN		= doxygen
 
 endif
+## \endcond

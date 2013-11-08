@@ -4,8 +4,8 @@
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,15 +23,19 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
 #
-SUBROOTTOP:=examples
+#SUBROOTTOP:=examples
 
 ifdef BLD_ROOT
-  include $(BLD_ROOT)include/Makefile-nodewalk.mk
+  include $(BLD_ROOT)lib/Makefile.lib/Makefile-nodewalk.mk
 else
-  $(error "Missing environment variable BLD_ROOT")
+  $(error "Missing environment variable BLD_ROOT - see utalm-bash-API(3)")
 endif
 

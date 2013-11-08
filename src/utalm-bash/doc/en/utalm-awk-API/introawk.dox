@@ -1,0 +1,30 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_001
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page introutalmawk Introduction to utalm-awk
+* \brief First steps with components of utalm-awk
+* \par
+*
+* 'awk' is the choice for sub-scripting in shell scripts, when small statefull string
+* processing utilities are required. The main requirement here is an integrated 
+* trace and logging environment. Therefore a common function library is provided, 
+* which integrates seamless into the UTALM environment.<br />    
+* API @@\ref libutalm_awk
+*
+* The awk component comprises:
+*   * libutalm.awk
+*   * libutalm-min.awk
+*
+*
+*/
+

@@ -1,11 +1,12 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,6 +24,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
@@ -34,14 +39,12 @@ SRC_FILES	+= README.md
 SRC_FILES	+= INSTALL.txt
 SRC_FILES	+= RELEASENOTES.txt
 SRC_FILES	+= sourceEnvironment.sh
-SRC_FILES	+= utalm-bash-show-help.sh
 
 SRC_FILES	+= install-devel.sh
 SRC_FILES	+= install.sh
-SRC_FILES	+= install.conf
 
 #
-SRC_DIRS	+= 
+SRC_DIRS	+= include
 
 #
 SUB_POOLS   += src 
@@ -49,3 +52,4 @@ SUB_POOLS   += examples
 SUB_POOLS   += tests
 SUB_POOLS   += doc
 SUB_POOLS   += dist
+## \endcond

@@ -1,11 +1,12 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,31 +24,54 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #$Header$
 #
+#***MODUL_DOXYGEN_START***
+## \endcond
+##
+## @file
+## @brief Common release definitions
+##
+## \cond
+#***MODUL_DOXYGEN_END***
+#
+
+ifndef MAKE_VERSION
+$(error "requires GNUmake")
+endif
 
 #production output
+## \endcond
 VENDOR      = Ingenieurbuero Arno-Can Uestuensoez - www.i4p.com
 PACKAGER    = Arno-Can Uestuensoez - acue.opensource@gmail.com
-VERSION		= 03.02.003
+VERSION		= 03.03.001
 LICENSE	    = Apache-2.0
-RELEASE	    = R1
+RELEASE	    = R0
 ARCH		= noarch
 PROJECT     = UnifiedTraceAndLogManager
-PACKAGE_LONG = libutalm-bash
-PACKAGE		= libutalm-bash
-WWW_PROJ	= https://github.com/ArnoCan/UnifiedTraceAndLogManager
-WWW_REPOS	= https://github.com/ArnoCan/UnifiedTraceAndLogManager
+PACKAGE_LONG = utalm-bash
+PACKAGE		= utalm-bash
+WWW_PROJ	= http://sourceforge.net/projects/utalm
+WWW_REPO_00	= http://sourceforge.net/p/utalm/code/ci/master/tree/
+WWW_REPO_01	= https://github.com/ArnoCan/utalm
 WWW_REF		= http://sourceforge.net/projects/utalm
 WWW_USM		= http://UnifiedSessionsManager.org
 
+## \cond
 ifndef OUTLANG
   OUTLANG=en
 endif
+## \endcond
 
+## \cond
 ifndef VARIANT
-  VARIANT=BETA
+  VARIANT=NIGHTLY
 endif
+## \endcond
 

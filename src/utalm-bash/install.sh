@@ -6,8 +6,8 @@
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -25,23 +25,22 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 #
 #***MODUL_DOXYGEN_START***
 ## \endcond
 ##
-## @package libutalm_bash_devel
-## @author Arno-Can Uestuensoez
-## @date 2013.10.10
-## @version 03_02_003
 ## @file
 ## @brief Installer
 ## 
 ## \cond
 #***MODUL_DOXYGEN_END***
 
-export DBG=${DBG:-0}
-export SILENT=${SILENT:-1}
+export DBGX=${DBGX:-0}
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -53,113 +52,145 @@ if [ ! -e ${0##*/} -a ${PWD##*/} != src ];then
 	echo "ERROR:Must be called in own directory!">&2
 	exit 1
 fi
+#
+# installation source
+#
+INSTSOURCE=$PWD
 
 function displayIt () {
-	if [ "$DBG" == 1 ];then
-		echo ${LINENO}:$*
-	else
-		if [ "$SILENT" == 0 ];then
-			echo ${LINENO}:$*
-		fi
-	fi
+	[[ "$DBGX" == 1 ]]&&echo $*
 }
-
 
 #
 # installation target
 #
 if [ -n "${INSTROOT}" ];then
-	if [ -e "${INSTROOT}" ];then
-		BASE=${INSTROOT}
-	else
-		echo "ERROR:Missing INSTROOT=${INSTROOT}">&2
-		exit 1
+	if [  -e "${INSTROOT}" ];then
+	   echo "ERROR:Missing INSTROOT=${INSTROOT}">&2
+	   exit 1
 	fi
 fi
 if [ -z "${INSTROOT}" ];then
-	INSTROOT=${HOME}
-	BASE=${HOME}
+   INSTROOT=${HOME}
 fi
 
-if [ -e ${MYCALLPATH%/*}/conf/utalm-bash.conf ];then
-	. ${MYCALLPATH%/*}/conf/utalm-bash.conf
-else
-	if [ -e ${BASH_SOURCE%/*}/src/conf/utalm-bash.conf ];then
-		. ${BASH_SOURCE%/*}/src/conf/utalm-bash.conf
-	else
-		if [ -e ${BASH_SOURCE%/*}/conf/utalm-bash.conf ];then
-			. ${BASH_SOURCE%/*}/conf/utalm-bash.conf
-		else
-			if [ -e ${HOME}/conf/utalm-bash.conf ];then
-				. ${HOME}/conf/utalm-bash.conf
-			else
-				echo "ERROR:Missing: utalm-bash.conf">&2
-				echo "ERROR:${BASH_SOURCE}">&2
-				echo "ERROR:${PWD}">&2
-				exit 1
-			fi
-		fi
-	fi
+BOOTSTRAPDIR=$(getPathToBootstrapDir.sh)
+BOOTSTRAP=${BOOTSTRAPDIR}/bootstrap-03_03_001.sh
+. ${BOOTSTRAP}
+if [ $? -ne 0 ];then
+	echo "ERROR:Missing bootstrap file:configuration: ${BOOTSTRAP}">&2
+	exit 1
 fi
-
-. ${MYCALLPATH}/install.conf
-
+setUTALMbash 1 $*
+#
+###
+#
 CP="cp -r"
-displayIt $BASH_SOURCE
-for i in ${BASE}bin/bootstrap/*;do
+
+###
+#bootstrap
+#
+for i in ${INSTSOURCE}/bin/bootstrap/*;do
+        _B=${INSTROOT}/bin/bootstrap
+        mkdir -p $_B
 	displayIt "->${i}"
-	$CP ${i} ${BOOTSTRAPBIN}
-	chmod -R u+x ${BOOTSTRAPBIN}${i##*/} 
-	$CP ${i} ${BOOTSTRAPLIB}
-	chmod -R u+x ${BOOTSTRAPLIB}${i##*/} 
+	$CP ${i} ${_B}
+	chmod -R u+x ${_B}/${i##*/}
 done
-displayIt $BASH_SOURCE
 
-for i in ${BASE}lib/core/*;do
+###
+#core
+#
+for i in ${INSTSOURCE}/lib/core/*;do
+        _B=${INSTROOT}/lib/core
+        mkdir -p $_B
 	displayIt "->${i}"
-	$CP ${i} ${COREBIN}
-	chmod -R u+x ${COREBIN}${i##*/} 
-	$CP ${i} ${CORELIB}
-	chmod -R u+x ${CORELIB}${i##*/} 
+	$CP ${i} ${_B}
+	chmod -R u+x ${_B}/${i##*/}
 done
-displayIt $BASH_SOURCE
 
-for i in ${BASE}bin/*;do
+###
+#bin
+#
+for i in ${INSTSOURCE}/bin/*;do
+        _B=${INSTROOT}/bin
+        mkdir -p $_B
 	displayIt "->${i}"
-	cp -r ${i} ${BINDIR}
-	chmod -R u+x ${BINDIR}${i##*/} 
+	$CP ${i} ${_B}
+	chmod -R u+x ${_B}/${i##*/}
 done
-displayIt $BASH_SOURCE
 
-for i in ${BASE}conf/*;do
+###
+#lib
+#
+for i in ${INSTSOURCE}/lib/*;do
+        _B=${INSTROOT}/lib
+        mkdir -p $_B
 	displayIt "->${i}"
-	cp -r ${i} ${MYCONFPATH}
+	$CP ${i} ${_B}
+	chmod -R u+x ${_B}/${i##*/}
 done
-displayIt $BASH_SOURCE
 
-_BASE=${BASE%/}
-_BASE=${_BASE%/src}
-if [ "$_BASE" == src ];then
-	_BASE=.
-fi
-displayIt $BASH_SOURCE
-
-_BASE=${_BASE}/
-for i in ${_BASE}doc/*;do
+###
+#conf
+#
+for i in ${INSTSOURCE}/conf/*;do
+        _B=${INSTROOT}/conf
+        mkdir -p $_B
 	displayIt "->${i}"
-	cp -r ${i} ${MYDOCBASE}
+	$CP ${i} ${_B}
+	chmod -R u+x ${_B}/${i##*/}
 done
-displayIt $BASH_SOURCE
 
-displayIt "->libutalm.sh $LIBDIR"
-$CP ${BASE}lib/libutalm.sh $LIBDIR
 
-displayIt "->sourceEnvironment.sh $HOME"
-$CP ${BASE}sourceEnvironment.sh $HOME
-displayIt "->utalm-bash-show-help.sh $HOME"
-$CP ${BASE}utalm-bash-show-help.sh $HOME
+###
+#doc
+#
+for i in ${INSTSOURCE}/doc/*;do
+        _B=${INSTROOT}/doc
+        mkdir -p $_B
+	displayIt "->${i}"
+	$CP ${i} ${_B}
+	chmod -R u+x ${_B}/${i##*/}
+done
 
-${HOME}/utalm-bash-show-help.sh
+
+###
+#examples
+#
+for i in ${INSTSOURCE}/examples/*;do
+        _B=${INSTROOT}/examples
+        mkdir -p $_B
+	displayIt "->${i}"
+	if [ "${i//decsription.dox}" != "$i" ];then
+		continue
+	fi
+	$CP ${i} ${_B}
+	chmod -R u+x ${_B}/${i##*/}
+done
+
+$CP ${INSTSOURCE}/sourceEnvironment.sh $INSTROOT
+$CP ${INSTSOURCE}/Makefile-root.mk $INSTROOT
+$CP ${INSTSOURCE}/Makefile-version.mk $INSTROOT
+
+echo "   -> For help:"
+echo "      -> utalmhelp.sh help"
+echo "      -> utalmhelp.sh intro"
+echo "      -> utalmhelp.sh api"
+echo ""
+echo "   -> Change to HOME:"
+echo "      -> cd "
+echo ""
+echo "   -> Set HOME-Environment:"
+echo "      -> . sourceEnvironment.sh"
+echo ""
+echo "   -> Type:"
+echo "      -> utalmhelp.sh api"
+echo ""
+echo "   -> Evetually install the devel-package and"
+echo "   -> run unit test for shell and awk scripts SUnit by UTALM."
+echo ""
+echo ""
 
 
 ## \endcond

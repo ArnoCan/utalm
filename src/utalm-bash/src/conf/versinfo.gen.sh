@@ -1,11 +1,12 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
 #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
-#LICENCE:      Apache-2.0
-#VERSION:      03_02_003
+#LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+#VERSION:      03_03_001
 #
 ########################################################################
 #
@@ -23,13 +24,18 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+########################################################################
+#
+# refer to source-package for unstripped sources
+#
 #HEADEND################################################################
 ###
-VERSION=03_02_003
-RELEASE=03_02_003
+## \endcond
+VERSION=03_03_001
+RELEASE=03_03_001
 VARIANT=VARIANT
-DATE=2011.12.07
-TIME=06:13:14
+DATE="2011.12.07"
+TIME="06:13:14"
 ###
 LOC="0"
 LOCNET="0"
