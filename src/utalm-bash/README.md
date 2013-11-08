@@ -30,9 +30,15 @@ This is the **bash** edition, the included subcomponents are:
 * utalm-make
 
 
+Current online manuals are available at:
+[UTALM@UnifiedSessionsManager.org](http://www.unifiedsessionsmanager.org/en/OpenSource/projects/utalm/utalm-bash/03_03_001/doc/en/html/man3/utalm-API/index.html)
+
+Long: "http://www.unifiedsessionsmanager.org/en/OpenSource/projects/utalm/utalm-bash/03_03_001/doc/en/html/man3/utalm-API/index.html"
+
 
 **Installation**:
 ***Package - rpm - recommended***
+
 * Download rpm
 * Install rpm, default is "/usr/share/utalm-bash-<version>.<arch>"
 * Change to "/usr/share/utalm-bash-<version>.<arch>"
@@ -44,6 +50,7 @@ This is the **bash** edition, the included subcomponents are:
 
 
 ***Package - rpm-devel - recommended***
+
 * Download rpm-devel
 * Install rpm-devel, default is "/usr/share/utalm-bash-devel-<version>.<arch>"
 * Change to "/usr/share/utalm-bash-<version>.<arch>"
@@ -58,6 +65,7 @@ This is the **bash** edition, the included subcomponents are:
   **Make help**, **utalm-make-API**, and **countErrors.sh --help**.
 
 ***Package - tgz***
+
 * Download tgz
 * Unpack tgz.
 * Call install.sh in main directory.
@@ -65,6 +73,7 @@ This is the **bash** edition, the included subcomponents are:
   and directories.conf contain a list of changes.
 
 ***Package - tgz-devel***
+
 * Download tgz
 * Unpack tgz.
 * Call install.sh in main directory.
@@ -72,15 +81,18 @@ This is the **bash** edition, the included subcomponents are:
   and directories.conf contain a list of changes.
 
 ***Sources***
+
 * Download zip-file, or clone from github.
 * Call **make**, or **make help**.
 * Install **tgz** file or **rpm** file.
 * Read man pages in $HOME/doc/{pdf,html,man}/{man3,man7}
 
 **Build**
+
 * Install sources.
 * Change into install root and call make
   Get help with "make help"
 
 ***Intro***
+
 For first help call from install root: "utalmhelp.sh".
