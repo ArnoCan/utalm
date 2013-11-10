@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,7 +32,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ##
 ## @file
@@ -47,7 +47,7 @@
 ## and 
 ## <b><a href="../../man3/utalm-make.html">libutalm-eclipse(3)</a></b>
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 if [ -z "$__ImportFromBashEclipse__" ];then #*** prevent multiple inclusion
 __ImportFromBashEclipse__=1 #*** prevent multiple inclusion

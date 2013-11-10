@@ -12,6 +12,7 @@
       <tab type="filelist" visible="yes" title="" intro=""/>
    </tab>
     <tab type="examples" visible="yes" title="" intro=""/>  
+	<tab type="user" url="../../man7/utalm-awk-tests/index.html" title="Testscases"/>
     <tab type="usergroup" visible="yes" title="Downloads">
         <tab type="user" url="http://sourceforge.net/projects/utalm/" title="Sourceforge.net">
         <img src="../../../../images/sourceforge-21x21.png" />

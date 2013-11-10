@@ -9,7 +9,7 @@
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 - code and concepts
 #LICENSE:      CCL-BY-SA - specification, interfaces, and inline documentation
-#VERSION:      03_03_001
+#
 #
 #***
 #

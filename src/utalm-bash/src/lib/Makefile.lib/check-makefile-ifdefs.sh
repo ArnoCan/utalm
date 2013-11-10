@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,7 +32,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @file
 ## @ingroup libutalm_make
@@ -50,7 +50,7 @@
 ##	DISPERRSUM=${DISPERRSUM:-0}
 ##
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 
 
 

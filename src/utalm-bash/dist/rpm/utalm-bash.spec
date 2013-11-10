@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -49,7 +49,7 @@ ExclusiveOS: Linux
 
 Prefix: /usr/share
 
-Requires: bash
+Requires: gawk >= 4, bash >= 4,  sed >= 4
 Provides: utalm-bash
 
 %description
@@ -75,8 +75,8 @@ the following options are available:
    tgz-file into your home directory and unpack it.
 
 	cd $HOME
-	cp utalm-bash-03.03.001-R0.noarch.tgz
-	tar zxf utalm-bash-03.03.001-R0.noarch.tgz   
+	cp utalm-bash-03.03.002-R0.noarch.tgz
+	tar zxf utalm-bash-03.03.002-R0.noarch.tgz   
 
 
 %prep
@@ -107,6 +107,10 @@ chmod -R 755 ${INSTTARGET}
 rm -rf ${RPM_BUILD_ROOT}
 
 %changelog
+* Thu Nov 10 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
+- Version-03.03.002
+  Major updates and fixes, probably for eternity.
+
 * Thu Nov 08 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
 - Version-03.03.001
   Major updates and fixes, probably for eternity.

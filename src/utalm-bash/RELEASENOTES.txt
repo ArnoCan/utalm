@@ -1,3 +1,10 @@
+20131110 - NIGHTLY - Fixes, extension of unit testframework BUnit - BashUnit
+           -> Format parameters: form+indent: removed for handling in 
+           	  post processing because of stream, not to be handled in any 
+           	  case in realtime, but post
+           -> Format parameters: F_FS fixes
+           -> introduced print of "TITLE" - field names, added tests
+           -> added testCaseStatistics.sh
 20131108 - NIGHTLY - AWK support, library-stripper, document enhancements, etc..
            Introduced relocation features:
            -> Added LD_LIBRARY_PATH and PATH based start resolution of 

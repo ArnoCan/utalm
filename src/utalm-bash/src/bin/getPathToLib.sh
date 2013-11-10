@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-make
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,7 +32,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @ingroup utalm_bash
 ## @file
@@ -44,7 +44,7 @@
 ##   3 HOME/lib
 ## 
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 [[ -n "$1" && -e "${0%/*/*}/lib/$1" ]]&&echo -n "${0%/*/*}/lib/$1"&&exit 0
 for i in ${LD_LIBRARY_PATH//:/ };do

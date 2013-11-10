@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -41,6 +41,8 @@ SRC_FILES	+= CallCase.sh
 SRC_FILES	+= Makefile
 SRC_FILES	+= Makefile-src-en.mk
 SRC_FILES	+= Makefile-nodeaction-en.mk
+
+SRC_FILES	+= input-data.txt
 
 #
 SRC_DIRS	+=   

@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-make
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,14 +32,14 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @ingroup tagstemplateDemo
 ## @file
 ## @brief Provides rules for txt2tags
 ##
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 ifndef BLD_TXT2TAGS_RULES_INCLUDED
 BLD_TXT2TAGS_RULES_INCLUDED:=1

@@ -7,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -33,7 +33,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ##
 ## @name bootstrap
@@ -46,7 +46,7 @@
 ##  Has to be located in the same directory as the callee gwhich is
 ##  going to set it's environment.
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 
 if [ -z "$__BOOTSTRAP__" ];then #*** prevent multiple inclusion
 

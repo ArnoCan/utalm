@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -186,14 +186,16 @@ $(OUTDIR):
 
 
 ifneq ($(VARIANT),ALL)
-ifneq ($(VARIANT),INTERNAL)
-ifneq ($(VARIANT),SUPPORT)
-ifneq ($(VARIANT),RELEASE)
-ifneq ($(VARIANT),NIGHTLY)
 ifneq ($(VARIANT),ALPHA)
 ifneq ($(VARIANT),BETA)
+ifneq ($(VARIANT),EXPERIMENTAL)
+ifneq ($(VARIANT),INTERNAL)
+ifneq ($(VARIANT),NIGHTLY)
+ifneq ($(VARIANT),RELEASE)
+ifneq ($(VARIANT),SUPPORT)
   $(info  "Available VARIANT={ ALL | RELEASE | SUPPORT | BETA | ALPHA | NIGHTLY | INTERNAL }")
   $(error "Unknown VARIANT=" $(VARIANT))
+endif
 endif
 endif
 endif

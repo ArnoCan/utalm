@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-make
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,7 +32,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @ingroup utalm_bash
 ## @file
@@ -41,7 +41,7 @@
 ## Relies on teh version with navtree.js and the variable NAVTREE. 
 ##
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -96,7 +96,7 @@ function insertEntryToNAVTREE () {
 
 
 _new='[ "Python", "../utalm-python-API/index.html", null ],'
-MYNAVTREEJS=/tmp/bld/utalm-bash-03.03.001/doc-tmp/BETA/doc/en/html/man3/utalm-API/navtree.js
+MYNAVTREEJS=/tmp/bld/utalm-bash-03.03.002/doc-tmp/BETA/doc/en/html/man3/utalm-API/navtree.js
 
 insertEntryToNAVTREE awk $MYNAVTREEJS $_new
 

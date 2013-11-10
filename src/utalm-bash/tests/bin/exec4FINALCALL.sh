@@ -7,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -31,6 +31,8 @@
 #
 #HEADEND################################################################
 ## \endcond
+## @file
+## @brief exit simulator
 ##
 ## \cond
 exit 0

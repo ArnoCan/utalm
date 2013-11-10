@@ -7,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -33,14 +33,14 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @ingroup utalm_make
 ## @file
 ##
 ## Performs unit tests by using TEST_DIRS.
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 shopt -s nullglob
 #

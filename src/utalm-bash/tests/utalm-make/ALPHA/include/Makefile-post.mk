@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,14 +32,14 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ##
 ## @file
 ## @brief Provides standard targets for make
 ##
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 ifndef BLD_ROOT_POST_INCLUDED
 BLD_ROOT_POST_INCLUDED:=1

@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -214,7 +214,11 @@ function filter1 () {
 					gsub("[ \t\n]*$","",buf);
 					buf=sprintf("%s %s",buf,$0);
 				}else{
-					buf=sprintf("%s;%s",buf,$0);
+					if(buf!~/[\n][ \t\n]*$/){
+						buf=sprintf("%s;%s",buf,$0);
+					}else{
+						buf=sprintf("%s%s",buf,$0);
+					}
 				}
 				print buf
 				buf="";
@@ -239,7 +243,8 @@ function filter1 () {
 			}
 			gsub("[ \t]$","");
 			gsub("[ \t]*$","");
-			gsub("^[ \t]*"," ");					
+			gsub("^[ \t]*","");
+			#gsub("^[ \t]*","",buf);
 			buf=sprintf("%s%s\n",buf,$0);
 			#buf=""
 		}
@@ -277,7 +282,6 @@ if [ -z "$1" -o ! -e "$1" ];then
 	echo "ERROR:Missing input file:$1">&2
 	exit 1
 fi
-
 for i in $*;do 
 	if [ ! -e "$i" ];then
 		echo

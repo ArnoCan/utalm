@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,14 +32,14 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ##
 ## @file
 ## @brief Common release definitions
 ##
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 
 ifndef MAKE_VERSION
@@ -50,7 +50,7 @@ endif
 ## \endcond
 VENDOR      = Ingenieurbuero Arno-Can Uestuensoez - www.i4p.com
 PACKAGER    = Arno-Can Uestuensoez - acue.opensource@gmail.com
-VERSION		= 03.03.001
+VERSION		= 03.03.002
 LICENSE	    = Apache-2.0
 RELEASE	    = R0
 ARCH		= noarch

@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -54,6 +54,7 @@ OUTFNAMES	=
 include Makefile-src-en.mk
 
 DOXYGEN_HTML_DIR = $(OUTHTML7)/$(OUTSTEM)
+OUTDIRS += $DOXYGEN_HTML_DIR
 
 DOXYGEN_HTML_FILES = $(DOXYGEN_HTML_DIR)/index.html
 OUTFILES	+= $(DOXYGEN_HTML_FILES) 
@@ -80,8 +81,6 @@ DOXYGEN_HTML_LAYOUT = DoxygenLayout.xml
 DOXYGEN_HTML_INPUT_CONF =  Doxyfile_Inputfiles.conf
 DOXYGEN_HTML_OUTPUT_CONF =  Doxyfile_Outputfiles.conf
 
-OUTDIRS += $(RTBASE)tests/bin
-OUTDIRS += $(RTBASE)tests/utalm-bash
 
 OUTFILES	= 
 
@@ -96,7 +95,7 @@ $(DOXYGEN_HTML_FILES):$(DOXYGEN_HTML_INPUT)
 $(RTBASE)tests/bin:$(BLD_ROOT)tests/bin 
 	$(CPA) $? $(@D)
 
-$(RTBASE)tests/utalm-make:$(BLD_ROOT)tests/utalm-make
+$(RTBASE)tests/utalm-bash:$(BLD_ROOT)tests/utalm-bash
 	@echo
 	@echo "###"
 	@echo "#Change to:$@"

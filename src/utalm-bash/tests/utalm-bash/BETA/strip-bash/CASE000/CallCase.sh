@@ -7,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -31,13 +31,13 @@
 #
 #HEADEND################################################################
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ##
 ## @file
 ## @brief strip sources from comments
 ##
-#***MODUL_DOXYGEN_END***
+##
 ## \cond
 #
 #Execution anchor
@@ -61,20 +61,10 @@ setUTALMbash 1 $*
 TROOT=$(getUpperTreePathMatch $PWD tests 0)
 refDataInit $TROOT
 
-fref=$(refDataStoragePath input-data-min.txt)
+refDataStore input-data-min.txt
+fref=$(refDataStorePath input-data-min.txt)
+
 ${BLD_ROOT}src/bin/strip-bash.sh KEEPLINES -o ${fref%input-data-min.txt} input-data.txt
+assertRefDataWithExit $LINENO $BASH_SOURCE input-data-min.txt "$(cat ref-data.txt)"
 
-data=$(cat fixed-ref.txt)
-assertRefDataWithExit $LINENO $BASH_SOURCE 
-
-#DROPLINES
-
-${CALL}
-if [ $? -ne 0 ];then
-	gotoHell $LINENO $BASH_SOURCE 1
-fi
-((DBG>0))&&echo "DARGS=$DARGS"
-gotoHell $LINENO $BASH_SOURCE 0
-
-#callErrOutWrapper
 ## \endcond

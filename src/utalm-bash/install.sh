@@ -7,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -31,14 +31,14 @@
 #
 #HEADEND################################################################
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ##
 ## @file
 ## @brief Installer
 ## 
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 
 export DBGX=${DBGX:-0}
 #
@@ -173,24 +173,23 @@ $CP ${INSTSOURCE}/sourceEnvironment.sh $INSTROOT
 $CP ${INSTSOURCE}/Makefile-root.mk $INSTROOT
 $CP ${INSTSOURCE}/Makefile-version.mk $INSTROOT
 
-echo "   -> For help:"
-echo "      -> utalmhelp.sh help"
-echo "      -> utalmhelp.sh intro"
-echo "      -> utalmhelp.sh api"
-echo ""
+echo
+echo "   Successfully installed"
+echo
 echo "   -> Change to HOME:"
 echo "      -> cd "
 echo ""
 echo "   -> Set HOME-Environment:"
 echo "      -> . sourceEnvironment.sh"
 echo ""
-echo "   -> Type:"
+echo "   -> For help:"
+echo "      -> utalmhelp.sh help"
+echo "      -> utalmhelp.sh intro"
 echo "      -> utalmhelp.sh api"
 echo ""
 echo "   -> Evetually install the devel-package and"
 echo "   -> run unit test for shell and awk scripts SUnit by UTALM."
-echo ""
-echo ""
+echo
 
 
 ## \endcond

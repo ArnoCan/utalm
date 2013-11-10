@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-make
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,7 +32,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @ingroup tagstemplateDemo
 ## @file
@@ -61,7 +61,7 @@
 ## 
 ## This could be customized as required.
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 ifndef _MAKE_NODEWALK_INCLUDED_
 _MAKE_NODEWALK_INCLUDED_:=1

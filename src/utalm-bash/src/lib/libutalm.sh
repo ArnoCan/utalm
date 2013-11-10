@@ -7,7 +7,7 @@
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 - code 
 #LICENSE:      CCL-BY-SA - specification, interfaces, and inline documentation
-#VERSION:      03_03_001
+#
 #
 #***
 #
@@ -98,12 +98,21 @@ MYLIBVERS="${_myLIBVERS_utalm}"
 ## \cond
 
 
-# if config failed.
+## LOG
+# Output stream.
 LOG=${LOG:-/dev/fd/2}
 LR=${LR:-0}
 _Rx=0
 LM=${LM:-10000}
 _Mx=0
+
+## _OF
+# Output filter control.
+_OF=0
+
+## outfilter
+# Output filter.
+outfilter=""
 
 # verify bootstrap - STAGE0a
 if [ $__BOOTSTRAP__ -ne 1 ];then
@@ -1028,6 +1037,7 @@ F_JSON=7
 ## Current field seperator for output records of line-type 
 ## @ingroup utalm_bash
 F_FS=":"
+export F_FS
 ## \cond
 
 ## \endcond
@@ -1496,9 +1506,16 @@ function formatToNum () {
         F_COLOR|COLOR)F=$((F|F_COLOR));;
         F_NOCOLOR|NOCOLOR)F=$((F|F_NOCOLOR));;
         F_EXITCODE_AS_STR|F_EXITCODE_AS_STR)F=$((F|F_EXITCODE_AS_STR));;
-        F_I|INDENT)F=$((F|F_I));;
-        F_FORM|FORM)F=$((F|F_FORM));;
-        F_FS=*|FS=*)_FS=${f#*=};;
+
+        F_CON|CON)F=$F_CON;;
+        F_TAB|TAB)F=$F_TAB;;
+        F_SYS|SYS)F=$F_SYS;;
+        F_LOG4J|LOG4J)F=$F_LOG4J;;
+        F_CSV|CSV)F=$F_CSV;;
+        F_XML|XML)F=$F_XML;;
+        F_HTML|HTML)F=$F_HTML;;
+        F_JSON|JSON)F=$F_JSON;;
+
         F_ALL|ALL)F=$((F|F_ALL));;
 		[0-9]*)F=$((F|fx));;
         HELP)F=-1;formatList;;
@@ -1634,8 +1651,8 @@ function formatList () {
     printf "   %-27s:%d\n" "|F_JSON|JSON" $F_JSON>>$LOG;
     printf ") == %d\n" $F_FORM>>$LOG;    
 	echo>>$LOG
-    printf "%-30s:%s\n" "F_FS|FS" "'$F_FS'">>$LOG;    
-    printf "%-30s:%d\n" "F_I|INDENT" $F_I>>$LOG
+    printf "%-30s:%s\n" "F_FS|FS" "'$_FS'">>$LOG;    
+    printf "%-30s:%d\n" "F_I|INDENT" $_IN>>$LOG
     echo >>$LOG
     printf "%-30s:%d\n" "F_EXITCODE_AS_STR|EXITCODE_STR" $F_EXITCODE_AS_STR>>$LOG
     echo >>$LOG
@@ -1643,6 +1660,7 @@ function formatList () {
 }
 
 _E=0
+_IN=0
 _FS=$F_FS
 [[ -z "${F_DEFAULT}" ]]&&F_DEFAULT=$((F_CALLNAME|F_LINENUMBER|F_SEVERITY|F_CODE))
 _F=${_F:-$F_DEFAULT}
@@ -1662,7 +1680,14 @@ _F=${_F:-$F_DEFAULT}
 function setFormat () {
 	local _f=;
 	for i in ${1//%/ };do
-		a=$(formatToNum $i);
+		case $i in
+        	#F_I|INDENT)F=$((F|F_I));;
+        	[fF]_[iI]=*|[iI][nN][dD][eE][nN][tT]=*)_IN="${i#*=}";continue;;
+        	[fF]_[fF][sS]=*|[fF][sS]=*)_FS="${i#*=}";continue;;
+        	[fF]_[fF][oO][rR][mM]=*|[fF][oO][rR][mM]=*)
+        		F_FORM=$(formatToNum ${i#*=});continue;;
+			*)a=$(formatToNum $i);;		
+		esac
 		case $a in
 		$F_EXITCODE_AS_STR)
 			_E=1;
@@ -1752,6 +1777,11 @@ function printHelp () {
 			;;
 		HTML|H)
 			if [ -n "$BROWSER" ];then
+				if [ -e "$X" ];then
+					$BROWSER ${X} &
+					return
+				fi
+								
 				local _MYDOC=${DEFAULT_HELP}
 				echo "CALL:$BROWSER ${_MYDOC}">>$LOG
 				if [ ! -e "${_MYDOC}" ];then
@@ -1762,7 +1792,20 @@ function printHelp () {
 				if [ -n "$X" ];then
 					_MYDOC=${_MYDOC%/*/index.html}
 					_MYDOC=${_MYDOC%/*.html}
-					_MYDOC=${_MYDOC}/$X.html
+					_MYDOC=${_MYDOC%/man[0-9]}
+					local _matched=0
+					for m in man1 man2 man3 man4 man5 man6 man7;do
+						(($_matched))&&continue
+						if [ -e ${_MYDOC}/$m/$X.html ];then
+							_MYDOC=${_MYDOC}/$m/$X.html
+							_matched=1
+						fi
+						if [ -e ${_MYDOC}/$m/$X/index.html ];then
+							_MYDOC=${_MYDOC}/$m/$X/index.html
+							_matched=1
+						fi
+					done
+																								
 				fi
 				$BROWSER ${_MYDOC} &
 			fi
@@ -1770,6 +1813,11 @@ function printHelp () {
 		    ;;
 		PDF|P)
 			if [ -n "$PDFVIEWER" ];then
+				if [ -e "$X" ];then
+					$PDFVIEWER ${X} &
+					return
+				fi
+								
 				local _MYDOC=${MYDOCBASE}/pdf/man3/utalm-bash.pdf
 				echo "CALL:$PDFVIEWER ${_MYDOC}">>$LOG
 				if [ ! -e "${_MYDOC}" ];then
@@ -1845,6 +1893,54 @@ EOF
 }
 
 
+## \endcond
+#P ##
+#P # Prints the title record with fieldnames
+#P #
+#P # @ingroup utalm_bash
+#P def _printTitle():
+#P 	pass
+## \cond
+function _printTitle () {
+    local r=$?;
+    local _title=""
+    #    ((F_S!=0))_CH=$(printf)||_CH=
+    ((_F&F_CALLNAME))&&_title="${_title}${_FS}CALLNAME";
+	if((_F&F_RLOGINDNS));then _title="${_title}${_FS}RLOGINDNS";else 
+		if((_F&F_RLOGINIP));then _title="${_title}${_FS}RLOGINIP";else 
+			if((_F&F_USERSTR));then _title="${_title}${_FS}USERSTR";else
+				if((_F&F_USERNUM));then _title="${_title}${_FS}USERNUM";fi
+			fi
+			if((_F&F_GROUPSTR));then _title="${_title}${_FS}GROUPSTR";else
+				if((_F&F_GROUPNUM));then _title="${_title}${_FS}GROUPNUM";fi
+			fi
+		fi
+	fi
+    if((_F&F_DATE&F_TIME));then
+	_title="${_title}${_FS}DATE${_FS}TIME";
+    else
+	((_F&F_DATE))&&_title=${_title}${_FS}DATE;
+	((_F&F_TIME))&&_title=${_title}${_FS}TIME;
+    fi
+    ((_F&F_PID))&&_title="${_title}${_FS}PID";
+    ((_F&F_PPID))&&_title=${_title}${_FS}PPID;
+    {
+	((_F&F_FILENAME))&&{ _title=${_title}${_FS}FILENAME; }||{ ((_F&F_FILEPATHNAME))&&_title="${_title}${_FS}FILEPATHNAME"; }
+	shift;
+    }
+    ((_F&F_LINENUMBER))&&_title="${_title}${_FS}LINENUMBER";
+    if((_F&F_SUBSYSSTR));then _title="${_title}${_FS}SUBSYSSTR";else ((_F&F_SUBSYSNUM))&&_title="${_title}${_FS}SUBSYSNUM";fi
+    if((_F&F_LEVELSTR));then _title="${_title}${_FS}LEVELSTR";else 
+    	if((_F&F_LEVELNUM));then _title="${_title}${_FS}LEVELNUM";fi
+	fi
+    ((_F&F_CODE))&&_title="${_title}${_FS}CODE";
+    ((_F&F_SEVERITY))&&_title="${_title}${_FS}SEVERITY";
+    _title="${_title}${_FS}DATA";
+    _title=${_title#$_FS}
+    echo ${_title}>>$LOG
+    return $r
+}
+
 
 ## \endcond
 #P ##
@@ -1866,7 +1962,7 @@ function fetchDBGArgs () {
 	local ARG=;
 	local printCONF=0
 	setFormat
-	
+		
 	local _C_DARGS=${C_DARGS//[,()]/ }
 	for i in ${_C_DARGS};do
 	    KEY=`echo ${i%%:*}|tr '[:lower:]' '[:upper:]'`
@@ -2010,6 +2106,9 @@ EOF
 		    export C_PFEXE=$(levelToNum ${ARG:-0})
 		    ((C_PFEXE==-1))&&exit 0;
 		    ;;
+		TITLE)
+			_printTitle
+			;;
 		TESTMODE|TM|T)
 			. $(getPathToLib.sh libutalmrefpersistency.sh)
 			if((__UTALMREFPERSISTOBJS__!=1));then
@@ -2081,41 +2180,39 @@ function _getHead () {
     local f0=$4;
     local c=$5;
     #    ((F_S!=0))_CH=$(printf)||_CH=
-    ((_F&F_CALLNAME))&&_CH="${_CH}:${MYCALLNAME}";
-	if((_F&F_RLOGINDNS));then _CH="${_CH}:${MYUID}@${MYHOST}";else 
-		if((_F&F_RLOGINIP));then _CH="${_CH}:${MYUID}@${MYHOSTIP}";else 
-			if((_F&F_USERSTR));then _CH="${_CH}:${MYNAME}";else
-				if((_F&F_USERNUM));then _CH="${_CH}:${MYUID}";fi
+    ((_F&F_CALLNAME))&&_CH="${_CH}${_FS}${MYCALLNAME}";
+	if((_F&F_RLOGINDNS));then _CH="${_CH}${_FS}${MYUID}@${MYHOST}";else 
+		if((_F&F_RLOGINIP));then _CH="${_CH}${_FS}${MYUID}@${MYHOSTIP}";else 
+			if((_F&F_USERSTR));then _CH="${_CH}${_FS}${MYNAME}";else
+				if((_F&F_USERNUM));then _CH="${_CH}${_FS}${MYUID}";fi
 			fi
-			if((_F&F_GROUPSTR));then _CH="${_CH}:${MYGNAME}";else
-				if((_F&F_GROUPNUM));then _CH="${_CH}:${MYGID}";fi
+			if((_F&F_GROUPSTR));then _CH="${_CH}${_FS}${MYGNAME}";else
+				if((_F&F_GROUPNUM));then _CH="${_CH}${_FS}${MYGID}";fi
 			fi
 		fi
 	fi
     if((_F&F_DATE&F_TIME));then
-	_CH="${_CH}:$(date +%Y%m%d:%H%M%S)";
+	_CH="${_CH}${_FS}$(date +%Y%m%d${_FS}%H%M%S)";
     else
-	((_F&F_DATE))&&_CH="${_CH}:$(date +%Y%m%d)";
-	((_F&F_TIME))&&_CH="${_CH}:$(date +%H%M%S)";
+	((_F&F_DATE))&&_CH="${_CH}${_FS}$(date +%Y%m%d)";
+	((_F&F_TIME))&&_CH="${_CH}${_FS}$(date +%H%M%S)";
     fi
-    ((_F&F_PID))&&_CH="${_CH}:$$";
-    ((_F&F_PPID))&&_CH="${_CH}:${PPID}";
+    ((_F&F_PID))&&_CH="${_CH}${_FS}$$";
+    ((_F&F_PPID))&&_CH="${_CH}${_FS}${PPID}";
     {
-	((_F&F_FILENAME))&&{ f=${f0%/*/*};f=${f0#$f\/};_CH="${_CH}:${f}"; }||{ ((_F&F_FILEPATHNAME))&&_CH="${_CH}:${f0}"; }
+	((_F&F_FILENAME))&&{ f=${f0%/*/*};f=${f0#$f\/};_CH="${_CH}${_FS}${f}"; }||{ ((_F&F_FILEPATHNAME))&&_CH="${_CH}${_FS}${f0}"; }
 	shift;
     }
-    ((_F&F_LINENUMBER))&&_CH="${_CH}:${li}";
-    if((_F&F_SUBSYSSTR));then _CH="${_CH}:$(subsysToStr ${s})";else ((_F&F_SUBSYSNUM))&&_CH="${_CH}:${s}";fi
-    if((_F&F_LEVELSTR));then _CH="${_CH}:$(levelToStr ${l})";else 
-    	if((_F&F_LEVELNUM));then _CH="${_CH}:$(levelToNum ${l})";fi
+    ((_F&F_LINENUMBER))&&_CH="${_CH}${_FS}${li}";
+    if((_F&F_SUBSYSSTR));then _CH="${_CH}${_FS}$(subsysToStr ${s})";else ((_F&F_SUBSYSNUM))&&_CH="${_CH}${_FS}${s}";fi
+    if((_F&F_LEVELSTR));then _CH="${_CH}${_FS}$(levelToStr ${l})";else 
+    	if((_F&F_LEVELNUM));then _CH="${_CH}${_FS}$(levelToNum ${l})";fi
 	fi
-    ((_F&F_CODE))&&_CH="${_CH}:${c}";
-    _CH=${_CH}:
-    _CH=${_CH#:}
+    ((_F&F_CODE))&&_CH="${_CH}${_FS}${c}";
+    _CH=${_CH}${_FS}
+    _CH=${_CH#$_FS}
     return $r
 }
-
-
 ## \endcond
 #P ##
 #P # Creates the current header in global variable _CH
@@ -2171,10 +2268,10 @@ function _printGen () {
 
     { 
     ((UTALM_XTERM==1))&&{
-   		_getHead $s $l $L $f0 $e;echo -e "${_CH}$se:$*";
+   		_getHead $s $l $L $f0 $e;echo -e "${_CH}$se${_FS}$*";
     }||{
 		_getHead $s $l $L $f0 $e;
-       	if((_F&F_SEVERITY));then ((_F&F_COLOR))&&echo -e "${_CH}\033[${cc}m${se:-:$se}\033[m:$*"||echo -e "${_CH}${se:-:$se}:$*";
+       	if((_F&F_SEVERITY));then ((_F&F_COLOR))&&echo -e "${_CH}\033[${cc}m${se:-$_FS$se}\033[m${_FS}$*"||echo -e "${_CH}${se:-$_FS$se}${_FS}$*";
 		else  echo -e "${_CH}$*";fi
     }
 	}>>${os}
@@ -2460,7 +2557,38 @@ function assert () {
 	printINFO 3 $a $b 1  "$*"
 		
 	[[ -n "${e//[0-9]/}" ]]&&{
-		eval $* 2>&1 >/dev/null
+		x=${*// /_}
+		x=${x//'
+'/_}
+		x=${x//[_/[ }
+		x=${x//_]/ ]}
+		x=${x//_[/ [}
+		x=${x//]_/] }
+		x=${x//_==_/ == }
+		x=${x//_=_/ = }
+		x=${x//_!=_/ != }
+		x=${x//_=~_/ =~ }
+		x=${x//_<_/ < }
+		x=${x//_>_/ > }
+								
+		x=${x//_-eq_/ -eq }
+		x=${x//_-ge_/ -ge }
+		x=${x//_-gt_/ -gt }
+		x=${x//_-le_/ -le }
+		x=${x//_-lt_/ -lt }
+		x=${x//_-ne_/ -ne }
+																
+		x=${x//_<_/ < }
+		x=${x//_>_/ > }
+		x=${x//_<=_/ <= }
+		x=${x//_>=_/ >= }
+		
+		x=${x//_&_/ & }
+		x=${x//_|_/ | }
+		x=${x//_&&_/ && }
+		x=${x//_||_/ || }
+
+		eval $x 2>&1 >/dev/null
 		e=$?
 	}
 	((e==0))&&return 0

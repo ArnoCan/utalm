@@ -31,9 +31,9 @@ This is the **bash** edition, the included subcomponents are:
 
 
 Current online manuals are available at:
-[UTALM@UnifiedSessionsManager.org](http://www.unifiedsessionsmanager.org/en/OpenSource/projects/utalm/utalm-bash/03_03_001/doc/en/html/man3/utalm-API/index.html)
+[UTALM@UnifiedSessionsManager.org](http://www.unifiedsessionsmanager.org/en/OpenSource/projects/utalm/utalm-bash/03_03_002/doc/en/html/man3/utalm-API/index.html)
 
-Long: "http://www.unifiedsessionsmanager.org/en/OpenSource/projects/utalm/utalm-bash/03_03_001/doc/en/html/man3/utalm-API/index.html"
+Long: "http://www.unifiedsessionsmanager.org/en/OpenSource/projects/utalm/utalm-bash/03_03_002/doc/en/html/man3/utalm-API/index.html"
 
 
 **Installation**:
@@ -46,7 +46,7 @@ Long: "http://www.unifiedsessionsmanager.org/en/OpenSource/projects/utalm/utalm-
 * Call "./install.sh"
 * Change to your HOME directory
 * Source now your local ". sourceEnvironment.sh"
-* Call: "utalmhelp.sh" and/or "utalmhelp.sh api"
+* Call: "utalmhelp.sh"  and/or "utalmhelp.sh api" and/or "utalmhelp.sh intro" 
 
 
 ***Package - rpm-devel - recommended***
@@ -61,8 +61,16 @@ Long: "http://www.unifiedsessionsmanager.org/en/OpenSource/projects/utalm/utalm-
 * Call: "utalmhelp.sh" and/or "utalmhelp.sh api"
 * Change to your HOME/tests directory
 * Call: "**make unit**" has to result in "**utalm_sum_of_errors:0**"
-  For additional info on test refer to **utalm-API**, and
-  **Make help**, **utalm-make-API**, and **countErrors.sh --help**.
+  For additional info on test refer to 
+  * **utalm-API**
+  * **Make help**
+  * **utalmhelp.sh utalm-bash-tests**
+  * **utalmhelp.sh utalm-make-API**
+  * **countErrors.sh --help**
+  * **testCaseStatistics.sh --help**
+  * **testCaseStatistics.sh**
+  * **testCaseStatistics.sh --groups**
+
 
 ***Package - tgz***
 

@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -51,7 +51,7 @@ SUB_POOLS	+= doDebug
 SUB_POOLS	+= controlDebug
 SUB_POOLS	+= fileStream
 #SUB_POOLS	+= findParameterError
-#SUB_POOLS	+= headerFormatDemo
+SUB_POOLS	+= headerFormatDemo
 SUB_POOLS	+= strip-bash
 #SUB_POOLS	+= thresholds
 

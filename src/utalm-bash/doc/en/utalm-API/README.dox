@@ -4,7 +4,7 @@
 * MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 * SHORT:        utalm-bash
 * LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
-* VERSION:      03_03_001
+* VERSION:      03_03_002
 *
 * Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
 *
@@ -23,12 +23,12 @@
 * and install the package. At the time of writing:
 *
 *
-*  * utalm-bash-03.03.001-R0_NIGHTLY.src.tgz
-*  * utalm-bash-03.03.001-R0_NIGHTLY.noarch.rpm
-*  * utalm-bash-devel-03.03.001-R0_NIGHTLY.noarch.rpm
-*  * utalm-bash-03.03.001-R0_NIGHTLY.noarch.tgz
-*  * utalm-bash-devel-03.03.001-R0_NIGHTLY.noarch.tgz
-*  * utalm-bash-03.03.001-R0_NIGHTLY.src.rpm
+*  * utalm-bash-03.03.002-R0_NIGHTLY.src.tgz
+*  * utalm-bash-03.03.002-R0_NIGHTLY.noarch.rpm
+*  * utalm-bash-devel-03.03.002-R0_NIGHTLY.noarch.rpm
+*  * utalm-bash-03.03.002-R0_NIGHTLY.noarch.tgz
+*  * utalm-bash-devel-03.03.002-R0_NIGHTLY.noarch.tgz
+*  * utalm-bash-03.03.002-R0_NIGHTLY.src.rpm
 *
 * This is installed by default to
 *

@@ -7,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -33,7 +33,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @file
 ## @brief print help
@@ -69,7 +69,7 @@
 ##
 ## @ingroup utalm_bash
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 shopt -s nullglob
 #
@@ -108,11 +108,43 @@ localHelp $*
 #if [ "${*//-d/}" == "${*}" -a "${*//--debug/}" == "${*}"  ];then
 #	printHelp $*
 #fi
+
+_isfile=0
+if [ -e "${_c}" ];then
+	_isfile=1
+	_file=${_c}
+	case ${_file##*.} in
+	html)h=HTML;;
+	pdf)h=PDF;;
+	esac	
+	shift
+fi
+if [ -e "${_c}.html" ];then
+	_isfile=1
+	_file=${_c}.html
+	case ${_file##*.} in
+	html)h=HTML;;
+	pdf)h=PDF;;
+	esac
+	shift
+fi
+if [ -e "${_c}/index.html" ];then
+	_isfile=1
+	_file=${_c}index.html
+	case ${_file##*.} in
+	html)h=HTML;;
+	pdf)h=PDF;;
+	esac
+	shift
+fi
+
 _c=`echo ${1}|tr '[:upper:]' '[:lower:]'`;
 case $_c in
-	intro|help|make|awk|bash|bash-api|awk|awk-api|make|make-api|api|utalm)shift;;
+	intro|help|make|awk|bash|bash-api|awk|awk-api|make|make-api|api|utalm)
+		shift
+		h=`echo ${1}|tr '[:lower:]' '[:upper:]'`;
+		;;	
 esac
-h=`echo ${1}|tr '[:lower:]' '[:upper:]'`;
 h=${h:-HTML}
 case $_c in
 	help)printHelp ;;
@@ -122,7 +154,14 @@ case $_c in
 	bash|bash-api)printHelp utalm-bash-API/index ${h};;
 	make|make-api)printHelp utalm-make-API/index ${h};;
     -d*)printHelp ${_c:-utalm-bash-API/index} ${h};;
-    *)localHelp;;
+    *)
+    if((_isfile));then
+    	printHelp $_file  ${h}
+	else
+		printHelp $_c ${h}
+    	localHelp
+    fi
+    ;;
 esac
 exit 0
 ## \endcond

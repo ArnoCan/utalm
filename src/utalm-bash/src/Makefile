@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -56,11 +56,12 @@ OUTDIRS += $(RTBASE)/lib
 all: outdirs $(SRC_FILES) $(SRC_DIRS) stripped
 
 stripped: $(SRC_FILES) $(SRC_DIRS) 
-	$(BLD_ROOT)/src/bin/strip-bash.sh DROPLINES -o $(RTBASE)bin $(RTBASE)bin/strip-bash.sh
-	$(BLD_ROOT)/src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalm.sh
-	$(BLD_ROOT)/src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalm.awk
-	$(BLD_ROOT)/src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalmfileobjects.sh
-	$(BLD_ROOT)/src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalmrefpersistency.sh
+	echo $(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)bin $(RTBASE)bin/strip-bash.sh
+	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)bin $(RTBASE)bin/strip-bash.sh
+	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalm.sh
+	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalm.awk
+	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalmfileobjects.sh
+	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalmrefpersistency.sh
 
 $(SRC_FILES):
 ifdef DBG

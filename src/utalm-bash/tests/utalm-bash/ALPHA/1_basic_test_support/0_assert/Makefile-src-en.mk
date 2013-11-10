@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-python
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -45,7 +45,6 @@ SRC_FILES	+= Makefile-nodeaction-en.mk
 SRC_DIRS	+=   
 
 #
-SUB_POOLS	+= CASE000  
-SUB_POOLS	+= CASE001
-SUB_POOLS	+= CASE002
+SUB_POOLS	+= base  
+SUB_POOLS	+= conditions
 ## \endcond

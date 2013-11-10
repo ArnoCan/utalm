@@ -4,7 +4,7 @@
 * MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 * SHORT:        utalm-bash
 * LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
-* VERSION:      03_03_001
+* VERSION:      03_03_002
 *
 * Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
 *
@@ -14,7 +14,7 @@
  * \package libutalm_examples_doxygen_bash
  * \author Arno-Can Uestuensoez
  * \date 2013.10.10
- * \version 03_03_001
+ * \version 03_03_002
  *
  * \brief Examples for bash script documentation by doxygen.
  */
@@ -32,6 +32,9 @@
 *   </li>
 *   <li>\ref addDebug<br />
 *   The addDebug provides an example for the typical cases for bash scripts. 
+*   </li>
+*   <li>\ref cliWrapperDemo<br />
+*   Demonstrates cli wrapper "utalm-bash-cli.sh". 
 *   </li>
 *   <li>\ref fileStream<br />
 *   Shows general application of files as output stream destinations. 

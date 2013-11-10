@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-make
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,7 +32,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ##
 ## @file
@@ -62,7 +62,7 @@
 ## This could be customized as required.
 ## @ingroup libutalm_make
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 ifndef _MAKE_NODEWALK_INCLUDED_
 _MAKE_NODEWALK_INCLUDED_:=1
@@ -200,8 +200,8 @@ ifdef DBG
 	$(ECHO) "$(INDENT1)IMPORT-DIRS:$@"	
 	$(ECHO) "$(INDENT1)$(CPA) $? $(TARGETBASE)/$(CURSUBPATH)"
 endif
-	$(MKDIR) $(TARGETBASE)/$(CURSUBPATH)
-	$(CPA) $? $(TARGETBASE)/$(CURSUBPATH)
+	$(MKDIR) $(TARGETBASE)$(CURSUBPATH)
+	$(CPA) $? $(TARGETBASE)$(CURSUBPATH)
 
 files:$(TARGET_FILES)
 .PHONY:files

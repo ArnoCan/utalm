@@ -5,7 +5,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -58,7 +58,6 @@ UNIQUE_IMPORT_FILES:=$(shell for i in ${IMPORT_FILES};do echo $$i;done|sort -u)
 .PHONY: SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPTGZ
 
 all: outdirs SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPTGZ $(TGZ_DEVEL_PNAME)
-
 .PHONY: src doc prep
 
 tgzcopy:$(TGZ_DEVEL_PNAME)

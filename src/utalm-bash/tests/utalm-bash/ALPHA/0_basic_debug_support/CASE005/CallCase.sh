@@ -7,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -31,7 +31,7 @@
 #
 #HEADEND################################################################
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ##
 ## @file
@@ -42,7 +42,7 @@
 ##	doDebug&&((DBG>0))&&echo "DBG=ON"||((DBG>0))&&echo "DBG=OFF"
 ##
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 #Execution anchor
 MYCALLPATHNAME=$0

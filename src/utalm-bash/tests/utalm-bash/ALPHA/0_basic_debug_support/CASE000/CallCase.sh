@@ -7,7 +7,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -31,7 +31,7 @@
 #
 #HEADEND################################################################
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @file
 ## @brief Test scan of command line call options by fetchDBArgs
@@ -53,7 +53,7 @@
 ##	
 ##	gotoHell $LINENO $BASH_SOURCE 0
 ##
-#***MODUL_DOXYGEN_END***
+##
 ## \cond
 #
 #Execution anchor

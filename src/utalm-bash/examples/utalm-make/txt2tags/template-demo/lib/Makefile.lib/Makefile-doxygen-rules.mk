@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-make
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,14 +32,14 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @file
 ## @ingroup tagstemplateDemo
 ## @brief Provides rules for doxygen
 ##
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 ifndef _DOXYGEN_RULES_INCLUDED_
 _DOXYGEN_RULES_INCLUDED_:=1

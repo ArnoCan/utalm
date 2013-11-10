@@ -6,7 +6,7 @@
 #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
-#VERSION:      03_03_001
+#
 #
 ########################################################################
 #
@@ -32,7 +32,7 @@
 #
 #$Header$
 #
-#***MODUL_DOXYGEN_START***
+##
 ## \endcond
 ## @ingroup headerFormatDemo
 ## @file
@@ -40,7 +40,7 @@
 ##
 ## For additional description refer to \ref headerFormatDemo. 
 ## \cond
-#***MODUL_DOXYGEN_END***
+##
 #
 #Execution anchor
 MYCALLPATHNAME=$0
@@ -71,27 +71,11 @@ function printSomeUTALM () {
 	
 }
 
-echo "#################################################">&2
-echo "# Default record">&2
-echo "#################################################">&2
+
+echo>&2
 echo "#">&2
 printSomeUTALM
 echo "#">&2
-echo "#################################################">&2
-echo "#">&2
-
-cat <<EOF
-try:
-
-demo.sh -d 1,f:F_CALLNAME%F_RLOGINIP
-demo.sh -d 1,f:F_CALLNAME%F_RLOGINIP%help
-demo.sh -d 1,f:F_CALLNAME%F_RLOGINIP%F_SEVERITY
-demo.sh -d 1,f:F_CALLNAME%F_RLOGINDNS%F_SEVERITY%F_INDENT
-demo.sh -d 1,f:F_CALLNAME%F_RLOGINDNS%F_USERNUM%F_SEVERITY%F_INDENT
-
-demo.sh -d 1,f:help
-
-EOF
 
 
 

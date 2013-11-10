@@ -7,7 +7,7 @@
 #SHORT:        utalm-bash
 #LICENSE:      Apache-2.0 - code 
 #LICENSE:      CCL-BY-SA - specification, interfaces, and inline documentation
-#VERSION:      03_03_001
+#
 #
 #***
 #
@@ -386,7 +386,39 @@ function assertWithExit () {
 		assert $LINENO $BASH_SOURCE 1
 	}
 	[[ -n "${e//[0-9]/}" ]]&&{
-		eval $* 2>&1 >/dev/null
+		#eval $* 2>&1 >/dev/null
+		x=${*// /_}
+		x=${x//'
+'/_}
+		x=${x//[_/[ }
+		x=${x//_]/ ]}
+		x=${x//_[/ [}
+		x=${x//]_/] }
+		x=${x//_==_/ == }
+		x=${x//_=_/ = }
+		x=${x//_!=_/ != }
+		x=${x//_=~_/ =~ }
+		x=${x//_<_/ < }
+		x=${x//_>_/ > }
+								
+		x=${x//_-eq_/ -eq }
+		x=${x//_-ge_/ -ge }
+		x=${x//_-gt_/ -gt }
+		x=${x//_-le_/ -le }
+		x=${x//_-lt_/ -lt }
+		x=${x//_-ne_/ -ne }
+																
+		x=${x//_<_/ < }
+		x=${x//_>_/ > }
+		x=${x//_<=_/ <= }
+		x=${x//_>=_/ >= }
+		
+		x=${x//_&_/ & }
+		x=${x//_|_/ | }
+		x=${x//_&&_/ && }
+		x=${x//_||_/ || }
+
+		eval $x >&2
 		e=$?
 	}
 	((TESTMODE&T_PRINTASSERT))&&echo -e "$*">>$LOG;
@@ -436,7 +468,9 @@ function assertRefDataWithExit () {
 	((TESTMODE&T_PRINTREF))&&{ echo $(refDataRead $id); return 0; }
 	((TESTMODE&T_PRINTVAL))&&{ echo -n -e $data; return 0; }
 	((TESTMODE&T_LISTREF))&&{ refDataStorePath $id ;echo;return 0; }
-	(((TESTMODE&(T_COMPAREREF|T_CREATEREF))>0))&&{
+	(((TESTMODE&(T_COMPAREREF|T_CREATEREF|T_PRINTASSERT))>0))&&{
+		OFS=$FS
+		export FS='%'
 		local refdat=$(refDataRead $id);
 		assertWithExit $l $s "[[ '$data' == '$refdat' ]]";
 	}
