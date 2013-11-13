@@ -1,0 +1,37 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_003
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page howtoutalmmake Howto - utalm-make
+* \par
+*
+* <h1>CLI Unittests</h1>
+* For an example refer to \ref cliUnittests.
+* The cli-unittests provides an example for the typical 
+* application of then make based unitttests for shell scripts.
+*
+* <h1>doxygen</h1>
+* For an example refer to \ref doxygen.
+* The doxygen provides examples for the documentation of 
+* some non-supported languages, which requires some workarounds:
+*   <ul>
+*   <li>awk - similar to C - \ref doxygenawkdocexample</li>
+*   <li>bash - similar to Python - \ref doxygenbashdocexample</li>
+*   <li>make - similar to Python - \ref doxygenmakedocexample</li>
+*   </ul>
+*
+* <h1>txt2tagsExamples</h1>
+* For an example refer to \ref txt2tagsExamples.
+* The txt2tags provides an example for the creation of pdf, html, and man formatted 
+* man pages.
+*/
+

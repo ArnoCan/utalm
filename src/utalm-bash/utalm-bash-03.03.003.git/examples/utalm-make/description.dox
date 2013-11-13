@@ -1,0 +1,68 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_003
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+ * \package libutalm_examples_doxygen_make
+ * \author Arno-Can Uestuensoez
+ * \date 2013.10.10
+ * \version 03_03_003
+ *
+ * \brief Examples for Makefile documentation by doxygen.
+ */
+
+/**
+* \page utalmmakeexamples Examples for utalm-make
+* \brief Examples and Patterns for utalm-make
+* \par
+*
+* <ul>
+*   <li>cli-regressiontests</li>
+*   <li>\ref cliUnittests<br />
+*   The cli-unittests provides an example for the typical 
+*   application of then make based unitttests for shell scripts.
+*   </li>
+*   <li>\ref doxygen<br />
+*   The doxygen provides examples for the documentation of 
+*   some non-supported languages, which requires some workarounds:
+*   <ul>
+*   <li>awk - similar to C - \ref doxygenawkdocexample</li>
+*   <li>bash - similar to Python - \ref doxygenbashdocexample</li>
+*   <li>make - similar to Python - \ref doxygenmakedocexample</li>
+*   </ul>
+*   </li>
+*   <li>Epydoc</li>
+*   <li>LaTex</li>
+*   <li>Sphinx</li>
+*   <li>\ref txt2tagsExamples<br />
+*   The txt2tags provides an example for the creation of pdf, html, and man formatted 
+*   man pages.
+*   </li>
+* </ul>
+*
+*/
+
+/**
+ * \ingroup libutalm_make
+ * \defgroup utalmMakeExamples utalm-make-examples
+ * \addtogroup utalmMakeExamples
+ *  @{
+ * \brief Example for libutalm.sh and libutaml.awk integration into bash and awk 
+ *
+ * The awkMatchFilter provides an example for the typical 
+ * cases for awk scripts used in conjunction with shell scripts.
+ * 
+ * @}
+ */
+
+
+
+

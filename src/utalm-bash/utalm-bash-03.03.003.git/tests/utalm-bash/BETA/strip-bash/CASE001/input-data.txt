@@ -1,0 +1,4 @@
+#----
+# line1
+echo line 2a # line 2
+   # line 3

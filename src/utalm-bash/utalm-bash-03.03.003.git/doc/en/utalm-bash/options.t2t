@@ -1,0 +1,228 @@
+
+.
+%NONTEX% = OPTIONS =
+%TEX% \ifman
+%% #HEADSTART##############################################################
+%% #
+%% #PROJECT:      UnifiedTraceAndLogManager
+%% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #SHORT:        utalm-bash
+%% #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+%% #
+%% #
+%% ########################################################################
+%% #
+%% #   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+%% #
+%% #   Licensed under the Apache License, Version 2.0 (the "License");
+%% #   you may not use this file except in compliance with the License.
+%% #   You may obtain a copy of the License at
+%% #
+%% #     http://www.apache.org/licenses/LICENSE-2.0
+%% #
+%% #   Unless required by applicable law or agreed to in writing, software
+%% #   distributed under the License is distributed on an "AS IS" BASIS,
+%% #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% #   See the License for the specific language governing permissions and
+%% #   limitations under the License.
+%% #
+%% #HEADEND################################################################
+%%
+%%$Header$
+
+%TEX% \section{OPTIONS}
+%TEX% \else
+%TEX% \section{OPTIONS}
+%TEX% \fi
+%%
+%%$Header$
+%%
+
+%HTML% -LT-a name="optd" /-GT-
+%TEX% : **-d <debug-args>**
+%NONTEX% ===-d <debug-args> ===
+%TEX% \ifman
+%TEX% \addtoUTALMManToc{subsubsection}{-d <debug-levels>}
+%TEX% \else
+%TEX% \addtotoc{subsubsection}{-d <args>}
+%TEX% \label{it:optd}
+%TEX% \fi
+%TEX% \ \\
+%HTML% -LT-br /-GT-
+
+Sets the level, range, and appearence of debug output. Could be altered to any option
+instead of **'-d'**, but the suboptions may not be changed.
+
+For the overview refer to the above figure with options and their syntax definitions.
+
+ - **<debug-bit-array>[,(PATTERN|P)|MIN|MAX]**
+
+%TEXMAN% \addtotoc{paragraph}{<debug-bit-array>}
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+  The debug output could be controlled by one of two basic styles, the
+  level-mode(MIN|MAX) or the match-mode(PATTERN).
+  - **level-mode(MIN|MAX)**
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+    The level-mode sets a threshold from which on(MIN), or up to
+    which(MAX) a trace output is displayed.
+    The switch-on value has to be increment one above the destination
+    output level.
+  - **match-mode(PATTERN)**
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+    The match mode displays trace only by bitwise AND operation.
+
+: _
+
+The debug mode value could be provided in any bash supported notation,
+  but only 32bit arrays should be used.
+```
+[(LEVEL|L):]<debug-bit-array>=2#(0|1){1,32}|[0-9]*|<any-bash-format-32bit>
+```
+
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+The following variables are predefined to be used for levels and pattern.
+The variable name could be used alternatively for suboptions.
+In general a value could be provided in one of the following representations:
+```
+  D_UI or UI or 1
+```
+
+ - **ERRORS**:
+The following levels and bitpatterns ar eprovided for error log configuration.
+%TEXMAN% \addtotoc{paragraph}{ERRORS}
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+  Traced independently and in any case.
+  - **D_UI=1=2#1**
+%TEXMAN% \addtotoc{subparagraph}{D_UI=1}
+  Common UserInterface. 
+  - **D_FLOW=2=2#10**
+%TEXMAN% \addtotoc{subparagraph}{D_FLOW=2}
+  Common UserInterfaceExtended, call flow.
+  - **D_UID=4=2#100**
+%TEXMAN% \addtotoc{subparagraph}{D_UID=4}
+  Common UserInterfaceDebug, draft data collection.
+  - **D_DATA=8=2#1000**
+%TEXMAN% \addtotoc{subparagraph}{D_DATA=8}
+  Detailed data processing.
+  - **D_MAINT=16=2#10000=16#10**
+%TEXMAN% \addtotoc{subparagraph}{D_MAINT=16}
+  Maintenance, details of attribute evaluation.
+  - **D_FRAME=32=2#100000=16#20**
+%TEXMAN% \addtotoc{subparagraph}{D_FRAME=32}
+  Traces the framework.
+  - **D_SYS=64=2#1000000=16#40**
+%TEXMAN% \addtotoc{subparagraph}{D_SYS=64}
+  Traces system calls encapsulated by "callErrOutWrapper".
+  Particularly useful for evaluating the required root-permissions for
+  "ksu" and/or "sudo".
+  - **D_TESTDEBUG=16384=2#100000000000000=16#4000**
+%TEXMAN% \addtotoc{subparagraph}{D_TESTDEBUG=16384}
+  Traces sync-points for regression tests.
+  - **D_BULK=32768=2#1000000000000000=16#8000**
+%TEXMAN% \addtotoc{subparagraph}{D_BULK=32768}
+  This is the the haystack.
+
+ - Generic Values:
+%TEXMAN% \addtotoc{paragraph}{Generic Values}
+%TEX% \ \\
+  Values to be used for multiple categories.
+  - **D_ALL**=4294967296=16#ffffffff
+%TEXMAN% \addtotoc{subparagraph}{D_ALL=4294967296}
+    This activates all.
+
+
+ - **(SUBSYSTEM|S):<subsystem-bit-array>**
+%TEXMAN% \addtotoc{paragraph}{SUBSYSTEM}
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+ Subsystems as match-mode bitr array.
+``` <subsystem-bit-array>=2#(0|1){1,32}|[0-9]*|<any-bash-format-32-bit>
+The following variables are predefined to be used for subsystems.
+  - **S_CONF**=1
+%TEXMAN% \addtotoc{subparagraph}{S_CONF=1}
+  - **S_BIN**=2
+%TEXMAN% \addtotoc{subparagraph}{S_BIN=2}
+  - **S_LIB**=4
+%TEXMAN% \addtotoc{subparagraph}{S_LIB=4}
+  - **S_CORE**=8
+%TEXMAN% \addtotoc{subparagraph}{S_CORE=8}
+  - **S_GEN**=16
+%TEXMAN% \addtotoc{subparagraph}{S_GEN=16}
+  - **S_CLI**=32
+%TEXMAN% \addtotoc{subparagraph}{S_CLI=32}
+  - **S_X11**=64
+%TEXMAN% \addtotoc{subparagraph}{S_X11=64}
+  - **S_VNC**=128
+%TEXMAN% \addtotoc{subparagraph}{S_VNC=128}
+  - **S_QEMU**=256
+%TEXMAN% \addtotoc{subparagraph}{S_QEMU=256}
+  - **S_VMW**=512
+%TEXMAN% \addtotoc{subparagraph}{S_VMW=512}
+  - **S_XEN**=1024
+%TEXMAN% \addtotoc{subparagraph}{S_XEN=1024}
+  - **S_PM**=2048
+%TEXMAN% \addtotoc{subparagraph}{S_PM=2048}
+
+
+ - **(WARNING|W):[0-9]**
+%TEXMAN% \addtotoc{paragraph}{WARNING}
+%TEXMAN% \addtotoc{subparagraph}{LEVEL=0-9}
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+  Warnings to be displayed, level-mode only and no subsystem.
+  "0" switches off.
+  The switch-on value has to be increment one above the destination
+  output level.
+ - **(INFO|I):[0-9]**
+%TEXMAN% \addtotoc{paragraph}{INFO}
+%TEXMAN% \addtotoc{subparagraph}{LEVEL=0-9}
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+  Info to be displayed, level-mode only and no subsystem.
+  "0" switches off.
+  The switch-on value has to be increment one above the destination
+  output level.
+ - **(FILELIST|F):<file-list>[,(EXCLUDE|INCLUDE)]**
+%TEXMAN% \addtotoc{paragraph}{FILELIST}
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+  A list of files to be included exclusively or excluded.
+  The names are matched with the presented string on output 
+```
+$(bootstrapGetRealPathname $CURRENTFILEPARAM) "string-in" <files-in-file-list>
+```
+  where due to performance reasons a simple pattern-match is performed
+  only.
+  For the same reason the EXCLUDE and INCLUDE keywords are applied to the whole
+  set at once.
+``` <file-list>=<file>[%<file-list>]
+
+ - **(PRINTFINAL|PFIN)[:[0-9]]**
+%TEXMAN% \addtotoc{paragraph}{PRINTFINAL}
+%TEXMAN% \addtotoc{subparagraph}{LEVEL=0-9}
+%TEX% \ \\
+%HTML%  -LT-br /-GT- 
+Prints final call assembly as passed to the execution interface and wait-points.
+In case of a wrapper script, the pre-wrapper-script and the final pre-execution 
+assembly within the wrapper-script are displayed.
+In case of a wrapper-script the displayed call string could be used from the command 
+line by cut-and-paste for debugging purposes.
+%TEX% \ \\
+
+LEVEL defines the granularity, where by convention the LEVEL==0 represents the ultimate 
+final call.
+This could be in some cases an internal library call with a bulk of
+subcalls of minor interest, but by definition is the final CLI execution.
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+%TEX% \ \\
+%TEX% \ \\
+
+
+

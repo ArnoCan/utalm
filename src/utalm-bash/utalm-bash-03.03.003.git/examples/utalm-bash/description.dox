@@ -1,0 +1,67 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_003
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+ * \package libutalm_examples_doxygen_bash
+ * \author Arno-Can Uestuensoez
+ * \date 2013.10.10
+ * \version 03_03_003
+ *
+ * \brief Examples for bash script documentation by doxygen.
+ */
+
+/**
+* \page utalmbashexamples Examples for utalm-bash
+* \brief Examples and Patterns for utalm-bash
+* \par
+*
+* <ul>
+*   <li>\ref helpDemo<br />
+*   The help-demo provides an example for the integration of embedded online help.<br />
+*   </li>
+*   <li>\ref addDebug<br />
+*   The addDebug provides an example for the typical cases for bash scripts. 
+*   </li>
+*   <li>\ref cliWrapperDemo<br />
+*   Demonstrates cli wrapper "utalm-bash-cli.sh". 
+*   </li>
+*   <li>\ref fileStream<br />
+*   Shows general application of files as output stream destinations. 
+*   </li>
+*   <li>\ref findParameterError<br />
+*   Shows parameter application and fix of missing values. 
+*   </li>
+*   <li>\ref headerFormatDemo<br />
+*   Demonstrates output customizing. 
+*   </li>
+*   </li>
+*   <li>\ref refPersistency<br />
+*   Demonstrates persistency of reference data. 
+*   </li>
+*   <li>\ref thresholds<br />
+*   Demonstrates thresholds MIN, MAX, PATTERN. 
+*   </li>
+* </ul>
+*
+*/
+
+/**
+ * \ingroup utalm_bash
+ * \defgroup utalmBashExamples utalm-bash-examples
+ * \addtogroup utalmBashExamples
+ *  @{
+ * \brief Examples for utalm-bash
+ *
+ * The ulibtalm-bash provides examples for libutalm.sh and related parts. 
+ * 
+ * @}
+ */

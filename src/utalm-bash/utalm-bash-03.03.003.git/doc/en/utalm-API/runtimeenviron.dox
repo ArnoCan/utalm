@@ -1,0 +1,165 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_003
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page utalmenvironment Rutime Environment and Configuration
+* \brief Configuration and Setup of Runtime Environment
+* \par
+*
+* <h1>Runtime Environment</h1>
+*
+* The required runtime environment of current version is based by default on a common root node
+* for the installed components. 
+* The components rely on relative paths for all of their parts by default.
+* The internal structure provides for a set of environment variables, which are
+* derived either from the anchor node, or from expected relative position in file system.
+* Each variable is implemented to keep pre-set values, when applicable.  
+*
+* The setup of the runtime and development environment is supported by the script
+* \ref sourceEnvironment.sh, which assembles the resulting systems execution environment
+* variables by internal parts.
+* The configuration variables are stored in the **utalm.conf** and **utalm-&lt;component&gt;.conf** files,
+* where &lt;component&gt; has to be replaced by the components name, e.g. **utalm-bash.conf**.
+* 
+* The main resulting runtime anchor variables are:
+* <ul>
+*   <li><a href="namespacemembers.html#index_p"><b>PATH</b></a></li>
+*   <li><a href="namespacemembers.html#index_l"><b>LD_LIBRARY_PATH</b></a></li>
+*   <li><a href="namespacemembers.html#index_m"><b>MANPATH</b></a></li>
+* </ul>
+*
+*
+* \remark Replace &lt;distribution&gt; by current, at the time of writing: <br /><b>&lt;distribution&gt;:=&lt;version&gt;-&lt;release&gt;_&lt;variant&gt;:=03.03.003-R0_BETA</b>
+*
+*
+* <h2>Directory structure</h2>
+* The created directories are depicted in the following figure, these are
+* used commonly for all spin-offs from the USM and other projects by the
+* author in the same manner.
+* 
+*	$HOME
+*	      |
+*	      +-bin
+*	        +-bootstrap
+*	      +-conf
+*	      +-doc
+*	         +de
+*	         +en
+*	      +-examples
+*	         +-utalm-awk
+*	         +-utalm-bash
+*	         +-utalm-make
+*	      +-include
+*	      +-lib
+*	         +-core
+*	         +-Makefile.lib
+*	      +-tests
+*	         +-utalm-awk
+*	         +-utalm-bash
+*	         +-utalm-make
+*
+* The **bootstrap** and **core** subdirectories of **bin** and **lib** contain the 
+* lowest level of required 
+* runtime calls, which are required to set internal variables. An example is the 
+* operations system, which is 
+* used for several mediation decisions within the code like using appropriate
+*  paths and system call variants.
+* 
+* <h2>Documents</h2>
+* The **doc** directory tree contains the documents in the formats 
+* **MAN**, **PDF**, and **HTML**.
+*
+*	    $HOME
+*	      |
+*	      +-doc
+*	         +css
+*	         +en
+*	           +css
+*	           +-html
+*	             +-man1
+*	             +-man7
+*	           +images
+*	           +-man
+*	             +-man1
+*	             +-man7
+*	           +-pdf
+*	             +-man1
+*	             +-man7
+*	         +images
+*	         +js
+* 
+* The **MANPATH** variable should be set as
+* 
+*	export MANPATH=${MANPATH}:$HOME/doc/en/man
+*
+* or
+*
+*	export MANPATH=${MANPATH}:$HOME/doc/de/man
+*
+* <h2>Tests</h2>
+* The **tests** directory tree contains the test cases.
+*
+*	    $HOME
+*	      |
+*	      +-tests
+*	         +-utalm-awk
+*	         +-utalm-bash
+*	         +-utalm-make
+*	         +-utalm-python
+*	         +-utalm-<component>
+* 
+* The following variables control the regression and unit test environment provided by 
+* <a href="../utalm-make-API/index.html"><b>utalm-make</b></a>:
+* <ul>
+*   <li><a href="namespacemembers.html#index_t"><b>TSTREF</b></a>
+*   	(<a href="../utalm-make-API/namespacemembers.html#index_t"><b>utalm-make-API(3)</b></a>)
+*		</li>
+*   <li><a href="namespacemembers.html#index_t"><b>TSTBASE</b></a>
+*   	(<a href="../utalm-make-API/namespacemembers.html#index_t"><b>utalm-make-API(3)</b></a>)
+*		</li>
+*   <li><a href="namespacemembers.html#index_c"><b>CALLTESTOPTS</b></a>
+*   	(<a href="../utalm-make-API/namespacemembers.html#index_c"><b>utalm-make-API(3)</b></a>)
+*		</li>
+*   <li>
+*   </li>
+* </ul>
+* 
+* The following tools provide the main execution frame by 
+* <a href="../utalm-make-API/index.html"><b>utalm-make</b></a>:
+* <ul>
+*   <li> \ref countErrors.sh
+*		</li>
+*   <li><a href="namespacemembers.html#index_t"><b>TSTBASE</b></a>
+*   	(<a href="../utalm-make-API/namespacemembers.html#index_t"><b>utalm-make-API(3)</b></a>)
+*		</li>
+*   <li><a href="namespacemembers.html#index_c"><b>CALLTESTOPTS</b></a>
+*   	(<a href="../utalm-make-API/namespacemembers.html#index_c"><b>utalm-make-API(3)</b></a>)
+*		</li>
+*   <li>
+*   </li>
+* </ul>
+*
+*
+* <h1>Configuration</h1>
+* The preset default values of internal shell variables could be changed by
+* environment variables, refer to the code. The standard pattern for this 
+* **bash** version is
+*
+*	MYVARNAME=${MYVARNAME:-&lt;default-value&gt;}
+*
+* could be changed by configuration files
+* and environment variables.
+* The configuration files are installed by default within '$HOME/conf' directory tree.
+*
+* 
+*/
+

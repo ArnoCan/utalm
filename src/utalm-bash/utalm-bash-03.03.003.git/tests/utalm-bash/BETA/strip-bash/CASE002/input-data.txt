@@ -1,0 +1,29 @@
+#----
+# line1
+echo line 2a # line 2
+   # line 3
+echo "line 4a "# line 4
+echo "line 5a "# line 5
+# whole line
+echo 'line 6a ' # line 6
+ # part of line
+echo 'line "7a ' # line 7
+echo 'line "8a ' # line 8 "string"
+echo 'line "9a ' # line 9 'string'
+
+cat << EOF
+
+asfasdf
+
+EOF
+function a () {
+  cat << EOF
+
+    asfasdf
+
+EOF
+}
+echo "EOF-end" # EOF-end
+echo "plus"
+  #2
+echo "add"

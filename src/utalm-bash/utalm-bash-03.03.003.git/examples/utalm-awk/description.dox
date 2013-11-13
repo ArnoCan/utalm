@@ -1,0 +1,48 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_003
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+ * \package libutalm_examples_doxygen_awk
+ * \author Arno-Can Uestuensoez
+ * \date 2013.10.10
+ * \version 03_03_003
+ *
+ * \brief Examples for awk script documentation by doxygen.
+ */
+
+/**
+* \page utalmawkexamples Examples for utalm-awk
+* \brief Examples and Patterns for utalm-awk
+* \par
+*
+* <ul>
+*   <li>\ref awkMatchFilter<br />
+*   The awkMatchFilter provides an example for the typical 
+*   cases for awk scripts used in conjunction with shell scripts.
+*   </li>
+* </ul>
+* For details refer to: \ref utalmAwkExamples
+*
+*/
+
+/**
+ * \ingroup libutalm_awk
+ * \defgroup utalmAwkExamples utalm-awk-examples
+ * \addtogroup utalmAwkExamples
+ *  @{
+ * \brief Examples for utalm-awk 
+ *
+ * The utalm-awk provides examples for libutalm.awk 
+ * 
+ * @}
+ */
+

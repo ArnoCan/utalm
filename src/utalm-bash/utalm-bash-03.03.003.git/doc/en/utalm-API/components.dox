@@ -1,0 +1,31 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_003
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+*
+* \page components Provided Components
+* \brief The provided components for Programming Languages and IDEs 
+* \par
+*
+* The UTALM project provides at the time of writing the libraries and plugins as listed.
+* The general layering and dependency structure is as depicted in the following figure.
+*  
+*
+* <H2>Programming Languages</H2>
+*
+* Language   | Package          |State   | Delivery  | Installed | API
+* -----------|------------------|--------|-----------|-----------|------------
+* awk        | utalm-bash       | alpha  | available | X         | <a href="../utalm-awk-API/index.html"><b>awk</b></a>
+*
+* \par
+*
+*/

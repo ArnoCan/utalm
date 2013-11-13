@@ -1,0 +1,26 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_003
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page testdevopstools How to test small sized adhoc-tools
+* \brief How to test sysadmin scripts.
+*  \par
+*
+ * The daily business requirements particularly for systems administration
+ * require frequently the development of micro utilities. Even though each of 
+ * this is actually small sized, the sum of the environment collection may not be. 
+ * Therefore some efficient and less efford based toolset is required in oder
+ * to assure quality and stability. This could be perfectly managed with a slim
+ * Makefile based environemnt, which also includes appropriate rulesets for
+ * some popular documentation automation tools.
+ *   
+ */

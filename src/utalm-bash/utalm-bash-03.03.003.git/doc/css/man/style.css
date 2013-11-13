@@ -1,0 +1,29 @@
+body {
+    margin:3em;
+/*
+    background-color:#dcd0bc;
+    background-color:#ffffff;
+ */
+ background-color:#fefefe;
+}
+
+a { 
+	text-decoration:none;
+}
+pre {
+/*
+    background-color:#d6bc8f;
+ */    
+ background-color:#eeeeee; 
+	
+}
+
+.O {color:orange;margin-bottom:7px;font-size:20px;}
+.Y {color:yellow;margin-bottom:7px;font-size:20px;}
+.U {color:green;margin-bottom:7px;font-size:20px;}
+.S {color:blue;margin-bottom:7px;;font-size:20px;}
+.M {color:red;margin-bottom:7px;font-size:20px;}
+
+.u {color:green;margin-bottom:7px;font-size:20px;line-height:1.0em;margin-top:10px;}
+.s {color:blue;margin-bottom:7px;font-size:20px;line-height:1.0em;margin-top:10px;}
+.m {color:red;margin-bottom:7px;font-size:20px;line-height:1.0em;margin-top:10px;}
