@@ -1,0 +1,107 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page buildingblocksutamlbash Building Blocks for SI and R&D
+* \brief Features for Systems Integration and R&D environments.
+* \par
+*
+* The UnifiedTraceAndLogManager provides a common approach of tracing 
+* and logging dynamic runtime information for heterogeneous systems.
+* The basic intention is here to provide a small interface with a 
+* similar control syntax and a common output format for multiple 
+* programming languages and runtime environments including scripting.
+*
+* <h2>Common Interfaces</h2>
+* <h3>Programming API</h3>
+* The available programming API combines development requirements
+* for more detailed in-time trace output for dialogue sessions, with
+* application integration requirements for production systems by severity
+* based systems logging of states with condensed information for post analysis.  
+*
+* \remark The syntax of the supported programming and scripting languages differ,
+* but the call name and the set of parameters are in general identical for all
+* provided programming languages. 
+*
+* The programming APIs with emphasis of development support 
+* provide parameters with the focus on internal software aspects. 
+*   * printDBG, printFINALCALL, callErrOutWrapper
+*
+* The programming APIs with focus on user aspects provide by internal design
+* severity based display of operational state information. 
+*   * printINFO, printWNG, printERR
+*
+* <h3>Output Stream</h3>
+* The output record format is configured as a
+* homogeneous output stream with common fields. The output stream could be 
+* redirected from consoles to almost any storage by various formats.  
+* Thus a unique view on control flow and runtime data including execution states 
+* is provided for all involved software components.
+*
+* <h3>Unit and Regression Test</h3>
+* The API provides automation of unit and regression tests by introduction of
+* a common assert interface with extension for persistence and assertion based
+* on stored data. This is particularly applicable to call options and interfaces
+* with huge amounts of parameters. Due to required
+* permutation in case of cross dependencies such common interfaces produce a
+* considerable amount of bulk data to be provided as reference for smoke tests.
+* This whole process could be automated by a few interfaces, basically by one
+* call only <b>assertRefDataWithExit</b>.
+*
+* <h3>Documentation</h3>
+* The integration of multiple programming environments includes various 
+* specific documentation environments. The utalm packages provide for a common 
+* build environment by make-rules for generating a common set of API documentation.   
+*
+* The supported tools are:
+*  * doxygen
+*  * epydoc
+*  * LaTex
+*  * sphinx
+*  * txt2tags
+*
+* The preferred API documentation tool is doxygen.
+*
+* <h2>utalm-bash</h2>
+* The package utalm-bash focuses on the lower layer of the systems 
+* and application integration stack with support for bash, awk, Makefiles, and
+* documentation tools.
+* This comprises scripting by bash, awk, and Makefile support, including
+* a unit and regression test environment.
+*
+*  * 'bash' scripts are the most common integration components for 
+*    applications and system components on Linux systems, and are 
+*    widely used on common UNIX based systems.
+*      * API @@\ref utalm_bash
+*      * \ref introutalmbash
+*      * \ref howtoutalmbash
+*      * \ref utalmbashexamples
+*  * 'awk' is the choice for shell sub-scripting, when small stateful string
+*    processing utilities are required.
+*      * API @@\ref libutalm_awk
+*      * \ref introutalmawk
+*      * \ref howtoutalmawk
+*      * \ref utalmawkexamples
+*  * Makefiles provide the most important build environment for  
+*    static software configuration at build time.
+*      * API @@\ref libutalm_make
+*      * \ref introutalmmake
+*      * \ref howtoutalmake
+*      * \ref utalmmakeexamples
+*  * TDD - Test driven Development requires particularly for simplicity in creation 
+*    of reference data. This is provided by integration of extensions 
+*    for assertion of dynamic and static data.
+*      * The API is documented @@\ref libutalm_tdd 
+*
+*
+*/
+

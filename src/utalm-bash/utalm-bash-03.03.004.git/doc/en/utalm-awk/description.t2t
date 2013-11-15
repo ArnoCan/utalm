@@ -1,0 +1,95 @@
+
+.
+%NONTEX% = NAME =
+%NONTEX% **MYTITLE**
+%% #HEADSTART##############################################################
+%% #
+%% #PROJECT:      UnifiedTraceAndLogManager
+%% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #SHORT:        utalm-bash
+%% #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+%% #
+%% #
+%% ########################################################################
+%% #
+%% #   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+%% #
+%% #   Licensed under the Apache License, Version 2.0 (the "License");
+%% #   you may not use this file except in compliance with the License.
+%% #   You may obtain a copy of the License at
+%% #
+%% #     http://www.apache.org/licenses/LICENSE-2.0
+%% #
+%% #   Unless required by applicable law or agreed to in writing, software
+%% #   distributed under the License is distributed on an "AS IS" BASIS,
+%% #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% #   See the License for the specific language governing permissions and
+%% #   limitations under the License.
+%% #
+%% #HEADEND################################################################
+%%
+%%$Header$
+%%
+%TEX% \ifman
+%TEX% \section{NAME}
+%TEX% **MYTITLE**
+%TEX% \else
+%TEX% \newpage
+%TEX% \section{MYCALL}
+%TEX% \label{s:MYCALL}
+%TEX% \fi
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+
+%NONTEX% = SYNTAX =
+%HTML%  -LT-br /-GT- 
+%TEX% \ifman
+%TEX% \section{SYNTAX}
+%TEX% \else
+%TEX% \large\textbf{MYCALL}
+%TEX% \fi
+%VERBATIMBEG
+%!include(wiki): ''syntax.t2t''
+%!include(tex): ''syntax.t2t''
+%!include(txt): ''syntax.t2t''
+%!include(man): ''syntax.t2t''
+%!include(html): ""syntax.t2t""
+%VERBATIMEND
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+%HTML% -LT-br /-GT-
+
+%NONTEX% = DESCRIPTION =
+%TEX% \ifman
+%TEX% \section{DESCRIPTION}
+%TEX% \fi
+Modern software systems and applications are assembled by components written in multiple languages
+include scripting engines, and are frequently build on multiple specialized frameworks and
+middleware for a considerable diversity of runtime environments.
+Therefore the interface of all packages and components of the -UnifiedTraceAndLogManager- are
+as close to each other as the specific syntax of supported programming languages provide.
+%TEX% \\
+
+The **awk** component of the **UnifiedTraceAndLogManager** provides awk scripting by the logging 
+and debugging library **libutalm.awk** with additional support for unit tests. 
+The integration is simply done by inclusion and currently supported for GNU-awk only.
+
+- standard severity levels with coloring - **DEBUG**, **INFO**, **WARNING**, and **ERROR**
+- symbolic and numeric value selection
+- selection of trace-levels/trace-bits, subsystems, file-scope, function-scope, module-scope
+
+
+The contained features comprise:
+
+- **strip-bash.sh** - comment stripper
+- Unit test support by:
+ - **assert** - Check for dynamic condition
+ - **assertRefDataWithExit** - handles creation and persistency of reference data
+
+
+For detailed help call **utalmhelp.sh api**.
+%HTML% -LT-br /-GT-
+
+

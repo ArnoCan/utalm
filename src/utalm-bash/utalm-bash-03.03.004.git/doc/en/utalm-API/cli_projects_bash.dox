@@ -1,0 +1,57 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+*
+* \page cli_projects_bash Howto create and setup a command line project for bash
+* \brief The example demonstrates the use for the creation of command line only bash projects 
+* \par
+*
+* The UTALM project provides the creation of bash projects.
+*  
+*  1. Create a directory, e.g.:
+*
+*		mkdir -p ${HOME}/projects/utalm-bash-test
+*  2. Set INSTROOT:
+*
+*		export INSTROOT=${HOME}/projects/utalm-bash-test
+*     Default is "INSTROOT=${HOME}".
+*  3. Install "utalm-bash" package
+*  4. Install "utalm-bash" base software into the project directory  by installer, e.g.:
+*
+*		cd /usr/share/utalm-bash
+*		. sourceEnvironment.sh
+*		./install.sh
+*  5. Install "utalm-bash-devel" SDK into the project directory  by installer, e.g.:
+*
+*		cd /usr/share/utalm-bash-devel
+*		. sourceEnvironment.sh
+*		./install-devel.sh
+*  6. Change to project directory and perform tests:
+*
+*		cd $INSTROOT
+*		. sourceEnvironment.sh
+*		cd tests
+*		make test
+*  7. Change to project directory and perform unit tests:
+*
+*		make unit
+*     when takes too long, try
+*
+*		DBG=1 COUNTERRORS_OPTS="filter=0"  make unit
+*		
+*		countErrors.sh help
+*		make help
+*
+* \par
+*
+*/

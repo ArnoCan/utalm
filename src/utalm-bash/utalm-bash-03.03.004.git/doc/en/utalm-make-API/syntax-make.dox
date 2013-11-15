@@ -1,0 +1,40 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page cliSyntaxMake SYNTAX: utalm-make collection
+* \brief Application Syntax for utalm-make 
+* \par
+*
+*	include lib/Makefile.lib/<module-name>
+*	
+*	<module-name>:=(
+*	    Makefile-doxygen-rules.mk
+*	    Makefile-epydoc-rules.mk
+*	    Makefile-latex-rules.mk
+*	    Makefile-nodewalk.mk
+*	    Makefile-test.mk
+*	    Makefile-txt2tags-rules.mk
+*	)
+*	
+*	Nodeaction-test.sh
+*	check-makefile-ifdefs.sh
+*	
+*	templates for: tgz, src-tgz, rpm, src-rpm, deb
+*	
+*	templates for: Makefiles, regression tests,, unit tests
+*	
+* For additional information refer to
+* @ref utalmmakeexamples and
+* <a href="../../man7/utalm-make-tests/index.html"><b>utalm-make tests</b></a>
+
+*/

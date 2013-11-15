@@ -1,0 +1,75 @@
+%% #HEADSTART##############################################################
+%% #
+%% #PROJECT:      UnifiedTraceAndLogManager
+%% #AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+%% #SHORT:        utalm-bash
+%% #LICENSE:      Apache-2.0 + CCL-BY-SA-3.0
+%% #
+%% #
+%% ########################################################################
+%% #
+%% #   Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+%% #
+%% #   Licensed under the Apache License, Version 2.0 (the "License");
+%% #   you may not use this file except in compliance with the License.
+%% #   You may obtain a copy of the License at
+%% #
+%% #     http://www.apache.org/licenses/LICENSE-2.0
+%% #
+%% #   Unless required by applicable law or agreed to in writing, software
+%% #   distributed under the License is distributed on an "AS IS" BASIS,
+%% #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%% #   See the License for the specific language governing permissions and
+%% #   limitations under the License.
+%% #
+%% #HEADEND################################################################
+%%
+%%$Header: /home2/reps/cvs/proj/utalm/utalm-doc/conf/html/html0/utalm-manual-macros.tex,v 1.2 2011/12/05 15:57:08 acue Exp $
+%%
+
+
+%
+%Add additional toc entries for online help
+%
+\newcommand{\addtotoc}[2]{
+%%   \phantomsection{}
+%%   \addcontentsline{toc}{#1}{#2}
+}
+
+
+%
+%Add toc to pdfbookmarks
+%
+\newcommand{\extpdfcontent}[0]{
+%%   \pdfbookmark[0]{Contents}{toc}
+%%  \tableofcontents
+}
+
+
+%
+%Set reduced section reference for latex2pdf
+%
+\newcommand{\sectionRef}[1]{
+  Section(\ref{#1})
+}
+
+%
+%Set hyperref as supported
+%
+\newcommand{\callHyperref}[2]{
+  #2(\ref{#1})
+}
+
+%
+%Set hyperref as supported
+%
+\newcommand{\callHyperlink}[2]{
+  #2(\ref{#1})
+}
+
+
+
+\newif\ifdefhtml\ifdefhtmltrue
+
+\newif\ifmanual\manualtrue

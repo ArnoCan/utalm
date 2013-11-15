@@ -1,0 +1,25 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+
+/**
+ * \ingroup doxygen
+ * \defgroup doxygenawkdocexample doxygen-awk-doc-example
+ * \addtogroup doxygenawkdocexample
+ *  @{
+ * \brief Example for inline documentation of bash scipts by doxygen 
+ *
+ * The doxygen-awk-doc-example provides examples for the API description 
+ * based on inline documentation for awk scripts. 
+ * 
+ * @}
+ */

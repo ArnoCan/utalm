@@ -1,0 +1,38 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page unittestsbymake Unit-Tests with make
+* \brief The make utility could be easily utilized for unit tests of command line utilities
+*  \par
+*
+ * The make utility is designed to process system trees and execute 
+ * operations based on predefined rules. This fits also to setting up a
+ * file system based unit and regression test environment for small sized utilities
+ * with less configuration effort. These requirements are typically present in the 
+ * systems administration and DevOPs environments, also in development and test environments.
+ *
+ * Another requirement is given by heterogeneous landscape of nowadays toolsets 
+ * covering almost all major programming languages and applied technologies.
+ * Therefore this project focuses on providing a lean environment with simple and
+ * efficient facilities for setting up a low-cost and low-effort development and
+ * test environment for collecting all adhoc utilities developed in an agile 
+ * work environement.
+ *
+ * This is provided by the utalm-bash component, which actually contains support 
+ * for make and awk too. The main part is a combined trace and logging library, 
+ * which enables a configurable standard output format for multiple programming languages.
+ * This also includes a standard response format for application of test automation
+ * of unit and regression tests.
+ *
+ *       
+ */

@@ -1,0 +1,61 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+
+/**
+ * \ingroup utalmBashExamples
+ * \defgroup headerFormatDemo headerFormatDemo
+ * \addtogroup headerFormatDemo
+ *  @{
+ * \brief Example for custom header by command line options 
+ *
+ * The default could be changed in the file:
+ *
+ *	conf/utaml-bash.conf
+ *
+ * The default value is:
+ *
+ *	F_DEFAULT=$((F_FILENAME|F_LINENUMBER|F_SEVERITY|F_CODE))
+ *
+ * The headerFormatDemo provides examples for the application of libutalm.bash.
+ * Help on available record fields:
+ *
+ *	demo.sh -d f:help
+ *
+ * Trace CALLNAME
+ *
+ *	demo.sh -d 1,f:F_CALLNAME
+ *	demo.sh -d 1,f:F_CALLNAME,title
+ *
+ * Shows help, with values initialized with given parameters:
+ *
+ *	demo.sh -d 1,f:F_CALLNAME%help
+ *
+ * Shows the configuration variants for multiple fields:
+ *
+ *	demo.sh -d 1,f:F_CALLNAME%F_RLOGINIP%F_LIBRARY%F_LEVEL
+ *	demo.sh -d 1,f:'F_CALLNAME|F_RLOGINIP|F_LIBRARY|F_LEVEL'
+ *
+ * Some additional examples:
+ *	
+ *	demo.sh -d 1,f:F_CALLNAME%F_RLOGINIP
+ *	demo.sh -d 1,f:F_CALLNAME%F_RLOGINIP%help
+ *	
+ *	
+ *	demo.sh -d 1,f:F_CALLNAME%F_RLOGINIP%F_SEVERITY
+ *	demo.sh -d 1,f:F_CALLNAME%F_RLOGINDNS%F_SEVERITY%F_INDENT
+ *	demo.sh -d 1,f:F_CALLNAME%F_RLOGINDNS%F_USERNUM%F_SEVERITY%F_INDENT
+ *	demo.sh -d 1,f:F_CALLNAME%F_RLOGINDNS%F_USERNUM%F_SEVERITY%F_INDENT,title
+ *
+ * @}
+ */
+ 

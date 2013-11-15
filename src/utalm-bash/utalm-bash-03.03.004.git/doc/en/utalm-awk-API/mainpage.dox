@@ -1,0 +1,216 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \mainpage User-Interfaces and Developer APIs 
+*
+* The 	UnifiedTraceAndLogManager - UTALM - provides a single interface for multiple
+* programming languages and runtime environments. The typical application is for
+* development and test of <a href="../utalm-API/buildingblocksutamlbash.html">"DevOps and R&D environments"</a>. 
+* The application support by the awk component starts for small  
+* ad-hoc utilities with just a dozen lines of code, ranging to major projects
+* in advanced environments.
+*
+* The awk component is contained in the bash-package, for installation and 
+* configuration refer to <a href="../../man3/utalm-API/index.html">utalm-API(3)</a>. 
+* The runtime component is based on utalm-bash and comprise in addition:
+* <ul>
+*   <li> 
+*   The  integration and support of scripting for awk by \ref libutalm.awk/\ref libutalm-min.awk - 
+*    <a href="../../man3/utalm-awk.html">libutalm.awk(3)</a>. 
+*   </li> 
+* </ul>
+*
+* For initial version and history refer to \ref historyanddorigin.
+*
+* <H1>Reference Pages</H1>
+* Standard packages required for the runtime environment:
+* <ul>
+* 	<li>GNU awk 
+*   @@<a href="http://www.gnu.org/software/gawk/" target="_blank">gnu.org</a>
+*   </li>
+* </ul>
+*
+* <H1>License</H1>
+* Details of \ref licenses ...
+*
+* <ul>
+* <li>Code<br />
+* The license for the runtime system excluding specifications and documentation is 
+* <a href="http://opensource.org/licenses/Apache-2.0" target="_blank">Apache-2.0</a>,
+* approved by the <a href="http://opensource.org/licenses" target="_blank">OSI</a>.
+* </li>
+* <li>Specification and Documentation<br />
+* The specification and documentation - this includes inline-documentation.
+* <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank"></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+* </li>
+* </ul>
+*
+*/
+// <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+
+/**
+ * \defgroup bootstrap bootstrap
+ * \addtogroup bootstrap 
+ *  @{
+ * \brief low-level environment for the initial step of loading modules
+ * 
+ * The boostrap module contains the initial low-level environment for
+ * the first step of loading required modules.
+ * This is mainly the evaluation, conversion, and handling of the
+ * location of fitting versions of modules by absolute pathnames.   
+ * Therefore the path of the bootstrap module itself has to be either a 
+ * hard-coded static standard pathname, or provided  by a predefined 
+ * environment variable.
+ * @}
+ */
+
+
+/**
+*  \defgroup core core
+ * \addtogroup core 
+ *  @{
+ * \brief core functions for loading the final runtime environment
+ * 
+ * The core module contains the required low-level environment for
+ * the process of loading final runtime environments.
+ * @}
+ */
+ 
+ 
+/**
+* \defgroup utalm_bash utalm-bash
+* \addtogroup utalm_bash
+*  @{
+* \brief main library containing the interface functions
+* 
+* The main library to be sourced into the script code, contains the
+* runtime setup of runtime environment and function interface.
+*
+* For additional information on <b>libutalm.sh</b> refer to:
+* <ul>
+*   <li> 
+*     <b><a href="../../man3/utalm-bash.html">utalm-bash(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-make.html">utalm-make(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-awk.html">utalm-awk(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/utalm-bash-examples/index.html">utalm-bash-examples(7)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/libutalm-test-and-examples/index.html">libutalm-test-and-examples(7)</a></b>
+*   </li> 
+* </ul>
+*
+* @}
+*/
+
+
+/**
+* \defgroup libutalm_awk utalm-awk
+* \addtogroup libutalm_awk
+*  @{
+* \brief support module of utalm-bash containing the awk interfaces
+* 
+* The main library module to be included into awk scripts, contains the
+* integration into utalm-bash.
+*
+* For additional information on <b>libutalm.awk</b> refer to:
+* <ul>
+*   <li> 
+*     <b><a href="../../man3/utalm-awk.html">utalm-awk(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-bash.html">utalm-bash(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-make.html">utalm-make(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/utalm-bash-examples/index.html">utalm-bash-examples(7)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/libutalm-test-and-examples/index.html">libutalm-test-and-examples(7)</a></b>
+*   </li> 
+* </ul>
+*
+* @}
+*/
+
+
+/**
+* \defgroup libutalm_make utalm-make
+* \addtogroup libutalm_make
+*  @{
+* \brief support for production and command line controlled tests
+* 
+* The environment suppoort for the Makefile based production and the command 
+* line based unit and regression tests. 
+*
+* For additional information on <b>libutalm.sh</b> refer to:
+* <ul>
+*   <li> 
+*     <b><a href="../../man3/utalm-bash.html">utalm-bash(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-make.html">utalm-make(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-awk.html">utalm-awk(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/utalm-bash-examples/index.html">utalm-bash-examples(7)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/libutalm-test-and-examples/index.html">libutalm-test-and-examples(7)</a></b>
+*   </li> 
+* </ul>
+*
+* @}
+*/
+
+ 
+/**
+* \defgroup libutalm_tdd libutalm-TDD
+* \addtogroup libutalm_tdd
+*  @{
+* \brief support for Test Driven Development
+* 
+* The environment suppoort for the Makefile based production and the command 
+* line based unit and regression tests. 
+*
+* For additional information on <b>libutalm.sh</b> refer to:
+* <ul>
+*   <li> 
+*     <b><a href="../../man3/utalm-bash.html">utalm-bash(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-make.html">utalm-make(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man3/utalm-awk.html">utalm-awk(3)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/utalm-bash-examples/index.html">utalm-bash-examples(7)</a></b>
+*   </li> 
+*   <li> 
+*     <b><a href="../../man7/libutalm-test-and-examples/index.html">libutalm-test-and-examples(7)</a></b>
+*   </li> 
+* </ul>
+*
+* @}
+*/
+ 

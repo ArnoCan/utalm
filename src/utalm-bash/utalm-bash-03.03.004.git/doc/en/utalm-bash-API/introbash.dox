@@ -1,0 +1,54 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+/**
+* \page introutalmbash Introduction to utalm-bash
+* \brief First steps with the runtime environment for bash scripting
+* \par
+*
+* 'bash' scripts are the choice of command line integration 
+* for system components.
+* Even though utilized in almost any UNIX/Linux based project, the shell scripting
+* has the big gap when it comes to integrated test and trace. 
+* This is particularly true for bigger applications, where an uncontrolled print 
+* of 'set +' may produce more output data than required.
+* Therefore the low-level components of UTALM includes the utalm-bash component
+* for integrated trace and logging with additional programming environments.
+* This includes facilities for unit and regression tests of shell scripts with 
+* automated generation of persistent reference data from a defined state.<br /> 
+*
+* The bash component comprises the main parts:
+*   * \ref libutalm.sh / \ref libutalm-min.sh<br />
+*     The runtime library.
+*   * \ref bootstrap-03_03_001.sh<br /> 
+*     The runtime bootstrap library for consistent assembly
+*     of initial libraries. The functions handle version consistency. 
+*   * \ref libcore-03_01_009.sh<br />
+*     The runtime library with basic low-level functions, e.g.
+*     coloring of display for ANSI terminals.
+*   * \ref utalm-bash-cli.sh<br />
+*     Wrapper call for application of trace and logging from any
+*     environment without inclusion of the libraries. 
+*   * \ref utalmhelp.sh<br />
+*     For online manuals. 
+*
+* The document \ref utalmBashExamples presents a collection of selected 
+* examples and application patterns, whereas the \ref howtoutalmbash 
+* contains destilled special cases with solutions for eventually misleading interface
+* contexts. The collection of unit tests in 
+* <a href="../../man7/utalm-bash-tests/index.html"><b>utalm-bash-tests(7)</b></a>
+* presents running pattern which are guaranteed to work, as they found the release
+* of a distribution.
+*
+* For the complete API reference refer to \ref utalm_bash.
+*/
+

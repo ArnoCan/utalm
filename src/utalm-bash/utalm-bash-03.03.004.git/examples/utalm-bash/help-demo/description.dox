@@ -1,0 +1,69 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+
+/**
+ * \ingroup utalmBashExamples
+ * \defgroup helpDemo help-demo
+ * \addtogroup helpDemo
+ *  @{
+ * \brief Example for inherent online help calls of utalm API 
+ *
+ * The help-demo provides examples for the application of libutalm.bash 
+ * and it's embedded onlien help.
+ *
+ * In addition to the embedded help for quick refrence purposes an additional
+ * utility is included called \ref utalmhelp.sh.
+ *
+ * The embedded online help contained in \ref libutalm.sh is based on  
+ * the early-fetch of cli options. This is the first-time evaluation
+ * of command line options at the time the library is loaded.  
+ * The advance if the early availability of the trace and logging environment
+ * for the initial phase of the containing process.
+ * The help is presented in one of the following formats, type in:
+ *
+ *	- demo.sh -d help
+ *	- demo.sh -d help:HTML
+ *	- demo.sh -d help:PDF
+ *	- demo.sh -d help:MAN
+ *	- demo.sh -d help:CONF
+ * 
+ * For special parameters with assigned pre-defined constants context specific
+ * help is available.
+ *
+ *  * Provides a list of header format constants.
+ *
+ *		demo.sh -d f:help
+ *
+ *  * Provides a subsystem constants.
+ *		
+ *		demo.sh -d s:help
+ *		
+ *  * Provides a list of log-level constants.
+ *	
+ *		demo.sh -d l:help
+ *	
+ *  * Provides a list of exit constants.
+ *	
+ *		demo.sh -d e:help
+ *	
+ * You can set the following environment variables, refer to utalm-bash.conf:
+ *
+ *	- LANG
+ *	- BROWSER
+ *	- PDFVIEWER
+ *	- MANPATH
+ * 
+ * 
+ * @}
+ */
+ 

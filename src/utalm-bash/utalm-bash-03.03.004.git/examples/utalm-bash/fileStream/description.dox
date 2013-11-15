@@ -1,0 +1,37 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+
+/**
+ * \ingroup utalmBashExamples
+ * \defgroup fileStream fileStream
+ * \addtogroup fileStream
+ *  @{
+ * \brief Example for filestreams and ringbuffers
+ *
+ * The fileStream provides examples for the application of LOGOUT
+ * filestreams, where particularly the advance of an integrated
+ * multi-language logging becomes visible. All language packages  
+ * write the same format into the (configured) identical filestream.
+ * Thus depicting cross-control flows, and enabling for simplified
+ * analysis. 
+ *
+ * The following calls show various contents:
+ *
+ *	demo.sh -d l:3,LOGOUT:myFile,LOGRING:2,LOGMAX:6
+ *	demo.sh -d l:3,LOGOUT:myFile,LOGRING:3,LOGMAX:5
+ *
+ * Where in the buffer handling is demonstrated by creating 
+ * incremental record numbers.
+ * @}
+ */
+ 

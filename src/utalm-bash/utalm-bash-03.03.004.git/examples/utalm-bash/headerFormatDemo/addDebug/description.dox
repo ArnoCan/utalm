@@ -1,0 +1,107 @@
+/*
+* PROJECT:      UnifiedTraceAndLogManager
+* AUTHOR:       Arno-Can Uestuensoez - acue.opensource@gmail.com
+* MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
+* SHORT:        utalm-bash
+* LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
+* VERSION:      03_03_004
+*
+* Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
+*
+*/
+
+
+/**
+ * \ingroup utalmBashExamples
+ * \defgroup addDebug addDebug
+ * \addtogroup addDebug
+ *  @{
+ * \brief Example for basic utalm API 
+ *
+ * The addDebug provides examples for the application of libutalm.bash 
+ * 
+ * Example with first application of UTALM library calls for bash
+ * for printDBG with full selection scope. This includes the raw integer,
+ * the pre-defined const-values, and the symbolic string, with
+ * logical evaluation.
+ *
+ *	fetchDBGArgs # collects options, is implicit called in library
+ *	printDBG  $S_ALL  5               $LINENO $BASH_SOURCE "printDBG..."
+ *
+ * Constant "variables":
+ *
+ *	printDBG  $S_SYS  1               $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  $D_USR0         $LINENO $BASH_SOURCE "printDBG..."
+ *
+ * Logic operations with numeric representation:
+ *
+ *	printDBG  $S_SYS  2               $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  $D_USR1         $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  $D_USR0|$D_USR2 $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  1|$D_USR2       $LINENO $BASH_SOURCE "printDBG..."
+ *
+ * Logic operations with numeric and symbolic string representation:
+ *
+ *	printDBG  $S_SYS  D_USR0|4        $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  USR0|4          $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  1|D_USR2        $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  D_USR0|4        $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  USR0|USR2       $LINENO $BASH_SOURCE "printDBG..."
+ *
+ * Logic operations with custom string representation:
+ *
+ *	printDBG  $S_SYS  $DEF_USR0|4     $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  USR0|$DEF_USR2  $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  CUSTOM0|CUSTOM2 $LINENO $BASH_SOURCE "printDBG..."
+ *	printDBG  $S_SYS  5               $LINENO $BASH_SOURCE "printDBG..."
+ *
+ * For DEF_USR0, DEF_USR2, CUSTOM0 and CUSTOM2 refer to \ref utalm-bash.conf.
+ *
+ * Help is available by:
+ *
+ *	demo.sh -d l:help
+ *
+ * Example for severities:
+ *
+ *	printWNG           3 $LINENO $BASH_SOURCE 1       "printWNG..."
+ *	printINFO          2 $LINENO $BASH_SOURCE 1       "printINFO..."
+ *	printERR             $LINENO $BASH_SOURCE 1       "printERR..."
+ * 
+ * Example for final assembly string of subcalls:
+ *
+ *	printFINALCALL     1 $LINENO $BASH_SOURCE TEST004 "echo ABC"
+ * 
+ * Example for wrapper of subcalls with transparent pass of
+ * exit values:
+ *
+ *	callErrOutWrapper    $LINENO $BASH_SOURCE         "echo BCD"
+ *	callErrOutWrapper    $LINENO $BASH_SOURCE         "exit 1"
+ *	callErrOutWrapper    $LINENO $BASH_SOURCE         exit 1
+ *	callErrOutWrapper    $LINENO $BASH_SOURCE         "exit 22"
+ *	callErrOutWrapper    $LINENO $BASH_SOURCE         exit 22
+ *	callErrOutWrapper    $LINENO $BASH_SOURCE         "exit 2"
+ * 
+ * The following calls show various contents and demonstrate 
+ * available shortcuts:
+ *
+ *	- demo.sh -d l:1
+ *	- demo.sh -d l:1,s:SYS
+ *	- demo.sh -d l:1,subsystem:SYS
+ *	- demo.sh -d l:usr0
+ *	- demo.sh -d level:usr2
+ *	- demo.sh -d llevel:usr0|usr2
+ *	- demo.sh -d lvl:1|usr2
+ *	- demo.sh -d l:usr0|4
+ *	
+ *	- demo.sh -d level:10
+ *	- demo.sh -d i:1
+ *	- demo.sh -d info:50
+ *	- demo.sh -d w:1
+ *	- demo.sh -d wng:50
+ *	- demo.sh -d l:50
+ *	- demo.sh -d l:50,info:50
+ *	- demo.sh -d lvl:100,i:100,warning:100
+ *
+ * @}
+ */
+ 

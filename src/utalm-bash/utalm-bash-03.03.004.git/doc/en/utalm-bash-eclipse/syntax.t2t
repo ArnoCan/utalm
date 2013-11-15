@@ -1,0 +1,15 @@
+.
+
+   include lib/Makefile.lib/<module-name>
+
+   <module-name>:=(
+	Makefile-doxygen-rules.mk
+	Makefile-epydoc-rules.mk
+	Makefile-latex-rules.mk
+	Makefile-txt2tags-rules.mk
+	Makefile-nodewalk.mk
+	Makefile-test.mk
+   )
+
+
+

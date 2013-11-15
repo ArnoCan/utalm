@@ -1,0 +1,20 @@
+201310xx - BETA - AWK support, libraray-stripper, document enhancements.
+20131010 - fix minor lastminite patch.
+20131010 - BETA - Deeper tested, added doygen common interface for all UTALM components.
+           Added some treewalker enhancements.
+20131007 - BETA with enhancements.
+           - Makefile-Library with:
+           	 - Nodewalk for generic tree-processing
+           	 - Pattern for regressiuon tests in particular
+           	   for small apps - apps for DevOps.
+           	 - Rules for:
+           	     LaTex
+           	     txt2tags(HTML, PDF, MAN)
+           	     epydoc
+             - Regression tests
+             - Packages: 
+               rpm, rpm-devel, srcrpm,
+               tgz, tgz-devel, srctgz
+
+20131002 - BETA with several minor enhancements.
+20130923 - NIGHTLY as ALPHA release.
