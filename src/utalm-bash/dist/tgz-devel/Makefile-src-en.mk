@@ -32,30 +32,52 @@
 #$Header$
 #
 
+CPOPTS += --parents 
+
 #
-IMPORT_FILES	+= $(RTBASE)README.md
-IMPORT_FILES	+= $(RTBASE)RELEASENOTES.txt
-IMPORT_FILES	+= $(RTBASE)INSTALL.txt
-IMPORT_FILES	+= $(RTBASE)Apache-2.0.txt
-IMPORT_FILES	+= $(RTBASE)install-devel.sh
-IMPORT_FILES	+= $(RTBASE)sourceEnvironment.sh
+IMPORT_FILES_BLD	+= $(BLD_ROOT)README.md
+IMPORT_FILES_BLD	+= $(BLD_ROOT)RELEASENOTES.txt
+IMPORT_FILES_BLD	+= $(BLD_ROOT)INSTALL.txt
+IMPORT_FILES_BLD	+= $(BLD_ROOT)Apache-2.0.txt
+IMPORT_FILES_BLD	+= $(BLD_ROOT)install-devel.sh
+IMPORT_FILES_BLD	+= $(BLD_ROOT)install.sh
+IMPORT_FILES_BLD	+= $(BLD_ROOT)sourceEnvironment.sh
 
-IMPORT_FILES	+= $(BLD_ROOT)TODO.txt
-IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
-IMPORT_FILES	+= $(BLD_ROOT)Makefile-root.mk
-IMPORT_FILES	+= $(BLD_ROOT)Makefile-version.mk
+#
+IMPORT_FILES_BLD += $(BLD_ROOT)TODO.txt
+IMPORT_FILES_BLD += $(BLD_ROOT)collect-filelist.sh
 
-IMPORT_DIRS		+= $(BLD_ROOT)include
+#
+IMPORT_FILES_BLD += $(BLD_ROOT)Makefile
+IMPORT_FILES_BLD += $(BLD_ROOT)Makefile-src-en.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)examples/Makefile
+IMPORT_FILES_BLD += $(BLD_ROOT)examples/Makefile-src-en.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)include/Makefile-root.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)include/Makefile-version.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)include/Makefile-post.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)include/Makefile-pre.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)include/Makefile-rules.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)src/Makefile
+IMPORT_FILES_BLD += $(BLD_ROOT)src/Makefile-nodeaction-en.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)src/Makefile-src-en.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)src/README.txt
+IMPORT_FILES_BLD += $(BLD_ROOT)src/include/Makefile-post.mk
+IMPORT_FILES_BLD += $(BLD_ROOT)src/include/Makefile-pre.mk
 
-IMPORT_DIRS		+= $(BLD_ROOT)bin
-IMPORT_DIRS		+= $(BLD_ROOT)conf
+#
+#IMPORT_DIRS_BLD	+= $(BLD_ROOT)bin
 
-IMPORT_DIRS		+= $(RTBASE)conf
-IMPORT_DIRS		+= $(RTBASE)bin
-IMPORT_DIRS		+= $(DOCBASE)man
+#
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/check-doxygen-cond-completion.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/check-doxygen-cond-pairs.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/doxygenfilter.awk
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/doxygen-html-nav-entry.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/strip-bash.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/testCaseStatistics.sh
 
+#
 #Requires make: 
-IMPORT_DIRS		+= $(RTBASE)lib/Makefile.lib
-IMPORT_DIRS		+= $(RTBASE)tests
+IMPORT_DIRS_SRC   	+= $(BLD_ROOT)src/lib/Makefile.lib
 
-
+#
+IMPORT_DIRS_RTBASE	+= $(RTBASE)tests

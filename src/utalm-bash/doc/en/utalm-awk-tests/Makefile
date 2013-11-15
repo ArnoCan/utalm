@@ -70,6 +70,10 @@ DOXYGEN_HTML_INPUT =
 DOXYGEN_HTML_INPUT += $(RTBASE)tests/bin
 DOXYGEN_HTML_INPUT += $(RTBASE)tests/utalm-awk
 
+DOXYGEN_HTML_INPUT += $(RTBASE)install-devel.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)install.sh
+
+
 DOXYGEN_HTML_INPUT += mainpage.dox
 DOXYGEN_HTML_INPUT += aboututalm.dox
 DOXYGEN_HTML_INPUT += license.dox
@@ -88,22 +92,31 @@ INCLUDES=$(wildcards $(BLD_ROOT)include/*)
 INCLUDES=$(wildcards $(DOC_BLD_ROOT)include/*)
 INCLUDES=$(wildcards ../include/*)
 
-all:outdirs $(ENVFILES) topmain $(INCLUDES) $(DOXYGEN_HTML_FILES)
+all: outdirs $(DOXYGEN_HTML_FILES) postpatches
+#refer to Makefile-doxygen.mk for: $(DOXYGEN_HTML_FILES)
 
-$(DOXYGEN_HTML_FILES):$(DOXYGEN_HTML_INPUT)
-$(RTBASE)tests/bin:$(BLD_ROOT)tests/bin 
-	$(CPA) $? $(@D)
+postpatches:
 
-$(RTBASE)tests/utalm-awk:$(BLD_ROOT)tests/utalm-awk 
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	cd $<&&$(MAKE) $(MFLAGS)
-	@echo "#...finished:$@"
-
-.PHONY:topmain
-topmain:
+$(DOXYGEN_HTML_INPUT): $(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF)
 	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
+$(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF): 
+
+#all:outdirs $(ENVFILES) topmain $(INCLUDES) $(DOXYGEN_HTML_FILES)
+#
+#$(DOXYGEN_HTML_FILES):$(DOXYGEN_HTML_INPUT)
+#$(RTBASE)tests/bin:$(BLD_ROOT)tests/bin 
+#	$(CPA) $? $(@D)
+#
+#$(RTBASE)tests/utalm-awk:$(BLD_ROOT)tests/utalm-awk 
+#	@echo
+#	@echo "###"
+#	@echo "#Change to:$@"
+#	cd $<&&$(MAKE) $(MFLAGS)
+#	@echo "#...finished:$@"
+#
+#.PHONY:topmain
+#topmain:
+#	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
 
 #
 include $(BLD_ROOT)lib/Makefile.lib/Makefile-doxygen-rules.mk

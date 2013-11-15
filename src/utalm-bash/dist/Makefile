@@ -34,7 +34,7 @@
 all: pkg pkg-devel pkg-src
 pkg: tgz rpm
 pkg-devel: tgz-devel rpm-devel
-pkg-src: srctgz srcrpm git
+pkg-src: srctgz srcrpm repopub
 rpm-src:srcrpm
 tgz-src:srctgz
 

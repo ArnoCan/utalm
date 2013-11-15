@@ -77,10 +77,10 @@ _myLIBVERS_libcore="03_01_009"
 #P #  	2. PATH
 #P #  	3. HOME/lib
 #P #
-#P # @param $1: libname
+#P # @param a $1=libname
 #P # @return Returns absolute pathname.
 #P # @ingroup core
-#P def coreGetLibPathname():
+#P def coreGetLibPathname(a):
 #P 	pass
 ## \cond
 #***FUNCEND***
@@ -161,13 +161,13 @@ function coreListLib () {
 #P # ANSI escaping of displayed characters.
 #P #
 #P # Encapsulates the input-string with appropriate escape sequences for
-#P # attributes of character representation - \ref UTALM_XTERM.
+#P # attributes of character representation - **UTALM_XTERM**.
 #P #
 #P # REMARK:
 #P #   Due to performance reasons for parts of common trace-output the 
 #P #   values are hard-coded within the whole module.
 #P #
-#P # @param $1: (
+#P # @param a $1 := (
 #P #      <br />BOLD|UNDL|RESET|
 #P #      <br />FBLACK|FRED|FGREEN|FYELLOW|FBLUE|FMAGENTA|FCYAN|FWHITE
 #P #      <br />BBLACK|BRED|BGREEN|BYELLOW|BBLUE|BMAGENTA|BCYAN|BWHITE
@@ -178,12 +178,12 @@ function coreListLib () {
 #P # <br />F*    : foreground
 #P # <br />B*    : background
 #P # 
-#P # @param $2-*
+#P # @param b $2-*
 #P # @return 
 #P #  - SUCCESS: 0 - "<esc-color>$2-*<esc-color-reset>" 
 #P #  - FAILURE: 1 
 #P # @ingroup core
-#P def setFontAttrib():
+#P def setFontAttrib(a,b):
 #P 	pass
 ## \cond
 #***FUNCEND***
@@ -235,17 +235,17 @@ function setFontAttrib () {
 #P #   Due to performance reasons for parts of common trace-output the 
 #P #   values are hardcoded within the whole module.
 #P #
-#P # @param $1: ERR|WNG|INF|TRY
+#P # @param a $1:=(ERR|WNG|INF|TRY)
 #P #    - ERR: Error, initally:        red(31)
 #P #    - WNG: Warning, initially:     magenta(35)
 #P #    - INF: Information, initially: green(32)
 #P #    - TRY: Trial input, initially: blue(34)
-#P # @param $2-*
+#P # @param b $2-*
 #P # @return 
 #P #  - SUCCESS: 0 - "<esc-color>$2-*<esc-color-reset>" 
 #P #  - FAILURE: 1 
 #P # @ingroup core
-#P def setSeverityColor():
+#P def setSeverityColor(a,b):
 #P 	pass
 ## \cond
 #***FUNCEND***
@@ -263,7 +263,7 @@ function setSeverityColor () {
 
 
 if [ -z "${MYLIBEXECPATH}" ];then
-	MYLIBEXECPATH=${_myLIBNAME_libcore%/*/*}
+	MYLIBEXECPATH=${_myLIBNAME_libcore%/*/*/*}
 fi
 
 
@@ -278,12 +278,12 @@ fi
 #P # This particularly ensures operability in unmanaged networks by 
 #P # evaluating the file databases.
 #P #  
-#P # @param $1: DNS|IP
+#P # @param a $1=(DNS|IP)
 #P # @return 
 #P #  - SUCCESS: 0 - "<dns-hostname>|<dotted-ip-address>" 
 #P #  - FAILURE: 1 
 #P # @ingroup core
-#P def getMyHost($1):
+#P def getMyHost(a):
 #P 	pass
 ## \cond
 #***FUNCEND***
@@ -408,9 +408,9 @@ DAYOFWEEK=`date +"%u"`
 #P # Basic trace with control - could also be pasted into standalone utilities. 
 #P #
 #P # Displays string, when DBG is set.
-#P # @param $1: Display string
+#P # @param a $1=Display string
 #P # @ingroup core
-#P def displayIt():
+#P def displayIt(a):
 #P 	pass
 ## \cond
 #***FUNCEND***

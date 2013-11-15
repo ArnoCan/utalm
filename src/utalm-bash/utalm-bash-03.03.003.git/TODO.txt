@@ -1,3 +1,0 @@
-1. Figure of architecture - runtime system
-2. Figure of architecture - runtime templates for build
-3. howto install utalm-bash and following utalm-python

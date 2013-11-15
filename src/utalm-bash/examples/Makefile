@@ -38,4 +38,3 @@ ifdef BLD_ROOT
 else
   $(error "Missing environment variable BLD_ROOT - see utalm-bash-API(3)")
 endif
-

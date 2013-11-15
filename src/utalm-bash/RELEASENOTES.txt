@@ -1,3 +1,11 @@
+20131112 - NIGHTLY - Fixes, installer for Python environment
+           -> Minor fixes and extension on installer
+20131112 - NIGHTLY - Fixes, integration tests
+           -> fixed install.sh INSTROOT
+           -> fixed dependency handling of generic Makefiles
+           -> added subtree creation for copy operations
+           -> added display option to make for delta only
+           -> cleared most warnings for doxygen - bash-to-Python emulation
 20131110 - NIGHTLY - Fixes, extension of unit testframework BUnit - BashUnit
            -> Format parameters: form+indent: removed for handling in 
            	  post processing because of stream, not to be handled in any 

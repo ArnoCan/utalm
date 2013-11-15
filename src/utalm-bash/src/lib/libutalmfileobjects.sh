@@ -156,13 +156,13 @@ fi
 #P ## configuration and specialization of test cases with pre-defined 
 #P ## default components by multiple levels of configuration files. 
 #P #
-#P # @param $1 start=None 
-#P # @param $2 top='tests' 
-#P # @param $3 (PREFIX|POSTFIX) 
+#P # @param a $1:= start=None 
+#P # @param b $2:= top='tests' 
+#P # @param c $3:= (PREFIX|POSTFIX) 
 #P #
 #P # @return with extended path
 #P # @ingroup utalm_bash
-#P def setUpperTreeSearchPath($1,$2,$3):
+#P def setUpperTreeSearchPath(a,b,c):
 #P 	pass
 ## \cond
 function setUpperTreeSearchPath () {
@@ -192,13 +192,13 @@ function setUpperTreeSearchPath () {
 #P # pattern is the prefix of remaining superior directory
 #P # pathname.
 #P #
-#P # @param $1 start=. 
-#P # @param $2 top='tests' 
-#P # @param $3 #swap-occurences-from-bottom 
+#P # @param a $1:= start=. 
+#P # @param b $2:= top='tests' 
+#P # @param c $3:= \#swap-occurences-from-bottom 
 #P #
 #P # @return with resulting top
 #P # @ingroup utalm_bash
-#P def getUpperTreePathMatch($1,$2,$3):
+#P def getUpperTreePathMatch(a,b,c):
 #P 	pass
 ## \cond
 function getUpperTreePathMatch () {
@@ -242,11 +242,11 @@ function getUpperTreePathMatch () {
 #P #
 #P # Duplicates subbranch of curtop in newtop.
 #P #
-#P # @param $1 curtop='tests' 
-#P # @param $2 newtop=/tmp
+#P # @param a $1:= curtop='tests' 
+#P # @param b $2:= newtop=/tmp
 #P #
 #P # @ingroup utalm_bash
-#P def mirrorBranchNode($1,$2):
+#P def mirrorBranchNode(a,b):
 #P 	pass
 ## \cond
 function mirrorBranchNode () {
@@ -264,11 +264,11 @@ function mirrorBranchNode () {
 #P ##
 #P # @brief Evaluates the subbranch for PWD  
 #P #
-#P # @param $1 curtop
-#P # @param $1 curpos
+#P # @param a $1:= curtop
+#P # @param b $1:= curpos
 #P #
 #P # @ingroup utalm_bash
-#P def getSubBranch($1):
+#P def getSubBranch(a,b):
 #P 	pass
 ## \cond
 function getSubBranch () {

@@ -1050,11 +1050,11 @@ F_I=0
 
 ## \endcond
 #P ##
-#P # Convert #subsys to string
+#P # Convert subsys to string
 #P #
-#P # @param $1 subsys
+#P # @param a $1:= subsys
 #P # @ingroup utalm_bash
-#P def subsysToNum($1):
+#P def subsysToNum(a):
 #P 	pass
 ## \cond
 function subsysToNum () {
@@ -1119,11 +1119,11 @@ function subsysToNum () {
 
 ## \endcond
 #P ##
-#P # Convert string to #subsys
+#P # Convert string to \#subsys
 #P #
-#P # @param $1 subsys
+#P # @param a $1:= subsys
 #P # @ingroup utalm_bash
-#P def subsysToStr($1):
+#P def subsysToStr(a):
 #P 	pass
 ## \cond
 function subsysToStr () {
@@ -1242,11 +1242,11 @@ function subsysList () {
 
 ## \endcond
 #P ##
-#P # Convert #debug-level to string
+#P # Convert \#debug-level to string
 #P #
-#P # @param $1 debug-level
+#P # @param a $1:= \#debug-level
 #P # @ingroup utalm_bash
-#P def levelToNum($1):
+#P def levelToNum(a):
 #P 	pass
 ## \cond
 function levelToNum () {
@@ -1296,11 +1296,11 @@ function levelToNum () {
 
 ## \endcond
 #P ##
-#P # Convert string to #debug-level
+#P # Convert string to \#debug-level
 #P #
-#P # @param $1 debug-level
+#P # @param a $1:= debug-level
 #P # @ingroup utalm_bash
-#P def levelToStr($1):
+#P def levelToStr(a):
 #P 	pass
 ## \cond
 function levelToStr () {
@@ -1387,11 +1387,11 @@ function levelList () {
 
 ## \endcond
 #P ##
-#P # Convert <exit_string> to #exit value 
+#P # Convert &lt;exit_string&gt; to \#exit value 
 #P #
-#P # @param $1 exit-string
+#P # @param a $1=exit-string
 #P # @ingroup utalm_bash
-#P def exitToNum($1):
+#P def exitToNum(a):
 #P 	pass
 ## \cond
 function exitToNum () {
@@ -1418,11 +1418,11 @@ function exitToNum () {
 
 ## \endcond
 #P ##
-#P # Convert #exit-value to <exit-string> 
+#P # Convert \#exit-value to <exit-string> 
 #P #
-#P # @param $1 exit-value
+#P # @param a $1:= exit-value
 #P # @ingroup utalm_bash
-#P def exitToStr($1):
+#P def exitToStr(a):
 #P 	pass
 ## \cond
 function exitToStr () {
@@ -1463,11 +1463,11 @@ function exitList () {
 
 ## \endcond
 #P ##
-#P # Convert #output-format-bit to <output-format-bit-string>
+#P # Convert \#output-format-bit to <output-format-bit-string>
 #P #
-#P # @param $1 output-format-bit
+#P # @param a $1:= output-format-bit
 #P # @ingroup utalm_bash
-#P def formatToNum($1):
+#P def formatToNum(a):
 #P 	pass
 ## \cond
 function formatToNum () {
@@ -1536,9 +1536,9 @@ function formatToNum () {
 #P ##
 #P # Convert <output-format-bit-string> to output-format-bit
 #P #
-#P # @param $1 output-format-bit
+#P # @param a $1:= output-format-bit
 #P # @ingroup utalm_bash
-#P def formatToStr($1):
+#P def formatToStr(a):
 #P 	pass
 ## \cond
 function formatToStr () {
@@ -1672,9 +1672,9 @@ _F=${_F:-$F_DEFAULT}
 #P # from provided string with list of field bits
 #P # Sets the <b>global variable _F</b>
 #P # 
-#P # @param $1 csv-string of output-bits
+#P # @param a $1:= csv-string of output-bits
 #P # @ingroup utalm_bash
-#P def setFormat($1):
+#P def setFormat(a):
 #P 	pass
 ## \cond
 function setFormat () {
@@ -2163,13 +2163,13 @@ _CH=""
 #P #
 #P #	printDBG <subsys> <dbg-level> <line> <file> <code>
 #P # 
-#P # @param $1 subsys
-#P # @param $2 dbg-level
-#P # @param $3 line
-#P # @param $4 file
-#P # @param $5 code
+#P # @param a $1:= subsys
+#P # @param b $2:= dbg-level
+#P # @param c $3:= line
+#P # @param d $4:= file
+#P # @param e $5:= code
 #P # @ingroup utalm_bash
-#P def _getHead($1,$2,$3,$4,$5):
+#P def _getHead(a,b,c,d,e):
 #P 	pass
 ## \cond
 function _getHead () {
@@ -2219,16 +2219,16 @@ function _getHead () {
 #P #
 #P #	printDBG <subsys> <dbg-level> <line> <file> <code>
 #P # 
-#P # @param $1 severity
-#P # @param $2 #severity-color
-#P # @param $3 subsys
-#P # @param $4 dbg-level
-#P # @param $5 line
-#P # @param $6 file
-#P # @param $7 code
-#P # @param $8 message
+#P # @param a $1:= severity
+#P # @param b $2:= #severity-color
+#P # @param c $3:= subsys
+#P # @param d $4:= dbg-level
+#P # @param e $5:= line
+#P # @param f $6:= file
+#P # @param g $7:= code
+#P # @param h $8:= message
 #P # @ingroup utalm_bash
-#P def _printGen($1,$2,$3,$4,$5,$6,$7,$8):
+#P def _printGen(a,b,c,d,e,f,g,h):
 #P 	pass
 ## \cond
 function _printGen () {
@@ -2289,12 +2289,12 @@ function _printGen () {
 #P #
 #P #	doDebug <subsys> <dbg-level> <line> <file>
 #P #
-#P # @param $1 subsys
-#P # @param $2 dbg-level
-#P # @param $3 line
-#P # @param $4 file
+#P # @param a $1:= subsys
+#P # @param b $2:= dbg-level
+#P # @param c $3:= line
+#P # @param d $4:= file
 #P # @ingroup utalm_bash
-#P def doDebug($1,$2,$3,$4):
+#P def doDebug(a,b,c,d):
 #P 	pass
 ## \cond
 function doDebug  () {
@@ -2313,13 +2313,13 @@ function doDebug  () {
 #P # 
 #P # Prints a trace/log-string as configured by \ref cliSyntaxBash 
 #P # 
-#P # @param $1 subsys
-#P # @param $2 dbg-level
-#P # @param $3 line
-#P # @param $4 fname
-#P # @param $5 message
+#P # @param a $1:= subsys
+#P # @param b $2:= dbg-level
+#P # @param c $3:= line
+#P # @param d $4:= fname
+#P # @param e $5:= message
 #P # @ingroup utalm_bash
-#P def printDBGBLOB($1,$2,$3,$4,$5):
+#P def printDBGBLOB(a,b,c,d,e):
 #P 	pass
 ## \cond
 function printDBGBLOB () {
@@ -2344,13 +2344,13 @@ function printDBGBLOB () {
 #P # 
 #P # Prints a trace/log-string as configured by \ref cliSyntaxBash 
 #P # 
-#P # @param $1 subsys
-#P # @param $2 dbg-level
-#P # @param $3 line
-#P # @param $4 fname
-#P # @param $5 message
+#P # @param a $1:= subsys
+#P # @param b $2:= dbg-level
+#P # @param c $3:= line
+#P # @param d $4:= fname
+#P # @param e $5:= message
 #P # @ingroup utalm_bash
-#P def printDBG($1,$2,$3,$4,$5):
+#P def printDBG(a,b,c,d,e):
 #P 	pass
 ## \cond
 function printDBG () {
@@ -2365,12 +2365,12 @@ function printDBG () {
 #P ##
 #P # Print trace/log-string for errors
 #P # 
-#P # @param $1 line
-#P # @param $2 fname
-#P # @param $3 code
-#P # @param $4 message
+#P # @param a $1:= line
+#P # @param b $2:= fname
+#P # @param c $3:= code
+#P # @param d $4:= message
 #P # @ingroup utalm_bash
-#P def printERR($1,$2,$3,$4):
+#P def printERR(a,b,c,d):
 #P 	pass
 ## \cond
 function printERR () {
@@ -2387,13 +2387,13 @@ function printERR () {
 #P # Prints a trace/log-string when called with more than one option 
 #P # and matches current level. 
 #P # 
-#P # @param $1 warning-level
-#P # @param $2 line
-#P # @param $3 fname
-#P # @param $4 code
-#P # @param $5 message
+#P # @param a $1:= warning-level
+#P # @param b $2:= line
+#P # @param c $3:= fname
+#P # @param d $4:= code
+#P # @param e $5:= message
 #P # @ingroup utalm_bash
-#P def printWNG($1,$2,$3,$4,$5):
+#P def printWNG(a,b,c,d,e):
 #P 	pass
 ## \cond
 function printWNG () {
@@ -2411,13 +2411,13 @@ function printWNG () {
 #P # Prints a trace/log-string when called with more than one option 
 #P # and matches current level. 
 #P # 
-#P # @param $1 info-level
-#P # @param $2 line
-#P # @param $3 fname
-#P # @param $4 code
-#P # @param $5 message
+#P # @param a $1:= info-level
+#P # @param b $2:= line
+#P # @param c $3:= fname
+#P # @param d $4:= code
+#P # @param e $5:= message
 #P # @ingroup utalm_bash
-#P def printINFO($1,$2,$3,$4,$5):
+#P def printINFO(a,b,c,d,e):
 #P 	pass
 ## \cond
 function printINFO () {
@@ -2435,13 +2435,13 @@ function printINFO () {
 #P # Prints a trace/log-string of a string prepared to be executed when called with more
 #P # than one option and matches current level. 
 #P # 
-#P # @param $1 level
-#P # @param $2 line
-#P # @param $3 fname
-#P # @param $4 title
-#P # @param $5 exec-or-call-string
+#P # @param a $1:= level
+#P # @param b $2:= line
+#P # @param c $3:= fname
+#P # @param d $4:= title
+#P # @param e $5:= exec-or-call-string
 #P # @ingroup utalm_bash
-#P def printFINALCALL($1,$2,$3,$4,$5):
+#P def printFINALCALL(a,b,c,d,e):
 #P 	pass
 ## \cond
 function printFINALCALL () {
@@ -2475,11 +2475,11 @@ function printFINALCALL () {
 #P # 
 #P # Implementation priority: PERFORMANCE
 #P # 
-#P # @param $1 line LINENO of caller
-#P # @param $2 file BASH_SOURCE of caller
-#P # @param $3 exec-or-call-string The call to be wrapped
+#P # @param a $1:= line LINENO of caller
+#P # @param b $2:= file BASH_SOURCE of caller
+#P # @param c $3:= exec-or-call-string The call to be wrapped
 #P # @ingroup utalm_bash
-#P def callErrOutWrapper($1,$2,$3):
+#P def callErrOutWrapper(a,b,c):
 #P 	pass
 ## \cond
 function callErrOutWrapper () {
@@ -2536,17 +2536,17 @@ function callErrOutWrapper () {
 #P # catched and if not representing a 'shell type boolean' processed 
 #P # by 'eval' before the check of expected logical value. 
 #P # 
-#P # @param $1: LINENO of caller
-#P # @param $2: BASH_SOURCE of caller
-#P # @param $3: condition
+#P # @param a $1:= LINENO of caller
+#P # @param b $2:= BASH_SOURCE of caller
+#P # @param c $3:= condition
 #P #   * 0 : boolean True
 #P #   * [0-9]* : boolean False
 #P #   * anything else : logical expression to be evaluated, '$?' applied  
 #P # 
 #P # 
-#P # @exit with 1 for False
+#P # @return with 1 for False
 #P # @ingroup libutalm_tdd
-#P def assert($1,$2,$3):
+#P def assert(a,b,c):
 #P 	pass
 ## \cond
 function assert () {
@@ -2634,7 +2634,7 @@ function assert () {
 #P # for this application. This has for now some gaps, but 
 #P # provides in most cases some flexibility.
 #P #
-#P # @param options-list Controls the filter characteristics:\n
+#P # @param a $*:=options-list Controls the filter characteristics:\n
 #P #   
 #P #	asone        = 0|1     :change value-name on: utalm_exit / off:utalm_sum_of_errors
 #P #	expect       = #errors :expected number of provoked errors, mapped to 0
@@ -2647,7 +2647,7 @@ function assert () {
 #P #
 #P # @return error count displayed as configured e.g. sum with sub-sums
 #P # @ingroup libutalm_tdd
-#P def countErrors($*):
+#P def countErrors(a):
 #P 	pass
 ## \cond
 function countErrors () {
@@ -2829,9 +2829,9 @@ EOF
 #P # 
 #P # Implementation priority: PERFORMANCE
 #P # 
-#P # @param $1: LINENO of caller
-#P # @param $2: BASH_SOURCE of caller
-#P # @param $3: ERROR|WARNING|WARNINGEXT
+#P # @param a $1:= LINENO of caller
+#P # @param b $2:= BASH_SOURCE of caller
+#P # @param c $3:= ERROR|WARNING|WARNINGEXT
 #P # <ul>
 #P #   <li>ERROR<br>
 #P #        Prints an error message and exits.
@@ -2843,8 +2843,8 @@ EOF
 #P #        Prints a warning-extended when activated by "-w" and continues.
 #P #   </li>
 #P # </ul>
-#P # @param $4: exec callee
-#P # @param $5: default path
+#P # @param d $4:= exec callee
+#P # @param e $5:= default path
 #P # @return 
 #P # <ul>
 #P #   <li>SUCCESS:= 0 + echo absolute-pathname</li>
@@ -2852,7 +2852,7 @@ EOF
 #P # </ul>
 #P # 
 #P # @ingroup utalm_bash
-#P def getPathName($1,$2,$3,$4,$5):
+#P def getPathName(a,b,c,d,e):
 #P 	pass
 ## \cond
 function getPathName () {
@@ -2907,12 +2907,12 @@ function getPathName () {
 #P #
 #P #  The name gotoHell is honouring my very first colleagues -
 #P #  actually skilled - not wanna-be-super-gurus.
-#P # @param $1: LINENO of caller
-#P # @param $2: BASH_SOURCE of caller
-#P # @param $3: EXIT values.
-#P # @exit with given code
+#P # @param a $1:= LINENO of caller
+#P # @param b $2:= BASH_SOURCE of caller
+#P # @param c $3:= EXIT values.
+#P # @return with given code
 #P # @ingroup utalm_bash
-#P def gotoHell($1,$2,$3):
+#P def gotoHell(a,b,c):
 #P 	pass
 ## \cond
 function gotoHell () {

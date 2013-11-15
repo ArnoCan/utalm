@@ -102,13 +102,13 @@ declare -a LIBMAN_VERS
 #P #
 #P #	bootstrapRegisterLib <pkg-name> <pkg-version>
 #P #
-#P # @param $1 pkg-name 
-#P # @param $2 pkg-version 
+#P # @param a $1:= pkg-name 
+#P # @param b $2:= pkg-version 
 #P #
 #P # @return with sum
 #P #
 #P # @ingroup bootstrap
-#P def bootstrapRegisterLib($1,$2):
+#P def bootstrapRegisterLib(a,b):
 #P 	pass
 ## \cond
 #***FUNCEND***
@@ -172,7 +172,7 @@ function bootstrapListLib () {
 #P #  Has to be located in the same directory as the callee gwhich is
 #P #  going to set it's environment.
 #P #
-#P # @param $1 Argument is checked for beeing a sysmbolic link, and
+#P # @param a $1:= Argument is checked for beeing a sysmbolic link, and
 #P #     if so the target will be evaluated and returned,
 #P #     else input is echoed.
 #P #
@@ -180,7 +180,7 @@ function bootstrapListLib () {
 #P #   Returns real target for sysmbolic links, else the 
 #P #   pathname itself.
 #P # @ingroup bootstrap
-#P def bootstrapGetRealPathname($1):
+#P def bootstrapGetRealPathname(a):
 #P 	pass
 ## \cond
 #***FUNCEND***
@@ -360,12 +360,12 @@ export -f gwhich
 #P ##
 #P # Locates related configuration file utalm-bash.conf
 #P #
-#P # @param $1 [EXIT]
+#P # @param a $1:= [EXIT]
 #P #     if EXIT in case of failere exit is called.
 #P #     else return (==default).
 #P #
 #P # @ingroup bootstrap
-#P def getConfigFile():
+#P def getConfigFile(a):
 #P 	pass
 ## \cond
 #***FUNCEND***
@@ -417,12 +417,12 @@ function getConfigFile () {
 #P #  *  . ${CORELIB}/libcore-${_myLIBVERS_bootstrap}.sh
 #P #  *  . ${LIBDIR}/libutalm.sh
 #P #
-#P # @param $1 [EXIT]
+#P # @param a $1:= [EXIT]
 #P #     if EXIT in case of failere exit is called.
 #P #     else return (==default).
 #P #
 #P # @ingroup bootstrap
-#P def setUTALMbash():
+#P def setUTALMbash(a):
 #P 	pass
 ## \cond
 #***FUNCEND***

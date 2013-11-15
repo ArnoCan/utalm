@@ -60,6 +60,31 @@
 ##	- $(BLD_ROOT)include/Makefile-post.mk   - mandatory
 ## 
 ## This could be customized as required.
+##
+## The following variables are applied as control switch for display:
+##
+##   * **DBG**
+##     Displays bulk for debugging
+##   * **QUIET**
+##     Displays actual actions only caused by deltas
+##   * **UNITTEST**
+##     Displays text for post filtering due to error analysis 
+##
+## The offset of the directory:
+##
+##   * **CURSUBPATH**
+##     Is used for copying and path preservation
+##   * **SUBROOTTOP**
+##     Honestly - forgotten it - updated later!
+##   * **TARGETBASE**
+##     Required as target, but also for processing the dependency list creation
+##
+## Inclusion of custom parts:
+##
+##   * **NODEACTIONONLY**
+##   * **PREFIXACTION**
+##   * **POSTFIXACTION**
+##
 ## @ingroup libutalm_make
 ## \cond
 ##
@@ -80,9 +105,7 @@ MYHELPTARGETS = help help_test help_utalm
 ## \cond
 
 ifdef UTALM
-$(warning "UTALM:" $(UTALM))
 TARGETS=utalm
-
 utalm:
 	echo "UTALM-target"
 ifdef D
@@ -93,8 +116,7 @@ ifeq ($(D),help:pdf)
 	echo epdfview $${HOME}/doc/en/pdf/man3/utalm-make.pdf
 	epdfview $${HOME}/doc/en/pdf/man3/utalm-make.pdf&
 endif
-endif
-	
+endif	
 
 endif
 	
@@ -105,10 +127,8 @@ X=$(shell X="$(X0)"&&echo $${X%%:*} )
 ifneq ($(MYGOAL), help)
 ifeq ($(firstword $(X)), help)
 MYGOAL=$(shell X="$(MAKECMDGOALS)"&&echo -n $${X// /_})
-$(warning "help for:" $(MYGOAL))
 
 ifneq ($(filter $(MYGOAL),$(MYHELPTARGETS)),)
-$(warning "help for:" $(MYGOAL))
 .PHONY:$(MYGOAL)
 _help:$(MYGOAL)
 endif
@@ -132,9 +152,9 @@ endif #BLD_ROOT
 #
 ifndef CURSUBPATH
 ifeq ($(shell pwd)/,$(BLD_ROOT))
-CURSUBPATH := 
+CURSUBPATH :=  
 else
-CURSUBPATH := $(subst $(BLD_ROOT),,$(shell pwd))
+CURSUBPATH := $(subst $(BLD_ROOT),,$(shell pwd))/
 endif
 endif
 .PHONY:CURSUBPATH
@@ -174,8 +194,8 @@ ifeq ($(CURSUBPATH),)
 TARGET_DIRS += $(addprefix $(TARGETBASE),$(UNIQUE_DIRS))
 TARGET_FILES += $(addprefix $(TARGETBASE),$(UNIQUE_FILES))
 else
-TARGET_DIRS += $(addprefix $(TARGETBASE),$(addprefix $(CURSUBPATH)/,$(UNIQUE_DIRS)))
-TARGET_FILES += $(addprefix $(TARGETBASE),$(addprefix $(CURSUBPATH)/,$(UNIQUE_FILES)))
+TARGET_DIRS += $(addprefix $(TARGETBASE),$(addprefix $(CURSUBPATH),$(UNIQUE_DIRS)))
+TARGET_FILES += $(addprefix $(TARGETBASE),$(addprefix $(CURSUBPATH),$(UNIQUE_FILES)))
 endif
 OUTDIRS += $(dir $(TARGET_FILES))
 #
@@ -192,26 +212,31 @@ ifndef NODEACTIONONLY
 #
 # Default is export selected items to intermediate tree
 #
-_forward_test_all all: outdirs $(SUB_POOLS) $(TARGET_DIRS) $(TARGET_FILES)
+_forward_test_all all: outdirs $(PREFIXACTION) $(SUB_POOLS) $(TARGET_DIRS) $(TARGET_FILES) $(POSTFIXACTION) 
 dirs:$(TARGET_DIRS)
-.PHONY:dirs
-$(TARGET_DIRS): $(UNIQUE_DIRS)
+$(TARGET_DIRS):$(subst $(TARGETBASE)$(CURSUBPATH),,$@)
 ifdef DBG
-	$(ECHO) "$(INDENT1)IMPORT-DIRS:$@"	
-	$(ECHO) "$(INDENT1)$(CPA) $? $(TARGETBASE)/$(CURSUBPATH)"
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(CURSUBPATH),,$@)"
+	@$(ECHO) "$(INDENT1)#  to:$@"
+else
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(CURSUBPATH),,$@)"
 endif
-	$(MKDIR) $(TARGETBASE)$(CURSUBPATH)
-	$(CPA) $? $(TARGETBASE)$(CURSUBPATH)
-
+	$(CP) $(CPOPTS) $(subst $(TARGETBASE)$(CURSUBPATH),,$@) $(TARGETBASE)$(CURSUBPATH)
+$(UNIQUE_DIRS):
 files:$(TARGET_FILES)
-.PHONY:files
-$(TARGET_FILES):$(UNIQUE_FILES)
-ifdef DBG
-	$(ECHO) "$(INDENT1)IMPORT-FILES:$@"
-	$(ECHO) "$(INDENT1)$(CPA) $? $(TARGETBASE)/$(CURSUBPATH)"
+$(TARGET_FILES):$(subst $(TARGETBASE)$(CURSUBPATH),,$@)
+ifdef DBG 
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(CURSUBPATH),,$@)"
+	@$(ECHO) "$(INDENT1)#  to:$@"
+else
+ifdef QUIET
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE),,$@)"
+else
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(CURSUBPATH),,$@)"
 endif
-	$(CPA) $? $(TARGETBASE)/$(CURSUBPATH)
-
+endif
+	$(CP) $(CPOPTS) $(subst $(TARGETBASE)$(CURSUBPATH),,$@) $(TARGETBASE)$(CURSUBPATH)
+$(UNIQUE_FILES):
 else
 _forward_test_all: all
 endif #NODEACTIONONLY
@@ -219,20 +244,33 @@ endif #NODEACTIONONLY
 subpools:$(SUB_POOLS)
 .PHONY:subpools
 $(SUB_POOLS):
-ifdef DEBUG 
+ifdef DBG 
 	@$(ECHO) "$(INDENT0)###################################"
-	@$(ECHO) "$(INDENT1)#Change to:$(CURSUBPATH)/$@"
-	@$(ECHO) "$(INDENT1)#INDENT0="   $(INDENT0)" INDENT1="   $(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP=$(SUBROOTTOP) CURSUBPATH=$(CURSUBPATH)/$@ $(MAKE) -C $@ $(MFLAGS) $(MAKECMDGOALS)"
+	@$(ECHO) "$(INDENT1)#Change to:$@"
+	@$(ECHO) "$(INDENT1)#INDENT0=\"   $(INDENT0)\" INDENT1=\"   $(INDENT1)\" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP=$(SUBROOTTOP) CURSUBPATH=$(CURSUBPATH)$@/ $(MAKE) -C $@ $(MFLAGS) $(MAKECMDGOALS)"
 endif
 ifndef UNITTEST
-	@$(ECHO) "$(INDENT0)#Change to:$(CURSUBPATH)/$@"
+ifndef QUIET
+	@$(ECHO) "$(INDENT0)#Change to:$@"
 endif
-	INDENT0="   $(INDENT0)" INDENT1="   $(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP=$(SUBROOTTOP) CURSUBPATH=$(CURSUBPATH)/$@ $(MAKE) -C $@ $(MFLAGS) $(MAKECMDGOALS)
+endif
+	INDENT0="   $(INDENT0)" INDENT1="   $(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP=$(SUBROOTTOP) CURSUBPATH=$(CURSUBPATH)$@/ $(MAKE) -C $@ $(MFLAGS) $(MAKECMDGOALS)
 ifndef UNITTEST
-	@$(ECHO) "$(INDENT1)#...return from:$(CURSUBPATH)/$@($$?)"
+ifndef QUIET
+	@$(ECHO) "$(INDENT1)#...return from:$(CURSUBPATH)$@($$?)"
+endif
 endif
 
 include $(BLD_ROOT)include/Makefile-post.mk
+
+ifndef _MAKE_TEST_INCLUDED_
+test unit:
+	@$(ECHO) "#"
+	@$(ECHO) "#*****************************"
+	@$(ECHO) "#* Requires Makefile-test.mk *"
+	@$(ECHO) "#*****************************"
+	@$(ECHO) "#"
+endif
 
 endif #_MAKE_NODEWALK_INCLUDED_
 ## \endcond

@@ -58,8 +58,8 @@ ifndef BLD_ROOT
   $(error "Missing environment variable BLD_ROOT")
 endif
 
-include $(BLD_ROOT)Makefile-version.mk
-include $(BLD_ROOT)Makefile-root.mk
+include $(BLD_ROOT)include/Makefile-version.mk
+include $(BLD_ROOT)include/Makefile-root.mk
 
 
 ifndef OUTLANG

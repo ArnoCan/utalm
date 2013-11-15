@@ -1158,3 +1158,41 @@ tr.heading h2 {
 #socialRefs a img .socialImg {padding:10px 0px 10px 0px; margin-top:10px; align:right;}
 #titlearea table {width:100%;}
 
+/**********************************************************/
+
+.slidingDiv {
+    height:300px;
+    margin-top:10px;
+    border-top:5px solid grey;
+    border-bottom:5px solid grey;
+}
+
+.slidingDivClosed {
+/*
+    border-top:1px dashed black;
+    border-bottom:1px dashed black;
+*/
+ 	margin-bottom:1em;
+    display:none;
+}
+
+.show_hide {
+    display:none;
+}
+
+/*
+.slidingDivSwitcher a  {
+    padding: 5px 10px;
+}
+*/
+
+.youtubetable {
+}
+#youtubetable iframe {
+    width:390px;
+    height:280px;
+}
+
+#youtubetable img {
+    width:180px;
+}

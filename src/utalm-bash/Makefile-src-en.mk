@@ -38,6 +38,7 @@ SRC_FILES	+= Apache-2.0.txt
 SRC_FILES	+= README.md
 SRC_FILES	+= INSTALL.txt
 SRC_FILES	+= RELEASENOTES.txt
+SRC_FILES	+= LICENSE.txt
 SRC_FILES	+= sourceEnvironment.sh
 
 SRC_FILES	+= install-devel.sh

@@ -52,46 +52,53 @@ IMPORT_FILES =
 include Makefile-src-en.mk
 ###
 
-UNIQUE_IMPORT_DIRS:=$(shell for i in ${IMPORT_DIRS};do echo $$i;done|sort -u)
-UNIQUE_IMPORT_FILES:=$(shell for i in ${IMPORT_FILES};do echo $$i;done|sort -u)
+all: outdirs SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD $(TGZ_PNAME)
+.PHONY: outdirs src doc prep
 
-
-
-.PHONY: SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPTGZ
-
-all: outdirs SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPTGZ $(TGZ_PNAME)
-
-.PHONY: src doc prep
-
-tgzcopy:$(TGZ_PNAME)
-.PHONY:tgzcopy 
-$(TGZ_PNAME):$(TGZ_PNAME_BLD)   
+$(TGZ_PNAME):pkgcopy
+pkgcopy:$(TGZ_PNAME_BLD)
 ifdef DBG
 	$(ECHO) "Copy TGZ-archive:$(TGZ_PNAME_BLD)"
 endif
 	cp $(TGZ_PNAME_BLD) $(TGZ_PNAME)
- 
-tgzpack:$(TGZ_PNAME_BLD)
- .PHONY:tgzpack
-$(TGZ_PNAME_BLD):   
+
+#
+_IMPORT_DIRS_DOCBASE_ML:=$(subst $(DOCBASE_ML),$(TGZ_ROOT)/doc/,$(IMPORT_DIRS_DOCBASE_ML))
+UNIQUE_IMPORT_DIRS_DOCBASE_ML:=$(shell for i in ${_IMPORT_DIRS_DOCBASE_ML};do echo $$i;done|sort -u)
+#
+_IMPORT_FILES_DOCBASE_ML:=$(subst $(DOCBASE_ML),$(TGZ_ROOT)/,$(IMPORT_FILES_DOCBASE_ML))
+UNIQUE_IMPORT_FILES_DOCBASE_ML:=$(shell for i in ${_IMPORT_FILES_DOCBASE_ML};do echo $$i;done|sort -u)
+#
+_IMPORT_DIRS_RTBASE:=$(subst $(RTBASE),$(TGZ_ROOT)/,$(IMPORT_DIRS_RTBASE))
+UNIQUE_IMPORT_DIRS_RTBASE:=$(shell for i in ${_IMPORT_DIRS_RTBASE};do echo $$i;done|sort -u)
+#
+_IMPORT_FILES_RTBASE:=$(subst $(RTBASE),$(TGZ_ROOT)/,$(IMPORT_FILES_RTBASE))
+UNIQUE_IMPORT_FILES_RTBASE:=$(shell for i in ${_IMPORT_FILES_RTBASE};do echo $$i;done|sort -u)
+#
+_IMPORT_DIRS_BLD:=$(subst $(BLD_ROOT),$(TGZ_ROOT)/,$(IMPORT_DIRS_BLD))
+UNIQUE_IMPORT_DIRS_BLD:=$(shell for i in ${_IMPORT_DIRS_BLD};do echo $$i;done|sort -u)
+#
+_IMPORT_FILES_BLD:=$(subst $(BLD_ROOT),$(TGZ_ROOT)/,$(IMPORT_FILES_BLD))
+UNIQUE_IMPORT_FILES_BLD:=$(shell for i in ${_IMPORT_FILES_BLD};do echo $$i;done|sort -u)
+#
+$(TGZ_PNAME_BLD): pkgbuild
+pkgbuild: $(UNIQUE_IMPORT_DIRS_DOCBASE_ML) $(UNIQUE_IMPORT_FILES_DOCBASE_ML) $(UNIQUE_IMPORT_DIRS_RTBASE) $(UNIQUE_IMPORT_FILES_RTBASE) $(UNIQUE_IMPORT_DIRS_BLD) $(UNIQUE_IMPORT_FILES_BLD)
 	$(ECHO) "Create TGZ-archive:$@"
 ifdef DBG
 	$(ECHO) "PKG=$(TGZ_PNAME)"
 	$(ECHO) "TGZ_ROOT=$(TGZ_ROOT)"
 	$(ECHO) 
-	$(ECHO) "Input:UNIQUE_IMPORT_DIRS="$(UNIQUE_IMPORT_DIRS) 
-	$(ECHO) 
-	$(ECHO) "Input:UNIQUE_IMPORT_FILES="$(UNIQUE_IMPORT_FILES) 
-	$(ECHO) 
-	$(ECHO) "Blacklist:PKG_BLACK="$(PKG_BLACK)
-	$(ECHO) 
 endif
+	echo "PKG=$(TGZ_PNAME)"
+	echo "TGZ_ROOT=$(TGZ_ROOT)"
 	$(FIND) $(TGZ_ROOT) \
              \( -type d  -exec $(CHMOD) 755 {} \; \) \
 	     -o \( -type f -name '*.sh'    -exec $(CHMOD) 755 {} \; \) \
 	     -o \( -type f -exec $(CHMOD) 644 {} \; \)
 ifdef DBG
+	echo setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" -d 99999 
 	setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" -d 99999 
+	echo setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(TGZ_ROOT)/VERSION -d 99999
 	setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" --target=$(TGZ_ROOT)/VERSION -d 99999
 else
 	setversion.sh --version="$(VERSION)" --variant="$(VARIANT)" --release="$(RELEASE)" 
@@ -100,31 +107,27 @@ endif
 	cd $(TGZ_ROOT)&&$(BLD_ROOT)collect-filelist.sh
 	cd $(dir $(TGZ_ROOT))&&$(TARGZIP) $(TGZ_PNAME_BLD) $(notdir $(TGZ_ROOT))
 
+$(UNIQUE_IMPORT_DIRS_DOCBASE_ML) $(UNIQUE_IMPORT_FILES_DOCBASE_ML):$(subst $(TGZ_ROOT),,$@)
+ifdef DBG
+	$(ECHO) "Input:"$@ 
+endif
+	-$(CD) $(DOCBASE_ML).. && $(CP) $(CPOPTS) $(subst $(TGZ_ROOT)/,,$@) $(TGZ_ROOT)
 
-prep:PREPTGZ
-PREPTGZ:
+
+$(UNIQUE_IMPORT_FILES_RTBASE) $(UNIQUE_IMPORT_DIRS_RTBASE):$(subst $(RTBASE),,$@)
 ifdef DBG
-	$(ECHO)
-	$(ECHO) "IMPORT-DIRS:$(UNIQUE_IMPORT_DIRS)"
-	$(ECHO)
-	$(ECHO) "IMPORT-FILES:$(UNIQUE_IMPORT_FILES)"
-	$(ECHO)
-	$(ECHO) INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
+	$(ECHO) "Input:"$@ 
 endif
-	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
+	-$(CD) $(RTBASE) && $(CP) $(CPOPTS) $(subst $(TGZ_ROOT)/,,$@) $(TGZ_ROOT)
+
+
+$(UNIQUE_IMPORT_DIRS_BLD) $(UNIQUE_IMPORT_FILES_BLD):$(subst $(BLD_ROOT),,$@)
 ifdef DBG
-	@$(ECHO) $(MKDIR) $(UNIQUE_IMPORT_DIRS)
+	$(ECHO) "Input:"$@ 
 endif
-	$(MKDIR) $(UNIQUE_IMPORT_DIRS)
-	$(CHMOD) 755 $(UNIQUE_IMPORT_DIRS)
-ifdef DBG
-	@$(ECHO) $(IMPORT_DIRS) $(TGZ_ROOT)
-endif
-	-$(CPA) $(IMPORT_DIRS) $(TGZ_ROOT)
-ifdef DBG
-	@$(ECHO) $(CPA) $(IMPORT_FILES) $(TGZ_ROOT)
-endif
-	-$(CPA) $(IMPORT_FILES) $(TGZ_ROOT)
+	-$(CD) $(BLD_ROOT) && $(CP) $(CPOPTS) $(subst $(TGZ_ROOT)/,,$@) $(TGZ_ROOT)
+
+
 
 src:SRC_BLD
 SRC_BLD:
@@ -149,5 +152,30 @@ EXAMPLES_BLD:
 	@echo "###Change to:$@"
 	$(MAKE) -C $(BLD_ROOT)examples $(MFLAGS)
 	@echo "###..return from $@"
+
+LOCALHELP=1
+help:
+	@echo "***************************************"
+	@echo
+	@echo "  VERSION        = $(VERSION)"
+	@echo "  PACKAGE        = $(PACKAGE)"
+	@echo
+	@echo "***************************************"
+	@echo
+	@echo " Help on :'make' in $(shell basename $$PWD)"
+	@echo
+	@echo "  make"
+	@echo "  - builds and copies into export directory"
+	@echo "    EXPORT_DIR = $(EXPORT_DIR)"
+	@echo
+	@echo "  make pkgbuild"
+	@echo "  - builds only"
+	@echo
+	@echo "  make pkgcopy"
+	@echo "  - copies only"
+	@echo
+	@echo "  make helpglobal"
+	@echo "  - displays global help"
+	@echo
 
 include $(BLD_ROOT)include/Makefile-post.mk

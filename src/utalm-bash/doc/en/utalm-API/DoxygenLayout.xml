@@ -28,6 +28,7 @@
     	<tab type="user" url="../utalm-visualstudio-API/index.html" title="VisualStudio"/>
 -->
     </tab>
+<!--
     <tab type="usergroup" visible="yes" title="Trace">
 	    <tab type="user" visible="no" url="@ref debugtracelogging" title="Integrated Debugger, Trace, and Logging"/>
 	    <tab type="user" visible="no" url="@ref lowcosttdd" title="UTALM as a Low-Cost TDD Environment"/>
@@ -46,12 +47,17 @@
 	    <tab type="user" visible="no" url="@ref testdevopstools" title="How to test small sized adhoc-tools"/>
 	    <tab type="user" visible="no" url="@ref unittestsbymake" title="Unit-Tests with make"/>
     </tab>
+    <tab type="usergroup" visible="yes" title="Environments">
+	    <tab type="user" visible="no" url="@ref utalmruntimeenvironment" title="Integrated Debugger, Trace, and Logging"/>
+	    <tab type="user" visible="no" url="@ref utalmdevenvironment" title="UTALM as a Low-Cost TDD Environment"/>
+	    <tab type="user" visible="no" url="@ref unittestsbymake" title="Unit-Tests with make"/>
+    </tab>
+-->
+    <tab type="user" url="@ref environment" title="HowTo" />
     <tab type="usergroup" visible="yes" title="Downloads">
-        <tab type="user" url="http://sourceforge.net/projects/utalm/" title="Sourceforge.net">
-        <img src="../../../../images/sourceforge-21x21.png" />
-        </tab>
+        <tab type="user" url="http://sourceforge.net/projects/utalm/" title="Sourceforge.net" />
         <tab type="user" url="https://github.com/ArnoCan/utalm" title="github"/>
-        <tab type="user" url="@ref licenses" title="Licence"/>
+        <tab type="user" url="@ref licenses" title="License"/>
     </tab>
     <tab type="usergroup" visible="yes" title="Help">
 	    <tab type="user" url="@ref readmeutalm" title="README"/>

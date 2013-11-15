@@ -32,32 +32,60 @@
 #$Header$
 #
 
-#
-IMPORT_FILES	+= $(RTBASE)README.md
-IMPORT_FILES	+= $(RTBASE)RELEASENOTES.txt
-IMPORT_FILES	+= $(RTBASE)INSTALL.txt
-IMPORT_FILES	+= $(RTBASE)Apache-2.0.txt
-IMPORT_FILES	+= $(RTBASE)install.sh
-IMPORT_FILES	+= $(RTBASE)sourceEnvironment.sh
+CPOPTS += --parents 
 
-IMPORT_FILES	+= $(BLD_ROOT)TODO.txt
-IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
-IMPORT_FILES	+= $(BLD_ROOT)Makefile-root.mk
-IMPORT_FILES	+= $(BLD_ROOT)Makefile-version.mk
+IMPORT_FILES_BLD	+= $(BLD_ROOT)README.md
+IMPORT_FILES_BLD	+= $(BLD_ROOT)RELEASENOTES.txt
+IMPORT_FILES_BLD	+= $(BLD_ROOT)INSTALL.txt
+IMPORT_FILES_BLD	+= $(BLD_ROOT)Apache-2.0.txt
+IMPORT_FILES_BLD	+= $(BLD_ROOT)install.sh
+IMPORT_FILES_BLD	+= $(BLD_ROOT)sourceEnvironment.sh
 
-
-IMPORT_DIRS		+= $(RTBASE)bin
-IMPORT_DIRS		+= $(RTBASE)conf
-
-IMPORT_DIRS		+= $(DOCBASE_ML)
+IMPORT_FILES_BLD	+= $(BLD_ROOT)TODO.txt
+IMPORT_FILES_BLD	+= $(BLD_ROOT)collect-filelist.sh
 
 #
-IMPORT_DIRS		+= $(RTBASE)bin
-IMPORT_DIRS		+= $(RTBASE)conf
-IMPORT_DIRS		+= $(RTBASE)lib
+IMPORT_FILES_BLD	+= $(BLD_ROOT)include/Makefile-root.mk
+IMPORT_FILES_BLD	+= $(BLD_ROOT)include/Makefile-version.mk
 
-IMPORT_DIRS		+= $(RTBASE)examples
+#
+IMPORT_DIRS_RTBASE	+= $(RTBASE)conf
 
+#
+IMPORT_DIRS_DOCBASE_ML	+= $(DOCBASE_ML)
 
+#
+IMPORT_DIRS_RTBASE	+= $(RTBASE)bin/bootstrap
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/check-if-fi-pairs.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/countErrors.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCPUinfo.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCurArch.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCurDistribution.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCurGID.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCurOSRel.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCurOS.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCurRelease.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCurUTALMRel.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getCurUTALMVariant.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getPathToBin.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getPathToBootstrapDir.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getPathToLib.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/getVMinfo.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/setversion.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/utalm-bash-cli.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)bin/utalmhelp.sh
 
+#
+IMPORT_DIRS_RTBASE	+= $(RTBASE)lib/core
+IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalm.awk
+IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalm-min.awk
+IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalm.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalm-min.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalmfileobjects.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalmfileobjects-min.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalmrefpersistency.sh
+IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalmrefpersistency-min.sh
+
+#
+IMPORT_DIRS_RTBASE	+= $(RTBASE)examples
 

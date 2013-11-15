@@ -4,7 +4,7 @@
 * MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 * SHORT:        utalm-bash
 * LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
-* VERSION:      03_03_002
+* VERSION:      03_03_004
 *
 * Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
 *
@@ -24,7 +24,7 @@
 * script installs the libraray and required **core** and **bootstrap** components in the users 
 * home directory.
 *
-* \remark Replace <distribution> by current, at the time of writing: <br /><b><distribution>:=<version>-<release>_<variant>:=03.03.002-R0_BETA</b>
+* \remark Replace &lt;distribution&gt; by current, at the time of writing: <br /><b>&lt;distribution&gt;:=&lt;version&gt;-&lt;release&gt;_&lt;variant&gt;:=03.03.004-R0_BETA</b>
 *
 * <h2>Prerequisites</h2>
 * Following are defined as main mandatory prerequisites for the runtime system:
@@ -64,8 +64,8 @@
 * <h2>tgz</h2>
 * The easiest way to install is to unpack the tgz archive and call
 * install, e.g.:
-*   * tar zxf utalm-bash-<b><distribution></b>.noarch.tgz
-*   * cd utalm-bash-<b><distribution></b>.noarch
+*   * tar zxf utalm-bash-<b>&lt;distribution&gt;</b>.noarch.tgz
+*   * cd utalm-bash-<b>&lt;distribution&gt;</b>.noarch
 *   * ./install.sh
 * 
 * 
@@ -73,22 +73,22 @@
 * The easiest way to install the sources is to unpack the 
 * source-tgz archive and call install. The prerequisite is
 * the previous installation of the runtime package.
-*   * tar zxf utalm-bash-<b><distribution></b>.src.tgz
-*   * cd utalm-bash-<b><distribution></b>.src
+*   * tar zxf utalm-bash-<b>&lt;distribution&gt;</b>.src.tgz
+*   * cd utalm-bash-<b>&lt;distribution&gt;</b>.src
 *   * ./install-devel.sh
 * 
 * <h2>rpm</h2>
 * When system installations are required the rpm installation 
 * is the recommended choice.
-*   * rpm -i utalm-bash-<b><distribution></b>.noarch.rpm
-*   * cd /usr/share/utalm-bash-<b><distribution></b>.noarch
+*   * rpm -i utalm-bash-<b>&lt;distribution&gt;</b>.noarch.rpm
+*   * cd /usr/share/utalm-bash-<b>&lt;distribution&gt;</b>.noarch
 *   * ./install.sh
 * 
 * <h2>Source rpm</h2>
 * When system installations are required the rpm installation 
 * is the recommended choice.
-*   * rpm -i utalm-bash-<b><distribution></b>.src.rpm
-*   * cd /usr/share/utalm-bash-<b><distribution></b>.src
+*   * rpm -i utalm-bash-<b>&lt;distribution&gt;</b>.src.rpm
+*   * cd /usr/share/utalm-bash-<b>&lt;distribution&gt;</b>.src
 *   * ./install-devel.sh
 *
 * <h2>deb</h2>

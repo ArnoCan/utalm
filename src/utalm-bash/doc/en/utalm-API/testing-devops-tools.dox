@@ -4,7 +4,7 @@
 * MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 * SHORT:        utalm-bash
 * LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
-* VERSION:      03_03_002
+* VERSION:      03_03_004
 *
 * Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
 *
@@ -31,20 +31,22 @@
  *	assertRefDataWithExit(lineno, filename, ID, data)
  *
  * All to be done for the storage of reference data collected on the fly is to set
- * the lag
+ * the flag
  *
  *	TESTMODE=CREATEREF
  *
  * which changes to write-storage-mode for later comparison. This creates a mirror of
- * the subtree and writes the reference data literally into a file.
- 
-  by setting a flag
+ * the current working directory subtree in file system and writes the reference data
+ * literally into a file.
  *
- *	COMPAREREF
+ * By setting the flag
  *
+ *	TESTMODE=COMPAREREF
+ *
+ * The comparison and assertion of the runtime data with the stored reference data is activated.
  * No additional code or action is required. The main benefit here is the 
  * availability for may languages and environments with almost the same syntax.
- * Thus once the whole tool set is learned for one language, the latter are almost
+ * Thus once the whole tool set is learned for one language, the others are almost
  * known. 
  *
  */

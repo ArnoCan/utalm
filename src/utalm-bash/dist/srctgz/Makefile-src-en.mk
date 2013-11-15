@@ -43,8 +43,8 @@ IMPORT_FILES	+= $(BLD_ROOT)install.sh
 IMPORT_FILES	+= $(BLD_ROOT)collect-filelist.sh
 
 IMPORT_FILES	+= $(BLD_ROOT)Makefile
-IMPORT_FILES	+= $(BLD_ROOT)Makefile-root.mk
-IMPORT_FILES	+= $(BLD_ROOT)Makefile-version.mk
+IMPORT_FILES	+= $(BLD_ROOT)include/Makefile-root.mk
+IMPORT_FILES	+= $(BLD_ROOT)include/Makefile-version.mk
 IMPORT_FILES	+= $(BLD_ROOT)Makefile-src-en.mk
 IMPORT_FILES	+= $(BLD_ROOT)sourceEnvironment.sh
 

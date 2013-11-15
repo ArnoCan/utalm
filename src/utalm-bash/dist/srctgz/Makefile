@@ -53,17 +53,18 @@ include Makefile-src-en.mk
 UNIQUE_IMPORT_DIRS:=$(shell for i in ${IMPORT_DIRS};do echo $$i;done|sort -u)
 UNIQUE_IMPORT_FILES:=$(shell for i in ${IMPORT_FILES};do echo $$i;done|sort -u)
 
-.PHONY: SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPTGZ
+.PHONY: SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD 
 
-all: outdirs SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD PREPSRCTGZ $(SRCTGZ_PNAME)
+all: outdirs SRC_BLD EXAMPLES_BLD TESTS_BLD DOC_BLD  $(SRCTGZ_PNAME)
 
-$(SRCTGZ_PNAME):$(SRCTGZ_PNAME_BLD)   
+pkgcopy $(SRCTGZ_PNAME):$(SRCTGZ_PNAME_BLD)   
 ifdef DBG
 	@$(ECHO) "Copy SRCTGZ-archive:$(SRCTGZ_PNAME_BLD)"
 endif
 	cp $(SRCTGZ_PNAME_BLD) $(SRCTGZ_PNAME)
  
-$(SRCTGZ_PNAME_BLD):   
+.PHONY:prep
+pkgbuild $(SRCTGZ_PNAME_BLD):prep 
 	@$(ECHO) "Create SRCTGZ-archive:$@"
 ifdef DBG
 	@$(ECHO) "PKG=$(SRCTGZ_PNAME)"
@@ -72,8 +73,6 @@ ifdef DBG
 	@$(ECHO) "Input:UNIQUE_IMPORT_DIRS="$(UNIQUE_IMPORT_DIRS) 
 	@$(ECHO) 
 	@$(ECHO) "Input:UNIQUE_IMPORT_FILES="$(UNIQUE_IMPORT_FILES) 
-	@$(ECHO) 
-	@$(ECHO) "Blacklist:PKG_BLACK="$(PKG_BLACK)
 	@$(ECHO) 
 endif
 	$(FIND) $(SRCTGZ_ROOT) \
@@ -93,8 +92,7 @@ endif
 	cd $(dir $(SRCTGZ_ROOT))&&$(TARGZIP) $(SRCTGZ_PNAME_BLD) $(notdir $(SRCTGZ_ROOT))
 
 
-prep:PREPSRCTGZ
-PREPSRCTGZ:
+prep $(UNIQUE_IMPORT_DIRS) $(UNIQUE_IMPORT_FILES):
 ifdef DBG
 	@$(ECHO)
 	@$(ECHO) "IMPORT-DIRS:$(UNIQUE_IMPORT_DIRS)"
@@ -109,13 +107,13 @@ ifdef DBG
 endif
 	$(CHMOD) 755 $(UNIQUE_IMPORT_DIRS)
 ifdef DBG
-	@$(ECHO) $(CPA) $(IMPORT_DIRS) $(SRCTGZ_ROOT)
+	@$(ECHO) $(CPA) $(UNIQUE_IMPORT_DIRS) $(SRCTGZ_ROOT)
 endif
-	$(CPA) $(IMPORT_DIRS) $(SRCTGZ_ROOT)
+	$(CPA) $(UNIQUE_IMPORT_DIRS) $(SRCTGZ_ROOT)
 ifdef DBG
-	@$(ECHO) $(CPA) $(IMPORT_FILES) $(SRCTGZ_ROOT)
+	@$(ECHO) $(CPA) $(UNIQUE_IMPORT_FILES) $(SRCTGZ_ROOT)
 endif
-	$(CPA) $(IMPORT_FILES) $(SRCTGZ_ROOT)
+	$(CPA) $(UNIQUE_IMPORT_FILES) $(SRCTGZ_ROOT)
 
 src:SRC_BLD
 SRC_BLD:
@@ -140,5 +138,30 @@ EXAMPLES_BLD:
 	@echo "###Change to:$@"
 	$(MAKE) -C $(BLD_ROOT)examples $(MFLAGS)
 	@echo "###..return from $@"
+
+LOCALHELP=1
+help:
+	@echo "***************************************"
+	@echo
+	@echo "  VERSION        = $(VERSION)"
+	@echo "  PACKAGE        = $(PACKAGE)"
+	@echo
+	@echo "***************************************"
+	@echo
+	@echo " Help on :'make' in $(shell basename $$PWD)"
+	@echo
+	@echo "  make"
+	@echo "  - builds and copies into export directory"
+	@echo "    EXPORT_DIR = $(EXPORT_DIR)"
+	@echo
+	@echo "  make pkgbuild"
+	@echo "  - builds only"
+	@echo
+	@echo "  make pkgcopy"
+	@echo "  - copies only"
+	@echo
+	@echo "  make helpglobal"
+	@echo "  - displays global help"
+	@echo
 
 include $(BLD_ROOT)include/Makefile-post.mk

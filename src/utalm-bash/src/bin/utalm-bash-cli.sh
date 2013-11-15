@@ -86,11 +86,11 @@
 ##	- utalm-bash-cli.sh -d help:PDF
 ##	- utalm-bash-cli.sh -d help:MAN
 ## 
-## - Warning output by \ref printWNG.
+## - Warning output by printWNG.
 ##
 ##	utalm-bash-cli.sh -d 10 printWNG 1 10 myfile 11 "This is a test"
 ##
-## - Debug output by \ref printDBG.
+## - Debug output by printDBG.
 ##
 ##	utalm-bash-cli.sh -d 10 printDBG 1 1 10 myfile "This is a test"
 ##
@@ -101,7 +101,7 @@
 ##
 ##	utalm-bash-cli.sh -X -d 10 printDBG 1 1 10 myfile "This is a test"
 ##
-## - A controlled exit with standard postprocessing format by \ref gotoHell.
+## - A controlled exit with standard postprocessing format by gotoHell.
 ##   This could be applied for example within scripts as well as within 
 ##   makefiles.
 ##

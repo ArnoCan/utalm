@@ -33,14 +33,15 @@ Version: %{myversion}
 Release:%{myrelease}
 License: %{mylicense}
 Group: Development/Libraries
-Source:%{mytgzname}
+Source:%{mytgzfilename}
 URL: %{myurl}
 Distribution: %{myname}
 Vendor: %{myvendor}
 Packager: %{mypackager}
 
 #BuildRoot: /tmp/rpm/%{mytgzname}
-BuildRoot: %{_tmppath}/%{mytgzname}
+#BuildRoot: %{_tmppath}/%{mytgzname}
+BuildRoot: %{_tmppath}/%{mytgzfilename}
 
 BuildArch: noarch
 BuildRequires: bash, make, gawk
@@ -49,7 +50,7 @@ ExclusiveOS: Linux
 
 Prefix: /usr/share
 
-Requires: make >= 3, utalm-bash = %{myversion} 
+Requires: coreutils , make >= 3, utalm-bash = %{myversion} 
 Provides: utalm-make
 
 
@@ -65,9 +66,9 @@ the following options are available:
    PATH=$PATH:<Prefix>/bin
    
    Use in your scripting code:
-     '. <Prefix>/lib/libutalm.sh
+     '. <Prefix>/lib/libutalm.sh'
    or
-     '. <Prefix>/lib/libutalm-min.sh
+     '. <Prefix>/lib/libutalm-min.sh'
  
    By default:
       <Prefix>:=/usr/share
@@ -76,23 +77,34 @@ the following options are available:
    tgz-file into your home directory and unpack it.
 
 	cd $HOME
-	cp utalm-bash-03.03.002-R0.noarch.tgz
-	tar zxf utalm-bash-03.03.002-R0.noarch.tgz   
+	cp utalm-bash-03.03.004-R0.noarch.tgz
+	tar zxf utalm-bash-03.03.004-R0.noarch.tgz   
 
 
 %prep
-%setup -n %{myname}-%{myversion}.%{_target_cpu}
+#%setup -n %{myname}-%{myversion}.%{_target_cpu}
+%setup -n %{mytgzname}
 
 %build
 
 %install
+#INSTBASE=${RPM_BUILD_ROOT}/usr/share
+#INSTTARGET=${INSTBASE}/%{myname}-${RPM_PACKAGE_VERSION}.%{_target_cpu}
 INSTBASE=${RPM_BUILD_ROOT}/usr/share
-INSTTARGET=${INSTBASE}/%{myname}-${RPM_PACKAGE_VERSION}.%{_target_cpu}
+#INSTTARGET=${INSTBASE}/utalm-bash-${RPM_PACKAGE_VERSION}.%{_target_cpu}
+INSTTARGET=${INSTBASE}/%{mydirname}
 
+#echo ${VARIANT_ROOT}/redhat
+#rm -rf ${INSTTARGET}
+#mkdir -p ${INSTBASE}
+#tar -C ${INSTBASE} -zxf %{mytgzpname}
+#chmod -R 755 ${INSTTARGET}
 echo ${VARIANT_ROOT}/redhat
 rm -rf ${INSTTARGET}
 mkdir -p ${INSTBASE}
-tar -C ${INSTBASE} -zxf %{mytgzpname}
+echo "INSTBASE=${INSTBASE}"
+
+tar -C ${INSTBASE} -zxf %{mytgzpname} 
 chmod -R 755 ${INSTTARGET}
 
 %post
@@ -102,14 +114,19 @@ chmod -R 755 ${INSTTARGET}
 %files
 %defattr(-,root,root)
 
-/usr/share/%{myname}-%{myversion}.%{_target_cpu}
+#/usr/share/%{myname}-%{myversion}.%{_target_cpu}
+/usr/share/%{mydirname}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
 %changelog
+* Thu Nov 15 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
+- Version-03.03.004
+  Major updates and fixes, probably for eternity.
+  
 * Thu Nov 10 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.03.002
+- Version-03.03.003
   Major updates and fixes, probably for eternity.
   
 * Thu Nov 08 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
@@ -117,7 +134,7 @@ rm -rf ${RPM_BUILD_ROOT}
   Major updates and fixes, probably for eternity.
   
 * Sat Sep 21 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.03.002
+- Version-03.03.004
 
 * Tue Sep 15 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
 - Version-02.01.001

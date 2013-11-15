@@ -37,7 +37,7 @@
 ## @brief Library of utalm-make based regression tests
 ##
 ##  * Source and documentation: @ref libutalmrefpersistency.sh
-##  * Stripped runtime version: @ref libutalmtestobjects-min.sh
+##  * Stripped runtime version: @ref libutalmrefpersistency-min.sh
 ##
 ## For detailed information on <b>libutalmrefpersistency.sh</b> refer to:
 ## <ul>
@@ -148,15 +148,14 @@ export T_LISTREF
 ## \cond
 TESTMODE="${TESTMODE:-$T_COMPAREREF}"
 export TESTMODE
-## \endcond
 
 ## \endcond
 #P ##
-#P # Convert <testmode_string> to #testmode value 
+#P # Convert &lt;testmode_string&gt; to \#testmode value 
 #P #
-#P # @param $1 testmode-string
+#P # @param a $1:=testmode-string
 #P # @ingroup utalm_bash
-#P def testmodeToNum($1):
+#P def testmodeToNum(a):
 #P 	pass
 ## \cond
 function testmodeToNum () {
@@ -187,11 +186,11 @@ function testmodeToNum () {
 
 ## \endcond
 #P ##
-#P # Convert #testmode-value to <testmode-string> 
+#P # Convert \#testmode-value to &lt;testmode-string&gt; 
 #P #
-#P # @param $1 testmode value
+#P # @param a $1=testmode value
 #P # @ingroup utalm_bash
-#P def testmodeToStr($1):
+#P def testmodeToStr(a):
 #P 	pass
 ## \cond
 function testmodeToStr () {
@@ -241,11 +240,11 @@ function testmodeList () {
 #P ##
 #P # @brief Initializes test file system  
 #P #
-#P # @param $1 curtop=${TSTCALLROOT}
-#P # @param $2 newtop=${TSTREF}
+#P # @param a $1:=curtop=${TSTCALLROOT}
+#P # @param b $2:=newtop=${TSTREF}
 #P #
 #P # @ingroup libutalm_tdd
-#P def refDataInit($1,$2):
+#P def refDataInit(a,b):
 #P 	pass
 ## \cond
 function refDataInit () {
@@ -267,10 +266,10 @@ function refDataInit () {
 #P # @brief Gets the storage path for ID  
 #P #
 #P #
-#P # @param $1 id 
+#P # @param a $1=id 
 #P #
 #P # @ingroup libutalm_tdd
-#P def refDataStorePath($1):
+#P def refDataStorePath(a):
 #P 	pass
 ## \cond
 function refDataStorePath () {
@@ -293,10 +292,10 @@ function refDataStorePath () {
 #P #
 #P # Duplicates subbranch of curtop in newtop.
 #P #
-#P # @param $1 id 
+#P # @param a $1=id 
 #P #
 #P # @ingroup libutalm_tdd
-#P def refDataStore($1):
+#P def refDataStore(a):
 #P 	pass
 ## \cond
 function refDataRead () {
@@ -319,11 +318,11 @@ function refDataRead () {
 #P #
 #P # Duplicates subbranch of curtop in newtop.
 #P #
-#P # @param $1 id 
-#P # @param $2 refData
+#P # @param a $1=id 
+#P # @param b $2=refData
 #P #
 #P # @ingroup libutalm_tdd
-#P def refDataRead($1,$2):
+#P def refDataRead(a,b):
 #P 	pass
 ## \cond
 function refDataStore () {
@@ -363,17 +362,17 @@ function refDataStore () {
 #P # catched and if not representing a 'shell type boolean' processed 
 #P # by 'eval' before the check of expected logical value. 
 #P # 
-#P # @param $1: LINENO of caller
-#P # @param $2: BASH_SOURCE of caller
-#P # @param $3: condition
+#P # @param a $1:=LINENO of caller
+#P # @param b $2:=BASH_SOURCE of caller
+#P # @param c $3:=condition
 #P #   * 0 : boolean True
 #P #   * [0-9]* : boolean False
 #P #   * anything else : logical expression to be evaluated, '$?' applied  
 #P # 
 #P # 
-#P # @exit with 0 for Ok, 1 for False
+#P # @return with 0 for Ok, 1 for False
 #P # @ingroup libutalm_tdd
-#P def assertWithExit($1,$2,$3):
+#P def assertWithExit(a,b,c):
 #P 	pass
 ## \cond
 function assertWithExit () {
@@ -450,13 +449,13 @@ function assertWithExit () {
 #P #
 #P #	TESTMODE
 #P #
-#P # @param $1 linennumber 
-#P # @param $2 filename
-#P # @param $3 id 
-#P # @param $4 data
+#P # @param a $1:= linennumber 
+#P # @param b $2:= filename
+#P # @param c $3:= id 
+#P # @param d $4:= data
 #P #
 #P # @ingroup libutalm_tdd
-#P def assertRefDataWithExit($1,$2):
+#P def assertRefDataWithExit(a,b,c,d):
 #P 	pass
 ## \cond
 function assertRefDataWithExit () {
@@ -484,10 +483,10 @@ function assertRefDataWithExit () {
 #P ##
 #P # @brief prints reference data for ID  
 #P #
-#P # @param $1 id 
+#P # @param a $1:= id 
 #P #
 #P # @ingroup libutalm_tdd
-#P def printRefData($1):
+#P def printRefData(a):
 #P 	pass
 ## \cond
 function printRefData () {

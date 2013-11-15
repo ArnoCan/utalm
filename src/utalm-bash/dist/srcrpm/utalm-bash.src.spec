@@ -33,13 +33,15 @@ Version: %{myversion}
 Release:%{myrelease}
 License: %{mylicense}
 Group: Development/Libraries
-Source:%{mytgzname}
+Source:%{mytgzfilename}
 URL: %{myurl}
 Distribution: %{myname}
 Vendor: %{myvendor}
 Packager: %{mypackager}
 
 BuildRoot: /tmp/rpm/%{mytgzname}
+BuildRoot: %{_tmppath}/%{mytgzfilename}
+
 ExclusiveOS: Linux
 
 #Prefix: /usr/share
@@ -69,24 +71,36 @@ the following options are available:
    tgz-file into your home directory and unpack it.
 
 	cd $HOME
-	cp utalm-bash-03.03.002-R0.src.tgz
-	tar zxf utalm-bash-03.03.002-R0.src.tgz   
+	cp utalm-bash-03.03.004-R0.src.tgz
+	tar zxf utalm-bash-03.03.004-R0.src.tgz   
 
 
 %prep
-%setup -n %{myname}-%{myversion}.src
+#%setup -n %{myname}-%{myversion}.src
+%setup -n %{mytgzname}
 
 %build
 
 %install
+#INSTBASE=${RPM_BUILD_ROOT}/usr/share
+#INSTTARGET=${INSTBASE}/utalm-bash-${RPM_PACKAGE_VERSION}.src
 INSTBASE=${RPM_BUILD_ROOT}/usr/share
-INSTTARGET=${INSTBASE}/utalm-bash-${RPM_PACKAGE_VERSION}.src
+#INSTTARGET=${INSTBASE}/utalm-bash-${RPM_PACKAGE_VERSION}.%{_target_cpu}
+#INSTTARGET=${INSTBASE}/%{mydirname}.src
+INSTTARGET=${INSTBASE}/%{mydirname}
 
+#echo ${VARIANT_ROOT}/redhat
+#rm -rf ${INSTTARGET}
+#mkdir -p ${INSTBASE}
+#pwd
+#tar -C ${INSTBASE} -zxf %{mytgzpname}
+#chmod -R 755 ${INSTTARGET}
 echo ${VARIANT_ROOT}/redhat
 rm -rf ${INSTTARGET}
 mkdir -p ${INSTBASE}
-pwd
-tar -C ${INSTBASE} -zxf %{mytgzpname}
+echo "INSTBASE=${INSTBASE}"
+
+tar -C ${INSTBASE} -zxf %{mytgzpname} 
 chmod -R 755 ${INSTTARGET}
 
 %post
@@ -96,14 +110,15 @@ chmod -R 755 ${INSTTARGET}
 %files
 %defattr(-,root,root)
 
-/usr/share/%{myname}-%{myversion}.src
+#/usr/share/%{myname}-%{myversion}.src
+/usr/share/%{mydirname}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
 %changelog
 * Thu Nov 10 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.03.002
+- Version-03.03.004
   Major updates and fixes, probably for eternity.
 
 * Thu Nov 08 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>

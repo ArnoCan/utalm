@@ -54,9 +54,9 @@ OUTFNAMES	=
 include Makefile-src-en.mk
 
 DOXYGEN_HTML_DIR = $(OUTHTML3)/$(OUTSTEM)
+OUTFILES	= $(DOXYGEN_HTML_DIR) 
 
 DOXYGEN_HTML_FILES = $(DOXYGEN_HTML_DIR)/index.html
-OUTFILES	+= $(DOXYGEN_HTML_FILES) 
 
 # DOXYGEN_HTML_CALLBASE = $(RTBASE)
 STRIP_FROM_PATH = $(RTBASE)
@@ -79,12 +79,17 @@ DOXYGEN_HTML_INPUT += mainpage.dox
 DOXYGEN_HTML_INPUT += continousintegration.dox
 DOXYGEN_HTML_INPUT += components.dox
 DOXYGEN_HTML_INPUT += historyandorigin.dox
-DOXYGEN_HTML_INPUT += license.dox
-DOXYGEN_HTML_INPUT += aboututalm.dox
 DOXYGEN_HTML_INPUT += README.dox
 
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)doc/en/include/license.dox
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)doc/en/include/aboututalm.dox
+
 DOXYGEN_HTML_INPUT += install.dox
+DOXYGEN_HTML_INPUT += environment.dox
+DOXYGEN_HTML_INPUT += utalmenviron.dox
 DOXYGEN_HTML_INPUT += runtimeenviron.dox
+
+DOXYGEN_HTML_INPUT	+= underconstruction.dox
 
 DOXYGEN_HTML_INPUT += syntax-bash.dox
 DOXYGEN_HTML_INPUT += lowcosttddenvironment.dox
@@ -95,81 +100,92 @@ DOXYGEN_HTML_INPUT += systemlogs.dox
 DOXYGEN_HTML_INPUT += eclipseintegration.dox
 
 DOXYGEN_HTML_INPUT += $(BLD_ROOT)include
-DOXYGEN_HTML_INPUT += $(BLD_ROOT)Makefile-version.mk
-DOXYGEN_HTML_INPUT += $(BLD_ROOT)Makefile-root.mk
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)include/Makefile-version.mk
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)include/Makefile-root.mk
 
-DOXYGEN_HTML_INPUT += $(RTBASE)install.sh
-DOXYGEN_HTML_INPUT += $(RTBASE)install-devel.sh
-DOXYGEN_HTML_INPUT += $(RTBASE)sourceEnvironment.sh
 DOXYGEN_HTML_INPUT += $(RTBASE)conf
 DOXYGEN_HTML_INPUT += $(RTBASE)bin/bootstrap
 DOXYGEN_HTML_INPUT += $(RTBASE)bin/countErrors.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)bin/utalmhelp.sh
 DOXYGEN_HTML_INPUT += $(RTBASE)lib/core
-DOXYGEN_HTML_INPUT += $(RTBASE)lib/Makefile.lib/Makefile-nodewalk.mk
-DOXYGEN_HTML_INPUT += $(RTBASE)lib/Makefile.lib/Nodeaction-test.sh
-DOXYGEN_HTML_INPUT += $(RTBASE)lib/Makefile.lib/Makefile-test.mk
+DOXYGEN_HTML_INPUT += $(RTBASE)examples/utalm-bash/help-demo
+DOXYGEN_HTML_INPUT += $(RTBASE)lib/libutalm.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)lib/libutalm-min.sh
+#DOXYGEN_HTML_INPUT += $(RTBASE)lib/Makefile.lib/Makefile-nodewalk.mk
+#DOXYGEN_HTML_INPUT += $(RTBASE)lib/Makefile.lib/Nodeaction-test.sh
+#DOXYGEN_HTML_INPUT += $(RTBASE)lib/Makefile.lib/Makefile-test.mk
+
+
+DOXYGEN_HTML_INPUT += cli_projects_bash.dox
+
+DOXYGEN_HTML_INPUT += eclipse_projects_bash.dox
+DOXYGEN_HTML_INPUT += eclipse_projects_cpp.dox
+DOXYGEN_HTML_INPUT += eclipse_projects_python.dox
 
 
 DOXYGEN_HTML_CONF = Doxyfile.conf
 DOXYGEN_HTML_LAYOUT = DoxygenLayout.xml
 DOXYGEN_HTML_INPUT_CONF =  Doxyfile_Inputfiles.conf
 DOXYGEN_HTML_OUTPUT_CONF =  Doxyfile_Outputfiles.conf
-
-OUTFILES	= 
+HTML_EXTRA_STYLESHEET = utalm.css
 
 #for safety now
-INCLUDES=$(wildcards $(BLD_ROOT)include/*)
-INCLUDES=$(wildcards $(DOC_BLD_ROOT)include/*)
-INCLUDES=$(wildcards ../include/*)
+INCLUDES =  $(wildcards $(BLD_ROOT)include/*)
+INCLUDES += $(wildcards $(DOC_BLD_ROOT)include/*)
+INCLUDES += $(wildcards ../include/*)
 
-.PHONY: postdo
-all:outdirs $(ENVFILES)  $(INCLUDES) $(DOXYGEN_HTML_FILES) postpatches
+#all:outdirs $(DOXYGEN_HTML_FILES) postpatches
+all: 	outdirs prep $(DOXYGEN_HTML_FILES) postpatches
+#refer to Makefile-doxygen.mk for: $(DOXYGEN_HTML_FILES)
 
-postpatches:postproc_00 postproc_01 postproc_02  postproc_03 postproc_04
-postproc_00:
-	touch $(DOXYGEN_HTML_DIR)/usergroup0.html-new
-	cat $(DOXYGEN_HTML_DIR)/usergroup0.html |sed -e '1,/<!--header/!d;'>>$(DOXYGEN_HTML_DIR)/usergroup0.html-new
-	cat $(DOXYGEN_HTML_DIR)/components-include.html >>$(DOXYGEN_HTML_DIR)/usergroup0.html-new
-	cat $(DOXYGEN_HTML_DIR)/usergroup0.html |sed -e '/contents -->/,$$!d'>>$(DOXYGEN_HTML_DIR)/usergroup0.html-new
-	mv $(DOXYGEN_HTML_DIR)/usergroup0.html $(DOXYGEN_HTML_DIR)/usergroup0.html-old
-	mv $(DOXYGEN_HTML_DIR)/usergroup0.html-new $(DOXYGEN_HTML_DIR)/usergroup0.html
-postproc_01:
+.PHONY:prep
+prep:
+	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
+
+$(DOXYGEN_HTML_INPUT): components-include.html $(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF)
+$(INCLUDES) $(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF):
+
+#
+#REMARK: The order of document and usergroup generation of 
+# doxygen varies, thus some interesting dependencies!
+#
+postpatches:postproc_00 postproc_01 postproc_02 
+
+postproc_00:$(DOXYGEN_HTML_DIR)/components.html-old
+$(DOXYGEN_HTML_DIR)/components.html-old:$(DOXYGEN_HTML_DIR)/index.html components-include.html
+ifdef DBG
+	$(ECHO) "Patching:components"
+endif
 	touch $(DOXYGEN_HTML_DIR)/components.html-new
 	cat $(DOXYGEN_HTML_DIR)/components.html |sed -e '1,/<!--header/!d;'>>$(DOXYGEN_HTML_DIR)/components.html-new
 	cat $(DOXYGEN_HTML_DIR)/components-include.html >>$(DOXYGEN_HTML_DIR)/components.html-new
 	cat $(DOXYGEN_HTML_DIR)/components.html |sed -e '/contents -->/,$$!d'>>$(DOXYGEN_HTML_DIR)/components.html-new
 	mv $(DOXYGEN_HTML_DIR)/components.html $(DOXYGEN_HTML_DIR)/components.html-old
+	touch $(DOXYGEN_HTML_DIR)/components.html-old
 	mv $(DOXYGEN_HTML_DIR)/components.html-new $(DOXYGEN_HTML_DIR)/components.html
-postproc_02:
-	touch $(DOXYGEN_HTML_DIR)/usergroup3.html-new
-	cat $(DOXYGEN_HTML_DIR)/usergroup3.html |sed -e '1,/<!--header/!d;'>>$(DOXYGEN_HTML_DIR)/usergroup3.html-new
-	cat $(DOXYGEN_HTML_DIR)/tdd-include.html >>$(DOXYGEN_HTML_DIR)/usergroup3.html-new
-	cat $(DOXYGEN_HTML_DIR)/usergroup3.html |sed -e '/contents -->/,$$!d'>>$(DOXYGEN_HTML_DIR)/usergroup3.html-new
-	mv $(DOXYGEN_HTML_DIR)/usergroup3.html $(DOXYGEN_HTML_DIR)/usergroup3.html-old
-	mv $(DOXYGEN_HTML_DIR)/usergroup3.html-new $(DOXYGEN_HTML_DIR)/usergroup3.html
-postproc_03:
-	touch $(DOXYGEN_HTML_DIR)/usergroup1.html-new
-	cat $(DOXYGEN_HTML_DIR)/usergroup1.html |sed -e '1,/<!--header/!d;'>>$(DOXYGEN_HTML_DIR)/usergroup1.html-new
-	cat $(DOXYGEN_HTML_DIR)/trace-include.html >>$(DOXYGEN_HTML_DIR)/usergroup1.html-new
-	cat $(DOXYGEN_HTML_DIR)/usergroup1.html |sed -e '/contents -->/,$$!d'>>$(DOXYGEN_HTML_DIR)/usergroup1.html-new
-	mv $(DOXYGEN_HTML_DIR)/usergroup1.html $(DOXYGEN_HTML_DIR)/usergroup1.html-old
-	mv $(DOXYGEN_HTML_DIR)/usergroup1.html-new $(DOXYGEN_HTML_DIR)/usergroup1.html
-postproc_04:
-	touch $(DOXYGEN_HTML_DIR)/usergroup2.html-new
-	cat $(DOXYGEN_HTML_DIR)/usergroup2.html |sed -e '1,/<!--header/!d;'>>$(DOXYGEN_HTML_DIR)/usergroup2.html-new
-	cat $(DOXYGEN_HTML_DIR)/logging-include.html >>$(DOXYGEN_HTML_DIR)/usergroup2.html-new
-	cat $(DOXYGEN_HTML_DIR)/usergroup2.html |sed -e '/contents -->/,$$!d'>>$(DOXYGEN_HTML_DIR)/usergroup2.html-new
-	mv $(DOXYGEN_HTML_DIR)/usergroup2.html $(DOXYGEN_HTML_DIR)/usergroup2.html-old
-	mv $(DOXYGEN_HTML_DIR)/usergroup2.html-new $(DOXYGEN_HTML_DIR)/usergroup2.html
 
+postproc_01:$(DOXYGEN_HTML_DIR)/usergroup0.html-old
+$(DOXYGEN_HTML_DIR)/usergroup0.html-old:$(DOXYGEN_HTML_DIR)/index.html components-include.html
+	touch $(DOXYGEN_HTML_DIR)/usergroup0.html-new
+	cat $(DOXYGEN_HTML_DIR)/usergroup0.html |sed -e '1,/<!--header/!d;'>>$(DOXYGEN_HTML_DIR)/usergroup0.html-new
+	cat $(DOXYGEN_HTML_DIR)/components-include.html >>$(DOXYGEN_HTML_DIR)/usergroup0.html-new
+	cat $(DOXYGEN_HTML_DIR)/usergroup0.html |sed -e '/contents -->/,$$!d'>>$(DOXYGEN_HTML_DIR)/usergroup0.html-new
+	mv $(DOXYGEN_HTML_DIR)/usergroup0.html $(DOXYGEN_HTML_DIR)/usergroup0.html-old
+	touch $(DOXYGEN_HTML_DIR)/usergroup0.html-old
+	mv $(DOXYGEN_HTML_DIR)/usergroup0.html-new $(DOXYGEN_HTML_DIR)/usergroup0.html
 
-$(DOXYGEN_HTML_FILES):$(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF) $(DOXYGEN_HTML_INPUT) 
-$(DOXYGEN_HTML_INPUT):outdirs $(ENVFILES) topmain
-$(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF) $(DOXYGEN_HTML_INPUT): 
-
-.PHONY:topmain
-topmain:
-	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
+postproc_02:$(DOXYGEN_HTML_DIR)/environment.html-old
+$(DOXYGEN_HTML_DIR)/environment.html-old:$(DOXYGEN_HTML_DIR)/index.html environment-include.html
+ifdef DBG
+	$(ECHO) "Patching:environment"
+endif
+	touch $(DOXYGEN_HTML_DIR)/environment.html-new
+	cat $(DOXYGEN_HTML_DIR)/environment.html |sed -e '1,/<!--header/!d;'>>$(DOXYGEN_HTML_DIR)/environment.html-new
+	cat environment-include.html >>$(DOXYGEN_HTML_DIR)/environment.html-new
+	cat $(DOXYGEN_HTML_DIR)/environment.html |sed -e '/contents -->/,$$!d'>>$(DOXYGEN_HTML_DIR)/environment.html-new
+	mv $(DOXYGEN_HTML_DIR)/environment.html $(DOXYGEN_HTML_DIR)/environment.html-old
+	touch $(DOXYGEN_HTML_DIR)/environment.html-old
+	mv $(DOXYGEN_HTML_DIR)/environment.html-new $(DOXYGEN_HTML_DIR)/environment.html
 
 
 #

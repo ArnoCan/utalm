@@ -44,7 +44,7 @@
 ##
 #
 SUBROOTTOP:=examples
-CURSUBPATH:=utalm-make
+CURSUBPATH:=utalm-make/
 ifdef BLD_ROOT
   include $(BLD_ROOT)lib/Makefile.lib/Makefile-nodewalk.mk
 else

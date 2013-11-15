@@ -4,7 +4,7 @@
 * MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 * SHORT:        utalm-bash
 * LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
-* VERSION:      03_03_002
+* VERSION:      03_03_004
 *
 * Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
 *
@@ -15,7 +15,7 @@
 *
 * The 	UnifiedTraceAndLogManager - UTALM - provides a single interface for multiple
 * programming languages and runtime environments. The typical application is for
-* development and test of \ref buildingblocksutamlbash "DevOps and R&D environments". 
+* development and test of <a href="../utalm-API/buildingblocksutamlbash.html">"DevOps and R&D environments"</a>. 
 * The application support by the bash and awk component starts for small  
 * ad-hoc utilities with just a dozen lines of code, ranging to major projects
 * in advanced environments.
@@ -146,11 +146,12 @@
 * </li>
 * <li>Specification and Documentation<br />
 * The specification and documentation - this includes inline-documentation.
-* <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+* <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank"></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
 * </li>
 * </ul>
 *
 */
+// <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
 
 /**
  * \defgroup bootstrap bootstrap

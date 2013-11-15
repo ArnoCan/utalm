@@ -72,17 +72,31 @@ DOXYGEN_HTML_INPUT += $(RTBASE)INSTALL.txt
 DOXYGEN_HTML_INPUT += $(RTBASE)RELEASENOTES.txt
 DOXYGEN_HTML_INPUT += mainpage.dox
 DOXYGEN_HTML_INPUT += install.dox
-DOXYGEN_HTML_INPUT += license.dox
-DOXYGEN_HTML_INPUT += aboututalm.dox
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)doc/en/include/license.dox
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)doc/en/include/aboututalm.dox
 DOXYGEN_HTML_INPUT += historyandorigin.dox
 DOXYGEN_HTML_INPUT += introawk.dox
 DOXYGEN_HTML_INPUT += syntax-awk.dox
 DOXYGEN_HTML_INPUT += howto-awk.dox
+DOXYGEN_HTML_INPUT += continousintegration.dox
 
+DOXYGEN_HTML_INPUT += $(RTBASE)install-devel.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)install.sh
+
+
+DOXYGEN_HTML_INPUT += $(RTBASE)bin/strip-bash.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)bin/strip-bash-min.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)bin/countErrors.sh
 DOXYGEN_HTML_INPUT += $(RTBASE)examples/utalm-awk
 DOXYGEN_HTML_INPUT += $(RTBASE)tests/utalm-awk
+DOXYGEN_HTML_INPUT += $(RTBASE)lib/libutalmfileobjects.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)lib/libutalmrefpersistency.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)lib/libutalm.sh
 DOXYGEN_HTML_INPUT += $(RTBASE)lib/libutalm.awk
 DOXYGEN_HTML_INPUT += $(RTBASE)lib/libutalm-min.awk
+
+DOXYGEN_HTML_INPUT += $(RTBASE)install-devel.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)install.sh
 
 DOXYGEN_HTML_CONF = Doxyfile.conf
 DOXYGEN_HTML_LAYOUT = DoxygenLayout.xml

@@ -41,15 +41,19 @@
 ## Search order:
 ##   1 PWD
 ##   2 PATH
-##   2 HOME/lib
+##   3 HOME/bin
+##   3 /usr/bin
 ## 
+## When no argument is provided the first existing bin
+## directory is provided.
 ## \cond
 ##
 #
-[[ -e "${0%/*}/$1" ]]&&echo -n "${0%/*}/$1"&&exit 0
+[[ -e "${0%/*}/$1" ]]&&{ echo -n "${0%/*}${1:+/$1}"&&exit 0 ; }
 for i in ${PATH//:/ };do
-	[[ -e "${i}/$1" ]]&&echo -n "${i}/$1"&&exit 0
+	[[ -e "${i}/$1" ]]&&{ echo -n "${i}${1:+/$1}"&&exit 0 ; }
 done
-[[ -e "${HOME}/bin/$1" ]]&&echo -n "${HOME}/bin/$1"&&exit 0
+[[ -e "${HOME}/bin/$1" ]]&&{ echo -n "${HOME}/bin${1:+/$1}"&&exit 0 ; }
+[[ -e "/usr/bin/$1" ]]&&{ echo -n "/usr/bin${1:+/$1}"&&exit 0 ; }
 exit 1
 ## \endcond

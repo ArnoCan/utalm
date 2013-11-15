@@ -34,7 +34,7 @@
 ## @file
 ## @author Arno-Can Uestuensoez
 ## @date 2013.10.10
-## @version 03_03_002
+## @version 03_03_004
 ## @brief Demo Makefile for documentation by doxygen
 ##
 ## The Makefile demonstrates ...
@@ -46,8 +46,8 @@
 ifndef BLD_ROOT_PRE_INCLUDED
 BLD_ROOT_PRE_INCLUDED:=1
 
-include $(BLD_ROOT)Makefile-version.mk
-include $(BLD_ROOT)Makefile-root.mk
+include $(BLD_ROOT)include/Makefile-version.mk
+include $(BLD_ROOT)include/Makefile-root.mk
 
 
 ifndef OUTLANG

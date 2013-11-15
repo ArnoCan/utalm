@@ -35,7 +35,11 @@
 ifndef BLD_ROOT_POST_INCLUDED
 BLD_ROOT_POST_INCLUDED:=1
 
-help:
+ifndef LOCALHELP
+help:helpglobal
+endif
+
+helpglobal:
 	@echo "***************************************"
 	@echo
 	@echo "  VERSION        = $(VERSION)"
@@ -103,6 +107,8 @@ help:
 	@echo "  DBG=1"
 	@echo "  ERRSTOP=1"
 	@echo "  KEEPMETA=1"
+	@echo "  QUIET=1"
+	@echo "  UNITTEST=1"
 	@echo
 	@echo "  INTERNAL=1"
 	@echo "     Creates private components"
@@ -118,9 +124,44 @@ help:
 	@echo
 	@echo "    ALL"
 	@echo
+	@echo "***************************************"
+	@echo
+	@echo "Examples:"
+	@echo ""
+	@echo "  Some major examples are:"
+	@echo ""
+	@echo "    'make'"
+	@echo "    - Requires included Makefile-nodewalk.mk"
+	@echo "    - Default values apply, which creates an temporary intermediate pool."
+	@echo "      Displays the full scope of performed actions."
+	@echo
+	@echo "    'QUIET=1 make'"
+	@echo "    - Requires included Makefile-nodewalk.mk"
+	@echo "    - Default values apply, which creates an temporary intermediate pool."
+	@echo "      Displays actions due to delta only."
+	@echo
+	@echo "    'DBG=1 make'"
+	@echo "    - Requires included Makefile-nodewalk.mk"
+	@echo "    - Default values apply, which creates an temporary intermediate pool."
+	@echo "      Displays debugging information."
+	@echo
+	@echo "    'make test'"
+	@echo "    - Has to be executed in e.g. tests, requires included Makefile-test.mk"	
+	@echo "    - Performs tests, which ran independently and has to be analyes seperately."
+	@echo
+	@echo "    'make unit'"
+	@echo "    - Has to be executed in e.g. tests, requires included Makefile-test.mk"	
+	@echo "    - Performs unit tests with cumulated results."
+	@echo
+	@echo "    'make help-utalm'"
+	@echo "     - Calls firefox with utalm-API"
+	@echo ""
+	@echo " For additional information refer to utalm-make-API(3)"
+	@echo ""
+	@echo
 
 help-utalm:
-	firefox $${HOME}/doc/en/html/man3/utalm-bash-API/index.html
+	firefox $${HOME}/doc/en/html/man3/utalm-API/index.html
 
 cleanlinks::
 	@$(ECHO) "Clean rootlinks:bld"
@@ -135,10 +176,10 @@ createlinks:: cleanlinks $(OUTDIR)
 clean:
 	@echo "Cleanup..."
 	@echo "**->In "$(shell echo $${PWD})
-ifdef DEBUG
-	@echo
 	@echo "$(RMRF) $(OUTFILES)"
 	@echo 
+ifdef DEBUG
+	@echo
 	@echo "SRC_POOL=$(SRC_POOL)"
 endif
 	$(RMRF) $(OUTFILES)
@@ -171,14 +212,6 @@ ifdef DBG
 endif
 	$(MKDIR) $@
 	$(CHMOD) 755 $@
-
-$(OUTDIR):	
-	@echo "Remove outlinks..."
-	@echo "->$(OUTDIR)"
-	-$(RM) -f $(OUTDIR)
-	@echo "Re-Create outlinks..."
-	@echo "->$(BASE) => $(OUTDIR)"
-	-$(LNS) $(BASE) $(OUTDIR)
 
 
 .SILENT:

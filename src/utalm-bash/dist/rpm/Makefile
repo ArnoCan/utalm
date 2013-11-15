@@ -49,7 +49,15 @@ RPM_OPTS = -bb --buildroot=$(RPMBLD)/bldroot --target=$(ARCH)
 RPM_OPTS += --define "%_topdir $(RPMBLD)/redhat"
 RPM_OPTS += --define "%_sourcedir $(VARIANT_ROOT)"
 #
-RPM_OPTS += --define "mytgzname    ${TGZ_NAME}"
+RPM_OPTS += --define "mydirname    ${PACKAGE}"
+#RPM_OPTS += --define "mydirname    ${PACKAGE}-${VERSION}"
+#RPM_OPTS += --define "mydirname    ${PACKAGE}-${VERSION}.$(ARCH)"
+#RPM_OPTS += --define "mytgzname    ${TGZ_NAME%.*}"
+
+RPM_OPTS += --define "mytgzname    ${PACKAGE}"
+#RPM_OPTS += --define "mytgzname    ${PACKAGE}-${VERSION}"
+
+RPM_OPTS += --define "mytgzfilename ${TGZ_NAME}"
 RPM_OPTS += --define "mytgzpname   ${TGZ_PNAME}"
 RPM_OPTS += --define "myversion    ${VERSION}"
 RPM_OPTS += --define "myvariant    ${VARIANT}"
@@ -60,6 +68,20 @@ RPM_OPTS += --define "myvendor     \'${VENDOR}\'"
 RPM_OPTS += --define "mypackager   \'${PACKAGER}\'"
 RPM_OPTS += --define "myurl        '${WWW_PROJ}'"
  
+#RPM_OPTS += --define "mydirname    ${PACKAGE}-${VERSION}"
+##RPM_OPTS += --define "mydirname    ${PACKAGE}-${VERSION}.$(ARCH)"
+#RPM_OPTS += --define "mytgzname    ${TGZ_NAME%.*}"
+#RPM_OPTS += --define "mytgzfilename ${TGZ_NAME}"
+#RPM_OPTS += --define "mytgzpname   ${TGZ_PNAME}"
+#RPM_OPTS += --define "myversion    ${VERSION}"
+#RPM_OPTS += --define "myvariant    ${VARIANT}"
+#RPM_OPTS += --define "mylicense    ${LICENSE}"
+#RPM_OPTS += --define "myproject    ${PROJECT}"
+#RPM_OPTS += --define "myname       ${PACKAGE}"
+#RPM_OPTS += --define "myvendor     \'${VENDOR}\'"
+#RPM_OPTS += --define "mypackager   \'${PACKAGER}\'"
+#RPM_OPTS += --define "myurl        '${WWW_PROJ}'"
+
 ifeq ($(VARIANT),ALL)
 OUTFILES += $(RPM_PNAME)
 RPM_OPTS += --define "myrelease    ${RELEASE}_${VARIANT}"
@@ -109,12 +131,14 @@ pkg:$(OUTFILES)
 ################################################
 #
 #
-$(RPM_PNAME): $(RPM_PNAME_BLD) 
+$(RPM_PNAME): $(RPM_PNAME_BLD) pkgcopy 
+pkgcopy: 
 	@$(ECHO) "#"
-	@$(ECHO) "Copy RPM to $@"
-	@$(CPA) $(RPM_PNAME_BLD) $@
+	@$(ECHO) "Copy RPM to $(RPM_PNAME)"
+	@$(CPA) $(RPM_PNAME_BLD) $(RPM_PNAME)
 
-$(RPM_PNAME_BLD): $(RPM_SPECPATH) $(TGZ_PNAME_BLD)
+$(RPM_PNAME_BLD): $(TGZ_PNAME_BLD) pkgbuild
+pkgbuild: $(RPM_SPECPATH) 
 	@$(ECHO) "#"
 ifdef DBG
 	@$(ECHO) "##########################################################################################"
@@ -156,6 +180,32 @@ $(SRC_POOL): $(ENVFILES)
 	cd $@&& $(MAKE) $(MFLAGS)
 
 .PHONY: PREPMETA 
+
+
+LOCALHELP=1
+help:
+	@echo "***************************************"
+	@echo
+	@echo "  VERSION        = $(VERSION)"
+	@echo "  PACKAGE        = $(PACKAGE)"
+	@echo
+	@echo "***************************************"
+	@echo
+	@echo " Help on :'make' in $(shell basename $$PWD)"
+	@echo
+	@echo "  make"
+	@echo "  - builds and copies into export directory"
+	@echo "    EXPORT_DIR = $(EXPORT_DIR)"
+	@echo
+	@echo "  make pkgbuild"
+	@echo "  - builds only"
+	@echo
+	@echo "  make pkgcopy"
+	@echo "  - copies only"
+	@echo
+	@echo "  make helpglobal"
+	@echo "  - displays global help"
+	@echo
 
 ################################################################
 ifdef BLD_ROOT

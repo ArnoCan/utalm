@@ -69,9 +69,13 @@ HTML_STYLESHEET = utalm.css
 DOXYGEN_HTML_INPUT =
 
 DOXYGEN_HTML_INPUT += mainpage.dox
-DOXYGEN_HTML_INPUT += license.dox
-DOXYGEN_HTML_INPUT += aboututalm.dox
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)/doc/en/include/license.dox
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)/doc/en/include/aboututalm.dox
 DOXYGEN_HTML_INPUT += historyandorigin.dox
+
+DOXYGEN_HTML_INPUT += $(RTBASE)install-devel.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)install.sh
+
 
 DOXYGEN_HTML_CONF = Doxyfile.conf
 DOXYGEN_HTML_LAYOUT = DoxygenLayout.xml

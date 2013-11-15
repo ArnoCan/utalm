@@ -1,3 +1,4 @@
+## \cond
 #HEADSTART##############################################################
 #
 #PROJECT:      UnifiedTraceAndLogManager
@@ -31,48 +32,11 @@
 #
 #$Header$
 #
+#SUBROOTTOP:=tests
+
 ifdef BLD_ROOT
-  include $(BLD_ROOT)include/Makefile-pre.mk
+  include $(BLD_ROOT)lib/Makefile.lib/Makefile-nodewalk.mk
 else
   $(error "Missing environment variable BLD_ROOT - see utalm-bash-API(3)")
 endif
-
-
-SRC_FILES = 
-SRC_DIRS =
-
-SRC_FILES += README.txt 
-
-SRC_DIRS += bin
-SRC_DIRS += conf
-SRC_DIRS += lib
-
-OUTDIRS += $(RTBASE)/bin
-OUTDIRS += $(RTBASE)/conf
-OUTDIRS += $(RTBASE)/lib
-
-.PHONY: $(SRC_DIRS) stripped
-
-all: outdirs $(SRC_FILES) $(SRC_DIRS) stripped
-
-stripped: $(SRC_FILES) $(SRC_DIRS) 
-	echo $(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)bin $(RTBASE)bin/strip-bash.sh
-	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)bin $(RTBASE)bin/strip-bash.sh
-	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalm.sh
-	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalm.awk
-	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalmfileobjects.sh
-	$(BLD_ROOT)src/bin/strip-bash.sh DROPLINES -o $(RTBASE)lib $(RTBASE)lib/libutalmrefpersistency.sh
-
-$(SRC_FILES):
-ifdef DBG
-	@echo "Copy $@"
-endif
-	@$(CPA) $@ $(RTBASE)
-
-$(SRC_DIRS):
-ifdef DBG
-	@echo "Copy $@"
-endif
-	@$(CPA) $@ $(RTBASE)
-
-include $(BLD_ROOT)include/Makefile-post.mk
+## \endcond

@@ -54,9 +54,19 @@ ifndef BLD_OUT_BASE
 endif
 
 ## \endcond
-#P BASE = "$(BLD_OUT_BASE)/bld/$(PACKAGE)-$(VERSION)/"
+#P EXPORT_DIR = "/tmp/$(LOGNAME)"
 ## \cond
-BASE = $(BLD_OUT_BASE)/bld/$(PACKAGE)-$(VERSION)/
+ifndef EXPORT_DIR
+	EXPORT_DIR := $(BLD_OUT_BASE)/bld
+endif
+ifndef EXPORT_DIR
+  $(error "Missing environment variable BLD_OUT_BASE append a '/'")
+endif
+
+## \endcond
+#P BASE = "$(EXPORT_DIR)/$(PACKAGE)-$(VERSION)/"
+## \cond
+BASE = $(EXPORT_DIR)/$(PACKAGE)-$(VERSION)/
 ## \endcond
 #P TMP = "${BASE}tmp"
 ## \cond

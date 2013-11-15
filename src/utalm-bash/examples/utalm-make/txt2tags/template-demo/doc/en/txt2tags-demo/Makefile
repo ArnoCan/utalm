@@ -106,9 +106,9 @@ ADDHTMLOPTS     = --toc
 
 ## \cond
 #for safety now
-INCLUDES=$(wildcards $(BLD_ROOT)include/*)
-INCLUDES=$(wildcards $(DOC_BLD_ROOT)include/*)
-INCLUDES=$(wildcards ../include/*)
+INCLUDES =$(wildcards $(BLD_ROOT)include/*)
+INCLUDES +=$(wildcards $(DOC_BLD_ROOT)include/*)
+INCLUDES +=$(wildcards ../include/*)
 
 all:outdirs $(ENVFILES) $(OUTFILES) $(INCLUDES)
 

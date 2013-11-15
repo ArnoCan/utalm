@@ -156,12 +156,12 @@ function getGID(){
 #P # 
 #P # @param le caller level
 #P # @param li caller line number
-#P # @param li caller file name
-#P # @param c caller code
+#P # @param f  caller file name
+#P # @param c  caller code
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def prepHead():
+#P def prepHead(le,li,f,c):
 #P     pass
 #P # \cond
 function prepHead(le,li,f,c){
@@ -185,7 +185,7 @@ function prepHead(le,li,f,c){
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def printOUT():
+#P def printOUT(m):
 #P     pass
 ## \cond
 function printOUT(m){
@@ -279,14 +279,14 @@ function fetchDBGArgs(){
 #P #        |2     |level                |No        |
 #P # 
 #P # 
-#P # @param subsys subsystem
-#P # @param level debug level
-#P # @param line caller line number
-#P # @param filename
+#P # @param s subsystem
+#P # @param le debug level
+#P # @param li caller line number
+#P # @param f filename
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def doDebug():
+#P def doDebug(s,le,li,f):
 #P     pass
 #P # \cond
 function doDebug(s,le,li,f){
@@ -324,7 +324,7 @@ function doDebug(s,le,li,f){
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def printDBG():
+#P def printDBG(s,le,li,f,msg):
 #P     pass
 #P # \cond
 function printDBG(s,le,li,f,msg){
@@ -352,7 +352,7 @@ function printDBG(s,le,li,f,msg){
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def printERR():
+#P def printERR(e,li,f,c,msg):
 #P     pass
 ## \cond
 function printERR(e,li,f,c,msg){
@@ -367,11 +367,6 @@ function printERR(e,li,f,c,msg){
 #P # Print trace/log-string for warnings
 #P # 
 #P # Prints a trace/log-string when matches current level.
-#P # The output format is:
-#P # 
-#P # 	<MYCALLNAME>:<MYUID>@<MYHOST>:<pid>:<filename>:#linenumber:INFO:<code>:<message>
-#P # 
-#P # Implementation priority: PERFORMANCE
 #P # 
 #P # @param w warning-level
 #P # @param li caller line number
@@ -381,10 +376,10 @@ function printERR(e,li,f,c,msg){
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def printWNG():
+#P def printWNG(w,li,f,c,msg)
 #P     pass
 ## \cond
-function printWNG(w,li,c,f,msg){
+function printWNG(w,li,f,c,msg){
 	if(w<WNG){
 		h=prepHead(w,li,f,c);
 		printOUT(h":WNG:"msg);
@@ -412,10 +407,10 @@ function printWNG(w,li,c,f,msg){
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def printINFO():
+#P def printINFO(i,li,f,c,msg):
 #P     pass
 #P # \cond
-function printINFO(i,li,c,f,msg){
+function printINFO(i,li,f,c,msg){
 	if(i<INF){
 		h=prepHead(i,li,f,c);
 		printOUT(h":INFO:"msg);
@@ -443,7 +438,7 @@ function printINFO(i,li,c,f,msg){
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def printFINALCALL():
+#P def printFINALCALL(le,li,f,t,x):
 #P     pass
 #P # \cond
 function printFINALCALL(le,li,f,t,x){
@@ -471,10 +466,10 @@ function printFINALCALL(le,li,f,t,x){
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def callErrOutWrapper():
+#P def callErrOutWrapper(li,x):
 #P     pass
 #P # \cond
-function callErrOutWrapper(li, x){
+function callErrOutWrapper(li,x){
 	if(le<=DBG){print "UTALM("thisAWKFile"):"FILENAME":"msg>"/dev/stderr"}
 }
 
@@ -499,10 +494,10 @@ function callErrOutWrapper(li, x){
 #P # @param f caller file
 #P # @param e exit value
 #P # 
-#P # @exit with given code
+#P # @return with given code
 #P # @ingroup libutalm_awk
 #P #
-#P def gotoHell():
+#P def gotoHell(l,f,e):
 #P     pass
 #P # \cond
 function gotoHell(l,f,e){

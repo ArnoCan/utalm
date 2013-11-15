@@ -35,8 +35,13 @@
 ## \endcond
 ##
 ## @file
-## @brief Installer
-## 
+## @brief Installer for runtime system
+##
+## The runtime system contains the libraries required for the applications
+## based on utaml-bash and utalm-awk.
+##
+## The application for creation of templates requires the SDK utaml-bash-devel.
+##
 ## \cond
 ##
 
@@ -52,6 +57,15 @@ if [ ! -e ${0##*/} -a ${PWD##*/} != src ];then
 	echo "ERROR:Must be called in own directory!">&2
 	exit 1
 fi
+
+if [ -d src ];then
+	if [ "${PATH#$PWD/src/bin}" == "$PATH" ];then
+		echo "ERROR:Requires for source install call of sourceEnvironment.sh ">&2
+		exit 1
+	fi
+else
+	PATH=$PWD/bin:$PATH
+fi
 #
 # installation source
 #
@@ -61,11 +75,32 @@ function displayIt () {
 	[[ "$DBGX" == 1 ]]&&echo $*
 }
 
+function printHelp () {
+	cat <<EOF
+
+CALL: $(dirname $0) 
+    INSTROOT=<target-directory> $(dirname $0)
+
+DESCRIPTION:
+	Installs the runtime system into <target-directory>
+	the default is:
+	  INSTROOT=$HOME
+	the current is:
+	  INSTROOT=$INSTROOT
+
+	Has to be called from the caontaining directory.	
+
+EOF
+}
+case $1 in
+	help|-h|--help)printHelp;exit 0;;
+esac
+
 #
 # installation target
 #
 if [ -n "${INSTROOT}" ];then
-	if [  -e "${INSTROOT}" ];then
+	if [  ! -e "${INSTROOT}" ];then
 	   echo "ERROR:Missing INSTROOT=${INSTROOT}">&2
 	   exit 1
 	fi
@@ -90,7 +125,7 @@ CP="cp -r"
 ###
 #bootstrap
 #
-for i in ${INSTSOURCE}/bin/bootstrap/*;do
+for i in $(getPathToBin.sh)/bootstrap/*;do
         _B=${INSTROOT}/bin/bootstrap
         mkdir -p $_B
 	displayIt "->${i}"
@@ -101,7 +136,7 @@ done
 ###
 #core
 #
-for i in ${INSTSOURCE}/lib/core/*;do
+for i in $(getPathToLib.sh)/core/*;do
         _B=${INSTROOT}/lib/core
         mkdir -p $_B
 	displayIt "->${i}"
@@ -112,7 +147,12 @@ done
 ###
 #bin
 #
-for i in ${INSTSOURCE}/bin/*;do
+_BIN=$(getPathToBin.sh)
+if [ -z "$_BIN" ];then
+	echo "ERROR:Missing bin">&2
+	exit 1
+fi 
+for i in $_BIN/*;do
         _B=${INSTROOT}/bin
         mkdir -p $_B
 	displayIt "->${i}"
@@ -123,7 +163,12 @@ done
 ###
 #lib
 #
-for i in ${INSTSOURCE}/lib/*;do
+_LIB=$(getPathToLib.sh)
+if [ -z "$_LIB" ];then
+	echo "ERROR:Missing lib">&2
+	exit 1
+fi 
+for i in $_LIB/*;do
         _B=${INSTROOT}/lib
         mkdir -p $_B
 	displayIt "->${i}"
@@ -134,8 +179,25 @@ done
 ###
 #conf
 #
-for i in ${INSTSOURCE}/conf/*;do
+CONFPATH=$(getConfigFile)
+if [ -z "$CONFPATH" ];then
+	echo "ERROR:Missing CONFPATH">&2
+	exit 1
+fi 
+for i in ${CONFPATH%/*}/*;do
         _B=${INSTROOT}/conf
+        mkdir -p $_B
+	displayIt "->${i}"
+	$CP ${i} ${_B}
+	chmod -R u+x ${_B}/${i##*/}
+done
+
+
+###
+#include
+#
+for i in ${INSTSOURCE}/include/Makefile-root.mk ${INSTSOURCE}/include/Makefile-version.mk ;do
+        _B=${INSTROOT}/include
         mkdir -p $_B
 	displayIt "->${i}"
 	$CP ${i} ${_B}
@@ -170,8 +232,6 @@ for i in ${INSTSOURCE}/examples/*;do
 done
 
 $CP ${INSTSOURCE}/sourceEnvironment.sh $INSTROOT
-$CP ${INSTSOURCE}/Makefile-root.mk $INSTROOT
-$CP ${INSTSOURCE}/Makefile-version.mk $INSTROOT
 
 echo
 echo "   Successfully installed"

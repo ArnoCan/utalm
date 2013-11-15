@@ -149,6 +149,9 @@ h=${h:-HTML}
 case $_c in
 	help)printHelp ;;
 	intro)printHelp utalm-API/usergroup0 ${h};;
+	man)printHelp utalm-bash MAN;;
+	pdf)printHelp utalm-bash PDF;;
+	html)printHelp utalm-API/index ${h};;
 	utalm|api)printHelp utalm-API/index ${h};;
 	awk|awk-api)printHelp utalm-awk-API/index ${h};;
 	bash|bash-api)printHelp utalm-bash-API/index ${h};;

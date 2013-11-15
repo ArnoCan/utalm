@@ -35,8 +35,8 @@
 ifndef BLD_ROOT_PRE_INCLUDED
 BLD_ROOT_PRE_INCLUDED:=1
 
-include $(BLD_ROOT)Makefile-version.mk
-include $(BLD_ROOT)Makefile-root.mk
+include $(BLD_ROOT)include/Makefile-version.mk
+include $(BLD_ROOT)include/Makefile-root.mk
 
 ifndef OUTLANG
   $(error "Missing environment variable OUTLANG")
@@ -152,7 +152,8 @@ OUTDIRS		+= $(OUTINTRO)
 
 
 #tgz - generic
-TGZ_ROOT	= $(VARIANT_ROOT)/$(PACKAGE)-$(VERSION).$(ARCH)
+#TGZ_ROOT	= $(VARIANT_ROOT)/$(PACKAGE)-$(VERSION)
+TGZ_ROOT	= $(VARIANT_ROOT)/$(PACKAGE)
 OUTDIRS  	+= $(TGZ_ROOT)
 ifeq ($(VARIANT),RELEASE)
 TGZ_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).$(ARCH).tgz
@@ -163,7 +164,7 @@ TGZ_PNAME	= $(DIST_ROOT)/$(TGZ_NAME)
 TGZ_PNAME_BLD = $(VARIANT_ROOT)/$(TGZ_NAME)
 
 #tgz-devel - generic
-TGZ_DEVEL_ROOT	= $(VARIANT_ROOT)/$(PACKAGE)-devel-$(VERSION).$(ARCH)
+TGZ_DEVEL_ROOT	= $(VARIANT_ROOT)/$(PACKAGE)-devel
 OUTDIRS  	+= $(TGZ_DEVEL_ROOT)
 ifeq ($(VARIANT),RELEASE)
 TGZ_DEVEL_NAME	= $(PACKAGE)-devel-$(VERSION)-$(RELEASE).$(ARCH).tgz
@@ -174,7 +175,7 @@ TGZ_DEVEL_PNAME	= $(DIST_ROOT)/$(TGZ_DEVEL_NAME)
 TGZ_DEVEL_PNAME_BLD = $(VARIANT_ROOT)/$(TGZ_DEVEL_NAME)
 
 #srctgz - generic
-SRCTGZ_ROOT= $(VARIANT_ROOT)/$(PACKAGE)-$(VERSION).src
+SRCTGZ_ROOT= $(VARIANT_ROOT)/$(PACKAGE).src
 OUTDIRS  	+= $(SRCTGZ_ROOT)
 ifeq ($(VARIANT),RELEASE)
 SRCTGZ_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).src.tgz
@@ -187,7 +188,7 @@ SRCTGZ_PNAME_BLD 	= $(VARIANT_ROOT)/$(SRCTGZ_NAME)
 #rpm - generic
 RPM			= $(VARIANT_ROOT)/rpm
 RPMBLD 		= $(RPM)/bld
-RPM_ROOT	= $(RPM)/$(PACKAGE)-$(VERSION)
+RPM_ROOT	= $(RPM)/$(PACKAGE)
 OUTDIRS  	+= $(RPM_ROOT)
 ifeq ($(VARIANT),RELEASE)
 RPM_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).$(ARCH).rpm
@@ -204,7 +205,7 @@ RPM_TGZ         =
 #rpm - devel
 RPMDEVEL	= $(VARIANT_ROOT)/rpm-devel
 RPMDEVELBLD	= $(RPMDEVEL)/bld
-RPMDEVEL_ROOT = $(RPMDEVEL)/$(PACKAGE)-devel-$(VERSION)
+RPMDEVEL_ROOT = $(RPMDEVEL)/$(PACKAGE)-devel
 OUTDIRS  	+= $(RPMDEVEL_ROOT)
 ifeq ($(VARIANT),RELEASE)
 RPMDEVEL_NAME	= $(PACKAGE)-devel-$(VERSION)-$(RELEASE).$(ARCH).rpm
@@ -221,7 +222,7 @@ RPMDEVEL_TGZ         =
 #srcrpm - generic
 SRCRPM		= $(VARIANT_ROOT)/srcrpm
 SRCRPMBLD	= $(SRCRPM)/bld
-SRCRPM_ROOT	= $(SRCRPM)/$(PACKAGE)-$(VERSION).src
+SRCRPM_ROOT	= $(SRCRPM)/$(PACKAGE).src
 OUTDIRS  	+= $(SRCRPM_ROOT)
 ifeq ($(VARIANT),RELEASE)
 SRCRPM_NAME	= $(PACKAGE)-$(VERSION)-$(RELEASE).src.rpm
@@ -270,6 +271,7 @@ CALLDIR		= $(shell pwd)
 CALLDIRNAME	= $(notdir $(CALLDIR))
 CD		    = cd
 #CPA		    = cp -a -f
+CPOPTS	    = -a -f -u
 CPA		    = cp -a -f -u
 CPTREE	    = cp -a --parents
 CPR  		= cp -r
@@ -295,5 +297,6 @@ SPHINX      = sphinx
 EPYDOC      = epydoc
 DOXYGEN		= doxygen
 
+TOUCH 		= touch
 endif
 ## \endcond

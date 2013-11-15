@@ -32,8 +32,8 @@
 #
 #$Header$
 #
-SUBROOTTOP:=tests
-CURSUBPATH:=utalm-make
+SUBROOTTOP:=tests/
+CURSUBPATH:=utalm-make/
 ifdef BLD_ROOT
   include $(BLD_ROOT)lib/Makefile.lib/Makefile-nodewalk.mk
 else

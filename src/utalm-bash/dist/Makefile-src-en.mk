@@ -46,5 +46,5 @@ SUB_POOLS   += rpm-devel
 
 SUB_POOLS   += srctgz
 SUB_POOLS   += srcrpm
-SUB_POOLS   += git 
+SUB_POOLS   += repopub 
 

@@ -50,7 +50,10 @@ SRCRPM_OPTS = -ba --buildroot=$(SRCRPMBLD)/bldroot
 SRCRPM_OPTS += --define "%_topdir $(SRCRPMBLD)/redhat"
 SRCRPM_OPTS += --define "%_sourcedir $(VARIANT_ROOT)"
 #
-SRCRPM_OPTS += --define "mytgzname    ${SRCTGZ_NAME}"
+SRCRPM_OPTS += --define "mydirname    ${PACKAGE}.src"
+SRCRPM_OPTS += --define "mytgzname    ${PACKAGE}.src"
+#SRCRPM_OPTS += --define "mytgzname    ${SRCTGZ_NAME}"
+SRCRPM_OPTS += --define "mytgzfilename ${SRCTGZ_NAME}"
 SRCRPM_OPTS += --define "mytgzpname   ${SRCTGZ_PNAME}"
 SRCRPM_OPTS += --define "myversion    ${VERSION}"
 SRCRPM_OPTS += --define "myvariant    ${VARIANT}"
@@ -110,12 +113,13 @@ pkg:$(OUTFILES)
 ################################################
 #
 #
-$(SRCRPM_PNAME):  $(SRCTGZ_PNAME) $(SRCRPM_PNAME_BLD) 
+pkgcopy $(SRCRPM_PNAME):  $(SRCTGZ_PNAME) $(SRCRPM_PNAME_BLD) 
 	@$(ECHO) "#"
 	@$(ECHO) "Copy RPM to $@"
 	@$(CPA) $(SRCRPM_PNAME_BLD) $@
 
-$(SRCRPM_PNAME_BLD): $(SRCRPM_SPECPATH) $(SRCRPM_SRCTGZ_PNAME)
+$(SRCRPM_PNAME_BLD): $(SRCRPM_SRCTGZ_PNAME) pkgbuild
+pkgbuild: $(SRCRPM_SPECPATH)
 	@$(ECHO) "#"
 ifdef DBG
 	@$(ECHO) "##########################################################################################"
@@ -153,6 +157,31 @@ $(SRCTGZ_PNAME):
 $(SRC_POOL): $(ENVFILES)
 	@echo "###Change to:$@"
 	cd $@&& $(MAKE) $(MFLAGS)
+
+LOCALHELP=1
+help:
+	@echo "***************************************"
+	@echo
+	@echo "  VERSION        = $(VERSION)"
+	@echo "  PACKAGE        = $(PACKAGE)"
+	@echo
+	@echo "***************************************"
+	@echo
+	@echo " Help on :'make' in $(shell basename $$PWD)"
+	@echo
+	@echo "  make"
+	@echo "  - builds and copies into export directory"
+	@echo "    EXPORT_DIR = $(EXPORT_DIR)"
+	@echo
+	@echo "  make pkgbuild"
+	@echo "  - builds only"
+	@echo
+	@echo "  make pkgcopy"
+	@echo "  - copies only"
+	@echo
+	@echo "  make helpglobal"
+	@echo "  - displays global help"
+	@echo
 
 .PHONY: PREPMETA 
 

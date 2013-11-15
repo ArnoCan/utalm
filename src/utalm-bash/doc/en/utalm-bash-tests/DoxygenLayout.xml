@@ -5,12 +5,12 @@
    	<tab type="user" url="../../man3/utalm-bash-API/index.html" visible="yes" title="bash" />
    	<tab type="mainpage" visible="yes" title="Usage" />
     <tab type="filelist" visible="yes" title="Test-Cases" intro=""/>
+<!--
     <tab type="directory" visible="yes" title="" intro=""/>  
+-->
     <tab type="examples" visible="yes" title="" intro=""/>  
     <tab type="usergroup" visible="yes" title="Downloads">
-        <tab type="user" url="http://sourceforge.net/projects/utalm/" title="Sourceforge.net">
-        <img src="../../../../images/sourceforge-21x21.png" />
-        </tab>
+        <tab type="user" url="http://sourceforge.net/projects/utalm/" title="Sourceforge.net" />
         <tab type="user" url="https://github.com/ArnoCan/utalm" title="github"/>
         <tab type="user" url="@ref licenses" title="Licence"/>
     </tab>

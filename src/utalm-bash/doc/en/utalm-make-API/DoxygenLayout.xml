@@ -20,9 +20,7 @@
     <tab type="examples" visible="yes" title="" intro=""/>  
 	<tab type="user" url="../../man7/utalm-make-tests/index.html" title="Testscases"/>
     <tab type="usergroup" visible="yes" title="Downloads">
-        <tab type="user" url="http://sourceforge.net/projects/utalm/" title="Sourceforge.net">
-            <img src="../../../../images/sourceforge-21x21.png" />
-        </tab>
+        <tab type="user" url="http://sourceforge.net/projects/utalm/" title="Sourceforge.net" />
 	    <tab type="user" url="https://github.com/ArnoCan/utalm" title="github"/>
     	<tab type="user" url="@ref licenses" title="Licence"/>
     </tab>

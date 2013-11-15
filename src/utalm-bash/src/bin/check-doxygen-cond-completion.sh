@@ -77,10 +77,14 @@ awk '
 }
 
 {
-if [ -n "${FILEONLY}" ];then
+if [ -f "${FILEONLY}" ];then
 	scantarget ${FILEONLY}
 else
-	_baseabs=$PWD
+	if [ -n "${FILEONLY}" ];then
+		_baseabs=${FILEONLY}
+	else
+		_baseabs=$PWD
+	fi
 	{
 		_curbase=;
 		for _curbase in ${_baseabs};do

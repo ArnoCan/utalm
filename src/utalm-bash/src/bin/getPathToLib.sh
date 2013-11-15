@@ -41,15 +41,20 @@
 ## Search order:
 ##   1 ${PWD%/*/*}/lib
 ##   2 LD_LIBRARY_PATH
-##   3 HOME/lib
+##   3 $HOME/lib
+##   4 /usr/lib
 ## 
+## When no argument is provided the first existing library
+## directory is provided.
 ## \cond
 ##
 #
-[[ -n "$1" && -e "${0%/*/*}/lib/$1" ]]&&echo -n "${0%/*/*}/lib/$1"&&exit 0
+[[ -e "${0%/*/*}/lib/$1" ]]&&{ echo -n "${0%/*/*}/lib${1:+/$1}"&&exit 0 ; }
 for i in ${LD_LIBRARY_PATH//:/ };do
-	[[ -e "${i}/$1" ]]&&echo -n "${i}/$1";exit 0
+	[[ -e "${i}/$1" ]]&&{ echo -n "${i}${1:+/$1}";exit 0 ; }
 done
-[[ -e "${HOME}/lib/$1" ]]&&{ echo -n "${HOME}/lib/$1";exit 0 ; }
+[[ -e "${HOME}/lib/$1" ]]&&{ echo -n "${HOME}/lib${1:+/$1}";exit 0 ; }
+[[ -e "/usr/lib/$1" ]]&&{ echo -n "/usr/lib${1:+/$1}";exit 0 ; }
+
 exit 1
 ## \endcond

@@ -37,14 +37,15 @@ SRC_FILES	+= header.html
 SRC_FILES	+= utalm.css
 SRC_FILES	+= mainpage.dox
 SRC_FILES	+= intromake.dox
-SRC_FILES	+= aboututalm.dox
-SRC_FILES	+= license.dox
+SRC_FILES	+= $(BLD_ROOT)/doc/en/include/aboututalm.dox
+SRC_FILES	+= $(BLD_ROOT)/doc/en/include/license.dox
 SRC_FILES	+= historyandorigin.dox
 SRC_FILES	+= install.dox
 SRC_FILES	+= syntax-make.dox
 SRC_FILES	+= make-based-unittests.dox
 SRC_FILES	+= testing-devops-tools.dox
 SRC_FILES	+= howto-make.dox
+SRC_FILES	+= $(BLD_ROOT)LICENSE.txt
 
 #
 SRC_DIRS	+= 

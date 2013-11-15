@@ -38,15 +38,14 @@ SRC_FILES	+= utalm.css
 SRC_FILES	+= mainpage.dox
 SRC_FILES	+= continousintegration.dox
 SRC_FILES	+= components.dox
-SRC_FILES	+= license.dox
-SRC_FILES	+= historyandorigin.dox
 SRC_FILES	+= install.dox
+SRC_FILES	+= utalmenviron.dox
 SRC_FILES	+= runtimeenviron.dox
+SRC_FILES	+= devenviron.dox
 SRC_FILES	+= syntax-bash.dox
 SRC_FILES	+= lowcosttddenvironment.dox
 SRC_FILES	+= make-based-unittests.dox
 SRC_FILES	+= testing-devops-tools.dox
-SRC_FILES	+= aboututalm.dox
 SRC_FILES	+= debuggertracelogging.dox
 SRC_FILES	+= systemlogs.dox
 SRC_FILES	+= eclipseintegration.dox
@@ -55,7 +54,35 @@ SRC_FILES	+= components-include.html
 SRC_FILES	+= tdd-include.html
 SRC_FILES	+= trace-include.html
 SRC_FILES	+= logging-include.html
+SRC_FILES	+= environment.dox
+SRC_FILES	+= environment-include.html
+SRC_FILES	+= underconstruction.dox
+#
 SRC_FILES	+= README.dox
+SRC_FILES	+= historyandorigin.dox
+
+#SRC_FILES	+= $(BLD_ROOT)LICENSE.txt
+#SRC_FILES	+= $(BLD_ROOT)/doc/en/include/aboututalm.dox
+#SRC_FILES	+= $(BLD_ROOT)/doc/en/include/license.dox
+
+SRC_FILES	+= cli_projects_bash.dox
+
+SRC_FILES	+= eclipse_projects_bash.dox
+SRC_FILES	+= eclipse_projects_cpp.dox
+SRC_FILES	+= eclipse_projects_python.dox
+
+
+
+
+
+
+
+
+
+
+
+
+
 #
 SRC_DIRS	+= 
 

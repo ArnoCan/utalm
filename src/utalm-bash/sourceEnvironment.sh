@@ -75,8 +75,11 @@ fi
 
 ## \endcond
 ## @ingroup libutalm_make
-PATH="${BLD_ROOT}src/bin:${BLD_ROOT}bin:$PATH_ORG"
+PATH="${BLD_ROOT}bin:$PATH_ORG"
 ## \cond
+if [ -d src ];then 
+	PATH="${BLD_ROOT}src/bin:$PATH_ORG"
+fi
 
 if [ -z "$PATH_ORG" ];then
 ## \endcond
@@ -93,29 +96,29 @@ export LD_LIBRARY_PATH
 
 ## \endcond
 ## @ingroup libutalm_make
-#P BLD_OUT_BASE="$(sed -n 's/^[ \t]*BLD_OUT_BASE[ \t:]*=[ \t]*//p;s/(/{/g;s/)/}/g' Makefile-root.mk)"
+#P BLD_OUT_BASE="$(sed -n 's/^[ \t]*BLD_OUT_BASE[ \t:]*=[ \t]*//p;s/(/{/g;s/)/}/g' include/Makefile-root.mk)"
 ## \cond
-BLD_OUT_BASE=$(sed -n '/^[ \t]*BLD_OUT_BASE/!d;s/^[ \t]*BLD_OUT_BASE[ \t:]*=[ \t]*//;s/\$(LOGNAME)/'"$LOGNAME"'/gp' Makefile-root.mk)
+BLD_OUT_BASE=$(sed -n '/^[ \t]*BLD_OUT_BASE/!d;s/^[ \t]*BLD_OUT_BASE[ \t:]*=[ \t]*//;s/\$(LOGNAME)/'"$LOGNAME"'/gp' include/Makefile-root.mk)
 export BLD_OUT_BASE
 
 
 ## \endcond
 ## @ingroup libutalm_make
-PACKAGE="$(sed -n 's/^[ \t]*PACKAGE[ \t:]*=[ \t]*//p' Makefile-version.mk)"
+PACKAGE="$(sed -n 's/^[ \t]*PACKAGE[ \t:]*=[ \t]*//p' include/Makefile-version.mk)"
 ## \cond
 export PACKAGE
 
 
 ## \endcond
 ## @ingroup libutalm_make
-VERSION="$(sed -n 's/^[ \t]*VERSION[ \t:]*=[ \t]*//p' Makefile-version.mk)"
+VERSION="$(sed -n 's/^[ \t]*VERSION[ \t:]*=[ \t]*//p' include/Makefile-version.mk)"
 ## \cond
 export VERSION
 
 
 ## \endcond
 ## @ingroup libutalm_make
-[[ -z "$VARIANT" ]]&&VARIANT="$(sed -n 's/^[ \t]*VARIANT[ \t:]*=[ \t]*//p' Makefile-version.mk)"
+[[ -z "$VARIANT" ]]&&VARIANT="$(sed -n 's/^[ \t]*VARIANT[ \t:]*=[ \t]*//p' include/Makefile-version.mk)"
 ## \cond
 export VARIANT
 
@@ -129,7 +132,7 @@ export BASE
 
 ## \endcond
 ## @ingroup libutalm_make
-TMP="$(sed -n 's/^[ \t]*TMP[ \t:]*=[ \t]*//p' Makefile-root.mk)"
+TMP="$(sed -n 's/^[ \t]*TMP[ \t:]*=[ \t]*//p' include/Makefile-root.mk)"
 ## \cond
 export TMP
 

@@ -50,7 +50,6 @@ _MAKE_NODEWALK_NODEACTION_TESTS_INCLUDED_:=1
 #all: outdirs $(SUB_POOLS)
 
 include $(BLD_ROOT)lib/Makefile.lib/Makefile-test.mk
-include $(BLD_ROOT)lib/Makefile.lib/Makefile-test.mk
 
 
 endif #_MAKE_NODEWALK_NODEACTION_TESTS_INCLUDED_

@@ -96,7 +96,7 @@ function insertEntryToNAVTREE () {
 
 
 _new='[ "Python", "../utalm-python-API/index.html", null ],'
-MYNAVTREEJS=/tmp/bld/utalm-bash-03.03.002/doc-tmp/BETA/doc/en/html/man3/utalm-API/navtree.js
+MYNAVTREEJS=/tmp/bld/utalm-bash-03.03.004/doc-tmp/BETA/doc/en/html/man3/utalm-API/navtree.js
 
 insertEntryToNAVTREE awk $MYNAVTREEJS $_new
 

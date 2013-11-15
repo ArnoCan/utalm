@@ -38,6 +38,10 @@
 
 #
 SRC_FILES	+= README.txt
+SRC_FILES	+= Makefile 
+SRC_FILES	+= Makefile-nodeaction-en.mk 
+SRC_FILES	+= Makefile-src-en.mk
+SRC_FILES	+= 
 
 #
 SRC_DIRS	+= 

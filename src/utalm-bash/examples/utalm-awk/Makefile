@@ -32,7 +32,7 @@
 #$Header$
 #
 SUBROOTTOP:=examples
-CURSUBPATH:=utalm-awk
+CURSUBPATH:=utalm-awk/
 ifdef BLD_ROOT
   include $(BLD_ROOT)lib/Makefile.lib/Makefile-nodewalk.mk
 else

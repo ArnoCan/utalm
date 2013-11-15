@@ -37,12 +37,13 @@ SRC_FILES	+= header.html
 SRC_FILES	+= utalm.css
 SRC_FILES	+= mainpage.dox
 SRC_FILES	+= introbash.dox
-SRC_FILES	+= aboututalm.dox
-SRC_FILES	+= license.dox
+SRC_FILES	+= $(BLD_ROOT)/doc/en/include/aboututalm.dox
+SRC_FILES	+= $(BLD_ROOT)/doc/en/include/license.dox
 SRC_FILES	+= historyandorigin.dox
 SRC_FILES	+= install.dox
 SRC_FILES	+= syntax-bash.dox
 SRC_FILES	+= howto-bash.dox
+SRC_FILES	+= $(BLD_ROOT)LICENSE.txt
 
 #
 SRC_DIRS	+= 

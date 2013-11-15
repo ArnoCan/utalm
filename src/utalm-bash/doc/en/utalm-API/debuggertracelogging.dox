@@ -4,7 +4,7 @@
 * MAINTAINER:   Arno-Can Uestuensoez - acue.opensource@gmail.com
 * SHORT:        utalm-bash
 * LICENSE:      CCL-3.0-BY-SA - http://creativecommons.org/licenses/by-sa/3.0/legalcode
-* VERSION:      03_03_002
+* VERSION:      03_03_004
 *
 * Copyright [2007,2008,2010,2013] Arno-Can Uestuensoez
 *
@@ -19,11 +19,11 @@
 * and tool sets for fault detection and tracking. 
 * This is  particularly true for the basically identical task to track and handle anomalies of processing.
 * Whereas the developer may rely on the debugger for error fixing, the test team requires documented traces
-* depicting the error context as well the history of the control flow which led to the failure.      
+* depicting the error context as well as the history of the control flow which led to the failure.      
 * The support team requires system and application logs, which are more condensed and production
 * proof variants of traces.
 *
-* The areas of application may overlap, when complex flows have to be are inspected by supporting development
+* The areas of application may overlap, when complex flows have to be inspected by supporting development
 * tools and utilities for test automation.
 * In such cases traces and logging may help to localize the cause for the fault before starting a detailed 
 * analysis by usage of a debugger.

@@ -49,7 +49,10 @@ RPM_OPTS = -bb --buildroot=$(RPMDEVELBLD)/bldroot --target=$(ARCH)
 RPM_OPTS += --define "%_topdir $(RPMDEVELBLD)/redhat"
 RPM_OPTS += --define "%_sourcedir $(VARIANT_ROOT)"
 #
-RPM_OPTS += --define "mytgzname    ${TGZ_DEVEL_NAME}"
+RPM_OPTS += --define "mydirname    ${PACKAGE}-devel"
+RPM_OPTS += --define "mytgzname    ${PACKAGE}-devel"
+#RPM_OPTS += --define "mytgzname    ${TGZ_DEVEL_NAME}"
+RPM_OPTS += --define "mytgzfilename ${TGZ_DEVEL_NAME}"
 RPM_OPTS += --define "mytgzpname   ${TGZ_DEVEL_PNAME}"
 RPM_OPTS += --define "myversion    ${VERSION}"
 RPM_OPTS += --define "myvariant    ${VARIANT}"
@@ -110,12 +113,14 @@ pkg:$(OUTFILES)
 ################################################
 #
 #
-$(RPMDEVEL_PNAME): $(RPMDEVEL_PNAME_BLD) 
+$(RPMDEVEL_PNAME): $(RPMDEVEL_PNAME_BLD) pkgcopy 
+pkgcopy: 
 	@$(ECHO) "#"
 	@$(ECHO) "Copy RPMDEVEL to $@"
-	@$(CPA) $(RPMDEVEL_PNAME_BLD) $@
+	@$(CPA) $(RPMDEVEL_PNAME_BLD) $(RPMDEVEL_PNAME)
 
-$(RPMDEVEL_PNAME_BLD): $(RPMDEVEL_SPECPATH) $(TGZ_DEVEL_PNAME_BLD)
+$(RPMDEVEL_PNAME_BLD): $(TGZ_DEVEL_PNAME_BLD) pkgbuild
+pkgbuild: $(RPMDEVEL_SPECPATH) 
 	@$(ECHO) "#"
 ifdef DBG
 	@$(ECHO) "##########################################################################################"
@@ -142,7 +147,8 @@ RPMDEVELDIRS:
 $(RPMDEVEL_SPECPATH): $(RPMDEVEL_SPECNAME)
 	@$(CPA) $(RPMDEVEL_SPECNAME) $@
 
-$(RPMDEVEL_SPECNAME):$(TGZ_DEVEL_PNAME_BLD)
+$(RPMDEVEL_SPECNAME):
+#$(RPMDEVEL_SPECNAME):$(TGZ_DEVEL_PNAME_BLD)
 $(TGZ_DEVEL_PNAME_BLD): TGZ_DEVEL
 	$(ECHO) "Update TGZ_DEVEL in rpm-devel-Tree"
 	$(CPA) $(TGZ_DEVEL_PNAME) $(RPMDEVELBLD)/redhat/RPMS/$(ARCH) 
@@ -154,6 +160,31 @@ TGZ_DEVEL:
 $(SRC_POOL): $(ENVFILES)
 	@echo "###Change to:$@"
 	cd $@&& $(MAKE) $(MFLAGS)
+
+LOCALHELP=1
+help:
+	@echo "***************************************"
+	@echo
+	@echo "  VERSION        = $(VERSION)"
+	@echo "  PACKAGE        = $(PACKAGE)"
+	@echo
+	@echo "***************************************"
+	@echo
+	@echo " Help on :'make' in $(shell basename $$PWD)"
+	@echo
+	@echo "  make"
+	@echo "  - builds and copies into export directory"
+	@echo "    EXPORT_DIR = $(EXPORT_DIR)"
+	@echo
+	@echo "  make pkgbuild"
+	@echo "  - builds only"
+	@echo
+	@echo "  make pkgcopy"
+	@echo "  - copies only"
+	@echo
+	@echo "  make helpglobal"
+	@echo "  - displays global help"
+	@echo
 
 .PHONY: PREPMETA 
 

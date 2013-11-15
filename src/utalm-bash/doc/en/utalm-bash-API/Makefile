@@ -56,21 +56,15 @@ include Makefile-src-en.mk
 DOXYGEN_HTML_DIR = $(OUTHTML3)/$(OUTSTEM)
 
 DOXYGEN_HTML_FILES = $(DOXYGEN_HTML_DIR)/index.html
-OUTFILES	+= $(DOXYGEN_HTML_FILES) 
 
 # DOXYGEN_HTML_CALLBASE = $(RTBASE)
 STRIP_FROM_PATH = $(RTBASE)
 
 PROJECT_LOGO = $(DOCBASE_ML)images/utalm-green-96x60.png
-#PROJECT_LOGO = $(DOCBASE_ML)images/utalm-92x60.png
 HTML_HEADER = header.html
 HTML_STYLESHEET = utalm.css 
 
 DOXYGEN_HTML_INPUT =
-DOXYGEN_HTML_INPUT_FILES_SRC =
-DOXYGEN_HTML_INPUT_DIRS_SRC =
-DOXYGEN_HTML_INPUT_FILES =
-DOXYGEN_HTML_INPUT_DIRS =
 
 DOXYGEN_HTML_INPUT_FILES += $(RTBASE)INSTALL.txt
 DOXYGEN_HTML_INPUT_FILES += $(RTBASE)RELEASENOTES.txt
@@ -82,7 +76,6 @@ DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)lib/libutalm-eclipse.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)lib/libutalm.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)lib/libutalmfileobjects.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)lib/libutalmrefpersistency.sh
-DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)collect-filelist.sh
 
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)conf/versinfo.conf.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)conf/versinfo.gen.sh
@@ -107,6 +100,7 @@ DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/setversion.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/utalm-bash-cli.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/utalmhelp.sh
 
+DOXYGEN_HTML_INPUT_FILES_SRC_GEN += $(RTBASE)bin/setversion-min.sh
 DOXYGEN_HTML_INPUT_FILES_SRC_GEN += $(RTBASE)lib/libutalm-min.sh
 DOXYGEN_HTML_INPUT_FILES_SRC_GEN += $(RTBASE)lib/libutalmfileobjects-min.sh
 DOXYGEN_HTML_INPUT_FILES_SRC_GEN += $(RTBASE)lib/libutalmrefpersistency-min.sh
@@ -139,146 +133,28 @@ DOXYGEN_HTML_LAYOUT = DoxygenLayout.xml
 DOXYGEN_HTML_INPUT_CONF =  Doxyfile_Inputfiles.conf
 DOXYGEN_HTML_OUTPUT_CONF =  Doxyfile_Outputfiles.conf
 
-OUTDIRS += $(RTBASE)lib
-OUTDIRS += $(RTBASE)bin
-OUTDIRS += $(RTBASE)conf
-OUTDIRS += $(RTBASE)conf/macros
-OUTDIRS += $(RTBASE)conf/utalm.d
- 
-OUTFILES	= 
+#OUTDIRS += $(RTBASE)lib
+#OUTDIRS += $(RTBASE)bin
+#OUTDIRS += $(RTBASE)conf
+#OUTDIRS += $(RTBASE)conf/macros
+#OUTDIRS += $(RTBASE)conf/utalm.d
+
 
 #for safety now
-INCLUDES=$(wildcards $(BLD_ROOT)include/*)
-INCLUDES=$(wildcards $(DOC_BLD_ROOT)include/*)
-INCLUDES=$(wildcards ../include/*)
+INCLUDES =
+INCLUDES += $(wildcards $(BLD_ROOT)include/*)
+INCLUDES += $(wildcards $(DOC_BLD_ROOT)include/*)
+INCLUDES += $(wildcards ../include/*)
 
-all:outdirs $(ENVFILES) topmain $(INCLUDES) $(DOXYGEN_HTML_FILES)
-$(DOXYGEN_HTML_FILES):$(DOXYGEN_HTML_INPUT)
+OUTFILES = 
+all: outdirs $(DOXYGEN_HTML_FILES) postpatches
+#refer to Makefile-doxygen.mk for: $(DOXYGEN_HTML_FILES)
 
+postpatches:
 
-$(RTBASE)conf/versinfo.conf.sh:$(BLD_ROOT)src/conf/versinfo.conf.sh
-	$(CP) $? $(@D)
-$(RTBASE)conf/versinfo.gen.sh:$(BLD_ROOT)src/conf/versinfo.gen.sh
-	$(CP) $? $(@D)
-$(RTBASE)conf/utalm-bash.conf:$(BLD_ROOT)src/conf/utalm-bash.conf
-	$(CP) $? $(@D)
-
-$(RTBASE)INSTALL.txt:$(BLD_ROOT)INSTALL.txt
-	$(CP) $? $(@D)
-$(RTBASE)RELEASENOTES.txt:$(BLD_ROOT)RELEASENOTES.txt
-	$(CP) $? $(@D)
-$(RTBASE)sourceEnvironment.sh:$(BLD_ROOT)sourceEnvironment.sh
-	$(CP) $? $(@D)
-$(RTBASE)install-devel.sh:$(BLD_ROOT)install-devel.sh
-	$(CP) $? $(@D)
-$(RTBASE)install.sh:$(BLD_ROOT)install.sh
-	$(CP) $? $(@D)
-
-$(RTBASE)lib/libutalm-eclipse.sh:$(BLD_ROOT)src/lib/libutalm-eclipse.sh
-	$(CP) $? $(@D)
-$(RTBASE)lib/libutalm.sh:$(BLD_ROOT)src/lib/libutalm.sh
-	$(CP) $? $(@D)
-$(RTBASE)lib/libutalmfileobjects.sh:$(BLD_ROOT)src/lib/libutalmfileobjects.sh
-	$(CP) $? $(@D)
-$(RTBASE)lib/libutalmrefpersistency.sh:$(BLD_ROOT)src/lib/libutalmrefpersistency.sh
-	$(CP) $? $(@D)
-
-$(RTBASE)bin/check-if-fi-pairs.sh:$(BLD_ROOT)src/bin/check-if-fi-pairs.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCPUinfo.sh:$(BLD_ROOT)src/bin/getCPUinfo.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCurArch.sh:$(BLD_ROOT)src/bin/getCurArch.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCurDistribution.sh:$(BLD_ROOT)src/bin/getCurDistribution.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCurGID.sh:$(BLD_ROOT)src/bin/getCurGID.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCurOSRel.sh:$(BLD_ROOT)src/bin/getCurOSRel.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCurOS.sh:$(BLD_ROOT)src/bin/getCurOS.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCurRelease.sh:$(BLD_ROOT)src/bin/getCurRelease.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCurUTALMRel.sh:$(BLD_ROOT)src/bin/getCurUTALMRel.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getCurUTALMVariant.sh:$(BLD_ROOT)src/bin/getCurUTALMVariant.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getPathToBin.sh:$(BLD_ROOT)src/bin/getPathToBin.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getPathToBootstrapDir.sh:$(BLD_ROOT)src/bin/getPathToBootstrapDir.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getPathToLib.sh:$(BLD_ROOT)src/bin/getPathToLib.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/getVMinfo.sh:$(BLD_ROOT)src/bin/getVMinfo.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/setversion.sh:$(BLD_ROOT)src/bin/setversion.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/utalm-bash-cli.sh:$(BLD_ROOT)src/bin/utalm-bash-cli.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/utalmhelp.sh:$(BLD_ROOT)src/bin/utalmhelp.sh
-	$(CP) $? $(@D)
-
-
-$(RTBASE)collect-filelist.sh:
-$(RTBASE)lib/libutalm-min.sh:$(RTBASE)lib/libutalm.sh
-$(RTBASE)lib/libutalmfileobjects-min.sh:$(RTBASE)lib/libutalm.sh
-$(RTBASE)lib/libutalmrefpersistency-min.sh:$(RTBASE)lib/libutalm.sh
-
-# mainpage.dox
-# historyandorigin.dox
-# aboututalm.dox
-# license.dox
-# install.dox
-# introbash.dox
-# syntax-bash.dox
-# howto-bash.dox
-
-$(RTBASE)examples/utalm-bash:$(BLD_ROOT)examples/utalm-bash
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	cd $<&&$(MAKE) $(MFLAGS)
-	@echo "#...finished:$@"
-$(RTBASE)tests/utalm-bash:$(BLD_ROOT)tests/utalm-bash
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	cd $<&&$(MAKE) $(MFLAGS)
-	@echo "#...finished:$@"
-
-$(RTBASE)bin/bootstrap:$(BLD_ROOT)src/bin/bootstrap
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	mkdir -p ${@D}
-	-$(CPA) $< ${@D}
-	@echo "#...finished:$@"
-$(RTBASE)lib/core:$(BLD_ROOT)src/lib/core
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	mkdir -p ${@D}
-	-$(CPA) $< ${@D}
-	@echo "#...finished:$@"
-$(RTBASE)bin:$(BLD_ROOT)src/bin
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	cd $(BLD_ROOT)src&&$(MAKE) $(MFLAGS)
-	@echo "#...finished:$@"
-$(RTBASE)conf:$(BLD_ROOT)src/conf
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	mkdir -p ${@D}
-	-$(CPA) $< ${@D}
-	@echo "#...finished:$@"
-
-
-.PHONY:topmain
-topmain:
+$(DOXYGEN_HTML_INPUT): $(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF)
 	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
-
+$(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF): 
 
 #
 include $(BLD_ROOT)lib/Makefile.lib/Makefile-doxygen-rules.mk

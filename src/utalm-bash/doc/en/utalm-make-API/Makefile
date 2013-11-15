@@ -70,8 +70,8 @@ DOXYGEN_HTML_INPUT =
 
 DOXYGEN_HTML_INPUT += mainpage.dox
 DOXYGEN_HTML_INPUT += historyandorigin.dox
-DOXYGEN_HTML_INPUT += aboututalm.dox
-DOXYGEN_HTML_INPUT += install.dox
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)/doc/en/include/license.dox
+DOXYGEN_HTML_INPUT += $(BLD_ROOT)/doc/en/include/aboututalm.dox
 DOXYGEN_HTML_INPUT += license.dox
 DOXYGEN_HTML_INPUT += syntax-make.dox
 DOXYGEN_HTML_INPUT += intromake.dox
@@ -87,14 +87,22 @@ DOXYGEN_HTML_INPUT_FILES += $(RTBASE)RELEASENOTES.txt
 DOXYGEN_HTML_INPUT_FILES += $(RTBASE)Makefile
 DOXYGEN_HTML_INPUT_FILES += $(RTBASE)README.txt
 
+DOXYGEN_HTML_INPUT += $(RTBASE)install-devel.sh
+DOXYGEN_HTML_INPUT += $(RTBASE)install.sh
+
+
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/check-doxygen-cond-completion.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/check-doxygen-cond-pairs.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/countErrors.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/doxygenfilter.awk
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/doxygen-html-nav-entry.sh
 DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/strip-bash.sh
+DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/strip-bash-min.sh
+DOXYGEN_HTML_INPUT_FILES_SRC += $(RTBASE)bin/countErrors.sh
 
 DOXYGEN_HTML_INPUT_DIRS_SRC += $(RTBASE)lib/Makefile.lib
+DOXYGEN_HTML_INPUT_DIRS_SRC += $(RTBASE)lib/libutalmrefpersistency.sh
+DOXYGEN_HTML_INPUT_DIRS_SRC += $(RTBASE)lib/libutalmrefpersistency-min.sh
 DOXYGEN_HTML_INPUT_DIRS_SRC += $(RTBASE)include
 
 DOXYGEN_HTML_INPUT_DIRS += $(RTBASE)examples/utalm-make
@@ -115,58 +123,18 @@ DOXYGEN_HTML_OUTPUT_CONF =  Doxyfile_Outputfiles.conf
 OUTFILES	= 
 
 #for safety now
-INCLUDES=$(wildcards $(BLD_ROOT)include/*)
-INCLUDES=$(wildcards $(DOC_BLD_ROOT)include/*)
-INCLUDES=$(wildcards ../include/*)
+INCLUDES =  $(wildcards $(BLD_ROOT)include/*)
+INCLUDES += $(wildcards $(DOC_BLD_ROOT)include/*)
+INCLUDES += $(wildcards ../include/*)
 
-all:outdirs $(ENVFILES) topmain $(INCLUDES) $(DOXYGEN_HTML_FILES)
-$(DOXYGEN_HTML_FILES):$(DOXYGEN_HTML_INPUT)
+all: outdirs $(DOXYGEN_HTML_FILES) postpatches
+#refer to Makefile-doxygen.mk for: $(DOXYGEN_HTML_FILES)
 
-$(RTBASE)README.txt:$(BLD_ROOT)src/README.txt
-	$(CP) $? $(@D)
-$(RTBASE)INSTALL.txt:$(BLD_ROOT)INSTALL.txt
-	$(CP) $? $(@D)
-$(RTBASE)RELEASENOTES.txt:$(BLD_ROOT)RELEASENOTES.txt
-	$(CP) $? $(@D)
-$(RTBASE)Makefile:$(BLD_ROOT)Makefile
-	$(CP) $? $(@D)
-$(RTBASE)bin/check-doxygen-cond-completion.sh:$(BLD_ROOT)src/bin/check-doxygen-cond-completion.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/check-doxygen-cond-pairs.sh:$(BLD_ROOT)src/bin/check-doxygen-cond-pairs.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/countErrors.sh:$(BLD_ROOT)src/bin/countErrors.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/doxygenfilter.awk:$(BLD_ROOT)src/bin/doxygenfilter.awk
-	$(CP) $? $(@D)
-$(RTBASE)bin/doxygen-html-nav-entry.sh:$(BLD_ROOT)src/bin/doxygen-html-nav-entry.sh
-	$(CP) $? $(@D)
-$(RTBASE)bin/strip-bash.sh:$(BLD_ROOT)src/bin/strip-bash.sh
-	$(CP) $? $(@D)
+postpatches:
 
-$(RTBASE)lib/Makefile.lib:$(BLD_ROOT)src/lib/Makefile.lib
-	$(CPA) $? $(@D)
-
-$(RTBASE)include:$(BLD_ROOT)src/include
-	$(CPA) $? $(@D)
-
-$(RTBASE)examples/utalm-make:$(BLD_ROOT)examples/utalm-make
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	cd $<&&$(MAKE) $(MFLAGS)
-	@echo "#...finished:$@"
-
-$(RTBASE)tests/utalm-make:$(BLD_ROOT)tests/utalm-make
-	@echo
-	@echo "###"
-	@echo "#Change to:$@"
-	cd $<&&$(MAKE) $(MFLAGS)
-	@echo "#...finished:$@"
-
-.PHONY:topmain
-topmain:
+$(DOXYGEN_HTML_INPUT): $(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF)
 	INDENT0="$(INDENT0)" INDENT1="$(INDENT1)" BLD_ROOT=$(BLD_ROOT) OUTLANG=$(OUTLANG) SUBROOTTOP= CURSUBPATH= $(MAKE) -C $(BLD_ROOT) $(MFLAGS) files dirs
-
+$(DOXYGEN_HTML_CONF) $(DOXYGEN_HTML_LAYOUT) $(DOXYGEN_HTML_INPUT_CONF) $(DOXYGEN_HTML_OUTPUT_CONF): 
 
 #
 include $(BLD_ROOT)lib/Makefile.lib/Makefile-doxygen-rules.mk

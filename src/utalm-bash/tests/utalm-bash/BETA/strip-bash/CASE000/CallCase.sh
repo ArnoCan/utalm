@@ -64,7 +64,7 @@ refDataInit $TROOT
 refDataStore input-data-min.txt
 fref=$(refDataStorePath input-data-min.txt)
 
-${BLD_ROOT}src/bin/strip-bash.sh KEEPLINES -o ${fref%input-data-min.txt} input-data.txt
+$(getPathToBin.sh)/strip-bash.sh KEEPLINES -o ${fref%input-data-min.txt} input-data.txt
 assertRefDataWithExit $LINENO $BASH_SOURCE input-data-min.txt "$(cat ref-data.txt)"
 
 ## \endcond

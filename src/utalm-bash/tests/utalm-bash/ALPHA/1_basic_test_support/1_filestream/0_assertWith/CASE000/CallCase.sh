@@ -37,7 +37,7 @@
 ## @file
 ## @brief Values of TESTMODE 
 ##
-## \attention Due to required tests of \ref TESTMODE itself, this case breaks
+## \attention Due to required tests of **TESTMODE** itself, this case breaks
 ## consequently control flow.
 ##
 ## Tests the storage and read of arbitrary data to be used in later
