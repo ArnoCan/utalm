@@ -44,7 +44,7 @@
 #production output
 VENDOR      = Ingenieurbuero Arno-Can Uestuensoez - www.i4p.com
 PACKAGER    = Arno-Can Uestuensoez - acue.opensource@gmail.com
-VERSION		= 03.03.004
+VERSION		= 03.03.005
 LICENSE	    = Apache-2.0
 RELEASE	    = R0
 ARCH		= noarch

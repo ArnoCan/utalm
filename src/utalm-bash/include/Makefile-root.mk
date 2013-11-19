@@ -68,9 +68,9 @@ endif
 ## \cond
 BASE = $(EXPORT_DIR)/$(PACKAGE)-$(VERSION)/
 ## \endcond
-#P TMP = "${BASE}tmp"
+#P TMP = "$(BASE)tmp"
 ## \cond
-TMP = ${BASE}tmp
+TMP = $(BASE)tmp
 ## \endcond
 #P OUTDIR = "$(BASE)-out"
 ## \cond
@@ -104,37 +104,35 @@ endif
 WWWLNK = www-tmp
 ## \cond
 ## \endcond
-#P WWWBASE = "${BASE}$(WWWLNK)/"
+#P WWWBASE = "$(BASE)$(WWWLNK)/"
 ## \cond
-WWWBASE		= ${BASE}$(WWWLNK)/
+WWWBASE		= $(BASE)$(WWWLNK)/
 
 #rt-root
 ## \endcond
 #P RTLNK = "rt-tmp"
 ## \cond
 RTLNK = rt-tmp
-## \cond
 
 ## \endcond
-#P RTBASE = "${BASE}$(RTLNK)/$(VARIANT)/"
+#P RTBASE = "$(BASE)$(RTLNK)/$(VARIANT)/"
 ## \cond
-RTBASE = ${BASE}$(RTLNK)/$(VARIANT)/
+RTBASE = $(BASE)$(RTLNK)/$(VARIANT)/
 
 #root for dependent parts
 #RTADDONSLNK	= addons-tmp
-#RTADDONSBASE  = ${BASE}/$(RTADDONSLNK)/$(VARIANT)/
+#RTADDONSBASE  = $(BASE)/$(RTADDONSLNK)/$(VARIANT)/
 
 #test-root
 ## \endcond
 #P TSTLNK = "tst-tmp"
 ## \cond
 TSTLNK = tst-tmp
-## \cond
 
 ## \endcond
-#P TSTBASE = "${BASE}$(TSTLNK)/$(VARIANT)/"
+#P TSTBASE = "$(BASE)$(TSTLNK)/$(VARIANT)/"
 ## \cond
-TSTBASE = ${BASE}$(TSTLNK)/$(VARIANT)/
+TSTBASE = $(BASE)$(TSTLNK)/$(VARIANT)/
 OUTDIRS += $(TSTBASE)
 
 ## \endcond
@@ -144,34 +142,22 @@ TSTREFLNK = tstref-tmp
 ## \cond
 
 ## \endcond
-#P TSTREF = "${BASE}$(TSTREFLNK)/$(VARIANT)/"
+#P TSTREF = "$(BASE)$(TSTREFLNK)/$(VARIANT)/"
 ## \cond
-TSTREF = ${BASE}$(TSTREFLNK)/$(VARIANT)/
+TSTREF = $(BASE)$(TSTREFLNK)/$(VARIANT)/
 OUTDIRS += $(TSTREF)
 
 #unknown temporary storage for further analysis
 #UNKNOWNLNK	= addons-tmp
-#UNKNOWNBASE  = ${BASE}/$(UNKNOWNLNK)/$(VARIANT)/
+#UNKNOWNBASE  = $(BASE)/$(UNKNOWNLNK)/$(VARIANT)/
 
 #doc-root - could be used autonomous too
 ## \endcond
 
 ## \endcond
-#P DOCLNK 		= "doc-tmp"
+#P DOCBASE_ML	= "$(RTBASE)doc/"
 ## \cond
-DOCLNK 		= doc-tmp
-## \endcond
-
-## \endcond
-#P DOCVARIANT  = "${BASE}$(DOCLNK)/$(VARIANT)/"
-## \cond
-DOCVARIANT  = ${BASE}$(DOCLNK)/$(VARIANT)/
-## \endcond
-
-## \endcond
-#P DOCBASE_ML	= "${BASE}$(DOCLNK)/$(VARIANT)/doc/"
-## \cond
-DOCBASE_ML	= ${BASE}$(DOCLNK)/$(VARIANT)/doc/
+DOCBASE_ML	= $(RTBASE)doc/
 ## \endcond
 
 #P DOCBASE		= "${DOCBASE_ML}$(OUTLANG)/"
@@ -179,21 +165,21 @@ DOCBASE_ML	= ${BASE}$(DOCLNK)/$(VARIANT)/doc/
 DOCBASE		= ${DOCBASE_ML}$(OUTLANG)/
 
 ## \endcond
-#P DOCBASE_COMMON	= "${BASE}$(DOCLNK)/"
+#P DOCBASE_COMMON	= "${DOCBASE_ML}"
 ## \cond
-DOCBASE_COMMON	= ${BASE}$(DOCLNK)/
+DOCBASE_COMMON	= ${DOCBASE_ML}
 
 #
 # Eclipse
 #
 ## \endcond
-ECLIPSE_DOC_ID  = "org.i4p.utalm.bash"
+ECLIPSE_DOC_ID  = org.i4p.utalm.bash
 ## \cond
 
 ## \endcond
-#P DOCBASE_ECLIPSE = "${BASE}$(DOCLNK)/$(VARIANT)/eclipse"
+#P DOCBASE_ECLIPSE = "$(RTBASE)eclipse/doc/"
 ## \cond
-DOCBASE_ECLIPSE = ${BASE}$(DOCLNK)/$(VARIANT)/eclipse
+DOCBASE_ECLIPSE = $(RTBASE)eclipse/doc/
 
 ## \endcond
 #P OUTDIRS += "$(DOCBASE_ECLIPSE)"

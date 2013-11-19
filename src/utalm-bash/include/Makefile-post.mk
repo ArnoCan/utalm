@@ -95,7 +95,6 @@ helpglobal:
 	@echo "  OUTDIR       = $(OUTDIR)"
 	@echo "  WWWLNK       = $(WWWLNK)"
 	@echo "  WWWBASE      = $(WWWBASE)"
-	@echo "  DOCLNK       = $(DOCLNK)"
 	@echo "  DOCBASE      = $(DOCBASE)"
 	@echo "  RTLNK        = $(RTLNK)"
 	@echo "  RTBASE       = $(RTBASE)"

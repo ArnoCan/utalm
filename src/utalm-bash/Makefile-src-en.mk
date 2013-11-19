@@ -51,6 +51,6 @@ SRC_DIRS	+= include
 SUB_POOLS   += src 
 SUB_POOLS   += examples
 SUB_POOLS   += tests
-SUB_POOLS   += doc
+SUB_POOLS   += docsrc
 SUB_POOLS   += dist
 ## \endcond

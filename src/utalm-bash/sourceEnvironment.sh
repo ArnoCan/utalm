@@ -49,7 +49,7 @@ export BLD_ROOT;
 
 ## \endcond
 ## @ingroup libutalm_make
-DOC_BLD_ROOT="$BLD_ROOT/doc/"
+DOC_BLD_ROOT="${BLD_ROOT}docsrc/"
 ## \cond
 export DOC_BLD_ROOT;
 
@@ -78,10 +78,10 @@ fi
 PATH="${BLD_ROOT}bin:$PATH_ORG"
 ## \cond
 if [ -d src ];then 
-	PATH="${BLD_ROOT}src/bin:$PATH_ORG"
+	PATH="${BLD_ROOT}src/bin:$PATH"
 fi
 
-if [ -z "$PATH_ORG" ];then
+if [ -z "$LD_LIBRARY_PATH_ORG" ];then
 ## \endcond
 ## @ingroup libutalm_make
 LD_LIBRARY_PATH_ORG="$LD_LIBRARY_PATH"
@@ -130,6 +130,15 @@ BASE="${BLD_OUT_BASE}/bld/${PACKAGE}-${VERSION}/"
 export BASE
 
 
+RTLNK=rt-tmp
+## \endcond
+## @ingroup libutalm_make
+#P RTBASE="${BASE}${RTLNK}/${VARIANT}/"
+## \cond
+RTBASE=${BASE}${RTLNK}/${VARIANT}/
+export RTBASE
+
+
 ## \endcond
 ## @ingroup libutalm_make
 TMP="$(sed -n 's/^[ \t]*TMP[ \t:]*=[ \t]*//p' include/Makefile-root.mk)"
@@ -139,28 +148,29 @@ export TMP
 if [ -z "$MANPATH_ORG" ];then
 ## \endcond
 ## @ingroup libutalm_make
-MANPATH_ORG="$MANPATH"
+MANPATH_ORG="${MANPATH## }"
 ## \cond
 fi
 
 ## \endcond
 ## @ingroup libutalm_make
-MANPATH="${PWD}/doc/${OUTLANG}/man:${HOME}/doc/${OUTLANG}/man:$MANPATH_ORG"
+MANPATH="${MANPATH_ORG}"
 ## \cond
-if [ -e "$PWD/src" ];then
-MANPATH="${BASE}doc-tmp/${VARIANT}/doc/${OUTLANG}/man:${MANPATH}"
-fi
+MANPATH=${MANPATH_ORG:+$MANPATH_ORG}
+MANPATH="${HOME}/doc/${OUTLANG}/man${MANPATH:+:$MANPATH}"
+[[ "$PWD" != "$RTBASE" && -e "${RTBASE}/doc/${OUTLANG}/man" ]]&&MANPATH="${RTBASE}doc/${OUTLANG}/man:${MANPATH}"
+[[ "$PWD" != "$HOME" && -e "${PWD}/doc/${OUTLANG}/man" ]]&&MANPATH="${PWD}/doc/${OUTLANG}/man:$MANPATH"
 export MANPATH
 
 ## \endcond
 ## @ingroup libutalm_make
-TSTBASE="${BLD_OUT_BASE}/bld/${PACKAGE}-${VERSION}/tst-tmp/"
+TSTBASE="${BASE}tst-tmp/${VARIANT}/"
 ## \cond
 export TSTBASE
 
 ## \endcond
 ## @ingroup libutalm_make
-TSTREF="${BLD_OUT_BASE}/bld/${PACKAGE}-${VERSION}/tstref-tmp/"
+TSTREF="${BASE}tstref-tmp/${VARIANT}/"
 ## \cond
 export TSTREF
 

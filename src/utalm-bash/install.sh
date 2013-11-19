@@ -121,6 +121,7 @@ setUTALMbash 1 $*
 ###
 #
 CP="cp -r"
+MK="mkdir -p"
 
 ###
 #bootstrap
@@ -208,12 +209,11 @@ done
 ###
 #doc
 #
+_B=${INSTROOT}/doc
+$MK $_B
 for i in ${INSTSOURCE}/doc/*;do
-        _B=${INSTROOT}/doc
-        mkdir -p $_B
 	displayIt "->${i}"
 	$CP ${i} ${_B}
-	chmod -R u+x ${_B}/${i##*/}
 done
 
 
@@ -232,6 +232,8 @@ for i in ${INSTSOURCE}/examples/*;do
 done
 
 $CP ${INSTSOURCE}/sourceEnvironment.sh $INSTROOT
+[[ $? -ne 0 ]]&&{ echo "ERROR:$BASH_SOURCE:$LINENO">&2 ; exit 1 ; }
+
 
 echo
 echo "   Successfully installed"

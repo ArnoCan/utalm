@@ -71,7 +71,7 @@ endif
 #P OUTDIRS = ""
 ## \cond
 ifndef OUTDIRS
-	OUTDIRS	= ""
+	OUTDIRS	= 
 endif
 
 #languages
@@ -91,7 +91,7 @@ endif
 
 #www-root
 ## \endcond
-WWWLNK = "www-tmp"
+WWWLNK = www-tmp
 ## \cond
 ## \endcond
 #P WWWBASE = "${BASE}$(WWWLNK)/"
@@ -117,32 +117,30 @@ RTBASE = ${BASE}$(RTLNK)/$(VARIANT)/
 
 #doc-root - could be used autonomous too
 ## \endcond
-DOCLNK 		= "doc-tmp"
-DOCVARIANT  = "${BASE}$(DOCLNK)/$(VARIANT)/"
-DOCBASE_ML	= "${BASE}$(DOCLNK)/$(VARIANT)/doc/"
-DOCBASE		= "${DOCBASE_ML}$(OUTLANG)/"
-DOCBASE_COMMON	= "${BASE}$(DOCLNK)/"
+DOCBASE_ML	= ${RTBASE}doc/
+DOCBASE		= ${DOCBASE_ML}$(OUTLANG)/
+DOCBASE_COMMON	= ${DOCBASE}doc/
 ## \cond
 
 #
 # Eclipse
 #
 ## \endcond
-ECLIPSE_DOC_ID  = "org.i4p.utalm.bash"
-DOCBASE_ECLIPSE = "${BASE}$(DOCLNK)/$(VARIANT)/eclipse"
-OUTDIRS += "$(DOCBASE_ECLIPSE)"
+ECLIPSE_DOC_ID  = org.i4p.utalm.bash
+DOCBASE_ECLIPSE = $(RTBASE)eclipse/doc/
+OUTDIRS += $(DOCBASE_ECLIPSE)
 #
 #assemble generic output directories 
 #
-OUTDIRS		+= "$(BASE) $(TMP)"
-OUTDIRS		+= "$(RTBASE) $(RTADDONSBASE) $(WWWBASE) $(DOCBASE) $(DOCBASE_COMMON)"
+OUTDIRS		+= $(BASE) $(TMP)
+OUTDIRS		+= $(RTBASE) $(RTADDONSBASE) $(WWWBASE) $(DOCBASE) $(DOCBASE_COMMON)
 
-ROOT_SRC_POOL   =  "doc src" 
-ROOT_LNK_POOL   =  ""
+ROOT_SRC_POOL   =  doc src 
+ROOT_LNK_POOL   =  
 
-DIST_ROOT	= "$(BLD_OUT_BASE)/bld"
-VARIANT_ROOT	= "$(BASE)dist-bld/$(VARIANT)"
-OUTDIRS		+= "$(DIST_ROOT) $(VARIANT_ROOT)"
+DIST_ROOT	= $(BLD_OUT_BASE)/bld
+VARIANT_ROOT	= $(BASE)dist-bld/$(VARIANT)
+OUTDIRS		+= $(DIST_ROOT) $(VARIANT_ROOT)
 
 ## \cond
 ## \endcond

@@ -340,10 +340,6 @@ function printDBG(s,le,li,f,msg){
 #P #
 #P # Print trace/log-string for errors
 #P # 
-#P # The output format is:
-#P # 
-#P # 	<MYCALLNAME>:<MYUID>@<MYHOST>:<pid>:<filename>:#linenumber:INFO:<code>:<message>
-#P # 
 #P # @param e caller error number
 #P # @param li caller line number
 #P # @param f filename of caller
@@ -376,7 +372,7 @@ function printERR(e,li,f,c,msg){
 #P # 
 #P # @ingroup libutalm_awk
 #P #
-#P def printWNG(w,li,f,c,msg)
+#P def printWNG(w,li,f,c,msg):
 #P     pass
 ## \cond
 function printWNG(w,li,f,c,msg){
@@ -426,7 +422,7 @@ function printINFO(i,li,f,c,msg){
 #P # Prints a trace/log-string of a string prepared to be executed when called with more
 #P # than one option and matches current level.
 #P # 
-#P # 	printFINALCALL <level> <line> <fname> <title> <exec-or-call-string>
+#P # 	printFINALCALL &lt;level&gt; &lt;line&gt; &lt;fname&gt; &lt;title&gt; &lt;exec-or-call-string&gt;
 #P # 
 #P # Implementation priority: PERFORMANCE
 #P # 

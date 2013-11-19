@@ -121,10 +121,10 @@ SRC_BLD:
 	$(MAKE) -C $(BLD_ROOT)src $(MFLAGS)
 	$(ECHO) "##..return from $@"
 
-doc:DOC_BLD
+docsrc:DOC_BLD
 DOC_BLD:
 	@echo "###Change to:$@"
-	$(MAKE) -C $(BLD_ROOT)doc $(MFLAGS)
+	$(MAKE) -C $(BLD_ROOT)docsrc $(MFLAGS)
 	@echo "###..return from $@"
 
 tests:TESTS_BLD

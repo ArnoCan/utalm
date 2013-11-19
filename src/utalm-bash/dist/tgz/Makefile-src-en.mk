@@ -51,8 +51,25 @@ IMPORT_FILES_BLD	+= $(BLD_ROOT)include/Makefile-version.mk
 #
 IMPORT_DIRS_RTBASE	+= $(RTBASE)conf
 
-#
-IMPORT_DIRS_DOCBASE_ML	+= $(DOCBASE_ML)
+IMPORT_DIRS_RTBASE	+= $(RTBASE)doc/css
+IMPORT_DIRS_RTBASE	+= $(RTBASE)doc/images
+IMPORT_DIRS_RTBASE	+= $(RTBASE)doc/js
+
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/gwiki/man3/utalm-awk.gwiki
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/gwiki/man3/utalm-bash.gwiki
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/html/man3/utalm-awk.html
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/html/man3/utalm-bash.html
+IMPORT_DIRS_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/html/man3/utalm-API
+IMPORT_DIRS_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/html/man3/utalm-awk-API
+IMPORT_DIRS_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/html/man3/utalm-bash-API
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/man/man3/utalm-awk.3
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/man/man3/utalm-bash.3
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/pdf/man3/utalm-awk.pdf
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/pdf/man3/utalm-bash.pdf
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/tex/man3/utalm-awk.tex
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/tex/man3/utalm-bash.tex
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/wiki/man3/utalm-awk.wiki
+IMPORT_FILES_RTBASE	+= $(RTBASE)doc/$(OUTLANG)/wiki/man3/utalm-bash.wiki
 
 #
 IMPORT_DIRS_RTBASE	+= $(RTBASE)bin/bootstrap
@@ -85,6 +102,9 @@ IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalmfileobjects.sh
 IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalmfileobjects-min.sh
 IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalmrefpersistency.sh
 IMPORT_FILES_RTBASE	+= $(RTBASE)lib/libutalmrefpersistency-min.sh
+
+#
+IMPORT_DIRS_DOCBASE_ML	+= 
 
 #
 IMPORT_DIRS_RTBASE	+= $(RTBASE)examples

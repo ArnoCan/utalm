@@ -121,6 +121,9 @@ endif
 $(UNIQUE_IMPORT_DIRS_DOCBASE_ML) $(UNIQUE_IMPORT_FILES_DOCBASE_ML):$(subst $(TGZ_DEVEL_ROOT),,$@)
 ifdef DBG
 	$(ECHO) "Input:"$@ 
+	$(ECHO) "  From:"$(DOCBASE_ML)$(subst $(TGZ_ROOT)/,,$@) 
+	$(ECHO) "  Sub:"$(subst $(TGZ_ROOT)/,,$@) 
+	$(ECHO) "  To:"$(TGZ_ROOT)
 endif
 	-$(CD) $(DOCBASE_ML).. && $(CP) $(CPOPTS) $(subst $(TGZ_DEVEL_ROOT)/,,$@) $(TGZ_DEVEL_ROOT)
 
@@ -128,6 +131,9 @@ endif
 $(UNIQUE_IMPORT_FILES_RTBASE) $(UNIQUE_IMPORT_DIRS_RTBASE):$(subst $(RTBASE),,$@)
 ifdef DBG
 	$(ECHO) "Input:"$@ 
+	$(ECHO) "  From:"$(RTBASE)$(subst $(TGZ_ROOT)/,,$@) 
+	$(ECHO) "  Sub:"$(subst $(TGZ_ROOT)/,,$@) 
+	$(ECHO) "  To:"$(TGZ_ROOT)
 endif
 	-$(CD) $(RTBASE) && $(CP) $(CPOPTS) $(subst $(TGZ_DEVEL_ROOT)/,,$@) $(TGZ_DEVEL_ROOT)
 
@@ -135,6 +141,9 @@ endif
 $(UNIQUE_IMPORT_DIRS_BLD) $(UNIQUE_IMPORT_FILES_BLD):$(subst $(BLD_ROOT),,$@)
 ifdef DBG
 	$(ECHO) "Input:"$@ 
+	$(ECHO) "  From:"$(BLD_ROOT)$(subst $(TGZ_ROOT)/,,$@) 
+	$(ECHO) "  Sub:"$(subst $(TGZ_ROOT)/,,$@) 
+	$(ECHO) "  To:"$(TGZ_ROOT)
 endif
 	-$(CD) $(BLD_ROOT) && $(CP) $(CPOPTS) $(subst $(TGZ_DEVEL_ROOT)/,,$@) $(TGZ_DEVEL_ROOT)
 
@@ -156,10 +165,10 @@ SRC_BLD:
 	$(MAKE) -C $(BLD_ROOT)src $(MFLAGS)
 	$(ECHO) "##..return from $@"
 
-doc:DOC_BLD
+docsrc:DOC_BLD
 DOC_BLD:
 	@echo "###Change to:$@"
-	$(MAKE) -C $(BLD_ROOT)doc $(MFLAGS)
+	$(MAKE) -C $(BLD_ROOT)docsrc $(MFLAGS)
 	@echo "###..return from $@"
 
 tests:TESTS_BLD

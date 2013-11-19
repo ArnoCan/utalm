@@ -50,7 +50,6 @@ SRC_FILES	+= bin/check-doxygen-cond-pairs.sh
 SRC_FILES	+= bin/check-if-fi-pairs.sh
 SRC_FILES	+= bin/countErrors.sh
 SRC_FILES	+= bin/doxygenfilter.awk
-SRC_FILES	+= bin/doxygen-html-nav-entry.sh
 SRC_FILES	+= bin/getCPUinfo.sh
 SRC_FILES	+= bin/getCurArch.sh
 SRC_FILES	+= bin/getCurDistribution.sh

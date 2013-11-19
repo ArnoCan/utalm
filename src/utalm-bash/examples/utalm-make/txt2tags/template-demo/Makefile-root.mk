@@ -83,17 +83,15 @@ RTBASE		= ${BASE}$(RTLNK)/$(VARIANT)/
 #UNKNOWNBASE  = ${BASE}/$(UNKNOWNLNK)/$(VARIANT)/
 
 #doc-root - could be used autonomous too
-DOCLNK 		= doc-tmp
-DOCVARIANT	= ${BASE}$(DOCLNK)/$(VARIANT)/
-DOCBASE_ML	= ${BASE}$(DOCLNK)/$(VARIANT)/doc/
+DOCBASE_ML	= ${RTBASE}doc/
 DOCBASE		= ${DOCBASE_ML}$(OUTLANG)/
-DOCBASE_COMMON	= ${BASE}$(DOCLNK)/
+DOCBASE_COMMON	= ${RTBASE}doc/
 
 #
 # Eclipse
 #
 ECLIPSE_DOC_ID  = org.i4p.utalm.bash
-DOCBASE_ECLIPSE = ${BASE}$(DOCLNK)/$(VARIANT)/eclipse
+DOCBASE_ECLIPSE = ${DOCBASE}/eclipse/
 OUTDIRS += $(DOCBASE_ECLIPSE)
 
 #

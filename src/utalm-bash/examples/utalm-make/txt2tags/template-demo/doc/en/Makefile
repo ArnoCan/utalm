@@ -32,7 +32,7 @@
 #$Header$
 #
 OUTLANG:=en
-DOC_BLD_ROOT:=$(BLD_ROOT)doc/
+DOC_BLD_ROOT:=$(BLD_ROOT)docsrc/
 
 ifdef DOC_BLD_ROOT
   include $(DOC_BLD_ROOT)include/Makefile-pre.mk

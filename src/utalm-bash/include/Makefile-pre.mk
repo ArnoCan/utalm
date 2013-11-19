@@ -256,8 +256,10 @@ OUTDIRS  	+= $(DEB_ROOT)
 
 OUTFILES        = 
 OUTFILES        += $(TGZ_PNAME)
+OUTFILES        += $(TGZ_DEVEL_PNAME)
 OUTFILES        += $(SRCTGZ_PNAME)
 OUTFILES        += $(RPM_PNAME)
+OUTFILES        += $(RPMDEVEL_PNAME)
 OUTFILES        += $(SRCRPM_PNAME)
 OUTFILES        += $(DEB_PNAME)
 

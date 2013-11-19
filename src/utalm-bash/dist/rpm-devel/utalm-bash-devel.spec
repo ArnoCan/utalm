@@ -77,8 +77,8 @@ the following options are available:
    tgz-file into your home directory and unpack it.
 
 	cd $HOME
-	cp utalm-bash-03.03.004-R0.noarch.tgz
-	tar zxf utalm-bash-03.03.004-R0.noarch.tgz   
+	cp utalm-bash-03.03.005-R0.noarch.tgz
+	tar zxf utalm-bash-03.03.005-R0.noarch.tgz   
 
 
 %prep
@@ -122,7 +122,7 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %changelog
 * Thu Nov 15 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.03.004
+- Version-03.03.005
   Major updates and fixes, probably for eternity.
   
 * Thu Nov 10 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
@@ -134,7 +134,7 @@ rm -rf ${RPM_BUILD_ROOT}
   Major updates and fixes, probably for eternity.
   
 * Sat Sep 21 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.03.004
+- Version-03.03.005
 
 * Tue Sep 15 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
 - Version-02.01.001

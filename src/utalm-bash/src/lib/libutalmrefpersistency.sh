@@ -31,8 +31,7 @@
 #
 ## \endcond
 ##
-## @ingroup libutalm_tdd
-## @ingroup libutalm_make
+## @ingroup utalm_tdd
 ## @file
 ## @brief Library of utalm-make based regression tests
 ##
@@ -87,50 +86,50 @@ fi
 #
 #test mode constants
 #
-## @ingroup utalm_bash
+## @ingroup utalm_tdd
 T_OFF=0
 ## \cond
 export T_OFF
 ## \endcond
 
 #
-## @ingroup utalm_bash
+## @ingroup utalm_tdd
 T_CREATEREF=1
 ## \cond
 export T_CREATEREF
 ## \endcond
 
-## @ingroup utalm_bash
+## @ingroup utalm_tdd
 T_COMPAREREF=2
 ## \cond
 export T_COMPAREREF
 ## \endcond
 
-## @ingroup utalm_bash
+## @ingroup utalm_tdd
 T_PRINTREF=4
 ## \cond
 export T_PRINTREF
 ## \endcond
 
-## @ingroup utalm_bash
+## @ingroup utalm_tdd
 T_PRINTVAL=8
 ## \cond
 export T_PRINTVAL
 ## \endcond
 
-## @ingroup utalm_bash
+## @ingroup utalm_tdd
 T_PRINTASSERT=16
 ## \cond
 export T_PRINTASSERT
 ## \endcond
 
-## @ingroup utalm_bash
+## @ingroup utalm_tdd
 T_FORCEOK=32
 ## \cond
 export T_FORCEOK
 ## \endcond
 
-## @ingroup utalm_bash
+## @ingroup utalm_tdd
 T_LISTREF=64
 ## \cond
 export T_LISTREF
@@ -154,7 +153,7 @@ export TESTMODE
 #P # Convert &lt;testmode_string&gt; to \#testmode value 
 #P #
 #P # @param a $1:=testmode-string
-#P # @ingroup utalm_bash
+#P # @ingroup utalm_tdd
 #P def testmodeToNum(a):
 #P 	pass
 ## \cond
@@ -189,7 +188,7 @@ function testmodeToNum () {
 #P # Convert \#testmode-value to &lt;testmode-string&gt; 
 #P #
 #P # @param a $1=testmode value
-#P # @ingroup utalm_bash
+#P # @ingroup utalm_tdd
 #P def testmodeToStr(a):
 #P 	pass
 ## \cond
@@ -216,7 +215,7 @@ function testmodeToStr () {
 #P ##
 #P # List known testmodes
 #P #
-#P # @ingroup utalm_bash
+#P # @ingroup utalm_tdd
 #P def testmodeList():
 #P 	pass
 ## \cond
@@ -243,7 +242,7 @@ function testmodeList () {
 #P # @param a $1:=curtop=${TSTCALLROOT}
 #P # @param b $2:=newtop=${TSTREF}
 #P #
-#P # @ingroup libutalm_tdd
+#P # @ingroup utalm_tdd
 #P def refDataInit(a,b):
 #P 	pass
 ## \cond
@@ -268,7 +267,7 @@ function refDataInit () {
 #P #
 #P # @param a $1=id 
 #P #
-#P # @ingroup libutalm_tdd
+#P # @ingroup utalm_tdd
 #P def refDataStorePath(a):
 #P 	pass
 ## \cond
@@ -294,7 +293,7 @@ function refDataStorePath () {
 #P #
 #P # @param a $1=id 
 #P #
-#P # @ingroup libutalm_tdd
+#P # @ingroup utalm_tdd
 #P def refDataStore(a):
 #P 	pass
 ## \cond
@@ -321,7 +320,7 @@ function refDataRead () {
 #P # @param a $1=id 
 #P # @param b $2=refData
 #P #
-#P # @ingroup libutalm_tdd
+#P # @ingroup utalm_tdd
 #P def refDataRead(a,b):
 #P 	pass
 ## \cond
@@ -371,7 +370,7 @@ function refDataStore () {
 #P # 
 #P # 
 #P # @return with 0 for Ok, 1 for False
-#P # @ingroup libutalm_tdd
+#P # @ingroup utalm_tdd
 #P def assertWithExit(a,b,c):
 #P 	pass
 ## \cond
@@ -454,7 +453,7 @@ function assertWithExit () {
 #P # @param c $3:= id 
 #P # @param d $4:= data
 #P #
-#P # @ingroup libutalm_tdd
+#P # @ingroup utalm_tdd
 #P def assertRefDataWithExit(a,b,c,d):
 #P 	pass
 ## \cond
@@ -485,7 +484,7 @@ function assertRefDataWithExit () {
 #P #
 #P # @param a $1:= id 
 #P #
-#P # @ingroup libutalm_tdd
+#P # @ingroup utalm_tdd
 #P def printRefData(a):
 #P 	pass
 ## \cond

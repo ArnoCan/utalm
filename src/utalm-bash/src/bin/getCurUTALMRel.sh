@@ -39,7 +39,7 @@
 ## \cond
 ##
 #
-UTALM_RELEASE=03_03_004
+UTALM_RELEASE=03_03_005
 
 echo -n "${UTALM_RELEASE}"
 ## \endcond

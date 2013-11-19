@@ -2659,7 +2659,7 @@ function countErrors () {
 	local origin=1;
 	local silent=0;
 
-	function setOpts ()	{
+	function _setOpts ()	{
 		for i in $*;do
 			case $i in
 				expect=*)expect=${1#*=};;
@@ -2704,10 +2704,10 @@ EOF
 	}
 	#COUNTERRORS_OPTS=${COUNTERRORS_OPTS:$*}
 	if [ -n "${COUNTERRORS_OPTS_FORCE}" ];then
-		setOpts ${COUNTERRORS_OPTS_FORCE}
+		_setOpts ${COUNTERRORS_OPTS_FORCE}
 	else				
-		setOpts ${*}
-		setOpts ${COUNTERRORS_OPTS}
+		_setOpts ${*}
+		_setOpts ${COUNTERRORS_OPTS}
 	fi
 	awk -v asone="$asone" -v expect="$expect" -v flat="$flat" -v filter="$filter" -v intermediate="$intermediate" -v sums="$sums" -v origin="$origin" -v silent="$silent" '
 		BEGIN{
@@ -2826,8 +2826,6 @@ EOF
 #P #
 #P # This approach includes support for pre-configured authorization by 
 #P # usage of PAM modules for specific console-wrappers.1
-#P # 
-#P # Implementation priority: PERFORMANCE
 #P # 
 #P # @param a $1:= LINENO of caller
 #P # @param b $2:= BASH_SOURCE of caller

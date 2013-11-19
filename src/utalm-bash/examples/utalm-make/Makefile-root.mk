@@ -58,9 +58,9 @@ endif
 ## \cond
 BASE = $(BLD_OUT_BASE)/bld/$(PACKAGE)-$(VERSION)/
 ## \endcond
-#P TMP = "${BASE}tmp"
+#P TMP = "$(BASE)tmp"
 ## \cond
-TMP = ${BASE}tmp
+TMP = $(BASE)tmp
 ## \endcond
 #P OUTDIR = "$(BASE)-out"
 ## \cond
@@ -94,53 +94,51 @@ endif
 WWWLNK = "www-tmp"
 ## \cond
 ## \endcond
-#P WWWBASE = "${BASE}$(WWWLNK)/"
+#P WWWBASE = "$(BASE)$(WWWLNK)/"
 ## \cond
-WWWBASE		= ${BASE}$(WWWLNK)/
+WWWBASE		= $(BASE)$(WWWLNK)/
 
 #rt-root
 ## \endcond
 RTLNK = "rt-tmp"
 ## \cond
 ## \endcond
-#P RTBASE = "${BASE}$(RTLNK)/$(VARIANT)/"
+#P RTBASE = "$(BASE)$(RTLNK)/$(VARIANT)/"
 ## \cond
-RTBASE = ${BASE}$(RTLNK)/$(VARIANT)/
+RTBASE = $(BASE)$(RTLNK)/$(VARIANT)/
 
 #root for dependent parts
 #RTADDONSLNK	= addons-tmp
-#RTADDONSBASE  = ${BASE}/$(RTADDONSLNK)/$(VARIANT)/
+#RTADDONSBASE  = $(BASE)/$(RTADDONSLNK)/$(VARIANT)/
 
 #unknown temporary storage for further analysis
 #UNKNOWNLNK	= addons-tmp
-#UNKNOWNBASE  = ${BASE}/$(UNKNOWNLNK)/$(VARIANT)/
+#UNKNOWNBASE  = $(BASE)/$(UNKNOWNLNK)/$(VARIANT)/
 
 #doc-root - could be used autonomous too
 ## \endcond
-DOCLNK 		= "doc-tmp"
-DOCVARIANT  = "${BASE}$(DOCLNK)/$(VARIANT)/"
-DOCBASE_ML	= "${BASE}$(DOCLNK)/$(VARIANT)/doc/"
-DOCBASE		= "${DOCBASE_ML}$(OUTLANG)/"
-DOCBASE_COMMON	= "${BASE}$(DOCLNK)/"
+DOCBASE_ML	= $(RTBASE)doc/
+DOCBASE		= $(DOCBASE_ML)$(OUTLANG)/
+DOCBASE_COMMON	= $(DOCBASE_ML)
 ## \cond
 
 #
 # Eclipse
 #
 ## \endcond
-ECLIPSE_DOC_ID  = "org.i4p.utalm.bash"
-DOCBASE_ECLIPSE = "${BASE}$(DOCLNK)/$(VARIANT)/eclipse"
+ECLIPSE_DOC_ID  = org.i4p.utalm.bash
+DOCBASE_ECLIPSE = $(RTBASE)eclipse/doc/
 OUTDIRS += "$(DOCBASE_ECLIPSE)"
 #
 #assemble generic output directories 
 #
-OUTDIRS		+= "$(BASE) $(TMP)"
-OUTDIRS		+= "$(RTBASE) $(RTADDONSBASE) $(WWWBASE) $(DOCBASE) $(DOCBASE_COMMON)"
+OUTDIRS		+= $(BASE) $(TMP)
+OUTDIRS		+= $(RTBASE) $(RTADDONSBASE) $(WWWBASE) $(DOCBASE) $(DOCBASE_COMMON)
 
 ROOT_SRC_POOL   =  doc src 
-ROOT_LNK_POOL   =  ""
+ROOT_LNK_POOL   =  
 
-DIST_ROOT	= "$(BLD_OUT_BASE)/bld"
-VARIANT_ROOT	= "$(BASE)dist-bld/$(VARIANT)"
-OUTDIRS		+= "$(DIST_ROOT) $(VARIANT_ROOT)"
+DIST_ROOT	= $(BLD_OUT_BASE)/bld
+VARIANT_ROOT = $(BASE)dist-bld/$(VARIANT)
+OUTDIRS		+= $(DIST_ROOT) $(VARIANT_ROOT)
 

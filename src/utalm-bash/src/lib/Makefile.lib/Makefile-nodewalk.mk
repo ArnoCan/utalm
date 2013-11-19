@@ -162,7 +162,7 @@ endif
 TARGETBASE=
 ifdef SUBROOTTOP
 ifeq ($(SUBROOTTOP),doc)
-TARGETBASE=$(DOCVARIANT)
+TARGETBASE=$(DOCBASE_ML)
 else
 TARGETBASE=$(RTBASE)$(SUBROOTTOP)/
 endif 
@@ -172,6 +172,9 @@ endif
 
 ifndef TARGETBASE
 $(error "Missing environment variable TARGETBASE - root node for output")
+endif
+ifndef TARGETSUBPATH
+TARGETSUBPATH =	$(CURSUBPATH)
 endif
 
 ###
@@ -194,10 +197,11 @@ ifeq ($(CURSUBPATH),)
 TARGET_DIRS += $(addprefix $(TARGETBASE),$(UNIQUE_DIRS))
 TARGET_FILES += $(addprefix $(TARGETBASE),$(UNIQUE_FILES))
 else
-TARGET_DIRS += $(addprefix $(TARGETBASE),$(addprefix $(CURSUBPATH),$(UNIQUE_DIRS)))
-TARGET_FILES += $(addprefix $(TARGETBASE),$(addprefix $(CURSUBPATH),$(UNIQUE_FILES)))
+TARGET_DIRS += $(addprefix $(TARGETBASE),$(addprefix $(TARGETSUBPATH),$(UNIQUE_DIRS)))
+TARGET_FILES += $(addprefix $(TARGETBASE),$(addprefix $(TARGETSUBPATH),$(UNIQUE_FILES)))
 endif
 OUTDIRS += $(dir $(TARGET_FILES))
+OUTDIRS += $(dir $(TARGET_DIRS))
 #
 ###
 
@@ -212,30 +216,34 @@ ifndef NODEACTIONONLY
 #
 # Default is export selected items to intermediate tree
 #
-_forward_test_all all: outdirs $(PREFIXACTION) $(SUB_POOLS) $(TARGET_DIRS) $(TARGET_FILES) $(POSTFIXACTION) 
+_forward_test_all all: outdirs $(PREFIXACTION) $(TARGET_DIRS) $(TARGET_FILES) $(SUB_POOLS) $(POSTFIXACTION) 
 dirs:$(TARGET_DIRS)
-$(TARGET_DIRS):$(subst $(TARGETBASE)$(CURSUBPATH),,$@)
+$(TARGET_DIRS):$(subst $(TARGETBASE)$(TARGETSUBPATH),,$@)
 ifdef DBG
-	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(CURSUBPATH),,$@)"
-	@$(ECHO) "$(INDENT1)#  to:$@"
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(TARGETSUBPATH),,$@)"
+	@if [ "$(CPOPTS)" == "$(subst parents,,$(CPOPTS))" ];then	$(ECHO) "$(INDENT1)#  to:$@";\
+	else $(ECHO) "$(INDENT1)#  to:$(TARGETBASE)$(TARGETSUBPATH)";fi
 else
-	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(CURSUBPATH),,$@)"
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(TARGETSUBPATH),,$@)"
 endif
-	$(CP) $(CPOPTS) $(subst $(TARGETBASE)$(CURSUBPATH),,$@) $(TARGETBASE)$(CURSUBPATH)
+	@if [ "$(CPOPTS)" == "$(subst parents,,$(CPOPTS))" ];then	$(CP) $(CPOPTS) $(subst $(TARGETBASE)$(TARGETSUBPATH),,$@) $@;\
+	else $(CP) $(CPOPTS) $(subst $(TARGETBASE)$(TARGETSUBPATH),,$@) $(TARGETBASE)$(TARGETSUBPATH);fi
 $(UNIQUE_DIRS):
 files:$(TARGET_FILES)
-$(TARGET_FILES):$(subst $(TARGETBASE)$(CURSUBPATH),,$@)
+$(TARGET_FILES):$(subst $(TARGETBASE)$(TARGETSUBPATH),,$@)
 ifdef DBG 
-	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(CURSUBPATH),,$@)"
-	@$(ECHO) "$(INDENT1)#  to:$@"
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(TARGETSUBPATH),,$@)"
+	@if [ "$(CPOPTS)" == "$(subst parents,,$(CPOPTS))" ];then	$(ECHO) "$(INDENT1)#  to:$@";\
+	else $(ECHO) "$(INDENT1)#  to:$(TARGETBASE)$(TARGETSUBPATH)";fi
 else
 ifdef QUIET
 	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE),,$@)"
 else
-	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(CURSUBPATH),,$@)"
+	@$(ECHO) "$(INDENT1)#Copy:$(subst $(TARGETBASE)$(TARGETSUBPATH),,$@)"
 endif
 endif
-	$(CP) $(CPOPTS) $(subst $(TARGETBASE)$(CURSUBPATH),,$@) $(TARGETBASE)$(CURSUBPATH)
+	@if [ "$(CPOPTS)" == "$(subst parents,,$(CPOPTS))" ];then	$(CP) $(CPOPTS) $(subst $(TARGETBASE)$(TARGETSUBPATH),,$@) $@;\
+	else $(CP) $(CPOPTS) $(subst $(TARGETBASE)$(TARGETSUBPATH),,$@) $(TARGETBASE)$(TARGETSUBPATH);fi
 $(UNIQUE_FILES):
 else
 _forward_test_all: all

@@ -71,8 +71,8 @@ the following options are available:
    tgz-file into your home directory and unpack it.
 
 	cd $HOME
-	cp utalm-bash-03.03.004-R0.src.tgz
-	tar zxf utalm-bash-03.03.004-R0.src.tgz   
+	cp utalm-bash-03.03.005-R0.src.tgz
+	tar zxf utalm-bash-03.03.005-R0.src.tgz   
 
 
 %prep
@@ -118,7 +118,7 @@ rm -rf ${RPM_BUILD_ROOT}
 
 %changelog
 * Thu Nov 10 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>
-- Version-03.03.004
+- Version-03.03.005
   Major updates and fixes, probably for eternity.
 
 * Thu Nov 08 2013 Arno-Can Uestuensoez <acue.opensource@gmail.com>

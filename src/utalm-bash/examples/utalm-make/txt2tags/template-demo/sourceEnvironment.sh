@@ -49,7 +49,7 @@ export BLD_ROOT;
 
 ## \endcond
 ## @ingroup libutalm_make
-DOC_BLD_ROOT="$BLD_ROOT/doc/"
+DOC_BLD_ROOT="$(BLD_ROOT)docsrc/"
 ## \cond
 export DOC_BLD_ROOT;
 ## \endcond

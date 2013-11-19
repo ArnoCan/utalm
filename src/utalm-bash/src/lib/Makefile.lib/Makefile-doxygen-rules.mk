@@ -130,6 +130,9 @@ ifdef HTML_HEADER
 	$(CPA) $(HTML_HEADER) $(DOXYGEN_HTML_DIR)
 	echo "HTML_HEADER = "$(notdir $(HTML_HEADER)) >> $(DOXYGEN_HTML_DIR)/$(DOXYGEN_HTML_CONF)		
 endif
+ifdef DOXYGEN_EXAMPLE_PATH
+	echo "EXAMPLE_PATH = ${DOXYGEN_EXAMPLE_PATH}" >> $(DOXYGEN_HTML_DIR)/$(DOXYGEN_HTML_CONF)		
+endif
 ifdef C_STYLE_WORKAROUND
 	echo "C_STYLE_WORKAROUND"
 	echo "INPUT_FILTER =  \"sed -e 's|#D\(  *.*\)$$|#D\1 //!\1|;s|#P  *\(.*\)$$|\1|;s|#C \(.*\)$$|\1|'\"" >> $(DOXYGEN_HTML_DIR)/$(DOXYGEN_HTML_CONF)
